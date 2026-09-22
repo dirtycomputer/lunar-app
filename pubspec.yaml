@@ -1,0 +1,43 @@
+name: lunar_social
+description: Meaningful connections, inspired by the Five Elements.
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ^3.6.0
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.6.0
+  lunar: 1.7.8
+  timezone: ^0.10.0
+  shared_preferences: ^2.3.5
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/portraits/
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-400.ttf
+          weight: 400
+        - asset: assets/fonts/Manrope-500.ttf
+          weight: 500
+        - asset: assets/fonts/Manrope-600.ttf
+          weight: 600
+        - asset: assets/fonts/Manrope-700.ttf
+          weight: 700
+    - family: NotoSansSC
+      fonts:
+        - asset: assets/fonts/NotoSansSC-Chart.ttf
+    # CanvasKit preloads its default family; resolve it to our bundled typeface.
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Manrope-400.ttf

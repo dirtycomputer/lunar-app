@@ -1,0 +1,874 @@
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Russian (`ru`).
+class AppLocalizationsRu extends AppLocalizations {
+  AppLocalizationsRu([String locale = 'ru']) : super(locale);
+
+  @override
+  String get appTitle => 'Lunar — Найди свою энергию';
+
+  @override
+  String get languageName => 'Русский';
+
+  @override
+  String get consentLead => 'Подтверждаю, что мне 18 лет или больше, и принимаю ';
+
+  @override
+  String get linkTerms => 'Условия использования';
+
+  @override
+  String get consentAnd => ' и ';
+
+  @override
+  String get linkPrivacy => 'Политику конфиденциальности';
+
+  @override
+  String get consentEnd => '.';
+
+  @override
+  String get consentError => 'Подтвердите, что вам 18+, и примите условия.';
+
+  @override
+  String get reportProfile => 'Пожаловаться на профиль';
+
+  @override
+  String get reportIntro => 'Расскажите, что не так. Наша команда модерации рассматривает каждую жалобу, и профиль сразу скрывается из ваших рекомендаций.';
+
+  @override
+  String get reasonHarassment => 'Домогательства или травля';
+
+  @override
+  String get reasonNudity => 'Обнажённое или сексуальное содержимое';
+
+  @override
+  String get reasonNcii => 'Распространял мои личные изображения без согласия';
+
+  @override
+  String get reasonUnderage => 'Этому человеку меньше 18 лет';
+
+  @override
+  String get reasonImpersonation => 'Выдача себя за другого или фальшивый профиль';
+
+  @override
+  String get reasonCsae => 'Угроза безопасности детей (CSAE)';
+
+  @override
+  String get reasonSpam => 'Спам, мошенничество или обман';
+
+  @override
+  String get reasonOther => 'Другое';
+
+  @override
+  String get reportNoteHint => 'Есть ли ещё что-то, что нам следует знать? (необязательно)';
+
+  @override
+  String get actionCancel => 'Отмена';
+
+  @override
+  String get submitReport => 'Отправить жалобу';
+
+  @override
+  String get reportReceivedToast => 'Жалоба получена. Этот профиль скрыт.';
+
+  @override
+  String get reportFailedToast => 'Не удалось отправить жалобу. Попробуйте ещё раз.';
+
+  @override
+  String get actionHide => 'Скрыть этот профиль';
+
+  @override
+  String get legalCenterTitle => 'Правовые документы и ваши данные';
+
+  @override
+  String get legalCenterIntro => 'Политики, которые будут действовать в Lunar при запуске. Нажмите, чтобы прочитать проект.';
+
+  @override
+  String get actionClose => 'Закрыть';
+
+  @override
+  String get exportMyData => 'Экспортировать мои данные (JSON)';
+
+  @override
+  String get exportDoneToast => 'Копия ваших данных скопирована в буфер обмена.';
+
+  @override
+  String get deleteAccount => 'Удалить аккаунт и данные';
+
+  @override
+  String get deleteConfirmTitle => 'Удалить ваш аккаунт и данные?';
+
+  @override
+  String get deleteConfirmBody => 'Это действие навсегда удаляет с этого устройства ваш профиль рождения, сохранённые связи, скрытые профили, жалобы и согласия. При запуске ваш аккаунт и данные также будут удалены с серверов Lunar. Записи о безопасности и юридические записи могут сохраняться там, где этого требует закон.';
+
+  @override
+  String get keepAccount => 'Сохранить аккаунт';
+
+  @override
+  String get deleteEverything => 'Удалить всё';
+
+  @override
+  String get deleteDoneToast => 'Ваш аккаунт и данные удалены с этого устройства.';
+
+  @override
+  String get deleteFailedToast => 'Не удалось удалить. Попробуйте ещё раз.';
+
+  @override
+  String get docTerms => 'Условия использования';
+
+  @override
+  String get docPrivacy => 'Политика конфиденциальности';
+
+  @override
+  String get docCommunity => 'Правила сообщества';
+
+  @override
+  String get docSafety => 'Руководство по безопасности знакомств';
+
+  @override
+  String get docCsae => 'Политика защиты детей (CSAE)';
+
+  @override
+  String get docDeletion => 'Политика удаления аккаунта и данных';
+
+  @override
+  String get docSubscription => 'Условия подписки';
+
+  @override
+  String get docModeration => 'Политика модерации контента и жалоб';
+
+  @override
+  String get legalPolicies => 'Правовые документы и правила';
+
+  @override
+  String get languageSystem => 'Использовать язык системы';
+
+  @override
+  String get languageTitle => 'Язык';
+
+  @override
+  String get planFree => 'Lunar Бесплатно';
+
+  @override
+  String get planPlus => 'Lunar Plus';
+
+  @override
+  String get planPro => 'Lunar Pro';
+
+  @override
+  String get planFreeSub => 'Поиск, карты и сохранённые связи.';
+
+  @override
+  String get planPlusSub => 'Больше ежедневных отметок «нравится» и полные отчёты о совместимости.';
+
+  @override
+  String get planProSub => 'Всё из Plus плюс расширенные разборы циклов.';
+
+  @override
+  String get tabDiscover => 'Поиск';
+
+  @override
+  String get tabSaved => 'Сохранённое';
+
+  @override
+  String get tabMyEnergy => 'Моя энергия';
+
+  @override
+  String get tabGuide => 'Гид';
+
+  @override
+  String get tabStudio => 'Студия';
+
+  @override
+  String get navConnections => 'Связи';
+
+  @override
+  String get navGuide => 'Гид по Бацзы';
+
+  @override
+  String get navStudio => 'Студия карт';
+
+  @override
+  String get tagline => 'Немного судьбы. Настоящая связь.';
+
+  @override
+  String get yourSpace => 'ВАШЕ ПРОСТРАНСТВО';
+
+  @override
+  String get promoTitle => 'Хорошее рождается из гармонии.';
+
+  @override
+  String get promoBody => 'Раскройте энергию, благодаря которой вы — это вы.';
+
+  @override
+  String get promoCta => 'Изучить свою карту';
+
+  @override
+  String get editProfileShort => 'Редактировать профиль';
+
+  @override
+  String get demoProfile => 'Ваш демо-профиль';
+
+  @override
+  String get topbarSub => 'Осмысленные связи начинаются с вашей энергии.';
+
+  @override
+  String get howLunarWorks => 'Как работает Lunar';
+
+  @override
+  String get heroEyebrow => 'ДРЕВНЯЯ МУДРОСТЬ. НОВЫЕ СВЯЗИ.';
+
+  @override
+  String get heroTitle => 'Некоторые энергии\nпросто созданы друг для друга.';
+
+  @override
+  String get heroBody => 'Встречайте людей, которые раскрывают в вас лучшее,\nс небольшой подсказкой от Бацзы.';
+
+  @override
+  String get findEnergy => 'Найти свою энергию';
+
+  @override
+  String get exploreEnergy => 'Изучить свою энергию';
+
+  @override
+  String get discoverTitle => 'Найдите свою энергию';
+
+  @override
+  String get discoverSub => 'Подобрано вдумчиво. Вы остаётесь собой.';
+
+  @override
+  String get savedTitle => 'Связь, которую хочется сохранить';
+
+  @override
+  String get savedSub => 'Ваши сохранённые люди — в одном месте.';
+
+  @override
+  String get filters => 'Фильтры';
+
+  @override
+  String get filtered => 'Отфильтровано';
+
+  @override
+  String get catForYou => 'Для вас';
+
+  @override
+  String get catHighHarmony => 'Высокая гармония';
+
+  @override
+  String get catSameCity => 'Один город рождения';
+
+  @override
+  String get catCreative => 'Творческие души';
+
+  @override
+  String countDiscover(int n) {
+    return '$n связей для знакомства';
+  }
+
+  @override
+  String countSaved(int n) {
+    return '$n сохранённых связей';
+  }
+
+  @override
+  String get bestHarmony => 'Сначала лучшая гармония';
+
+  @override
+  String get curiosity => 'Немного любопытства — и что-то хорошее уже начинается.';
+
+  @override
+  String get demoNotice => 'Демо-сообщество · Все профили — примеры';
+
+  @override
+  String harmonyPct(int n) {
+    return 'Гармония $n%';
+  }
+
+  @override
+  String savedToast(String name) {
+    return 'Профиль $name сохранён в ваших связях';
+  }
+
+  @override
+  String removedToast(String name) {
+    return 'Профиль $name удалён из связей';
+  }
+
+  @override
+  String get couldNotSave => 'Не удалось сохранить. Попробуйте ещё раз.';
+
+  @override
+  String saveTo(String name) {
+    return 'Сохранить $name';
+  }
+
+  @override
+  String unsave(String name) {
+    return 'Убрать $name';
+  }
+
+  @override
+  String get compareFailed => 'Не удалось открыть сравнение. Попробуйте ещё раз.';
+
+  @override
+  String get glanceTitle => 'Ваша энергия — с первого взгляда';
+
+  @override
+  String get glancePersonal => 'Немного о вашей природе.';
+
+  @override
+  String get glanceSample => 'Знакомьтесь: пример вашей карты рождения.';
+
+  @override
+  String get seeChart => 'Посмотреть мою полную карту';
+
+  @override
+  String get wisdomEyebrow => 'МОМЕНТ МУДРОСТИ';
+
+  @override
+  String get wisdomTitle => 'Чтобы быть на одной волне,\nне нужно быть одинаковыми.';
+
+  @override
+  String get wisdomBody => 'В Бацзы разные элементы могут раскрывать лучшее друг в друге. Равновесие — это прекрасно.';
+
+  @override
+  String get wisdomCta => 'Познакомьтесь с Пятью элементами';
+
+  @override
+  String get detailsYours => 'Ваши данные остаются только вашими.';
+
+  @override
+  String get detailsStored => 'Данные рождения хранятся на этом устройстве. Они никогда не показываются в вашем публичном профиле.';
+
+  @override
+  String get privacyData => 'Приватность и ваши данные';
+
+  @override
+  String get emptySavedTitle => 'Хорошие связи стоят того, чтобы их сохранить.';
+
+  @override
+  String get emptySavedBody => 'Нажмите на сердечко в профиле, чтобы сохранить его здесь.';
+
+  @override
+  String get emptyFilterTitle => 'Немного больше простора для поиска.';
+
+  @override
+  String get emptyFilterBody => 'Попробуйте расширить диапазон возраста или искать по всему миру.';
+
+  @override
+  String get discoverPeople => 'Знакомьтесь с людьми';
+
+  @override
+  String get resetFilters => 'Сбросить фильтры';
+
+  @override
+  String get filterTitle => 'Место для тех, кто вам близок';
+
+  @override
+  String get showMe => 'Показывать мне';
+
+  @override
+  String get genderEveryone => 'Все';
+
+  @override
+  String get genderWomen => 'Женщины';
+
+  @override
+  String get genderMen => 'Мужчины';
+
+  @override
+  String get location => 'Местоположение';
+
+  @override
+  String get regionWorldwide => 'Весь мир';
+
+  @override
+  String get regionUSA => 'США';
+
+  @override
+  String get regionUK => 'Великобритания';
+
+  @override
+  String get regionFrance => 'Франция';
+
+  @override
+  String get regionAustralia => 'Австралия';
+
+  @override
+  String get regionSingapore => 'Сингапур';
+
+  @override
+  String ageRangeLabel(int a, int b) {
+    return 'Возраст · $a–$b';
+  }
+
+  @override
+  String minHarmony(int n) {
+    return 'Минимальная гармония · $n%';
+  }
+
+  @override
+  String get harmonyNote => 'Гармония — это оценка для культурного исследования, а не прогноз успешности отношений.';
+
+  @override
+  String get reset => 'Сбросить';
+
+  @override
+  String get showConnections => 'Показать связи';
+
+  @override
+  String dayMasterContext(String name, String identity) {
+    return 'Господин дня у $name — $identity. Значок показывает элемент дня и его полярность.';
+  }
+
+  @override
+  String get energyTitle => 'Природа, которая принадлежит только вам.';
+
+  @override
+  String get energySub => 'Познакомьтесь с элементами, благодаря которым вы — это вы.';
+
+  @override
+  String get editBirth => 'Изменить данные рождения';
+
+  @override
+  String get sampleNotice => 'Вы смотрите пример карты. Добавьте свои данные рождения, чтобы получить личный разбор.';
+
+  @override
+  String get getStarted => 'Начать';
+
+  @override
+  String get dayMasterBody => 'Господин дня — это центральный элемент вашей карты Бацзы. Относитесь к нему как к линзе для размышлений, оставляющей достаточно простора, чтобы быть собой.';
+
+  @override
+  String get whatIsDayMaster => 'Что такое господин дня?';
+
+  @override
+  String myDayMasterContext(String identity) {
+    return 'Ваш господин дня — $identity: небесный ствол в верхней части столпа дня.';
+  }
+
+  @override
+  String get fiveElements => 'Ваши Пять элементов';
+
+  @override
+  String get elementsContext => 'Все видимые стволы и ветви вашей карты складываются в это распределение.';
+
+  @override
+  String get elementsSub => 'Видимые стволы и ветви вашей карты.';
+
+  @override
+  String get fourPillars => 'Ваши четыре столпа';
+
+  @override
+  String get pillarsContext => 'Каждый столп ниже сочетает небесный ствол с земной ветвью.';
+
+  @override
+  String get pillarsSub => 'Четыре момента, восемь знаков, одно уникальное сочетание.';
+
+  @override
+  String pillarContext(String pillar, String combo) {
+    return 'Столп «$pillar» — $combo. Цвет элемента на этой карточке задаёт небесный ствол.';
+  }
+
+  @override
+  String get hourUnknown => 'Час неизвестен';
+
+  @override
+  String get hourUnknownBody => 'Добавьте время рождения для четвёртого столпа.';
+
+  @override
+  String get contextTitle => 'Немного контекста творит чудеса.';
+
+  @override
+  String calcNote(String zone, String lon) {
+    return 'Рассчитано по времени рождения в часовом поясе $zone и местному среднему солнечному времени на долготе $lon°. Год и месяц следуют границам солнечных периодов. Сутки меняются в полночь.';
+  }
+
+  @override
+  String get noTimeBoundaryNote => 'Без точного времени рождения час опускается, а граничные даты могут быть неточными.';
+
+  @override
+  String get solarWhy => 'Почему важно солнечное время';
+
+  @override
+  String solarContext(String lon) {
+    return 'Эта карта использует местное среднее солнечное время на долготе $lon°.';
+  }
+
+  @override
+  String get understandChart => 'Понять свою карту';
+
+  @override
+  String get guideEyebrow => 'НЕМНОГО МУДРОСТИ, МНОГО ВОЗМОЖНОСТЕЙ';
+
+  @override
+  String get guideTitle => 'Древние корни.\nЧеловеческие связи.';
+
+  @override
+  String get guideIntro => 'Бацзы — традиционная китайская система для изучения закономерностей момента рождения. Lunar приносит эту традицию в более любознательный и связанный мир.';
+
+  @override
+  String get meetElements => 'Знакомьтесь с Пятью элементами';
+
+  @override
+  String get elementsTagline => 'Разные по природе. Лучше — в равновесии.';
+
+  @override
+  String get guidePillarsTitle => 'Что такое Четыре столпа?';
+
+  @override
+  String get guidePillarsBody => 'Год, месяц, день и час рождения образуют по столпу. В каждом столпе — небесный ствол и земная ветвь: всего восемь знаков. Именно это и значит Бацзы — «восемь знаков». Небесный ствол вашего дня называется господином дня.';
+
+  @override
+  String get guideHarmonyTitle => 'Как Lunar считает гармонию?';
+
+  @override
+  String get guideHarmonyBody => 'Наша демо-оценка объединяет три прозрачных фактора: 45% — общий баланс элементов, измеряемый нормализованной энтропией видимых элементов; 35% — связь господина дня, основанная на порождающем цикле; и 20% — резонанс ветви дня по традиционным парам, триадам и противостояниям. Оценки вычисляются по картам, а рекомендации сортируются от высшей к низшей.';
+
+  @override
+  String get guideScoreTitle => 'Что означает высокая оценка?';
+
+  @override
+  String get guideScoreBody => 'Это значит, что две карты соответствуют выбранным нами правилам. Эти правила — интерпретационное продуктовое решение, а не научный тест личности или успеха отношений. Оценка должна приглашать к разговору, но никогда не решать, кто его заслуживает. Общие ценности, доброта, согласие и настоящая химия в жизни важнее.';
+
+  @override
+  String get guideTimezoneTitle => 'Как работают часовые пояса?';
+
+  @override
+  String get guideTimezoneBody => 'Lunar определяет время рождения по базе данных часовых поясов IANA, включая исторические правила перехода на летнее время. Для года и месяца используются моменты солнечных периодов из библиотеки календаря в UTC+8. Рекомендации для знакомств используют местное среднее солнечное время по долготе места рождения, а сутки меняются в полночь. Студия карт дополнительно поддерживает локальное время часов, истинное солнечное время с приближённой поправкой на уравнение времени и границу суток в 23:00. При повторном времени перевода часов используется более ранний случай; несуществующие времена перевода отклоняются. Другие школы Бацзы могут строить иные карты.';
+
+  @override
+  String get guideNoTimeTitle => 'Что делать, если я не знаю время рождения?';
+
+  @override
+  String get guideNoTimeBody => 'Вы всё равно можете исследовать. Lunar использует местный полдень для расчёта даты, опускает столп часа и помечает результат как приблизительный. В даты рядом с границей солнечного периода год или месяц тоже могут быть неточными. Добавьте время позже, чтобы уточнить карту.';
+
+  @override
+  String get guideCommunityTitle => 'Это живое сообщество знакомств?';
+
+  @override
+  String get guideCommunityBody => 'Эта первая версия — интерактивное локальное демо. Показанные люди — вымышленные профили со стоковыми фотографиями. Вы можете изучать карты, фильтровать рекомендации и сохранять связи на этом устройстве. Аккаунты, сообщения, верификация и настоящее сообщество появятся в будущей интеграции с серверной частью.';
+
+  @override
+  String get digDeeper => 'УЗНАТЬ БОЛЬШЕ';
+
+  @override
+  String get termFourPillars => 'Четыре столпа';
+
+  @override
+  String get termStemsBranches => 'Небесные стволы и земные ветви';
+
+  @override
+  String get termDayMaster => 'Господин дня';
+
+  @override
+  String get termTenGods => 'Десять богов';
+
+  @override
+  String get termCombinations => 'Слияния';
+
+  @override
+  String get termSolarTime => 'Истинное солнечное время';
+
+  @override
+  String get guideFooter => 'Сохраняйте любопытство. Будьте добры. Оставьте место для приятной случайности.';
+
+  @override
+  String get privacyTitle => 'Ваши данные остаются только вашими.';
+
+  @override
+  String get privacyBody1 => 'Это приложение сохраняет на этом устройстве ваше имя, данные рождения, карты из студии, настройки моделей, сохранённые связи и скрытые профили. Ключи API клиента остаются в памяти. Когда вы решаете сгенерировать толкование, рассчитанные данные карты отправляются выбранному провайдеру модели. Имена, точные даты и места рождения из этих данных исключены. Сброс локальных данных не стирает записи провайдера или API-ключ локального сервера.';
+
+  @override
+  String get privacyBody2 => 'Локальное хранилище не зашифровано. На общем устройстве очищайте свои данные, когда закончите. Очистка данных браузера или приложения также удалит ваш профиль.';
+
+  @override
+  String get privacyBody3 => 'Сброс очищает личные данные и сохранённые настройки, после чего возвращается к образцу профиля.';
+
+  @override
+  String get clearDataTitle => 'Очистить локальные данные?';
+
+  @override
+  String get clearDataBody => 'Ваш профиль рождения, сохранённые связи и скрытые профили будут удалены с этого устройства.';
+
+  @override
+  String get keepMyData => 'Оставить мои данные';
+
+  @override
+  String get clearData => 'Очистить данные';
+
+  @override
+  String get resetLocalData => 'Сбросить локальные данные';
+
+  @override
+  String get clearOkToast => 'Ваши локальные данные очищены.';
+
+  @override
+  String get clearFailToast => 'Некоторые данные не удалось очистить. Попробуйте ещё раз.';
+
+  @override
+  String get editorTitle => 'Всё начинается с вас.';
+
+  @override
+  String get editorSub => 'Мгновение времени. Энергия, которая принадлежит только вам.\nДобавьте данные рождения, чтобы открыть свою карту Бацзы.';
+
+  @override
+  String get firstName => 'Ваше имя';
+
+  @override
+  String get nameHint => 'Как нам вас называть?';
+
+  @override
+  String get nameRequired => 'Пожалуйста, введите ваше имя.';
+
+  @override
+  String get dateLabel => 'Дата рождения';
+
+  @override
+  String get chooseDate => 'Выбрать дату';
+
+  @override
+  String get dateInvalid => 'Введите корректную дату в формате YYYY-MM-DD.';
+
+  @override
+  String get adultsOnly => 'Lunar предназначен для взрослых от 18 лет.';
+
+  @override
+  String get yearMin => 'Пожалуйста, укажите год начиная с 1900.';
+
+  @override
+  String get timeLabel => 'Местное время рождения';
+
+  @override
+  String get timeInvalid => 'Используйте 24-часовой формат, например 09:30.';
+
+  @override
+  String get noTimeCheckbox => 'Я не знаю своё время рождения';
+
+  @override
+  String get noTimeNote => 'Мы используем три столпа и опускаем час. Ваша карта и оценки гармонии будут приблизительными.';
+
+  @override
+  String get birthplace => 'Место рождения';
+
+  @override
+  String get otherBirthplace => 'Другое место рождения';
+
+  @override
+  String get cityCountry => 'Город и страна';
+
+  @override
+  String get cityRequired => 'Пожалуйста, укажите место рождения.';
+
+  @override
+  String get tzLabel => 'Часовой пояс места рождения';
+
+  @override
+  String get longitude => 'Долгота';
+
+  @override
+  String get lonHint => 'Восток — плюс, запад — минус. Например: -73.98';
+
+  @override
+  String get lonInvalid => 'Введите долготу от -180 до 180.';
+
+  @override
+  String tzNote(String zone) {
+    return 'Часовой пояс: $zone\nСутки и час используют местное среднее солнечное время. Если время перевода часов повторяется, используется более ранний случай.';
+  }
+
+  @override
+  String get privacyNote => 'Ваши данные рождения остаются на этом устройстве и никогда не отображаются в вашем публичном профиле.';
+
+  @override
+  String get findingEnergy => 'Определяем вашу энергию…';
+
+  @override
+  String get discoverEnergy => 'Узнать мою энергию';
+
+  @override
+  String get energyReadyToast => 'Ваша энергия готова. Ваши связи обновлены.';
+
+  @override
+  String get saveFailed => 'Не удалось сохранить профиль. Попробуйте ещё раз.';
+
+  @override
+  String get calcFailed => 'Нам не удалось рассчитать эту карту. Проверьте дату и место рождения.';
+
+  @override
+  String get editorFooter => 'Культурный контекст — с простором для настоящей химии.';
+
+  @override
+  String get closeProfile => 'Закрыть профиль';
+
+  @override
+  String get chemistryTitle => 'Химия, которая стоит за вашей связью';
+
+  @override
+  String meetsText(String you, String name, String their) {
+    return 'Ваша энергия $you встречается с энергией $their у $name.';
+  }
+
+  @override
+  String get factorBalance => 'Баланс элементов';
+
+  @override
+  String get factorConnection => 'Связь господина дня';
+
+  @override
+  String get factorResonance => 'Резонанс ветви дня';
+
+  @override
+  String get factorBalanceDesc => '45% оценки · Насколько равномерно сочетаются ваши видимые элементы.';
+
+  @override
+  String get factorConnectionDesc => '35% оценки · Связь между вашими дневными элементами.';
+
+  @override
+  String get factorResonanceDesc => '20% оценки · Традиционные пары ветвей и слияния.';
+
+  @override
+  String get starterTitle => 'Небольшой повод для разговора';
+
+  @override
+  String starterText(String topic) {
+    return '«Что из $topic вы могли бы обсуждать часами?»';
+  }
+
+  @override
+  String get demoDisclaimer => 'Это пример профиля в демо-сообществе. Гармония — прозрачная культурная эвристика, а не научное измерение и не прогноз совместимости.';
+
+  @override
+  String get timeApprox => 'Время рождения неизвестно, поэтому эта оценка приблизительная.';
+
+  @override
+  String get saveConnection => 'Сохранить эту связь';
+
+  @override
+  String get savedConnection => 'Сохранено в связях';
+
+  @override
+  String get compareCharts => 'Сравнить наши полные карты';
+
+  @override
+  String hideToast(String name) {
+    return 'Профиль $name скрыт из ваших рекомендаций.';
+  }
+
+  @override
+  String get hideFailed => 'Не удалось обновить рекомендации. Попробуйте ещё раз.';
+
+  @override
+  String factorContext(String title, int score) {
+    return 'Вклад «$title» в эту оценку гармонии — $score%.';
+  }
+
+  @override
+  String get elementWood => 'Дерево';
+
+  @override
+  String get elementFire => 'Огонь';
+
+  @override
+  String get elementEarth => 'Земля';
+
+  @override
+  String get elementMetal => 'Металл';
+
+  @override
+  String get elementWater => 'Вода';
+
+  @override
+  String get qualityWood => 'Рост и доброта';
+
+  @override
+  String get qualityFire => 'Страсть и теплота';
+
+  @override
+  String get qualityEarth => 'Равновесие и доверие';
+
+  @override
+  String get qualityMetal => 'Ясность и целеустремлённость';
+
+  @override
+  String get qualityWater => 'Глубина и интуиция';
+
+  @override
+  String get qualityWoodShort => 'Рост';
+
+  @override
+  String get qualityFireShort => 'Страсть';
+
+  @override
+  String get qualityEarthShort => 'Равновесие';
+
+  @override
+  String get qualityMetalShort => 'Ясность';
+
+  @override
+  String get qualityWaterShort => 'Глубина';
+
+  @override
+  String get polarityYin => 'Инь';
+
+  @override
+  String get polarityYang => 'Ян';
+
+  @override
+  String get pillarYear => 'Год';
+
+  @override
+  String get pillarMonth => 'Месяц';
+
+  @override
+  String get pillarDay => 'День';
+
+  @override
+  String get pillarHour => 'Час';
+
+  @override
+  String get branchRat => 'Крыса';
+
+  @override
+  String get branchOx => 'Бык';
+
+  @override
+  String get branchTiger => 'Тигр';
+
+  @override
+  String get branchRabbit => 'Кролик';
+
+  @override
+  String get branchDragon => 'Дракон';
+
+  @override
+  String get branchSnake => 'Змея';
+
+  @override
+  String get branchHorse => 'Лошадь';
+
+  @override
+  String get branchGoat => 'Коза';
+
+  @override
+  String get branchMonkey => 'Обезьяна';
+
+  @override
+  String get branchRooster => 'Петух';
+
+  @override
+  String get branchDog => 'Собака';
+
+  @override
+  String get branchPig => 'Свинья';
+
+  @override
+  String get matchNatural => 'Природная гармония';
+
+  @override
+  String get matchLovely => 'Прекрасный баланс';
+
+  @override
+  String get matchRoom => 'Есть что открыть';
+}

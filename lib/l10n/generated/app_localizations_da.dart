@@ -1,0 +1,874 @@
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Danish (`da`).
+class AppLocalizationsDa extends AppLocalizations {
+  AppLocalizationsDa([String locale = 'da']) : super(locale);
+
+  @override
+  String get appTitle => 'Lunar — Find din energi';
+
+  @override
+  String get languageName => 'Dansk';
+
+  @override
+  String get consentLead => 'Jeg bekræfter, at jeg er 18 år eller ældre, og jeg accepterer ';
+
+  @override
+  String get linkTerms => 'servicevilkårene';
+
+  @override
+  String get consentAnd => ' og ';
+
+  @override
+  String get linkPrivacy => 'privatlivspolitikken';
+
+  @override
+  String get consentEnd => '.';
+
+  @override
+  String get consentError => 'Bekræft, at du er 18+, og acceptér vilkårene.';
+
+  @override
+  String get reportProfile => 'Anmeld denne profil';
+
+  @override
+  String get reportIntro => 'Fortæl os, hvad der er galt. Vores moderationsteam gennemgår hver anmeldelse, og profilen skjules straks fra dine anbefalinger.';
+
+  @override
+  String get reasonHarassment => 'Chikane eller mobning';
+
+  @override
+  String get reasonNudity => 'Nøgenhed eller seksuelt indhold';
+
+  @override
+  String get reasonNcii => 'Delte mine private billeder uden samtykke';
+
+  @override
+  String get reasonUnderage => 'Denne person er under 18';
+
+  @override
+  String get reasonImpersonation => 'Identitetsmisbrug eller falsk profil';
+
+  @override
+  String get reasonCsae => 'Barnsikkerhedsmisstanke (CSAE)';
+
+  @override
+  String get reasonSpam => 'Spam, svindel eller fidus';
+
+  @override
+  String get reasonOther => 'Noget andet';
+
+  @override
+  String get reportNoteHint => 'Noget mere, vi bør vide? (valgfrit)';
+
+  @override
+  String get actionCancel => 'Annuller';
+
+  @override
+  String get submitReport => 'Indsend anmeldelse';
+
+  @override
+  String get reportReceivedToast => 'Anmeldelse modtaget. Denne profil er nu skjult.';
+
+  @override
+  String get reportFailedToast => 'Kunne ikke indsende anmeldelsen. Prøv igen.';
+
+  @override
+  String get actionHide => 'Skjul denne profil';
+
+  @override
+  String get legalCenterTitle => 'Juridisk & dine data';
+
+  @override
+  String get legalCenterIntro => 'Politikker, der vil gælde for Lunar ved lancering. Tryk for at læse udkastet.';
+
+  @override
+  String get actionClose => 'Luk';
+
+  @override
+  String get exportMyData => 'Eksportér mine data (JSON)';
+
+  @override
+  String get exportDoneToast => 'En kopi af dine data er på udklipsholderen.';
+
+  @override
+  String get deleteAccount => 'Slet konto & data';
+
+  @override
+  String get deleteConfirmTitle => 'Slette din konto og dine data?';
+
+  @override
+  String get deleteConfirmBody => 'Dette sletter permanent din fødselsprofil, gemte forbindelser, skjulte profiler, anmeldelser og samtykker fra denne enhed. Ved lancering slettes din konto og data også fra Lunars servere. Sikkerheds- og juridiske registre kan opbevares, hvor loven kræver det.';
+
+  @override
+  String get keepAccount => 'Behold konto';
+
+  @override
+  String get deleteEverything => 'Slet alt';
+
+  @override
+  String get deleteDoneToast => 'Din konto og dine data er blevet slettet fra denne enhed.';
+
+  @override
+  String get deleteFailedToast => 'Sletning mislykkedes. Prøv igen.';
+
+  @override
+  String get docTerms => 'Servicevilkår';
+
+  @override
+  String get docPrivacy => 'Privatlivspolitik';
+
+  @override
+  String get docCommunity => 'Fællesskabsretningslinjer';
+
+  @override
+  String get docSafety => 'Sikkerhedsvejledning til dating';
+
+  @override
+  String get docCsae => 'Barnsikkerhedspolitik (CSAE)';
+
+  @override
+  String get docDeletion => 'Politik for sletning af konto og data';
+
+  @override
+  String get docSubscription => 'Abonnementsvilkår';
+
+  @override
+  String get docModeration => 'Politik for indholdsmoderering og anmeldelser';
+
+  @override
+  String get legalPolicies => 'Juridisk & politikker';
+
+  @override
+  String get languageSystem => 'Brug systemsproget';
+
+  @override
+  String get languageTitle => 'Sprog';
+
+  @override
+  String get planFree => 'Lunar Gratis';
+
+  @override
+  String get planPlus => 'Lunar Plus';
+
+  @override
+  String get planPro => 'Lunar Pro';
+
+  @override
+  String get planFreeSub => 'Opdagelse, kort og gemte forbindelser.';
+
+  @override
+  String get planPlusSub => 'Flere daglige likes og fulde kompatibilitetsrapporter.';
+
+  @override
+  String get planProSub => 'Alt fra Plus, samt avancerede cyklusanalyser.';
+
+  @override
+  String get tabDiscover => 'Opdag';
+
+  @override
+  String get tabSaved => 'Gemte';
+
+  @override
+  String get tabMyEnergy => 'Min energi';
+
+  @override
+  String get tabGuide => 'Guide';
+
+  @override
+  String get tabStudio => 'Studio';
+
+  @override
+  String get navConnections => 'Forbindelser';
+
+  @override
+  String get navGuide => 'BaZi-guiden';
+
+  @override
+  String get navStudio => 'Kortstudio';
+
+  @override
+  String get tagline => 'Lidt skæbne. En ægte forbindelse.';
+
+  @override
+  String get yourSpace => 'DIT RUM';
+
+  @override
+  String get promoTitle => 'Gode ting kræver samklang.';
+
+  @override
+  String get promoBody => 'Opdag energien, der gør dig til dig.';
+
+  @override
+  String get promoCta => 'Udforsk dit kort';
+
+  @override
+  String get editProfileShort => 'Rediger din profil';
+
+  @override
+  String get demoProfile => 'Din demoprofil';
+
+  @override
+  String get topbarSub => 'Meningsfulde forbindelser starter med din energi.';
+
+  @override
+  String get howLunarWorks => 'Sådan fungerer Lunar';
+
+  @override
+  String get heroEyebrow => 'GAMMEL VISDOM. NYE FORBINDELSER.';
+
+  @override
+  String get heroTitle => 'Nogle energier\nhører simpelthen sammen.';
+
+  @override
+  String get heroBody => 'Mød mennesker, der frembringer det bedste i dig,\nmed lidt visdom fra BaZi.';
+
+  @override
+  String get findEnergy => 'Find min energi';
+
+  @override
+  String get exploreEnergy => 'Udforsk min energi';
+
+  @override
+  String get discoverTitle => 'Find din slags energi';
+
+  @override
+  String get discoverSub => 'Gennemtænkt matchet. Naturligt dig.';
+
+  @override
+  String get savedTitle => 'En forbindelse værd at gemme';
+
+  @override
+  String get savedSub => 'Dine gemte mennesker, samlet ét sted.';
+
+  @override
+  String get filters => 'Filtre';
+
+  @override
+  String get filtered => 'Filtreret';
+
+  @override
+  String get catForYou => 'Til dig';
+
+  @override
+  String get catHighHarmony => 'Høj harmoni';
+
+  @override
+  String get catSameCity => 'Samme fødselsby';
+
+  @override
+  String get catCreative => 'Kreative sjæle';
+
+  @override
+  String countDiscover(int n) {
+    return '$n forbindelser at opdage';
+  }
+
+  @override
+  String countSaved(int n) {
+    return '$n gemte forbindelser';
+  }
+
+  @override
+  String get bestHarmony => 'Bedste harmoni først';
+
+  @override
+  String get curiosity => 'Lidt nysgerrighed kan være begyndelsen på noget godt.';
+
+  @override
+  String get demoNotice => 'Demofællesskab · Alle profiler er eksempler';
+
+  @override
+  String harmonyPct(int n) {
+    return '$n % harmoni';
+  }
+
+  @override
+  String savedToast(String name) {
+    return '$name gemt i dine forbindelser';
+  }
+
+  @override
+  String removedToast(String name) {
+    return '$name fjernet fra forbindelser';
+  }
+
+  @override
+  String get couldNotSave => 'Kunne ikke gemme. Prøv igen.';
+
+  @override
+  String saveTo(String name) {
+    return 'Gem $name';
+  }
+
+  @override
+  String unsave(String name) {
+    return 'Fjern $name';
+  }
+
+  @override
+  String get compareFailed => 'Kunne ikke åbne sammenligningen. Prøv igen.';
+
+  @override
+  String get glanceTitle => 'Din energi med ét blik';
+
+  @override
+  String get glancePersonal => 'Lidt indsigt i din natur.';
+
+  @override
+  String get glanceSample => 'Mød dit eksempelfødselskort.';
+
+  @override
+  String get seeChart => 'Se mit fulde kort';
+
+  @override
+  String get wisdomEyebrow => 'ET ØJEBLIKS VISDOM';
+
+  @override
+  String get wisdomTitle => 'Du behøver ikke være ens\nfor at være i samklang.';
+
+  @override
+  String get wisdomBody => 'I BaZi kan forskellige elementer frembringe det bedste i hinanden. Balance er noget smukt.';
+
+  @override
+  String get wisdomCta => 'Bliv kendt med de fem elementer';
+
+  @override
+  String get detailsYours => 'Dine oplysninger forbliver dine.';
+
+  @override
+  String get detailsStored => 'Fødselsoplysninger gemmes på denne enhed. De vises aldrig på din offentlige profil.';
+
+  @override
+  String get privacyData => 'Privatliv & dine data';
+
+  @override
+  String get emptySavedTitle => 'Gode forbindelser er værd at gemme.';
+
+  @override
+  String get emptySavedBody => 'Tryk på hjertet på en profil for at gemme den her.';
+
+  @override
+  String get emptyFilterTitle => 'Lidt mere plads at udforske.';
+
+  @override
+  String get emptyFilterBody => 'Prøv et bredere aldersinterval, eller udforsk hele verden.';
+
+  @override
+  String get discoverPeople => 'Opdag mennesker';
+
+  @override
+  String get resetFilters => 'Nulstil filtre';
+
+  @override
+  String get filterTitle => 'Gør plads til din slags mennesker';
+
+  @override
+  String get showMe => 'Vis mig';
+
+  @override
+  String get genderEveryone => 'Alle';
+
+  @override
+  String get genderWomen => 'Kvinder';
+
+  @override
+  String get genderMen => 'Mænd';
+
+  @override
+  String get location => 'Placering';
+
+  @override
+  String get regionWorldwide => 'Hele verden';
+
+  @override
+  String get regionUSA => 'USA';
+
+  @override
+  String get regionUK => 'Storbritannien';
+
+  @override
+  String get regionFrance => 'Frankrig';
+
+  @override
+  String get regionAustralia => 'Australien';
+
+  @override
+  String get regionSingapore => 'Singapore';
+
+  @override
+  String ageRangeLabel(int a, int b) {
+    return 'Aldersinterval · $a–$b';
+  }
+
+  @override
+  String minHarmony(int n) {
+    return 'Minimiharmoni · $n %';
+  }
+
+  @override
+  String get harmonyNote => 'Harmoni er en score til kulturel udforskning, ikke en forudsigelse af parforholdets succes.';
+
+  @override
+  String get reset => 'Nulstil';
+
+  @override
+  String get showConnections => 'Vis forbindelser';
+
+  @override
+  String dayMasterContext(String name, String identity) {
+    return 'Dagsherren til $name er $identity. Mærkatet viser dagselementet og polariteten.';
+  }
+
+  @override
+  String get energyTitle => 'En natur helt din egen.';
+
+  @override
+  String get energySub => 'Bliv kendt med de elementer, der gør dig til dig.';
+
+  @override
+  String get editBirth => 'Rediger fødselsoplysninger';
+
+  @override
+  String get sampleNotice => 'Du udforsker et eksempelkort. Tilføj dine egne fødselsoplysninger for at få en personlig tydning.';
+
+  @override
+  String get getStarted => 'Kom i gang';
+
+  @override
+  String get dayMasterBody => 'Din dagsherre er det centrale element i dit BaZi-kort. Se det som en linse til reflektion, med masser af plads til at være dig selv.';
+
+  @override
+  String get whatIsDayMaster => 'Hvad er en dagsherre?';
+
+  @override
+  String myDayMasterContext(String identity) {
+    return 'Din dagsherre er $identity — stammen øverst på din dagssøjle.';
+  }
+
+  @override
+  String get fiveElements => 'Dine fem elementer';
+
+  @override
+  String get elementsContext => 'Dit korts synlige stammer og grene giver tilsammen denne fordeling.';
+
+  @override
+  String get elementsSub => 'De synlige stammer og grene i dit kort.';
+
+  @override
+  String get fourPillars => 'Dine fire søjler';
+
+  @override
+  String get pillarsContext => 'Hver søjle nedenfor parer en himmelstamme med en jordgren.';
+
+  @override
+  String get pillarsSub => 'Fire øjeblikke, otte tegn, én unik kombination.';
+
+  @override
+  String pillarContext(String pillar, String combo) {
+    return 'Din $pillar-søjle er $combo. Himmelstammen giver dette kort sin elementfarve.';
+  }
+
+  @override
+  String get hourUnknown => 'Time ukendt';
+
+  @override
+  String get hourUnknownBody => 'Tilføj et fødselstidspunkt til din fjerde søjle.';
+
+  @override
+  String get contextTitle => 'Lidt kontekst rækker langt.';
+
+  @override
+  String calcNote(String zone, String lon) {
+    return 'Beregnet med fødselstidspunkt $zone og lokal middelsoltid ved længdegrad $lon°. År og måned følger solterminernes grænser. Dagen skifter ved midnat.';
+  }
+
+  @override
+  String get noTimeBoundaryNote => 'Uden et præcist fødselstidspunkt udelades timen, og grænsedatoer kan være usikre.';
+
+  @override
+  String get solarWhy => 'Hvorfor soltid betyder noget';
+
+  @override
+  String solarContext(String lon) {
+    return 'Dette kort bruger lokal middelsoltid ved længdegrad $lon°.';
+  }
+
+  @override
+  String get understandChart => 'Forstå dit kort';
+
+  @override
+  String get guideEyebrow => 'LIDT VISDOM, MASSER AF MULIGHEDER';
+
+  @override
+  String get guideTitle => 'Gamle rødder.\nMenneskelige forbindelser.';
+
+  @override
+  String get guideIntro => 'BaZi er et traditionelt kinesisk system til at udforske mønstrene i et fødselsøjeblik. Lunar bringer den tradition ind i en mere nysgerrig, forbundet verden.';
+
+  @override
+  String get meetElements => 'Mød de fem elementer';
+
+  @override
+  String get elementsTagline => 'Forskellige af natur. Bedre i balance.';
+
+  @override
+  String get guidePillarsTitle => 'Hvad er de fire søjler?';
+
+  @override
+  String get guidePillarsBody => 'Dit fødselsår, -måned, -dag og -time danner hver sin søjle. Hver søjle har en himmelstamme og en jordgren — otte tegn i alt. Det er dét, BaZi betyder: ”otte tegn”. Din dagstam kaldes din dagsherre.';
+
+  @override
+  String get guideHarmonyTitle => 'Hvordan beregner Lunar harmoni?';
+
+  @override
+  String get guideHarmonyBody => 'Vores demoscore kombinerer tre gennemsigtige faktorer: 45 % kombineret elementbalance, målt ved den normaliserede entropi af synlige elementer; 35 % dagsherre-forbindelse, baseret på den generende cyklus; og 20 % resonans i dagsgrenen, med traditionelle par, trigoner og oppositioner. Scores beregnes ud fra kortene, og anbefalingerne sorteres fra højeste til laveste.';
+
+  @override
+  String get guideScoreTitle => 'Hvad betyder en høj score?';
+
+  @override
+  String get guideScoreBody => 'Den betyder, at to kort passer sammen efter vores valgte regler. Disse regler er et tolkende produktvalg, ikke en videnskabelig test af personlighed eller parforholdets succes. En score skal invitere til en samtale, aldrig afgøre, hvem der fortjener en. Fælles værdier, venlighed, samtykke og ægte kemi tæller.';
+
+  @override
+  String get guideTimezoneTitle => 'Hvordan fungerer tidszoner?';
+
+  @override
+  String get guideTimezoneBody => 'Lunar finder din fødselstid via IANA-tidszonedatabasen, herunder historiske sommertidsregler. År og måned bruger kalenderbibliotekets solterminstidspunkter i UTC+8. Anbefalinger til dating bruger lokal middelsoltid baseret på fødestedets længdegrad, med dagskifte ved midnat. Kortstudiet understøtter desuden lokal klokkeslæt, sand soltid med en tilnærmet korrektion for tidsekvationen samt en dagsgrænse ved 23:00. Ved et gentaget klokkeskift bruges det tidligste tidspunkt; ikke-eksisterende klokkeskiftstidspunkter afvises. Andre BaZi-skoler kan give andre kort.';
+
+  @override
+  String get guideNoTimeTitle => 'Hvad hvis jeg ikke kender min fødselstid?';
+
+  @override
+  String get guideNoTimeBody => 'Du kan stadig udforske. Lunar bruger lokal middagstid i datoberegningen, udelader timesøjlen og markerer dine resultater som omtrentlige. Ved datoer tæt på en soltermingrænse kan også år eller måned være usikkert. Tilføj dit tidspunkt senere for at finpudse dit kort.';
+
+  @override
+  String get guideCommunityTitle => 'Er dette et rigtigt dating-fællesskab?';
+
+  @override
+  String get guideCommunityBody => 'Denne første version er en interaktiv, lokal demo. De viste mennesker er fiktive profiler med stockfotos. Du kan udforske kort, filtrere anbefalinger og gemme forbindelser på denne enhed. Konti, beskeder, verifikation og et ægte fællesskab bliver en del af en fremtidig backend-integration.';
+
+  @override
+  String get digDeeper => 'GRAV DYBERE';
+
+  @override
+  String get termFourPillars => 'Fire søjler';
+
+  @override
+  String get termStemsBranches => 'Himmelstammer & jordgrene';
+
+  @override
+  String get termDayMaster => 'Dagsherre';
+
+  @override
+  String get termTenGods => 'Ti guder';
+
+  @override
+  String get termCombinations => 'Kombinationer';
+
+  @override
+  String get termSolarTime => 'Sand soltid';
+
+  @override
+  String get guideFooter => 'Forbliv nysgerrig. Vær venlig. Giv plads til et heldigt tilfælde.';
+
+  @override
+  String get privacyTitle => 'Dine oplysninger forbliver dine.';
+
+  @override
+  String get privacyBody1 => 'Denne app gemmer dit navn, fødselsoplysninger, studiekort, modelindstillinger, gemte forbindelser og skjulte profiler på denne enhed. Klient-API-nøgler forbliver i hukommelsen. Når du vælger at generere en tydning, sendes beregnede kortdata til din valgte modeludbyder. Navne, præcise fødselsdatoer og -steder udelades. Nulstilling af lokale data sletter ikke udbyderdata eller den lokale servers API-nøgle.';
+
+  @override
+  String get privacyBody2 => 'Lokal lagring er ikke krypteret. Ryd dine data på en delt enhed, når du er færdig. At rydde browser- eller appdata fjerner også din profil.';
+
+  @override
+  String get privacyBody3 => 'Ved nulstilling ryddes dine personlige oplysninger og gemte præferencer, og du vender tilbage til eksempelprofilen.';
+
+  @override
+  String get clearDataTitle => 'Ryd dine lokale data?';
+
+  @override
+  String get clearDataBody => 'Din fødselsprofil, gemte forbindelser og skjulte profiler fjernes fra denne enhed.';
+
+  @override
+  String get keepMyData => 'Behold mine data';
+
+  @override
+  String get clearData => 'Ryd data';
+
+  @override
+  String get resetLocalData => 'Nulstil lokale data';
+
+  @override
+  String get clearOkToast => 'Dine lokale data er ryddet.';
+
+  @override
+  String get clearFailToast => 'Nogle data kunne ikke ryddes. Prøv igen.';
+
+  @override
+  String get editorTitle => 'Det starter med dig.';
+
+  @override
+  String get editorSub => 'Et øjeblik i tiden. En energi helt din egen.\nTilføj dine fødselsoplysninger for at opdage dit BaZi-kort.';
+
+  @override
+  String get firstName => 'Dit fornavn';
+
+  @override
+  String get nameHint => 'Hvad skal vi kalde dig?';
+
+  @override
+  String get nameRequired => 'Indtast dit fornavn.';
+
+  @override
+  String get dateLabel => 'Fødselsdato';
+
+  @override
+  String get chooseDate => 'Vælg dato';
+
+  @override
+  String get dateInvalid => 'Indtast en gyldig dato i formatet ÅÅÅÅ-MM-DD.';
+
+  @override
+  String get adultsOnly => 'Lunar er til voksne fra 18 år.';
+
+  @override
+  String get yearMin => 'Indtast et år fra 1900 og frem.';
+
+  @override
+  String get timeLabel => 'Lokal fødselstid';
+
+  @override
+  String get timeInvalid => 'Brug 24-timers ur, for eksempel 09:30.';
+
+  @override
+  String get noTimeCheckbox => 'Jeg kender ikke min fødselstid';
+
+  @override
+  String get noTimeNote => 'Vi bruger tre søjler og udelader timen. Dit kort og dine harmoniscores bliver omtrentlige.';
+
+  @override
+  String get birthplace => 'Fødested';
+
+  @override
+  String get otherBirthplace => 'Andet fødested';
+
+  @override
+  String get cityCountry => 'By og land';
+
+  @override
+  String get cityRequired => 'Indtast et fødested.';
+
+  @override
+  String get tzLabel => 'Tidszone for fødested';
+
+  @override
+  String get longitude => 'Længdegrad';
+
+  @override
+  String get lonHint => 'Øst er positivt, vest er negativt. Eksempel: -73.98';
+
+  @override
+  String get lonInvalid => 'Indtast en længdegrad mellem -180 og 180.';
+
+  @override
+  String tzNote(String zone) {
+    return 'Tidszone: $zone\nDag og time bruger lokal middelsoltid. Ved et gentaget klokkeskift bruges det tidligste tidspunkt.';
+  }
+
+  @override
+  String get privacyNote => 'Dine fødselsoplysninger forbliver på denne enhed og vises aldrig på din offentlige profil.';
+
+  @override
+  String get findingEnergy => 'Finder din energi…';
+
+  @override
+  String get discoverEnergy => 'Opdag min energi';
+
+  @override
+  String get energyReadyToast => 'Din energi er klar. Dine forbindelser er blevet opdateret.';
+
+  @override
+  String get saveFailed => 'Din profil kunne ikke gemmes. Prøv igen.';
+
+  @override
+  String get calcFailed => 'Vi kunne ikke beregne dette kort. Tjek din dato og dit fødested.';
+
+  @override
+  String get editorFooter => 'Kulturel indsigt, med plads til ægte kemi.';
+
+  @override
+  String get closeProfile => 'Luk profil';
+
+  @override
+  String get chemistryTitle => 'Kemien bag jeres forbindelse';
+
+  @override
+  String meetsText(String you, String name, String their) {
+    return 'Din $you-energi møder ${name}s $their-energi.';
+  }
+
+  @override
+  String get factorBalance => 'Elementbalance';
+
+  @override
+  String get factorConnection => 'Dagsherre-forbindelse';
+
+  @override
+  String get factorResonance => 'Dagsgrenresonans';
+
+  @override
+  String get factorBalanceDesc => '45 % af scoren · Hvor jævnt dine synlige elementer fordeler sig.';
+
+  @override
+  String get factorConnectionDesc => '35 % af scoren · Forholdet mellem de to dagelementer.';
+
+  @override
+  String get factorResonanceDesc => '20 % af scoren · Traditionelle grenpar og kombinationer.';
+
+  @override
+  String get starterTitle => 'En lille samtalestarter';
+
+  @override
+  String starterText(String topic) {
+    return '”Hvad er der ved $topic, du kan snakke timevis om?”';
+  }
+
+  @override
+  String get demoDisclaimer => 'Dette er en illustrativ profil i demofællesskabet. Harmoni er en gennemsigtig kulturel heuristik, ikke en videnskabelig måling eller en forudsigelse af kompatibilitet.';
+
+  @override
+  String get timeApprox => 'Din fødselstid er ukendt, så denne score er omtrentlig.';
+
+  @override
+  String get saveConnection => 'Gem denne forbindelse';
+
+  @override
+  String get savedConnection => 'Gemt i forbindelser';
+
+  @override
+  String get compareCharts => 'Sammenlign vores fulde kort';
+
+  @override
+  String hideToast(String name) {
+    return '$name er skjult fra dine anbefalinger.';
+  }
+
+  @override
+  String get hideFailed => 'Kunne ikke opdatere anbefalingerne. Prøv igen.';
+
+  @override
+  String factorContext(String title, int score) {
+    return '$title bidrog med $score % til denne harmoniscore.';
+  }
+
+  @override
+  String get elementWood => 'Træ';
+
+  @override
+  String get elementFire => 'Ild';
+
+  @override
+  String get elementEarth => 'Jord';
+
+  @override
+  String get elementMetal => 'Metal';
+
+  @override
+  String get elementWater => 'Vand';
+
+  @override
+  String get qualityWood => 'Vækst & venlighed';
+
+  @override
+  String get qualityFire => 'Passion & varme';
+
+  @override
+  String get qualityEarth => 'Balance & tillid';
+
+  @override
+  String get qualityMetal => 'Klarhed & målrettethed';
+
+  @override
+  String get qualityWater => 'Dybde & intuition';
+
+  @override
+  String get qualityWoodShort => 'Vækst';
+
+  @override
+  String get qualityFireShort => 'Passion';
+
+  @override
+  String get qualityEarthShort => 'Balance';
+
+  @override
+  String get qualityMetalShort => 'Klarhed';
+
+  @override
+  String get qualityWaterShort => 'Dybde';
+
+  @override
+  String get polarityYin => 'Yin';
+
+  @override
+  String get polarityYang => 'Yang';
+
+  @override
+  String get pillarYear => 'År';
+
+  @override
+  String get pillarMonth => 'Måned';
+
+  @override
+  String get pillarDay => 'Dag';
+
+  @override
+  String get pillarHour => 'Time';
+
+  @override
+  String get branchRat => 'Rotte';
+
+  @override
+  String get branchOx => 'Okse';
+
+  @override
+  String get branchTiger => 'Tiger';
+
+  @override
+  String get branchRabbit => 'Kanin';
+
+  @override
+  String get branchDragon => 'Drage';
+
+  @override
+  String get branchSnake => 'Slange';
+
+  @override
+  String get branchHorse => 'Hest';
+
+  @override
+  String get branchGoat => 'Ged';
+
+  @override
+  String get branchMonkey => 'Abe';
+
+  @override
+  String get branchRooster => 'Hane';
+
+  @override
+  String get branchDog => 'Hund';
+
+  @override
+  String get branchPig => 'Svin';
+
+  @override
+  String get matchNatural => 'Naturlig harmoni';
+
+  @override
+  String get matchLovely => 'En dejlig balance';
+
+  @override
+  String get matchRoom => 'Plads til at opdage';
+}

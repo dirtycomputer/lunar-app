@@ -1,0 +1,874 @@
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Turkish (`tr`).
+class AppLocalizationsTr extends AppLocalizations {
+  AppLocalizationsTr([String locale = 'tr']) : super(locale);
+
+  @override
+  String get appTitle => 'Lunar — Kendi enerjini bul';
+
+  @override
+  String get languageName => 'Türkçe';
+
+  @override
+  String get consentLead => '18 yaşından büyük olduğumu onaylıyor ve şunları kabul ediyorum: ';
+
+  @override
+  String get linkTerms => 'Hizmet Şartları';
+
+  @override
+  String get consentAnd => ' ve ';
+
+  @override
+  String get linkPrivacy => 'Gizlilik Politikası';
+
+  @override
+  String get consentEnd => '.';
+
+  @override
+  String get consentError => 'Lütfen 18 yaşından büyük olduğunuzu onaylayın ve şartları kabul edin.';
+
+  @override
+  String get reportProfile => 'Bu profili bildir';
+
+  @override
+  String get reportIntro => 'Sorunun ne olduğunu bize anlatın. Denetim ekibimiz her bildirimi inceler ve profil önerilerinizden hemen gizlenir.';
+
+  @override
+  String get reasonHarassment => 'Taciz veya zorbalık';
+
+  @override
+  String get reasonNudity => 'Çıplaklık veya cinsel içerik';
+
+  @override
+  String get reasonNcii => 'Özel fotoğraflarımı izinsiz paylaştı';
+
+  @override
+  String get reasonUnderage => 'Bu kişi 18 yaşından küçük';
+
+  @override
+  String get reasonImpersonation => 'Kimliğe bürünme veya sahte profil';
+
+  @override
+  String get reasonCsae => 'Çocuk güvenliği endişesi (CSAE)';
+
+  @override
+  String get reasonSpam => 'Spam, dolandırıcılık veya aldatma';
+
+  @override
+  String get reasonOther => 'Başka bir şey';
+
+  @override
+  String get reportNoteHint => 'Bilmemiz gereken başka bir şey var mı? (isteğe bağlı)';
+
+  @override
+  String get actionCancel => 'İptal';
+
+  @override
+  String get submitReport => 'Bildirimi gönder';
+
+  @override
+  String get reportReceivedToast => 'Bildirim alındı. Bu profil artık gizli.';
+
+  @override
+  String get reportFailedToast => 'Bildirim gönderilemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get actionHide => 'Bu profili gizle';
+
+  @override
+  String get legalCenterTitle => 'Yasal & verileriniz';
+
+  @override
+  String get legalCenterIntro => 'Lunar\'ı lansmanda yönetecek politikalar. Taslağı okumak için dokunun.';
+
+  @override
+  String get actionClose => 'Kapat';
+
+  @override
+  String get exportMyData => 'Verilerimi dışa aktar (JSON)';
+
+  @override
+  String get exportDoneToast => 'Verilerinizin bir kopyası panoya kopyalandı.';
+
+  @override
+  String get deleteAccount => 'Hesabı ve verileri sil';
+
+  @override
+  String get deleteConfirmTitle => 'Hesabınızı ve verilerinizi silmek istiyor musunuz?';
+
+  @override
+  String get deleteConfirmBody => 'Bu işlem bu cihazdan doğum profilinizi, kaydedilen bağlantıları, gizlenen profilleri, bildirimleri ve onayları kalıcı olarak kaldırır. Lansmanda hesabınız ve verileriniz Lunar sunucularından da silinir. Güvenlik ve hukuki kayıtlar yasaların gerektirdiği durumlarda saklanabilir.';
+
+  @override
+  String get keepAccount => 'Hesabı koru';
+
+  @override
+  String get deleteEverything => 'Her şeyi sil';
+
+  @override
+  String get deleteDoneToast => 'Hesabınız ve verileriniz bu cihazdan silindi.';
+
+  @override
+  String get deleteFailedToast => 'Silme başarısız oldu. Lütfen tekrar deneyin.';
+
+  @override
+  String get docTerms => 'Hizmet Şartları';
+
+  @override
+  String get docPrivacy => 'Gizlilik Politikası';
+
+  @override
+  String get docCommunity => 'Topluluk Kuralları';
+
+  @override
+  String get docSafety => 'Flört Güvenliği Rehberi';
+
+  @override
+  String get docCsae => 'Çocuk Güvenliği (CSAE) Politikası';
+
+  @override
+  String get docDeletion => 'Hesap ve Veri Silme Politikası';
+
+  @override
+  String get docSubscription => 'Abonelik Koşulları';
+
+  @override
+  String get docModeration => 'İçerik Denetimi ve Bildirim Politikası';
+
+  @override
+  String get legalPolicies => 'Yasal bilgiler ve politikalar';
+
+  @override
+  String get languageSystem => 'Sistem dilini kullan';
+
+  @override
+  String get languageTitle => 'Dil';
+
+  @override
+  String get planFree => 'Lunar Ücretsiz';
+
+  @override
+  String get planPlus => 'Lunar Plus';
+
+  @override
+  String get planPro => 'Lunar Pro';
+
+  @override
+  String get planFreeSub => 'Keşif, haritalar ve kaydedilen bağlantılar.';
+
+  @override
+  String get planPlusSub => 'Daha fazla günlük beğeni ve tam uyumluluk raporları.';
+
+  @override
+  String get planProSub => 'Plus\'taki her şey, ayrıca gelişmiş döngü analizleri.';
+
+  @override
+  String get tabDiscover => 'Keşfet';
+
+  @override
+  String get tabSaved => 'Kaydedilenler';
+
+  @override
+  String get tabMyEnergy => 'Enerjim';
+
+  @override
+  String get tabGuide => 'Rehber';
+
+  @override
+  String get tabStudio => 'Stüdyo';
+
+  @override
+  String get navConnections => 'Bağlantılar';
+
+  @override
+  String get navGuide => 'BaZi rehberi';
+
+  @override
+  String get navStudio => 'Harita stüdyosu';
+
+  @override
+  String get tagline => 'Biraz kader. Gerçek bir bağ.';
+
+  @override
+  String get yourSpace => 'Sizin alanınız';
+
+  @override
+  String get promoTitle => 'Güzel şeyler uyum ister.';
+
+  @override
+  String get promoBody => 'Sizi siz yapan enerjiyi keşfedin.';
+
+  @override
+  String get promoCta => 'Haritanızı keşfedin';
+
+  @override
+  String get editProfileShort => 'Profilinizi düzenleyin';
+
+  @override
+  String get demoProfile => 'Demo profiliniz';
+
+  @override
+  String get topbarSub => 'Anlamlı bağlantılar enerjinizle başlar.';
+
+  @override
+  String get howLunarWorks => 'Lunar nasıl çalışır';
+
+  @override
+  String get heroEyebrow => 'Kadim bilgelik. Yeni bağlantılar.';
+
+  @override
+  String get heroTitle => 'Bazı enerjiler\nbirlikte olmak için yaratılmıştır.';
+
+  @override
+  String get heroBody => 'Sizin en iyi yanınızı ortaya çıkaran insanlarla tanışın,\nBaZi\'nin hafif rehberliğiyle.';
+
+  @override
+  String get findEnergy => 'Enerjimi bul';
+
+  @override
+  String get exploreEnergy => 'Enerjimi incele';
+
+  @override
+  String get discoverTitle => 'Size benzer enerjiyi bulun';
+
+  @override
+  String get discoverSub => 'Özenli eşleştirme. Tam da siz olduğunuz gibi.';
+
+  @override
+  String get savedTitle => 'Saklamaya değer bir bağ';
+
+  @override
+  String get savedSub => 'Kaydettiğiniz kişiler, tek bir yerde.';
+
+  @override
+  String get filters => 'Filtreler';
+
+  @override
+  String get filtered => 'Filtrelendi';
+
+  @override
+  String get catForYou => 'Sizin için';
+
+  @override
+  String get catHighHarmony => 'Yüksek uyum';
+
+  @override
+  String get catSameCity => 'Aynı doğum şehri';
+
+  @override
+  String get catCreative => 'Yaratıcı ruhlar';
+
+  @override
+  String countDiscover(int n) {
+    return 'Keşfedilecek $n bağlantı';
+  }
+
+  @override
+  String countSaved(int n) {
+    return '$n kaydedilen bağlantı';
+  }
+
+  @override
+  String get bestHarmony => 'Önce en yüksek uyum';
+
+  @override
+  String get curiosity => 'Biraz merak, güzel bir şeyin başlangıcı olabilir.';
+
+  @override
+  String get demoNotice => 'Demo topluluk · Tüm profiller örnektir';
+
+  @override
+  String harmonyPct(int n) {
+    return '%$n uyum';
+  }
+
+  @override
+  String savedToast(String name) {
+    return '$name bağlantılarınıza kaydedildi';
+  }
+
+  @override
+  String removedToast(String name) {
+    return '$name bağlantılardan kaldırıldı';
+  }
+
+  @override
+  String get couldNotSave => 'Kaydedilemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String saveTo(String name) {
+    return '$name kişisini kaydet';
+  }
+
+  @override
+  String unsave(String name) {
+    return '$name kaydını kaldır';
+  }
+
+  @override
+  String get compareFailed => 'Karşılaştırma açılamadı. Lütfen tekrar deneyin.';
+
+  @override
+  String get glanceTitle => 'Enerjiniz, tek bakışta';
+
+  @override
+  String get glancePersonal => 'Doğanız hakkında küçük bir içgörü.';
+
+  @override
+  String get glanceSample => 'Örnek doğum haritanızla tanışın.';
+
+  @override
+  String get seeChart => 'Tam haritama bak';
+
+  @override
+  String get wisdomEyebrow => 'Bir bilgelik anı';
+
+  @override
+  String get wisdomTitle => 'Aynı ritimde olmak için\naynı olmak gerekmez.';
+
+  @override
+  String get wisdomBody => 'BaZi\'de farklı elementler birbirinin en iyi yanını ortaya çıkarabilir. Denge güzel bir şeydir.';
+
+  @override
+  String get wisdomCta => 'Beş Elementle tanışın';
+
+  @override
+  String get detailsYours => 'Bilgileriniz sizde kalır.';
+
+  @override
+  String get detailsStored => 'Doğum bilgileri bu cihazda saklanır. Asla herkese açık profilinizde gösterilmez.';
+
+  @override
+  String get privacyData => 'Gizlilik ve verileriniz';
+
+  @override
+  String get emptySavedTitle => 'İyi bağlantılar saklamaya değerdir.';
+
+  @override
+  String get emptySavedBody => 'Burada tutmak için bir profildeki kalbe dokunun.';
+
+  @override
+  String get emptyFilterTitle => 'Keşfetmek için biraz daha alan.';
+
+  @override
+  String get emptyFilterBody => 'Daha geniş bir yaş aralığı deneyin ya da dünyanın dört bir yanına bakın.';
+
+  @override
+  String get discoverPeople => 'İnsanları keşfet';
+
+  @override
+  String get resetFilters => 'Filtreleri sıfırla';
+
+  @override
+  String get filterTitle => 'Size benzeyen insanlara yer açın';
+
+  @override
+  String get showMe => 'Bana göster';
+
+  @override
+  String get genderEveryone => 'Herkes';
+
+  @override
+  String get genderWomen => 'Kadınlar';
+
+  @override
+  String get genderMen => 'Erkekler';
+
+  @override
+  String get location => 'Konum';
+
+  @override
+  String get regionWorldwide => 'Dünya genelinde';
+
+  @override
+  String get regionUSA => 'ABD';
+
+  @override
+  String get regionUK => 'Birleşik Krallık';
+
+  @override
+  String get regionFrance => 'Fransa';
+
+  @override
+  String get regionAustralia => 'Avustralya';
+
+  @override
+  String get regionSingapore => 'Singapur';
+
+  @override
+  String ageRangeLabel(int a, int b) {
+    return 'Yaş aralığı · $a–$b';
+  }
+
+  @override
+  String minHarmony(int n) {
+    return 'En düşük uyum · %$n';
+  }
+
+  @override
+  String get harmonyNote => 'Uyum, kültürel bir keşif puanıdır; ilişki başarısının öngörüsü değildir.';
+
+  @override
+  String get reset => 'Sıfırla';
+
+  @override
+  String get showConnections => 'Bağlantıları göster';
+
+  @override
+  String dayMasterContext(String name, String identity) {
+    return '$name kişisinin gün efendisi $identity. Rozet, gün elementini ve kutupluluğunu gösterir.';
+  }
+
+  @override
+  String get energyTitle => 'Yalnızca size ait bir doğa.';
+
+  @override
+  String get energySub => 'Sizi siz yapan elementlerle tanışın.';
+
+  @override
+  String get editBirth => 'Doğum bilgilerini düzenle';
+
+  @override
+  String get sampleNotice => 'Bir örnek haritayı inceliyorsunuz. Kişisel bir okuma için doğum bilgilerinizi ekleyin.';
+
+  @override
+  String get getStarted => 'Başlayın';
+
+  @override
+  String get dayMasterBody => 'Gün efendisi, BaZi haritanızın merkez elementidir. Onu kendini gözlemek için bir mercek olarak düşünün — kendiniz olmanız için geniş bir alan bırakarak.';
+
+  @override
+  String get whatIsDayMaster => 'Gün efendisi nedir?';
+
+  @override
+  String myDayMasterContext(String identity) {
+    return 'Gün efendiniz $identity — gün sütununuzun tepesindeki gövdedir.';
+  }
+
+  @override
+  String get fiveElements => 'Beş Elementiniz';
+
+  @override
+  String get elementsContext => 'Haritanızda görünen gövdeler ve dallar bu dağılımı oluşturur.';
+
+  @override
+  String get elementsSub => 'Haritanızda görünen gövdeler ve dallar.';
+
+  @override
+  String get fourPillars => 'Dört Sütununuz';
+
+  @override
+  String get pillarsContext => 'Aşağıdaki her sütun bir göksel gövdeyi bir yer dalıyla eşleştirir.';
+
+  @override
+  String get pillarsSub => 'Dört an, sekiz karakter, eşsiz bir bileşim.';
+
+  @override
+  String pillarContext(String pillar, String combo) {
+    return '$pillar sütununuz $combo. Göksel gövde, bu karta element rengini verir.';
+  }
+
+  @override
+  String get hourUnknown => 'Saat bilinmiyor';
+
+  @override
+  String get hourUnknownBody => 'Dördüncü sütununuz için doğum saati ekleyin.';
+
+  @override
+  String get contextTitle => 'Biraz bağlam büyük fark yaratır.';
+
+  @override
+  String calcNote(String zone, String lon) {
+    return '$zone doğum saati ve $lon° boylamındaki yerel ortalama güneş zamanı ile hesaplandı. Yıl ve ay güneş dönem sınırlarını izler. Gün gece yarısı değişir.';
+  }
+
+  @override
+  String get noTimeBoundaryNote => 'Kesin bir doğum saati olmadan saat sütunu atlanır ve sınır tarihleri belirsiz olabilir.';
+
+  @override
+  String get solarWhy => 'Güneş zamanı neden önemlidir';
+
+  @override
+  String solarContext(String lon) {
+    return 'Bu harita $lon° boylamındaki yerel ortalama güneş zamanını kullanır.';
+  }
+
+  @override
+  String get understandChart => 'Haritanızı anlayın';
+
+  @override
+  String get guideEyebrow => 'Biraz bilgelik, sınırsız olasılık';
+
+  @override
+  String get guideTitle => 'Kadim kökler.\nİnsani bağlar.';
+
+  @override
+  String get guideIntro => 'BaZi, doğum anının örüntülerini keşfetmek için geleneksel bir Çin sistemidir. Lunar bu geleneği daha meraklı, daha birbirine bağlı bir dünyaya taşır.';
+
+  @override
+  String get meetElements => 'Beş Elementle tanışın';
+
+  @override
+  String get elementsTagline => 'Doğaları farklı. Dengede daha güzel.';
+
+  @override
+  String get guidePillarsTitle => 'Dört Sütun nedir?';
+
+  @override
+  String get guidePillarsBody => 'Doğum yılınız, ayınız, gününüz ve saatiniz — her biri bir sütun oluşturur. Her sütun bir göksel gövde ve bir yer dalı içerir — toplamda sekiz karakter. BaZi\'nin anlamı budur: “sekiz karakter”. Gün gövdeniz, gün efendiniz olarak adlandırılır.';
+
+  @override
+  String get guideHarmonyTitle => 'Lunar uyumu nasıl hesaplar?';
+
+  @override
+  String get guideHarmonyBody => 'Demo puanımız üç saydam faktörü birleştirir: görünen elementlerin normalize edilmiş entropisiyle ölçülen %45\'lik birleşik element dengesi; üretme döngüsüne dayanan %35\'lik gün efendisi ilişkisi; ve geleneksel çiftler, üçlüler ve karşıtlıklar kullanan %20\'lik gün dalı rezonansı. Puanlar haritalardan hesaplanır ve öneriler yüksekten düşüğe sıralanır.';
+
+  @override
+  String get guideScoreTitle => 'Yüksek puan ne anlama gelir?';
+
+  @override
+  String get guideScoreBody => 'İki haritanın seçtiğimiz kurallara göre uyduğunu gösterir. Bu kurallar yorumlayıcı bir ürün tercihidir; kişilik ya da ilişki başarısının bilimsel bir testi değildir. Puan bir sohbet daveti olmalı; kimin sohbete layık olduğuna asla karar vermemelidir. Paylaşılan değerler, nezaket, rıza ve gerçek hayattaki kimya asıl önem taşıyandır.';
+
+  @override
+  String get guideTimezoneTitle => 'Saat dilimleri nasıl işler?';
+
+  @override
+  String get guideTimezoneBody => 'Lunar doğum saatinizi, tarihi yaz saati uygulaması kuralları dahil IANA saat dilimi veritabanıyla belirler. Yıl ve ay, takvim kitaplığının UTC+8 üzerindeki güneş dönem anlarını kullanır. Flört önerileri, doğum yerinin boylamına göre yerel ortalama güneş zamanını kullanır ve gün gece yarısı değişir. Chart Studio ayrıca yerel saat zamanını, yaklaşık zaman denklemi düzeltmesi içeren gerçek güneş zamanını ve 23:00 gün sınırını da destekler. Saat değişikliğinin tekrarlanan anında önceki örnek alınır; var olmayan saat değişikliği zamanları reddedilir. Diğer BaZi ekolleri farklı haritalar üretebilir.';
+
+  @override
+  String get guideNoTimeTitle => 'Doğum saatimi bilmiyorsam?';
+
+  @override
+  String get guideNoTimeBody => 'Yine de keşfedebilirsiniz. Lunar tarih hesabı için yerel öğleyi kullanır, saat sütununu atlar ve sonuçlarınızı yaklaşık olarak işaretler. Güneş dönemi sınırına yakın tarihlerde yıl veya ay da belirsiz olabilir. Haritanızı hassaslaştırmak için saatinizi daha sonra ekleyin.';
+
+  @override
+  String get guideCommunityTitle => 'Bu gerçek bir flört topluluğu mu?';
+
+  @override
+  String get guideCommunityBody => 'Bu ilk sürüm etkileşimli, yerel bir demodur. Gösterilen kişiler stok fotoğraflı kurgusal profillerdir. Bu cihazda haritaları inceleyebilir, önerileri filtreleyebilir ve bağlantıları kaydedebilirsiniz. Hesaplar, mesajlaşma, doğrulama ve gerçek bir topluluk, gelecekteki arka uç entegrasyonunun parçası olacaktır.';
+
+  @override
+  String get digDeeper => 'Daha derine inin';
+
+  @override
+  String get termFourPillars => 'Dört Sütun';
+
+  @override
+  String get termStemsBranches => 'Göksel gövdeler ve yer dalları';
+
+  @override
+  String get termDayMaster => 'Gün efendisi';
+
+  @override
+  String get termTenGods => 'On Tanrı';
+
+  @override
+  String get termCombinations => 'Birleşimler';
+
+  @override
+  String get termSolarTime => 'Gerçek güneş zamanı';
+
+  @override
+  String get guideFooter => 'Meraklı kalın. Nazik olun. Biraz tesadüfe yer bırakın.';
+
+  @override
+  String get privacyTitle => 'Bilgileriniz size ait kalır.';
+
+  @override
+  String get privacyBody1 => 'Bu uygulama adınızı, doğum bilgilerinizi, stüdyo haritalarınızı, model ayarlarınızı, kaydedilen bağlantıları ve gizlenen profilleri bu cihazda saklar. İstemci API anahtarları bellekte kalır. Yorum oluşturmayı seçtiğinizde hesaplanan harita kanıtları seçtiğiniz model sağlayıcısına gönderilir. Adlar, kesin doğum tarihleri ve yerler bu kanıtlara dahil edilmez. Yerel verileri sıfırlamak, sağlayıcı kayıtlarını ya da yerel sunucunun API anahtarını silmez.';
+
+  @override
+  String get privacyBody2 => 'Yerel depolama şifreli değildir. Paylaşılan bir cihazda işiniz bitince verilerinizi temizleyin. Tarayıcı ya da uygulama verilerini temizlemek profilinizi de kaldırır.';
+
+  @override
+  String get privacyBody3 => 'Sıfırlama kişisel bilgilerinizi ve kaydedilen tercihlerinizi temizler, sonra örnek profile geri döner.';
+
+  @override
+  String get clearDataTitle => 'Yerel verileriniz temizlensin mi?';
+
+  @override
+  String get clearDataBody => 'Doğum profiliniz, kaydedilen bağlantılar ve gizlenen profiller bu cihazdan kaldırılacak.';
+
+  @override
+  String get keepMyData => 'Verilerimi koru';
+
+  @override
+  String get clearData => 'Verileri temizle';
+
+  @override
+  String get resetLocalData => 'Yerel verileri sıfırla';
+
+  @override
+  String get clearOkToast => 'Yerel verileriniz temizlendi.';
+
+  @override
+  String get clearFailToast => 'Bazı veriler temizlenemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get editorTitle => 'Her şey sizinle başlar.';
+
+  @override
+  String get editorSub => 'Zamandaki bir an. Yalnızca size ait bir enerji.\nBaZi haritanızı keşfetmek için doğum bilgilerinizi ekleyin.';
+
+  @override
+  String get firstName => 'Adınız';
+
+  @override
+  String get nameHint => 'Size nasıl hitap edelim?';
+
+  @override
+  String get nameRequired => 'Lütfen adınızı girin.';
+
+  @override
+  String get dateLabel => 'Doğum tarihi';
+
+  @override
+  String get chooseDate => 'Tarih seçin';
+
+  @override
+  String get dateInvalid => 'YYYY-MM-DD biçiminde geçerli bir tarih girin.';
+
+  @override
+  String get adultsOnly => 'Lunar 18 yaş ve üzeri yetişkinler içindir.';
+
+  @override
+  String get yearMin => 'Lütfen 1900 veya sonrası bir yıl girin.';
+
+  @override
+  String get timeLabel => 'Yerel doğum saati';
+
+  @override
+  String get timeInvalid => '24 saat biçimini kullanın, örneğin 09:30.';
+
+  @override
+  String get noTimeCheckbox => 'Doğum saatimi bilmiyorum';
+
+  @override
+  String get noTimeNote => 'Üç sütun kullanacağız ve saati dışarıda bırakacağız. Haritanız ve uyum puanlarınız yaklaşık olacak.';
+
+  @override
+  String get birthplace => 'Doğum yeri';
+
+  @override
+  String get otherBirthplace => 'Başka bir doğum yeri';
+
+  @override
+  String get cityCountry => 'Şehir ve ülke';
+
+  @override
+  String get cityRequired => 'Lütfen doğum yerinizi girin.';
+
+  @override
+  String get tzLabel => 'Doğum yerinin saat dilimi';
+
+  @override
+  String get longitude => 'Boylam';
+
+  @override
+  String get lonHint => 'Doğu pozitif, batı negatiftir. Örneğin: -73.98';
+
+  @override
+  String get lonInvalid => '-180 ile 180 arasında bir boylam girin.';
+
+  @override
+  String tzNote(String zone) {
+    return 'Saat dilimi: $zone\nGün ve saat yerel ortalama güneş zamanını kullanır. Saat değişikliği zamanı tekrar ederse önceki örnek alınır.';
+  }
+
+  @override
+  String get privacyNote => 'Doğum bilgileriniz bu cihazda kalır ve asla herkese açık profilinizde gösterilmez.';
+
+  @override
+  String get findingEnergy => 'Enerjiniz aranıyor…';
+
+  @override
+  String get discoverEnergy => 'Enerjimi keşfet';
+
+  @override
+  String get energyReadyToast => 'Enerjiniz hazır. Bağlantılarınız yenilendi.';
+
+  @override
+  String get saveFailed => 'Profiliniz kaydedilemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String get calcFailed => 'Bu haritayı hesaplayamadık. Lütfen tarihinizi ve doğum yerinizi kontrol edin.';
+
+  @override
+  String get editorFooter => 'Kültürel içgörü, gerçek hayattaki kimyaya da yer bırakır.';
+
+  @override
+  String get closeProfile => 'Profili kapat';
+
+  @override
+  String get chemistryTitle => 'Bağınızın ardındaki kimya';
+
+  @override
+  String meetsText(String you, String name, String their) {
+    return 'Sizin $you enerjiniz, $name kişisinin $their enerjisiyle buluşuyor.';
+  }
+
+  @override
+  String get factorBalance => 'Element dengesi';
+
+  @override
+  String get factorConnection => 'Gün efendisi ilişkisi';
+
+  @override
+  String get factorResonance => 'Gün dalı rezonansı';
+
+  @override
+  String get factorBalanceDesc => 'Puanın %45\'i · Görünen elementlerinizin ne kadar dengeli biçimde birleştiği.';
+
+  @override
+  String get factorConnectionDesc => 'Puanın %35\'i · Gün elementleriniz arasındaki ilişki.';
+
+  @override
+  String get factorResonanceDesc => 'Puanın %20\'si · Geleneksel dal çiftleri ve birleşimler.';
+
+  @override
+  String get starterTitle => 'Sohbet açacak küçük bir fikir';
+
+  @override
+  String starterText(String topic) {
+    return '“$topic hakkında saatlerce konuşabileceğiniz bir şey ne?”';
+  }
+
+  @override
+  String get demoDisclaimer => 'Bu, demo topluluktan örnek bir profildir. Uyum, şeffaf kültürel bir sezgisel ölçüttür; bilimsel bir ölçüm ya da uyum öngörüsü değildir.';
+
+  @override
+  String get timeApprox => 'Doğum saatiniz bilinmediği için bu puan yaklaşıktır.';
+
+  @override
+  String get saveConnection => 'Bu bağlantıyı kaydet';
+
+  @override
+  String get savedConnection => 'Bağlantılara kaydedildi';
+
+  @override
+  String get compareCharts => 'Tam haritalarımızı karşılaştır';
+
+  @override
+  String hideToast(String name) {
+    return '$name önerilerinizden gizlendi.';
+  }
+
+  @override
+  String get hideFailed => 'Öneriler güncellenemedi. Lütfen tekrar deneyin.';
+
+  @override
+  String factorContext(String title, int score) {
+    return 'Bu uyum puanına $title %$score katkıda bulundu.';
+  }
+
+  @override
+  String get elementWood => 'Ağaç';
+
+  @override
+  String get elementFire => 'Ateş';
+
+  @override
+  String get elementEarth => 'Toprak';
+
+  @override
+  String get elementMetal => 'Metal';
+
+  @override
+  String get elementWater => 'Su';
+
+  @override
+  String get qualityWood => 'Büyüme ve şefkat';
+
+  @override
+  String get qualityFire => 'Tutku ve sıcaklık';
+
+  @override
+  String get qualityEarth => 'Denge ve güven';
+
+  @override
+  String get qualityMetal => 'Berraklık ve amaç';
+
+  @override
+  String get qualityWater => 'Derinlik ve sezgi';
+
+  @override
+  String get qualityWoodShort => 'Büyüme';
+
+  @override
+  String get qualityFireShort => 'Tutku';
+
+  @override
+  String get qualityEarthShort => 'Denge';
+
+  @override
+  String get qualityMetalShort => 'Berraklık';
+
+  @override
+  String get qualityWaterShort => 'Derinlik';
+
+  @override
+  String get polarityYin => 'Yin';
+
+  @override
+  String get polarityYang => 'Yang';
+
+  @override
+  String get pillarYear => 'Yıl';
+
+  @override
+  String get pillarMonth => 'Ay';
+
+  @override
+  String get pillarDay => 'Gün';
+
+  @override
+  String get pillarHour => 'Saat';
+
+  @override
+  String get branchRat => 'Fare';
+
+  @override
+  String get branchOx => 'Öküz';
+
+  @override
+  String get branchTiger => 'Kaplan';
+
+  @override
+  String get branchRabbit => 'Tavşan';
+
+  @override
+  String get branchDragon => 'Ejderha';
+
+  @override
+  String get branchSnake => 'Yılan';
+
+  @override
+  String get branchHorse => 'At';
+
+  @override
+  String get branchGoat => 'Keçi';
+
+  @override
+  String get branchMonkey => 'Maymun';
+
+  @override
+  String get branchRooster => 'Horoz';
+
+  @override
+  String get branchDog => 'Köpek';
+
+  @override
+  String get branchPig => 'Domuz';
+
+  @override
+  String get matchNatural => 'Doğal uyum';
+
+  @override
+  String get matchLovely => 'Güzel bir denge';
+
+  @override
+  String get matchRoom => 'Keşfedilecek alan';
+}
