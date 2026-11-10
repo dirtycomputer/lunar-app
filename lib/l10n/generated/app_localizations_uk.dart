@@ -578,7 +578,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get privacyTitle => 'Ваші дані залишаються тільки вашими.';
 
   @override
-  String get privacyBody1 => 'Цей застосунок зберігає на цьому пристрої ваше ім\'я, дані народження, карти зі студії, налаштування моделей, збережені зв\'язки та приховані профілі. Ключі API клієнта залишаються в пам\'яті. Коли ви вирішите згенерувати тлумачення, розраховані дані карти надсилаються обраному провайдеру моделі. Імена, точні дати та місця народження з цих даних виключено. Скидання локальних даних не стирає записи провайдера або API-ключ локального сервера.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Локальне сховище не зашифроване. На спільному пристрої очищайте свої дані, коли завершите. Очищення даних браузера або застосунку також видалить ваш профіль.';
@@ -679,7 +679,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Ваші дані народження залишаються на цьому пристрої та ніколи не відображаються у вашому публічному профілі.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Визначаємо вашу енергію…';

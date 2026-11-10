@@ -110,19 +110,17 @@ void main() {
     expect(r.palaces.length, 2);
     expect((r.evidence()['pillars'] as List).length, 3);
   });
-  test('evidence excludes exact birth data and personal identifiers', () {
+  test('calculation inputs are included for authoritative server verification',
+      () {
     final r = engine.calculate(subject());
-    final text = jsonEncode(r.evidence());
-    for (final private in [
-      'Private name',
-      '2005-12-23',
-      'Test meridian',
-      'Asia/Shanghai'
-    ]) {
-      expect(text, isNot(contains(private)));
-    }
-    expect(text, contains('辛巳'));
+    final input = r.evidence()['calculationInput'] as Map<String, dynamic>;
+    expect(input, r.subject.toJson());
+    expect(input['birth']['zone'], r.subject.birth.place.zone);
+    expect(input['birth']['longitude'], r.subject.birth.place.longitude);
+    expect(input['basis'], r.subject.basis.name);
+    expect(input, isNot(contains('apiKey')));
   });
+
   test('all twelve solar months have correct boundaries and pillar mapping',
       () {
     for (final y in [1900, 2000, 2026, 2100]) {

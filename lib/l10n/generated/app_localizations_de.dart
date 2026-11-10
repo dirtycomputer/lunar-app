@@ -578,7 +578,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get privacyTitle => 'Deine Angaben bleiben deine.';
 
   @override
-  String get privacyBody1 => 'Diese App speichert deinen Namen, Geburtsdaten, Studio-Charts, Modelleinstellungen, gespeicherte Verbindungen und ausgeblendete Profile auf diesem Gerät. Client-API-Schlüssel bleiben im Arbeitsspeicher. Wenn du eine Deutung erzeugst, werden die berechneten Chart-Daten an deinen gewählten Modell-Anbieter gesendet. Namen, genaue Geburtsdaten und -orte werden dabei weggelassen. Das Zurücksetzen lokaler Daten löscht keine Anbieter-Einträge oder den API-Schlüssel des lokalen Servers.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Lokale Speicherung ist nicht verschlüsselt. Lösche deine Daten auf einem gemeinsam genutzten Gerät, wenn du fertig bist. Das Löschen von Browser- oder App-Daten entfernt auch dein Profil.';
@@ -679,7 +679,7 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Deine Geburtsdaten bleiben auf diesem Gerät und werden nie auf deinem öffentlichen Profil angezeigt.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Deine Energie wird ermittelt…';

@@ -12,58 +12,71 @@ if (process.argv.includes('--key-stdin')) {
   const input = readline.createInterface({ input: process.stdin, terminal: false });
   key = await new Promise(resolve => input.once('line', line => { input.close(); resolve(line.trim()); }));
 }
-const provider = 'https://api.deepseek.com';
-let models = [], providerStatus = key ? 'checking' : 'not_configured';
-async function discover() {
-  if (!key) return;
-  try {
-    const response = await fetch(`${provider}/models`, { headers: { Authorization: `Bearer ${key}` }, signal: AbortSignal.timeout(15000) });
-    if (!response.ok) { providerStatus = `http_${response.status}`; return; }
-    const json = await response.json();
-    models = (json.data || []).map(m => m.id).filter(m => typeof m === 'string');
-    providerStatus = models.length ? 'ready' : 'no_models';
-  } catch { providerStatus = 'unreachable'; }
+// All live analysis goes through the Python chart-first service.
+const service = process.env.FATEPAIR_MODEL_SERVICE || 'http://127.0.0.1:5301';
+const serviceUrl = new URL(service);
+if (!['127.0.0.1', 'localhost'].includes(serviceUrl.hostname) || serviceUrl.protocol !== 'http:') {
+  throw new Error('The local chart service must use loopback HTTP.');
 }
-const modelChoice = () => models.find(m => m === 'deepseek-flash') || models.find(m => /flash/.test(m)) || models.find(m => m === 'deepseek-chat') || models[0];
+let python;
+if (key && !process.env.FATEPAIR_MODEL_SERVICE) {
+  const { spawn } = await import('node:child_process');
+  const pythonCommand = process.env.FATEPAIR_PYTHON || 'python3';
+  python = spawn(pythonCommand.includes('/') ? path.resolve(pythonCommand) : pythonCommand,
+    ['-m', 'uvicorn', 'api.index:app', '--host', '127.0.0.1', '--port', '5301', '--no-access-log'],
+    { cwd: path.dirname(fileURLToPath(import.meta.url)),
+      env: { ...process.env, DEEPSEEK_API_KEY: key }, stdio: ['ignore', 'inherit', 'inherit'] });
+  python.on('error', () => console.error('Python service could not start. Install server/requirements.txt and set FATEPAIR_PYTHON.'));
+  python.on('exit', code => {
+    if (code) { console.error('The chart service failed to start or stopped. Check its dependencies and port 5301.'); process.exit(1); }
+  });
+  for (const name of ['SIGINT', 'SIGTERM']) {
+    process.on(name, () => { python.kill('SIGTERM'); process.exit(0); });
+  }
+  process.on('exit', () => python.kill('SIGTERM'));
+}
 const contentTypes = { '.html':'text/html; charset=utf-8', '.js':'application/javascript', '.json':'application/json', '.wasm':'application/wasm', '.png':'image/png', '.jpg':'image/jpeg', '.svg':'image/svg+xml', '.ttf':'font/ttf', '.otf':'font/otf' };
-let active = 0;
 const server = http.createServer(async (req, res) => {
   const host = req.headers.host;
   if (![`127.0.0.1:${port}`, `localhost:${port}`].includes(host)) { res.writeHead(403); res.end(); return; }
   const url = new URL(req.url, `http://${host}`);
   const reply = (status, data) => { res.writeHead(status, {'Content-Type':'application/json','Cache-Control':'no-store'}); res.end(JSON.stringify(data)); };
   if (url.pathname.startsWith('/api/model')) {
-    if (req.headers.origin && ![`http://127.0.0.1:${port}`,`http://localhost:${port}`].includes(req.headers.origin)) {
-      reply(403,{error:'Origin not allowed'}); return;
+    if (req.headers.origin && ![`http://127.0.0.1:${port}`, `http://localhost:${port}`].includes(req.headers.origin)) {
+      reply(403, { error: { code: 'origin_not_allowed' } }); return;
     }
-    if (req.method === 'GET' && url.pathname === '/api/model/info') {
-      reply(200,{provider:'DeepSeek',configured:!!key,status:providerStatus,models,defaultModel:modelChoice()||null});return;
+    const info = req.method === 'GET' && url.pathname === '/api/model/info';
+    const chat = req.method === 'POST' && url.pathname === '/api/model/chat/completions';
+    if (!info && !chat) { reply(404, { error: { code: 'not_found' } }); return; }
+    if (!key && !process.env.FATEPAIR_MODEL_SERVICE) {
+      reply(info ? 200 : 503, info
+        ? { provider: 'DeepSeek', configured: false, status: 'not_configured', models: [], defaultModel: null }
+        : { error: { code: 'model_not_configured' } }); return;
     }
-    if (req.method !== 'POST' || url.pathname !== '/api/model/chat/completions') { reply(404,{error:'Unknown endpoint'});return; }
-    if (req.headers['x-lunar-client'] !== 'studio') { reply(403,{error:'Missing client header'}); return; }
-    if (!key) {reply(503,{error:'Model key is not configured on the local server'});return;}
-    if (active >= 2) {reply(429,{error:'Two requests are already in progress'});return;}
-    let bytes=0, chunks=[];
+    if (chat && req.headers['x-lunar-client'] !== 'studio') {
+      reply(403, { error: { code: 'missing_client_header' } }); return;
+    }
+    let bytes = 0, chunks = [];
     try {
-      for await (const chunk of req) {bytes+=chunk.length;if(bytes>200000) {reply(413,{error:'Request too large'});return;}chunks.push(chunk);}
-      const input=JSON.parse(Buffer.concat(chunks).toString('utf8'));
-      const model=input.model==='auto'?modelChoice():input.model;
-      if(!model||typeof model!=='string'||(models.length&&!models.includes(model))) {reply(400,{error:'Select an available provider model'});return;}
-      if(!Array.isArray(input.messages)||input.messages.length>12||input.messages.some(m=>!['system','user','assistant'].includes(m.role)||typeof m.content!=='string')) {reply(400,{error:'Invalid messages'});return;}
+      for await (const chunk of req) {
+        bytes += chunk.length;
+        if (bytes > 4000000) { reply(413, { error: { code: 'context_too_large' } }); return; }
+        chunks.push(chunk);
+      }
       const abort = new AbortController();
-      const timeout = setTimeout(()=>abort.abort(),60000);
-      res.once('close',()=>{ if(!res.writableEnded)abort.abort(); });
-      active++;
-      try {
-        const upstream=await fetch(`${provider}/chat/completions`, {method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${key}`},
-          body:JSON.stringify({model,messages:input.messages,stream:false,max_tokens:2000,thinking:{type:'disabled'}}),signal:abort.signal});
-        if(!upstream.ok) {reply(upstream.status,{error:`Provider returned HTTP ${upstream.status}`});return;}
-        const result=await upstream.json();
-        // Only expose the intended answer and usage, not provider internals.
-        reply(200,{model:result.model,choices:(result.choices||[]).map(c=>({message:{role:'assistant',content:c.message?.content||''},finish_reason:c.finish_reason})),usage:result.usage});
-      } catch {if(!res.destroyed)reply(502,{error:'Provider request failed or timed out'});}
-      finally {clearTimeout(timeout);active--;}
-    } catch {reply(400,{error:'Invalid JSON request'});}
+      res.once('close', () => { if (!res.writableEnded) abort.abort(); });
+      const upstream = await fetch(new URL(url.pathname, serviceUrl), {
+        method: req.method,
+        headers: { 'Content-Type': 'application/json', 'X-Lunar-Client': 'studio',
+          ...(req.headers.origin ? { Origin: req.headers.origin } : {}) },
+        ...(chat ? { body: Buffer.concat(chunks) } : {}),
+        signal: AbortSignal.any([abort.signal, AbortSignal.timeout(285000)])
+      });
+      const data = await upstream.json();
+      reply(upstream.status, data);
+    } catch {
+      if (!res.destroyed) reply(503, { error: { code: 'chart_service_unavailable' } });
+    }
     return;
   }
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405);res.end();return;}
@@ -77,5 +90,4 @@ const server = http.createServer(async (req, res) => {
   } catch {res.writeHead(404);res.end('Not found');}
 });
 server.listen(port,'127.0.0.1',()=>console.log(`Lunar preview + model proxy: http://127.0.0.1:${port}`));
-await discover();
-console.log(`DeepSeek status: ${providerStatus}; available models: ${models.join(', ') || 'none'}`);
+console.log('Live analysis uses lunar-python before DeepSeek; provider credentials are never sent to the browser.');

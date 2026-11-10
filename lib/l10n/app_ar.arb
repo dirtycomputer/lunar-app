@@ -203,7 +203,7 @@
   "guideFooter": "ابقَ فضوليًا، وكن لطيفًا، واترك مجالًا لقليل من الصدفة الجميلة.",
 
   "privacyTitle": "بياناتك تبقى ملكك وحدك.",
-  "privacyBody1": "يحفظ هذا التطبيق اسمك وتفاصيل ميلادك وخرائط الاستوديو وإعدادات النموذج والاتصالات المحفوظة والملفات المخفية على هذا الجهاز. تبقى مفاتيح API للعميل في الذاكرة. وعند اختيارك توليد تفسير، تُرسَل أدلة الخريطة المحسوبة إلى مزوّد النموذج الذي اخترته. وتُستثنى الأسماء وتواريخ وأماكن الميلاد الدقيقة من تلك الأدلة. ولا تؤدي إعادة تعيين البيانات المحلية إلى محو سجلات المزوّد أو مفتاح API للخادم المحلي.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
   "privacyBody2": "التخزين المحلي غير مشفّر. على جهاز مشترك، امسح بياناتك عند الانتهاء. ومسح بيانات المتصفح أو التطبيق يزيل ملفك الشخصي أيضًا.",
   "privacyBody3": "تؤدي إعادة التعيين إلى مسح تفاصيلك الشخصية وتفضيلاتك المحفوظة، ثم العودة إلى الملف النموذجي.",
   "clearDataTitle": "مسح بياناتك المحلية؟",
@@ -238,7 +238,7 @@
   "lonInvalid": "أدخل خط طول بين ‎-180 و180.",
   "tzNote": "المنطقة الزمنية: {zone}\nيستخدم اليوم والساعة متوسط التوقيت الشمسي المحلي. وعند تكرار وقت تعديل الساعة يُعتمد التكرار الأبكر.",
   "@tzNote": { "placeholders": { "zone": { "type": "String" } } },
-  "privacyNote": "تفاصيل ميلادك تبقى على هذا الجهاز ولا تُعرض أبدًا على ملفك الشخصي العام.",
+  "privacyNote": "Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.",
   "findingEnergy": "جارٍ العثور على طاقتك…",
   "discoverEnergy": "اكتشف طاقتي",
   "energyReadyToast": "طاقتك جاهزة، وتم تحديث اتصالاتك.",

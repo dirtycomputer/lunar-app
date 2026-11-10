@@ -55,3 +55,9 @@ app.*.map.json
 
 # Local verification artifacts
 output/
+
+# Vercel local linkage and Python virtual environments
+.vercel/
+__pycache__/
+.venv/
+.pytest_cache/

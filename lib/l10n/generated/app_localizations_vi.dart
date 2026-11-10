@@ -578,7 +578,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get privacyTitle => 'Thông tin của bạn vẫn thuộc về bạn.';
 
   @override
-  String get privacyBody1 => 'Ứng dụng này lưu tên, thông tin sinh, các lá số trong xưởng, cài đặt mô hình, kết nối đã lưu và các hồ sơ đã ẩn của bạn trên thiết bị này. Khóa API của máy khách chỉ nằm trong bộ nhớ. Khi bạn chọn tạo bài diễn giải, bằng chứng lá số đã tính sẽ được gửi đến nhà cung cấp mô hình bạn chọn. Tên, ngày sinh và nơi sinh chính xác được lược khỏi bằng chứng đó. Việc đặt lại dữ liệu cục bộ không xóa các bản ghi của nhà cung cấp hay khóa API của máy chủ cục bộ.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Bộ nhớ cục bộ không được mã hóa. Trên thiết bị dùng chung, hãy xóa dữ liệu của bạn khi dùng xong. Xóa dữ liệu trình duyệt hoặc ứng dụng cũng sẽ xóa hồ sơ của bạn.';
@@ -679,7 +679,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Thông tin sinh của bạn nằm trên thiết bị này và không bao giờ hiển thị trên hồ sơ công khai.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Đang tìm năng lượng của bạn…';

@@ -578,7 +578,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyTitle => 'Privacy & data';
 
   @override
-  String get privacyBody1 => 'This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key. Invitations and local message drafts are also stored on this device and included in your data export. Agent questions and recent conversation turns are sent to a connected model when you ask; this includes information you type.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.';
@@ -679,7 +679,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Your birth details stay on this device and are never displayed on your public profile.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Finding your energy…';

@@ -578,7 +578,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get privacyTitle => 'Τα στοιχεία σας παραμένουν δικά σας.';
 
   @override
-  String get privacyBody1 => 'Αυτή η εφαρμογή αποθηκεύει σε αυτή τη συσκευή το όνομά σας, τα στοιχεία γέννησης, τους χάρτες του στούντιο, τις ρυθμίσεις μοντέλων, τις αποθηκευμένες συνδέσεις και τα κρυμμένα προφίλ. Τα κλειδιά API του πελάτη παραμένουν στη μνήμη. Όταν επιλέξετε να δημιουργήσετε μια ερμηνεία, τα υπολογισμένα δεδομένα του χάρτη αποστέλλονται στον επιλεγμένο πάροχο μοντέλου. Ονόματα, ακριβείς ημερομηνίες και τόποι γέννησης παραλείπονται από αυτά τα δεδομένα. Η επαναφορά των τοπικών δεδομένων δεν σβήνει τα αρχεία του παρόχου ή το κλειδί API του τοπικού διακομιστή.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Η τοπική αποθήκευση δεν είναι κρυπτογραφημένη. Σε κοινόχρηστη συσκευή, εκκαθαρίστε τα δεδομένα σας όταν τελειώσετε. Η εκκαθάριση δεδομένων του προγράμματος περιήγησης ή της εφαρμογής αφαιρεί επίσης το προφίλ σας.';
@@ -679,7 +679,7 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Τα στοιχεία γέννησής σας παραμένουν σε αυτή τη συσκευή και δεν εμφανίζονται ποτέ στο δημόσιο προφίλ σας.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Υπολογίζουμε την ενέργειά σας…';

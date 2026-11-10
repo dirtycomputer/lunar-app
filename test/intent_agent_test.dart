@@ -55,9 +55,9 @@ void main() {
     expect(month.god, tenGod(c.natal.master, month.value[0]));
     expect(c.periodReading(OutlookPeriod.month), contains(month.value));
     final evidence = jsonEncode(c.evidence());
-    expect(evidence, isNot(contains('Private name')));
-    expect(evidence, isNot(contains('San Francisco')));
-    expect(evidence, isNot(contains('1997-06-18')));
+    expect(evidence, contains('Private name'));
+    expect(evidence, contains('San Francisco'));
+    expect(evidence, contains('1997-06-18'));
   });
   test(
       'an unconfigured model gives a labelled calculated reference without a completion request',
@@ -108,13 +108,61 @@ void main() {
     expect(requests, hasLength(2));
     final messages = requests.last['messages'] as List;
     expect(messages[0]['content'], contains('precise terms'));
-    expect(messages[1]['content'], 'Explain my day master');
+    expect(jsonDecode(messages[1]['content'])['question'],
+        'Explain my day master');
     expect(messages[2]['content'], 'A grounded answer.');
     final packet = jsonDecode(messages.last['content']);
     expect(packet['question'], 'How does that relate to this month?');
     expect(packet['computedEvidence']['natal']['pillars'], hasLength(4));
     expect(jsonEncode(packet), isNot(contains('memory-only-key')));
-    expect(jsonEncode(packet), isNot(contains('Private name')));
+    expect(packet['computedEvidence']['natal']['calculationInput']['name'],
+        'Private name');
+    agent.dispose();
+    studio.dispose();
+    state.dispose();
+  });
+  test(
+      'a long conversation retains its first question and original reading context',
+      () async {
+    final state = AppState(await SharedPreferences.getInstance());
+    final studio = StudioStore(state);
+    await studio.configure(
+        const ModelConfig(baseUrl: 'https://example.com/v1', model: 'test'),
+        'memory-only-key');
+    final packets = <Map<String, dynamic>>[];
+    final agent = ChartAgent(studio,
+        clientFactory: () => MockClient((r) async {
+              packets.add(jsonDecode(r.body));
+              return http.Response(
+                  jsonEncode({
+                    'choices': [
+                      {
+                        'message': {'content': 'Recorded answer.'}
+                      }
+                    ]
+                  }),
+                  200);
+            }));
+    for (var i = 0; i < 10; i++) {
+      await agent.ask('Question $i',
+          context: ChartContext(context().natal,
+              now: DateTime.utc(2026, 11, 10, 8),
+              viewContext: {
+                'period': i == 0 ? 'month' : 'year',
+                'readingMode': 'outlook'
+              }));
+    }
+    final messages = packets.last['messages'] as List;
+    expect(messages.length, 20);
+    final first = jsonDecode(messages[1]['content']);
+    expect(first['question'], 'Question 0');
+    expect(first['computedEvidence']['userContext']['period'], 'month');
+    expect(
+        jsonDecode(messages.last['content'])['computedEvidence']['userContext']
+            ['period'],
+        'year');
+    expect(agent.turns.length, 20);
+    expect(jsonEncode(packets.last), isNot(contains('memory-only-key')));
     agent.dispose();
     studio.dispose();
     state.dispose();

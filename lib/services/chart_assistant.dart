@@ -27,8 +27,10 @@ const godThemes = {
 class ChartContext {
   final ChartReport natal;
   final DateTime instant;
+  final Map<String, dynamic> viewContext;
   late final ChartReport transit;
-  ChartContext(this.natal, {DateTime? now}) : instant = now ?? DateTime.now() {
+  ChartContext(this.natal, {DateTime? now, this.viewContext = const {}})
+      : instant = now ?? DateTime.now() {
     final local = tz.TZDateTime.from(
         instant.toUtc(), tz.getLocation(natal.subject.birth.place.zone));
     transit = ChartEngine().calculate(ChartSubject(
@@ -84,6 +86,12 @@ class ChartContext {
           for (final p in OutlookPeriod.values) p.name: period(p).toJson()
         },
         'currentDate': dateLabel(transit.clock.civil),
+        'userContext': viewContext,
+        'visibleReading': viewContext['readingMode'] == 'outlook'
+            ? periodReading(OutlookPeriod.values.firstWhere(
+                (p) => p.name == viewContext['period'],
+                orElse: () => OutlookPeriod.month))
+            : reading,
       };
 
   String referenceAnswer(String question) {
@@ -121,7 +129,9 @@ class ChartContext {
 
 class AgentTurn {
   final String role, text, source;
-  const AgentTurn(this.role, this.text, {this.source = ''});
+  final Map<String, dynamic>? contextSnapshot;
+  const AgentTurn(this.role, this.text,
+      {this.source = '', this.contextSnapshot});
 }
 
 class ChartAgent extends ChangeNotifier {
@@ -148,7 +158,7 @@ class ChartAgent extends ChangeNotifier {
       final r = await client
           .get(Uri.parse(
               '${config.baseUrl.replaceFirst(RegExp(r'/+$'), '')}/info'))
-          .timeout(const Duration(seconds: 3));
+          .timeout(const Duration(seconds: 20));
       if (r.statusCode != 200) return false;
       return (jsonDecode(r.body) as Map<String, dynamic>)['configured'] == true;
     } catch (_) {
@@ -162,11 +172,19 @@ class ChartAgent extends ChangeNotifier {
     final id = ++_request;
     busy = true;
     error = null;
+    final snapshot = context?.evidence() ?? {'personalChartAvailable': false};
     final history = _turns
-        .skip(_turns.length > 6 ? _turns.length - 6 : 0)
-        .map((t) => {'role': t.role, 'content': t.text})
+        .map((t) => {
+              'role': t.role,
+              'content': t.contextSnapshot == null
+                  ? t.text
+                  : jsonEncode({
+                      'question': t.text,
+                      'computedEvidence': t.contextSnapshot
+                    })
+            })
         .toList();
-    _turns.add(AgentTurn('user', q));
+    _turns.add(AgentTurn('user', q, contextSnapshot: snapshot));
     notifyListeners();
     String reference() => context?.referenceAnswer(q) ?? generalReference(q);
     _client = clientFactory();
@@ -177,7 +195,7 @@ class ChartAgent extends ChangeNotifier {
             config: studio.model,
             apiKey: studio.apiKey,
             style: ReadingStyle.professional,
-            evidence: context?.evidence() ?? {'personalChartAvailable': false},
+            evidence: snapshot,
             topic: context == null
                 ? 'General BaZi study question'
                 : 'BaZi question and answer',

@@ -578,7 +578,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get privacyTitle => 'Az adataid a tieid maradnak.';
 
   @override
-  String get privacyBody1 => 'Ez az alkalmazás ezen az eszközön tárolja a nevedet, a születési adataidat, a stúdió térképeidet, a modellbeállításokat, a mentett kapcsolatokat és a rejtett profilokat. A kliens API-kulcsok a memóriában maradnak. Ha értelmezést kérsz, a kiszámolt térkép-adatok a kiválasztott modellszolgáltatóhoz kerülnek. A nevek, a pontos születési dátumok és helyek kimaradnak ezekből az adatokból. A helyi adatok visszaállítása nem törli a szolgáltató nyilvántartásait vagy a helyi szerver API-kulcsát.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'A helyi tárolás nincs titkosítva. Megosztott eszközön használat után töröld az adataidat. A böngésző vagy alkalmazás adatainak törlése a profilodat is eltávolítja.';
@@ -679,7 +679,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'A születési adataid ezen az eszközön maradnak, a nyilvános profilodon soha nem jelennek meg.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Felderítjük az energiádat…';

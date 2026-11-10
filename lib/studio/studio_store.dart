@@ -6,14 +6,17 @@ import 'chart_engine.dart';
 import 'interpretation.dart';
 
 class StudioStore extends ChangeNotifier {
+  static const configuredBase = String.fromEnvironment('LUNAR_MODEL_BASE_URL');
+  static ModelConfig defaultModel() => ModelConfig(
+      baseUrl: configuredBase.isNotEmpty
+          ? configuredBase
+          : kIsWeb
+              ? '${Uri.base.origin}/api/model'
+              : 'http://127.0.0.1:5199/api/model',
+      model: 'auto');
   final AppState source;
   late ChartSubject primary, secondary;
-  ModelConfig model = ModelConfig(
-      baseUrl: kIsWeb
-          ? '${Uri.base.origin}/api/model'
-          : const String.fromEnvironment('LUNAR_MODEL_BASE_URL',
-              defaultValue: 'http://127.0.0.1:5199/api/model'),
-      model: 'auto');
+  ModelConfig model = defaultModel();
   ReadingStyle style = ReadingStyle.plain;
   String apiKey = ''; // Deliberately memory-only; never SharedPreferences.
   String? loadError;
@@ -36,6 +39,12 @@ class StudioStore extends ChangeNotifier {
       if (settings != null) {
         model =
             ModelConfig.fromJson(jsonDecode(settings) as Map<String, dynamic>);
+        if (configuredBase.isNotEmpty &&
+            model.model == 'auto' &&
+            ((kIsWeb && model.baseUrl == '${Uri.base.origin}/api/model') ||
+                model.baseUrl == 'http://127.0.0.1:5199/api/model')) {
+          model = defaultModel();
+        }
       }
       final s = source.preferences.getString('studio.style');
       if (s != null) style = ReadingStyle.values.byName(s);
@@ -55,11 +64,7 @@ class StudioStore extends ChangeNotifier {
     if (source.resetGeneration != _resetGeneration) {
       _resetGeneration = source.resetGeneration;
       _defaults();
-      model = ModelConfig(
-          baseUrl: kIsWeb
-              ? '${Uri.base.origin}/api/model'
-              : 'http://127.0.0.1:5199/api/model',
-          model: 'auto');
+      model = defaultModel();
       style = ReadingStyle.plain;
       apiKey = '';
       notifyListeners();

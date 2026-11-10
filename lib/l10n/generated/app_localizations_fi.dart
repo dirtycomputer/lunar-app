@@ -578,7 +578,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get privacyTitle => 'Tietosi pysyvät sinulla.';
 
   @override
-  String get privacyBody1 => 'Tämä sovellus tallentaa nimesi, syntymätietosi, studiokaaviot, malliasetukset, tallennetut yhteydet ja piilotetut profiilit tälle laitteelle. Asiakkaan API-avaimet pysyvät muistissa. Kun valitset tulkinnan tuottamisen, laskettu kaaviodata lähetetään valitsemallesi mallintarjoajalle. Nimet, tarkat syntymäpäivät ja -paikat jätetään datasta pois. Paikallisten tietojen nollaus ei poista tarjoajien tietueita eikä paikallisen palvelimen API-avainta.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Paikallinen tallennus ei ole salattua. Tyhjennä tietosi jaetulla laitteella, kun olet valmis. Selaimen tai sovelluksen tietojen tyhjentäminen poistaa myös profiilisi.';
@@ -679,7 +679,7 @@ class AppLocalizationsFi extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Syntymätietosi pysyvät tällä laitteella, eikä niitä koskaan näytetä julkisessa profiilissasi.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Etsitään energiaasi…';

@@ -578,7 +578,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get privacyTitle => 'आपकी जानकारी आपकी ही रहती है।';
 
   @override
-  String get privacyBody1 => 'यह ऐप आपका नाम, जन्म विवरण, स्टूडियो चार्ट, मॉडल सेटिंग, सहेजे गए कनेक्शन और छिपाई गई प्रोफ़ाइलें इस डिवाइस पर सहेजता है। क्लाइंट API कुंजियाँ मेमोरी में रहती हैं। जब आप व्याख्या बनाने का विकल्प चुनते हैं, तो गणना किया गया चार्ट साक्ष्य आपके चुने हुए मॉडल प्रदाता को भेजा जाता है। नाम, सटीक जन्म तिथियाँ और स्थान उस साक्ष्य में शामिल नहीं होते। स्थानीय डेटा रीसेट करने से प्रदाता के रिकॉर्ड या स्थानीय सर्वर की API कुंजी नहीं मिटती।';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'स्थानीय संग्रहण एन्क्रिप्टेड नहीं है। साझा डिवाइस पर काम पूरा होने पर अपना डेटा साफ़ कर लें। ब्राउज़र या ऐप डेटा साफ़ करने से आपकी प्रोफ़ाइल भी हट जाती है।';
@@ -679,7 +679,7 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'आपकी जन्म जानकारी इस डिवाइस पर रहती है और कभी भी आपकी सार्वजनिक प्रोफ़ाइल पर नहीं दिखाई जाती।';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'आपकी ऊर्जा खोजी जा रही है…';

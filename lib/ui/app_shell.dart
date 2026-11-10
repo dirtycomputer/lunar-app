@@ -78,12 +78,19 @@ class _AppShellState extends State<AppShell> {
     super.dispose();
   }
 
-  ChartContext get chart => ChartContext(ChartEngine().calculate(ChartSubject(
-      name: state.name,
-      birth: state.birth,
-      sex: studio.primary.sex,
-      sect: studio.primary.sect,
-      basis: studio.primary.basis)));
+  ChartContext get chart => ChartContext(
+          ChartEngine().calculate(ChartSubject(
+              name: state.name,
+              birth: state.birth,
+              sex: studio.primary.sex,
+              sect: studio.primary.sect,
+              basis: studio.primary.basis)),
+          viewContext: {
+            'task': section?.name,
+            'readingMode': outlook ? 'outlook' : 'natal',
+            'period': period.name,
+            'language': state.localeOverride?.toLanguageTag() ?? 'en',
+          });
   Future<void> choose(AppIntent intent) async {
     if (intent == AppIntent.chart && !state.personalized) {
       await showProfileEditor(context, state);

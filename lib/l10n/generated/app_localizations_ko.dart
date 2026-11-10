@@ -339,7 +339,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get detailsYours => '내 정보는 나의 것.';
 
   @override
-  String get detailsStored => '출생 정보는 이 기기에만 저장되며 공개 프로필에는 절대 표시되지 않습니다.';
+  String get detailsStored => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get privacyData => '개인정보와 데이터';
@@ -578,7 +578,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get privacyTitle => '내 정보는 나의 것.';
 
   @override
-  String get privacyBody1 => '이 앱은 이름, 출생 정보, 스튜디오 명식, 모델 설정, 저장한 연결, 숨긴 프로필을 이 기기에 저장합니다. 클라이언트 API 키는 메모리에만 유지됩니다. 해석 생성을 선택하면 계산된 명식 근거가 선택한 모델 제공사로 전송됩니다. 이름, 정확한 생년월일, 장소는 그 근거에서 제외됩니다. 로컬 데이터 초기화는 제공사 기록이나 로컬 서버의 API 키를 지우지 않습니다.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => '로컬 저장은 암호화되지 않습니다. 공용 기기에서는 사용이 끝나면 데이터를 지우세요. 브라우저나 앱 데이터를 지우면 프로필도 함께 사라집니다.';
@@ -679,7 +679,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => '출생 정보는 이 기기에만 저장되며 공개 프로필에는 절대 표시되지 않습니다.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => '에너지를 찾는 중…';

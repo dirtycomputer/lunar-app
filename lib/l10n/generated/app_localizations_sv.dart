@@ -578,7 +578,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get privacyTitle => 'Dina uppgifter är dina.';
 
   @override
-  String get privacyBody1 => 'Den här appen sparar ditt namn, dina födelseuppgifter, studiodiagram, modellinställningar, sparade kontakter och dolda profiler på den här enheten. Klient-API-nycklar stannar i minnet. När du väljer att generera en tolkning skickas beräknad diagramdata till din valda modellleverantör. Namn, exakta födelsedatum och platser utelämnas från den datan. Att återställa lokala data raderar inte leverantörsuppgifter eller den lokala serverns API-nyckel.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Lokal lagring är inte krypterad. Rensa dina data på en delad enhet när du är klar. Att rensa webbläsar- eller appdata tar också bort din profil.';
@@ -679,7 +679,7 @@ class AppLocalizationsSv extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Dina födelseuppgifter stannar på den här enheten och visas aldrig i din offentliga profil.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Söker din energi…';

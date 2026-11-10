@@ -203,7 +203,7 @@
   "guideFooter": "Fortsett å være nysgjerrig. Vær snill. Gi plass til litt lykkelig tilfeldighet.",
 
   "privacyTitle": "Opplysningene dine forblir dine.",
-  "privacyBody1": "Denne appen lagrer navnet ditt, fødselsopplysningene dine, studio-kart, modellinnstillinger, lagrede forbindelser og skjulte profiler på denne enheten. Klient-API-nøkler forblir i minnet. Når du velger å generere en tolkning, sendes beregnede kartdata til modellleverandøren du har valgt. Navn, nøyaktige fødselsdatoer og steder utelates. Å tilbakestille lokale data sletter ikke leverandørdata eller den lokale serverens API-nøkkel.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
   "privacyBody2": "Lokal lagring er ikke kryptert. På en delt enhet: slett dataene dine når du er ferdig. Å slette nettleser- eller appdata fjerner også profilen din.",
   "privacyBody3": "Ved tilbakestilling tømmes personlige opplysninger og lagrede innstillinger, og du går tilbake til eksempelprofilen.",
   "clearDataTitle": "Slette de lokale dataene dine?",
@@ -238,7 +238,7 @@
   "lonInvalid": "Skriv inn en lengdegrad mellom -180 og 180.",
   "tzNote": "Tidssone: {zone}\nDag og time bruker lokal middelsoltid. I timer som gjentas ved klokkeskifte brukes det første tidspunktet.",
   "@tzNote": { "placeholders": { "zone": { "type": "String" } } },
-  "privacyNote": "Fødselsopplysningene dine forblir på denne enheten og vises aldri på den offentlige profilen din.",
+  "privacyNote": "Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.",
   "findingEnergy": "Finner energien din…",
   "discoverEnergy": "Oppdag energien min",
   "energyReadyToast": "Energien din er klar. Forbindelsene dine er oppdatert.",

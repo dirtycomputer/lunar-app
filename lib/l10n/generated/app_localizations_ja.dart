@@ -339,7 +339,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get detailsYours => 'あなたの情報はあなたのもの。';
 
   @override
-  String get detailsStored => '出生情報はこの端末にのみ保存され、公開プロフィールに表示されることはありません。';
+  String get detailsStored => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get privacyData => 'プライバシーとデータ';
@@ -578,7 +578,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get privacyTitle => 'あなたの情報はあなたのもの。';
 
   @override
-  String get privacyBody1 => 'このアプリは、名前、出生情報、スタジオの命式、モデル設定、保存したつながり、非表示にしたプロフィールをこの端末に保存します。クライアントの API キーはメモリ内のみに保持されます。解釈の生成を選択した場合、計算された命式のエビデンスが選択したモデルプロバイダーに送られます。名前、正確な生年月日、場所はその証跡に含まれません。ローカルデータのリセットでは、プロバイダーの記録やローカルサーバーの API キーは消えません。';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'ローカル保存は暗号化されていません。共用の端末では、使い終わったらデータを消してください。ブラウザやアプリのデータを消すと、プロフィールも削除されます。';
@@ -679,7 +679,7 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => '出生情報はこの端末にのみ保存され、公開プロフィールに表示されることはありません。';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'エネルギーを探しています…';

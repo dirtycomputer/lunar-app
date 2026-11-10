@@ -578,7 +578,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get privacyTitle => 'Bilgileriniz size ait kalır.';
 
   @override
-  String get privacyBody1 => 'Bu uygulama adınızı, doğum bilgilerinizi, stüdyo haritalarınızı, model ayarlarınızı, kaydedilen bağlantıları ve gizlenen profilleri bu cihazda saklar. İstemci API anahtarları bellekte kalır. Yorum oluşturmayı seçtiğinizde hesaplanan harita kanıtları seçtiğiniz model sağlayıcısına gönderilir. Adlar, kesin doğum tarihleri ve yerler bu kanıtlara dahil edilmez. Yerel verileri sıfırlamak, sağlayıcı kayıtlarını ya da yerel sunucunun API anahtarını silmez.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Yerel depolama şifreli değildir. Paylaşılan bir cihazda işiniz bitince verilerinizi temizleyin. Tarayıcı ya da uygulama verilerini temizlemek profilinizi de kaldırır.';
@@ -679,7 +679,7 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Doğum bilgileriniz bu cihazda kalır ve asla herkese açık profilinizde gösterilmez.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Enerjiniz aranıyor…';

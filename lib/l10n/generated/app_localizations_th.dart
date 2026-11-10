@@ -578,7 +578,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get privacyTitle => 'ข้อมูลของคุณยังเป็นของคุณ';
 
   @override
-  String get privacyBody1 => 'แอปนี้บันทึกชื่อ ข้อมูลวันเกิด แผนภูมิในสตูดิโอ การตั้งค่าโมเดล การเชื่อมต่อที่บันทึกไว้ และโปรไฟล์ที่ซ่อนไว้ของคุณบนอุปกรณ์นี้ คีย์ API ของไคลเอนต์อยู่ในหน่วยความจำเท่านั้น เมื่อคุณเลือกสร้างการตีความ หลักฐานแผนภูมิที่คำนวณแล้วจะถูกส่งไปยังผู้ให้บริการโมเดลที่คุณเลือก ชื่อ วันเกิด และสถานที่เกิดที่แน่นอนจะถูกตัดออกจากหลักฐานนั้น การรีเซ็ตข้อมูลในเครื่องไม่ลบบันทึกของผู้ให้บริการหรือคีย์ API ของเซิร์ฟเวอร์ในเครื่อง';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'ที่เก็บข้อมูลในเครื่องไม่ได้เข้ารหัส บนอุปกรณ์ใช้ร่วมกัน โปรดล้างข้อมูลของคุณเมื่อใช้เสร็จ การล้างข้อมูลเบราว์เซอร์หรือแอปจะลบโปรไฟล์ของคุณด้วย';
@@ -679,7 +679,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'ข้อมูลวันเกิดของคุณอยู่บนอุปกรณ์นี้และไม่เคยแสดงบนโปรไฟล์สาธารณะ';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'กำลังค้นหาพลังงานของคุณ…';

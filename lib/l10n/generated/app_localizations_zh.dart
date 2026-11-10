@@ -578,7 +578,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privacyTitle => '隐私与数据';
 
   @override
-  String get privacyBody1 => '本应用将你的姓名、出生信息、工作室命盘、模型设置、保存的连接和隐藏的资料保存在此设备上。客户端 API 密钥只存在于内存中。当你选择生成解读时，计算所得的命盘证据会发送给你选择的模型服务商；姓名、确切出生日期和地点不会包含在内。重置本地数据不会清除服务商的记录，也不会清除本地服务器的 API 密钥。 邀请和本地消息草稿也保存在此设备，并包含在数据导出中。 使用已连接的模型提问时，你输入的问题与近期对话会一并发送给模型。';
+  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。';
 
   @override
   String get privacyBody2 => '本地存储未经加密。在共用设备上使用完毕后，请清除你的数据。清除浏览器或应用数据也会同时移除你的资料。';
@@ -679,7 +679,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => '你的出生信息只保存在此设备上，绝不会显示在你的公开资料中。';
+  String get privacyNote => '出生资料不会出现在公开资料中。提问时，相关资料会发送给排盘和解读服务。';
 
   @override
   String get findingEnergy => '正在寻找你的能量…';
@@ -1699,7 +1699,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get privacyTitle => '你的資訊只屬於你。';
 
   @override
-  String get privacyBody1 => '本應用將你的姓名、出生資訊、工作室命盤、模型設定、儲存的連結和隱藏的資料儲存在此裝置上。用戶端 API 金鑰只存在於記憶體中。當你選擇產生解讀時，計算所得的命盤證據會傳送給你選擇的模型服務商；姓名、確切出生日期和地點不會包含在內。重設本地資料不會清除服務商的紀錄，也不會清除本地伺服器的 API 金鑰。';
+  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。';
 
   @override
   String get privacyBody2 => '本地儲存未經加密。在共用裝置上使用完畢後，請清除你的資料。清除瀏覽器或應用程式資料也會同時移除你的資料。';
@@ -1800,7 +1800,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get privacyNote => '你的出生資訊只儲存在此裝置上，絕不會顯示在你的公開資料中。';
+  String get privacyNote => '出生资料不会出现在公开资料中。提问时，相关资料会发送给排盘和解读服务。';
 
   @override
   String get findingEnergy => '正在尋找你的能量…';

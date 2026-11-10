@@ -1,0 +1,5 @@
+fastapi==0.121.1
+httpx==0.28.1
+lunar-python==1.4.9
+tzdata==2025.2
+uvicorn==0.38.0

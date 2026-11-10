@@ -578,7 +578,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get privacyTitle => 'Datele tale rămân ale tale.';
 
   @override
-  String get privacyBody1 => 'Această aplicație salvează numele tău, datele de naștere, hărțile din studio, setările modelului, conexiunile salvate și profilurile ascunse pe acest dispozitiv. Cheile API ale clientului rămân în memorie. Când alegi să generezi o interpretare, dovezile calculate ale hărții sunt trimise furnizorului de model selectat. Numele, datele exacte de naștere și locurile sunt omise din acele dovezi. Resetarea datelor locale nu șterge înregistrările furnizorului nici cheia API a serverului local.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Stocarea locală nu este criptată. Pe un dispozitiv partajat, șterge-ți datele când ai terminat. Ștergerea datelor din browser sau din aplicație îți elimină și profilul.';
@@ -679,7 +679,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Datele tale de naștere rămân pe acest dispozitiv și nu sunt afișate niciodată în profilul tău public.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Căutăm energia ta…';

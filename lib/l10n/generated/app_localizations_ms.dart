@@ -578,7 +578,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get privacyTitle => 'Maklumat anda tetap milik anda.';
 
   @override
-  String get privacyBody1 => 'Aplikasi ini menyimpan nama, butiran kelahiran, carta studio, tetapan model, sambungan tersimpan dan profil tersembunyi anda pada peranti ini. Kunci API klien kekal dalam memori. Apabila anda memilih untuk menjana tafsiran, bukti carta yang dikira dihantar kepada penyedia model pilihan anda. Nama, tarikh dan tempat kelahiran yang tepat dikecualikan daripada bukti itu. Menetap semula data setempat tidak memadam rekod penyedia atau kunci API pelayan setempat.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Storan setempat tidak disulitkan. Pada peranti berkongsi, kosongkan data anda selepas selesai. Mengosongkan data pelayar atau aplikasi turut membuang profil anda.';
@@ -679,7 +679,7 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Butiran kelahiran anda kekal pada peranti ini dan tidak pernah dipaparkan pada profil awam anda.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Mencari tenaga anda…';

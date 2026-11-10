@@ -38,7 +38,7 @@ The default DeepSeek proxy discovers live model IDs. Model settings accepts comp
 - Two core tasks, My chart and Match, with Agent as a supporting destination.
 - Focused Match page with a vertical people list, one computed recommendation reason per person, filter-aware random matching, and search/filters.
 - My chart opens with the main reading before Four Pillars; recent outlook switches between day, month, and year transits. Detailed chart tables are collapsed by default. Day master terminology can be explained in place.
-- Contextual questions open beside the current reading on desktop or in a phone bottom sheet, preserving the reading position. Agent also accepts general questions before birth setup and chart-specific questions with follow-ups using computed chart evidence. Without a configured provider it shows labelled chart-reference answers.
+- Contextual questions open beside the current reading on desktop or in a phone bottom sheet, preserving the reading position. Agent also accepts general questions before birth setup and chart-specific questions with follow-ups using computed chart evidence and complete conversation history. Without a configured provider it shows labelled chart-reference answers.
 - Advanced Chart Studio tools are available from My chart → Tools; model settings, language, privacy, and guide remain in Settings.
 - Live cultural harmony scoring, not hard-coded percentages.
 - Filter by gender, age, country, and minimum harmony.
@@ -54,7 +54,9 @@ The default DeepSeek proxy discovers live model IDs. Model settings accepts comp
 
 ## Scope
 
-This version is a working local prototype. Six fictional adults with stock photos make the recommendation experience immediately explorable. There is no live community, authentication server, messaging transport, payments, or account verification. Profile details, saves, invitations, and conversation drafts remain in local SharedPreferences; this storage is not encrypted. Agent conversation state lives in memory for the current app session and is cleared when birth details change or local data is reset. When a model is connected, questions and recent turns are transmitted alongside computed chart evidence. Text typed by the user is not automatically redacted. Chart calculations run locally. Clicking Generate sends calculated evidence to the configured model provider; names, exact birth dates and places are omitted. Client keys are memory-only and the default DeepSeek key is held by the local server. See [proxy setup](server/README.md).
+This version is a working prototype with six fictional adults and stock photos, local social interactions, and no live community or messaging transport. Local profiles and drafts use unencrypted SharedPreferences. Agent history stays in memory for the session and resets when birth details change or local data is cleared.
+
+The new analysis service verifies birth charts with lunar-python before sending verified evidence and the user's complete session context to DeepSeek-V4.1-Flash-1017 (official API name `deepseek-flash`, 1M context, maximum reasoning). Context includes name, birth inputs, chart convention, current reading, and all earlier turns; typed text is not automatically redacted. Service keys are server-only. See [chart service setup, deployment protection, and limits](server/README.md). The existing public preview remains on its published configuration until the protected service can be made available to its intended users.
 
 A real launch requires backend authentication and profiles, mutual consent and messaging, moderation/reporting, verification and age assurance, secure handling of birth data, server-side recommendation processing, retention/deletion controls, and production privacy documentation.
 
@@ -108,14 +110,15 @@ The current Web app was exercised with Playwright in Chromium at 1440 × 1000 an
 - `lib/ui/app_shell.dart`: intent-based navigation, the focused people list, filtering, random matching, and saves.
 - `lib/ui/intent_pages.dart`: first-use chooser, Four Pillars, reading, and recent outlook.
 - `lib/ui/agent_page.dart`: conversation and question composer.
-- `lib/services/chart_assistant.dart`: computed context, reference answers, model routing, conversation context, and cancellation.
+- `lib/services/chart_assistant.dart`: computed context, reference answers, full-history snapshots, model routing, and cancellation.
+- `server/chart_engine.py` and `server/api/index.py`: authoritative lunar-python calculation and chart-first DeepSeek analysis.
 - `lib/ui/profile_editor.dart`: validated birth data editor.
 - `lib/ui/profile_detail.dart`: profile and match breakdown.
 - `lib/ui/secondary_pages.dart`: optional BaZi guide and privacy controls.
 
 ## Validation
 
-Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 59 tests pass in the current UX update, and the Web release builds successfully. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
+Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 60 Flutter tests and 18 Python service tests pass in the model integration, and the Web release builds successfully. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
 
 ## References and assets
 

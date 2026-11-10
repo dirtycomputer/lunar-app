@@ -578,7 +578,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get privacyTitle => 'Datamu tetap milikmu.';
 
   @override
-  String get privacyBody1 => 'Aplikasi ini menyimpan nama, detail kelahiran, grafik studio, pengaturan model, koneksi tersimpan, dan profil tersembunyimu di perangkat ini. Kunci API klien tetap di memori. Saat kamu memilih membuat interpretasi, bukti grafik yang dihitung dikirim ke penyedia model pilihanmu. Nama, tanggal dan tempat kelahiran yang persis dihilangkan dari bukti itu. Mereset data lokal tidak menghapus catatan penyedia atau kunci API server lokal.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Penyimpanan lokal tidak terenkripsi. Di perangkat bersama, bersihkan datamu setelah selesai. Membersihkan data browser atau aplikasi juga menghapus profilmu.';
@@ -679,7 +679,7 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Detail kelahiranmu tetap di perangkat ini dan tidak pernah ditampilkan di profil publikmu.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Mencari energimu…';

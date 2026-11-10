@@ -578,7 +578,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get privacyTitle => 'Vaše údaje zůstávají vaše.';
 
   @override
-  String get privacyBody1 => 'Tato aplikace ukládá do tohoto zařízení vaše jméno, údaje o narození, mapy ze studia, nastavení modelů, uložená spojení a skryté profily. Klientské klíče API zůstávají v paměti. Když se rozhodnete vygenerovat výklad, vypočtené podklady mapy se odesílají vybranému poskytovateli modelu. Jména, přesná data a místa narození jsou z těchto podkladů vynechána. Resetování místních dat nesmaže záznamy poskytovatele ani klíč API místního serveru.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Místní úložiště není šifrované. Ve sdíleném zařízení po dokončení vymažte svá data. Vymazání dat prohlížeče nebo aplikace odstraní i váš profil.';
@@ -679,7 +679,7 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Vaše údaje o narození zůstávají v tomto zařízení a nikdy se nezobrazují ve vašem veřejném profilu.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Zjišťujeme vaši energii…';

@@ -1,5 +1,14 @@
 # Verification record
 
+## Chart-first DeepSeek integration — 2026-11-10
+
+- All 60 Flutter tests and 18 Python service tests pass. Twenty shared birth fixtures match on Four Pillars, Ten Gods, hidden stems, clock instants, and known-hour fortune start.
+- Live local HTTP requests: two DeepSeek responses return HTTP 200, with `deepseek-flash`, `reasoning_effort: max`, enabled thinking, and `lunar-python 1.4.9` chart verification. Follow-up includes the complete prior conversation. Provider usage confirms reasoning tokens. Only final answers are returned.
+- Model alias/version, 1M context and supported max effort are verified against current official DeepSeek documentation and the live `/models` API.
+- No six-turn truncation; per-question snapshots preserve the original page context. Oversized context is rejected explicitly. Birth-input sharing disclosures were updated.
+- Chromium app flow with the live local Python service: birth setup → chart → contextual Agent → model answer → follow-up passes, with `verifiedChartCount: 1`, `contextMessages: 4`, max reasoning, zero page errors and no failed resources.
+- Vercel production SSO protection remains in place. Public access is not enabled; the public preview is not claimed to use the new protected service.
+
 ## FatePair focused-flow update — 2026-11-10
 
 - Two primary first-use cards and a secondary Ask Agent action; remembered entry route and return-to-start control. Root `product.md` records the natural-language product baseline; `AGENTS.md` requires synchronized updates for substantial product changes.

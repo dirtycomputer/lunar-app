@@ -203,7 +203,7 @@
   "guideFooter": "Bleib neugierig. Sei freundlich. Lass Raum für ein wenig Zufall.",
 
   "privacyTitle": "Deine Angaben bleiben deine.",
-  "privacyBody1": "Diese App speichert deinen Namen, Geburtsdaten, Studio-Charts, Modelleinstellungen, gespeicherte Verbindungen und ausgeblendete Profile auf diesem Gerät. Client-API-Schlüssel bleiben im Arbeitsspeicher. Wenn du eine Deutung erzeugst, werden die berechneten Chart-Daten an deinen gewählten Modell-Anbieter gesendet. Namen, genaue Geburtsdaten und -orte werden dabei weggelassen. Das Zurücksetzen lokaler Daten löscht keine Anbieter-Einträge oder den API-Schlüssel des lokalen Servers.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
   "privacyBody2": "Lokale Speicherung ist nicht verschlüsselt. Lösche deine Daten auf einem gemeinsam genutzten Gerät, wenn du fertig bist. Das Löschen von Browser- oder App-Daten entfernt auch dein Profil.",
   "privacyBody3": "Beim Zurücksetzen werden deine persönlichen Angaben und gespeicherten Einstellungen gelöscht, dann kehrst du zum Beispielprofil zurück.",
   "clearDataTitle": "Lokale Daten löschen?",
@@ -238,7 +238,7 @@
   "lonInvalid": "Gib einen Längengrad zwischen -180 und 180 ein.",
   "tzNote": "Zeitzone: {zone}\nTag und Stunde nutzen lokale mittlere Sonnenzeit. Tritt eine Uhrenumstellungszeit doppelt auf, wird der frühere Zeitpunkt verwendet.",
   "@tzNote": { "placeholders": { "zone": { "type": "String" } } },
-  "privacyNote": "Deine Geburtsdaten bleiben auf diesem Gerät und werden nie auf deinem öffentlichen Profil angezeigt.",
+  "privacyNote": "Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.",
   "findingEnergy": "Deine Energie wird ermittelt…",
   "discoverEnergy": "Meine Energie entdecken",
   "energyReadyToast": "Deine Energie ist bereit. Deine Verbindungen wurden aktualisiert.",

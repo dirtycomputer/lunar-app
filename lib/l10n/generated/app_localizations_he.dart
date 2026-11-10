@@ -578,7 +578,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get privacyTitle => 'הפרטים שלכם נשארים שלכם.';
 
   @override
-  String get privacyBody1 => 'האפליקציה הזאת שומרת במכשיר הזה את השם, פרטי הלידה, מפות הסטודיו, הגדרות המודל, הקשרים השמורים והפרופילים המוסתרים שלכם. מפתחות API של הלקוח נשארים בזיכרון. כשאתם בוחרים ליצור פרשנות, ראיות המפה המחושבות נשלחות לספק המודל שבחרתם. שמות, תאריכי לידה מדויקים ומקומות מושמטים מהראיות האלה. איפוס נתונים מקומיים אינו מוחק רשומות של ספקים או את מפתח ה-API של השרת המקומי.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'אחסון מקומי אינו מוצפן. במכשיר משותף, נקו את הנתונים שלכם כשסיימתם. ניקוי נתוני דפדפן או אפליקציה מסיר גם את הפרופיל שלכם.';
@@ -679,7 +679,7 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'פרטי הלידה שלכם נשארים במכשיר הזה ולעולם לא מוצגים בפרופיל הציבורי שלכם.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'מאתרים את האנרגיה שלכם…';
