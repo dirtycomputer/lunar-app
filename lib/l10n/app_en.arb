@@ -1,17 +1,14 @@
 {
   "@@locale": "en",
-  "@@consistency": "Product name 'Lunar' and 'BaZi' are never translated. Legal document titles, report reasons and action verbs (report / hide / delete / export) use one fixed rendering per language across the whole app. Language names are written in their own language (native names). BaZi terms follow translate/zh2XX.md glossaries.",
-
-  "appTitle": "Lunar — Find your kind of energy",
+  "@@consistency": "Product name 'FatePair' and 'BaZi' are never translated. Legal document titles, report reasons and action verbs (report / hide / delete / export) use one fixed rendering per language across the whole app. Language names are written in their own language (native names). BaZi terms follow translate/zh2XX.md glossaries.",
+  "appTitle": "FatePair — BaZi",
   "languageName": "English",
-
   "consentLead": "I confirm I am 18 or older and I accept the ",
   "linkTerms": "Terms of Service",
   "consentAnd": " and ",
   "linkPrivacy": "Privacy Policy",
   "consentEnd": ".",
   "consentError": "Please confirm you are 18+ and accept the terms.",
-
   "reportProfile": "Report this profile",
   "reportIntro": "Tell us what is wrong. Reports are reviewed by our moderation team, and the profile is hidden from your recommendations right away.",
   "reasonHarassment": "Harassment or bullying",
@@ -27,21 +24,19 @@
   "submitReport": "Submit report",
   "reportReceivedToast": "Report received. This profile is now hidden.",
   "reportFailedToast": "Could not submit the report. Please try again.",
-
   "actionHide": "Hide this profile",
   "legalCenterTitle": "Legal & your data",
-  "legalCenterIntro": "Policies that will govern Lunar at launch. Tap to read the draft.",
+  "legalCenterIntro": "Policies that will govern FatePair at launch. Tap to read the draft.",
   "actionClose": "Close",
   "exportMyData": "Export my data (JSON)",
   "exportDoneToast": "A copy of your data is on the clipboard.",
   "deleteAccount": "Delete account & data",
   "deleteConfirmTitle": "Delete your account and data?",
-  "deleteConfirmBody": "This permanently removes your birth profile, saved connections, hidden profiles, reports and consents from this device. At launch this also deletes your account and data on Lunar servers. Safety and legal records may be retained where the law requires.",
+  "deleteConfirmBody": "This permanently removes your birth profile, saved connections, hidden profiles, reports and consents from this device. At launch this also deletes your account and data on FatePair servers. Safety and legal records may be retained where the law requires.",
   "keepAccount": "Keep account",
   "deleteEverything": "Delete everything",
   "deleteDoneToast": "Your account and data have been deleted from this device.",
   "deleteFailedToast": "Deletion failed. Please try again.",
-
   "docTerms": "Terms of Service",
   "docPrivacy": "Privacy Policy",
   "docCommunity": "Community Guidelines",
@@ -50,18 +45,15 @@
   "docDeletion": "Account & Data Deletion Policy",
   "docSubscription": "Subscription Terms",
   "docModeration": "Content Moderation & Reporting Policy",
-
   "legalPolicies": "Legal & policies",
   "languageSystem": "Use system language",
   "languageTitle": "Language",
-
-  "planFree": "Lunar Free",
-  "planPlus": "Lunar Plus",
-  "planPro": "Lunar Pro",
+  "planFree": "FatePair Free",
+  "planPlus": "FatePair Plus",
+  "planPro": "FatePair Pro",
   "planFreeSub": "Discovery, charts and saved connections.",
   "planPlusSub": "More daily likes and full compatibility reports.",
   "planProSub": "Everything in Plus, plus advanced cycle insights.",
-
   "tabDiscover": "Discover",
   "tabSaved": "Saved",
   "tabMyEnergy": "My energy",
@@ -78,14 +70,12 @@
   "editProfileShort": "Edit your profile",
   "demoProfile": "Your demo profile",
   "topbarSub": "Meaningful connections start with your energy.",
-  "howLunarWorks": "How Lunar works",
-
+  "howLunarWorks": "How FatePair works",
   "heroEyebrow": "ANCIENT WISDOM. NEW CONNECTIONS.",
   "heroTitle": "Some energies\njust belong together.",
   "heroBody": "Meet people who bring out your best,\nwith a little guidance from BaZi.",
   "findEnergy": "Find my energy",
   "exploreEnergy": "Explore my energy",
-
   "discoverTitle": "Find your kind of energy",
   "discoverSub": "Thoughtfully matched. Naturally you.",
   "savedTitle": "A connection worth keeping",
@@ -97,25 +87,66 @@
   "catSameCity": "Same birth city",
   "catCreative": "Creative souls",
   "countDiscover": "{n} connections to discover",
-  "@countDiscover": { "placeholders": { "n": { "type": "int" } } },
+  "@countDiscover": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "countSaved": "{n} saved connections",
-  "@countSaved": { "placeholders": { "n": { "type": "int" } } },
+  "@countSaved": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "bestHarmony": "Best harmony first",
   "curiosity": "A little curiosity can be the start of something good.",
   "demoNotice": "Demo community · All profiles are illustrative",
   "harmonyPct": "{n}% harmony",
-  "@harmonyPct": { "placeholders": { "n": { "type": "int" } } },
+  "@harmonyPct": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "savedToast": "{name} saved to your connections",
-  "@savedToast": { "placeholders": { "name": { "type": "String" } } },
+  "@savedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "removedToast": "{name} removed from connections",
-  "@removedToast": { "placeholders": { "name": { "type": "String" } } },
+  "@removedToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "couldNotSave": "Could not save. Please try again.",
   "saveTo": "Save {name}",
-  "@saveTo": { "placeholders": { "name": { "type": "String" } } },
+  "@saveTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "unsave": "Unsave {name}",
-  "@unsave": { "placeholders": { "name": { "type": "String" } } },
+  "@unsave": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "compareFailed": "Could not open the comparison. Please try again.",
-
   "glanceTitle": "Your energy, at a glance",
   "glancePersonal": "A little insight into your nature.",
   "glanceSample": "Meet your sample birth chart.",
@@ -124,7 +155,7 @@
   "wisdomTitle": "You don’t need to be\nthe same to be in sync.",
   "wisdomBody": "In BaZi, different elements can bring out the best in each other. Balance is a beautiful thing.",
   "wisdomCta": "Get to know the Five Elements",
-  "detailsYours": "Your details stay yours.",
+  "detailsYours": "Privacy & data",
   "detailsStored": "Birth details are stored on this device. They’re never shown on your public profile.",
   "privacyData": "Privacy & your data",
   "emptySavedTitle": "Good connections are worth saving.",
@@ -133,7 +164,6 @@
   "emptyFilterBody": "Try a wider age range or explore worldwide.",
   "discoverPeople": "Discover people",
   "resetFilters": "Reset filters",
-
   "filterTitle": "Make room for your kind of people",
   "showMe": "Show me",
   "genderEveryone": "Everyone",
@@ -147,15 +177,38 @@
   "regionAustralia": "Australia",
   "regionSingapore": "Singapore",
   "ageRangeLabel": "Age range · {a}–{b}",
-  "@ageRangeLabel": { "placeholders": { "a": { "type": "int" }, "b": { "type": "int" } } },
+  "@ageRangeLabel": {
+    "placeholders": {
+      "a": {
+        "type": "int"
+      },
+      "b": {
+        "type": "int"
+      }
+    }
+  },
   "minHarmony": "Minimum harmony · {n}%",
-  "@minHarmony": { "placeholders": { "n": { "type": "int" } } },
+  "@minHarmony": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "harmonyNote": "Harmony is a cultural exploration score, not a prediction of relationship success.",
   "reset": "Reset",
   "showConnections": "Show connections",
   "dayMasterContext": "{name}’s day master is {identity}. The badge shows their day element and polarity.",
-  "@dayMasterContext": { "placeholders": { "name": { "type": "String" }, "identity": { "type": "String" } } },
-
+  "@dayMasterContext": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "identity": {
+        "type": "String"
+      }
+    }
+  },
   "energyTitle": "A nature all your own.",
   "energySub": "Get to know the elements that make you, you.",
   "editBirth": "Edit birth details",
@@ -164,7 +217,13 @@
   "dayMasterBody": "Your day master is the central element of your BaZi chart. Think of it as a lens for reflection, with plenty of room to be yourself.",
   "whatIsDayMaster": "What is a day master?",
   "myDayMasterContext": "Your day master is {identity} — the stem at the top of your day pillar.",
-  "@myDayMasterContext": { "placeholders": { "identity": { "type": "String" } } },
+  "@myDayMasterContext": {
+    "placeholders": {
+      "identity": {
+        "type": "String"
+      }
+    }
+  },
   "fiveElements": "Your Five Elements",
   "elementsContext": "The visible stems and branches of your chart add up to this distribution.",
   "elementsSub": "The visible stems and branches in your chart.",
@@ -172,33 +231,56 @@
   "pillarsContext": "Each pillar below pairs a heavenly stem with an earthly branch.",
   "pillarsSub": "Four moments, eight characters, one unique combination.",
   "pillarContext": "Your {pillar} pillar is {combo}. The heavenly stem gives this card its element color.",
-  "@pillarContext": { "placeholders": { "pillar": { "type": "String" }, "combo": { "type": "String" } } },
+  "@pillarContext": {
+    "placeholders": {
+      "pillar": {
+        "type": "String"
+      },
+      "combo": {
+        "type": "String"
+      }
+    }
+  },
   "hourUnknown": "Hour unknown",
   "hourUnknownBody": "Add a birth time for your fourth pillar.",
   "contextTitle": "A little context goes a long way.",
   "calcNote": "Calculated with {zone} birth time and local mean solar time at {lon}° longitude. Year and month follow solar-term boundaries. Day changes at midnight.",
-  "@calcNote": { "placeholders": { "zone": { "type": "String" }, "lon": { "type": "String" } } },
+  "@calcNote": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      },
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
   "noTimeBoundaryNote": "Without an exact birth time, the hour is omitted and boundary dates may be uncertain.",
   "solarWhy": "Why solar time matters",
   "solarContext": "This chart uses local mean solar time at {lon}° longitude.",
-  "@solarContext": { "placeholders": { "lon": { "type": "String" } } },
+  "@solarContext": {
+    "placeholders": {
+      "lon": {
+        "type": "String"
+      }
+    }
+  },
   "understandChart": "Understand your chart",
-
   "guideEyebrow": "A LITTLE WISDOM, A LOT OF POSSIBILITY",
   "guideTitle": "Ancient roots.\nHuman connections.",
-  "guideIntro": "BaZi is a traditional Chinese system for exploring the patterns of a birth moment. Lunar brings that tradition into a more curious, connected world.",
+  "guideIntro": "BaZi is a traditional Chinese system for exploring the patterns of a birth moment. FatePair brings that tradition into a more curious, connected world.",
   "meetElements": "Meet the Five Elements",
   "elementsTagline": "Different by nature. Better in balance.",
   "guidePillarsTitle": "What are the Four Pillars?",
   "guidePillarsBody": "Your birth year, month, day, and hour each form a pillar. Each pillar has a heavenly stem and an earthly branch — eight characters in total. That is what BaZi means: “eight characters.” Your day stem is called your day master.",
-  "guideHarmonyTitle": "How does Lunar calculate harmony?",
+  "guideHarmonyTitle": "How does FatePair calculate harmony?",
   "guideHarmonyBody": "Our demo score combines three transparent factors: 45% combined element balance, measured by the normalized entropy of visible elements; 35% day master connection, based on the generating cycle; and 20% day branch resonance, using traditional pairs, trines, and oppositions. Scores are computed from the charts and recommendations are sorted from highest to lowest.",
   "guideScoreTitle": "What does a high score mean?",
   "guideScoreBody": "It means two charts align under our chosen rules. These rules are an interpretive product choice, not a scientific test of personality or relationship success. A score should invite a conversation, never decide who deserves one. Shared values, kindness, consent, and real-life chemistry matter.",
   "guideTimezoneTitle": "How do time zones work?",
-  "guideTimezoneBody": "Lunar resolves your birth time using the IANA time-zone database, including historical daylight saving rules. Year and month use the calendar library’s solar-term instants in UTC+8. Dating recommendations use local mean solar time based on birthplace longitude, with the day changing at midnight. Chart Studio additionally supports local clock time, true solar time with an approximate equation-of-time correction, and a 23:00 day boundary. During a repeated clock-change time, the earlier occurrence is used; nonexistent clock-change times are rejected. Other BaZi schools may produce different charts.",
+  "guideTimezoneBody": "FatePair resolves your birth time using the IANA time-zone database, including historical daylight saving rules. Year and month use the calendar library’s solar-term instants in UTC+8. Dating recommendations use local mean solar time based on birthplace longitude, with the day changing at midnight. Chart Studio additionally supports local clock time, true solar time with an approximate equation-of-time correction, and a 23:00 day boundary. During a repeated clock-change time, the earlier occurrence is used; nonexistent clock-change times are rejected. Other BaZi schools may produce different charts.",
   "guideNoTimeTitle": "What if I don’t know my birth time?",
-  "guideNoTimeBody": "You can still explore. Lunar uses local noon for the date calculation, omits the hour pillar, and marks your results as approximate. On dates near a solar-term boundary, year or month may be uncertain too. Add your time later to refine your chart.",
+  "guideNoTimeBody": "You can still explore. FatePair uses local noon for the date calculation, omits the hour pillar, and marks your results as approximate. On dates near a solar-term boundary, year or month may be uncertain too. Add your time later to refine your chart.",
   "guideCommunityTitle": "Is this a live dating community?",
   "guideCommunityBody": "This first version is an interactive, local demo. The people shown are fictional profiles paired with stock photographs. You can explore charts, filter recommendations, and save connections on this device. Accounts, messages, verification, and a real community will be part of a future backend integration.",
   "digDeeper": "DIG DEEPER",
@@ -209,9 +291,8 @@
   "termCombinations": "Combinations",
   "termSolarTime": "True solar time",
   "guideFooter": "Stay curious. Be kind. Leave room for a little serendipity.",
-
-  "privacyTitle": "Your details stay yours.",
-  "privacyBody1": "This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key.",
+  "privacyTitle": "Privacy & data",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
   "privacyBody2": "Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.",
   "privacyBody3": "Resetting clears your personal details and saved preferences, then returns to the sample profile.",
   "clearDataTitle": "Clear your local data?",
@@ -221,7 +302,6 @@
   "resetLocalData": "Reset local data",
   "clearOkToast": "Your local data has been cleared.",
   "clearFailToast": "Some data could not be cleared. Please try again.",
-
   "editorTitle": "It starts with you.",
   "editorSub": "A moment in time. An energy all your own.\nAdd your birth details to discover your BaZi chart.",
   "firstName": "Your first name",
@@ -230,7 +310,7 @@
   "dateLabel": "Date of birth",
   "chooseDate": "Choose date",
   "dateInvalid": "Enter a valid date in YYYY-MM-DD format.",
-  "adultsOnly": "Lunar is for adults aged 18 and over.",
+  "adultsOnly": "FatePair is for adults aged 18 and over.",
   "yearMin": "Please enter a year from 1900 onward.",
   "timeLabel": "Local birth time",
   "timeInvalid": "Use 24-hour time, for example 09:30.",
@@ -245,39 +325,76 @@
   "lonHint": "East is positive, west is negative. Example: -73.98",
   "lonInvalid": "Enter a longitude between -180 and 180.",
   "tzNote": "Time zone: {zone}\nDay and hour use local mean solar time. If a clock-change time repeats, the earlier occurrence is used.",
-  "@tzNote": { "placeholders": { "zone": { "type": "String" } } },
-  "privacyNote": "Your birth details stay on this device and are never displayed on your public profile.",
+  "@tzNote": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyNote": "Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.",
   "findingEnergy": "Finding your energy…",
-  "discoverEnergy": "Discover my energy",
-  "energyReadyToast": "Your energy is ready. Your connections have been refreshed.",
+  "discoverEnergy": "Save",
+  "energyReadyToast": "Birth details saved.",
   "saveFailed": "Your profile could not be saved. Please try again.",
   "calcFailed": "We couldn’t calculate this chart. Please check your date and birthplace.",
   "editorFooter": "Cultural insight, with room for real-life chemistry.",
-
   "closeProfile": "Close profile",
-  "chemistryTitle": "The chemistry behind your connection",
+  "chemistryTitle": "Compatibility",
   "meetsText": "Your {you} energy meets {name}’s {their} energy.",
-  "@meetsText": { "placeholders": { "you": { "type": "String" }, "name": { "type": "String" }, "their": { "type": "String" } } },
+  "@meetsText": {
+    "placeholders": {
+      "you": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "their": {
+        "type": "String"
+      }
+    }
+  },
   "factorBalance": "Element balance",
   "factorConnection": "Day master connection",
   "factorResonance": "Day branch resonance",
   "factorBalanceDesc": "45% of score · How evenly your visible elements combine.",
   "factorConnectionDesc": "35% of score · The relationship between your day elements.",
   "factorResonanceDesc": "20% of score · Traditional branch pairs and combinations.",
-  "starterTitle": "A little conversation starter",
+  "starterTitle": "Conversation starter",
   "starterText": "“What’s something about {topic} you could talk about for hours?”",
-  "@starterText": { "placeholders": { "topic": { "type": "String" } } },
+  "@starterText": {
+    "placeholders": {
+      "topic": {
+        "type": "String"
+      }
+    }
+  },
   "demoDisclaimer": "This is an illustrative profile in the demo community. Harmony is a transparent cultural heuristic, not a scientific measure or a prediction of compatibility.",
   "timeApprox": "Your birth time is unknown, so this score is approximate.",
   "saveConnection": "Save this connection",
   "savedConnection": "Saved to connections",
   "compareCharts": "Compare our full charts",
   "hideToast": "{name} is hidden from your recommendations.",
-  "@hideToast": { "placeholders": { "name": { "type": "String" } } },
+  "@hideToast": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "hideFailed": "Could not update recommendations. Please try again.",
   "factorContext": "{title} contributed {score}% to this harmony score.",
-  "@factorContext": { "placeholders": { "title": { "type": "String" }, "score": { "type": "int" } } },
-
+  "@factorContext": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      }
+    }
+  },
   "elementWood": "Wood",
   "elementFire": "Fire",
   "elementEarth": "Earth",
@@ -313,5 +430,104 @@
   "branchPig": "Pig",
   "matchNatural": "Natural harmony",
   "matchLovely": "A lovely balance",
-  "matchRoom": "Room to discover"
+  "matchRoom": "Room to discover",
+  "socialTitle": "Your next chapter starts with hello.",
+  "socialSubtitle": "People you saved. Invitations you made. Conversations you started.",
+  "socialInvitations": "Invitations",
+  "socialMessages": "Messages",
+  "socialInvite": "Connect with {name}",
+  "@socialInvite": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "socialPending": "Invitation pending",
+  "socialWithdraw": "Withdraw invitation",
+  "socialLocalNotice": "Demo mode · Invitations and messages stay on this device.",
+  "socialInviteSaved": "Invitation saved locally. No real person is notified.",
+  "socialNotSent": "Local draft · not sent",
+  "socialEmptyInvitesTitle": "Your next hello is out there.",
+  "socialEmptyInvitesBody": "Open a profile and invite someone you would like to know.",
+  "socialEmptyMessagesTitle": "A thoughtful hello goes a long way.",
+  "socialEmptyMessagesBody": "Open a profile and save an icebreaker to start a local conversation preview.",
+  "socialSayHello": "Say hello",
+  "socialMessageHint": "Write a thoughtful hello…",
+  "socialSaveMessage": "Save message locally",
+  "socialDraftStatus": "Saved on this device",
+  "socialMessageDisclaimer": "Local conversation preview. No messages are delivered.",
+  "socialIcebreaker": "Hi {name}! What is something about {topic} you could talk about for hours?",
+  "@socialIcebreaker": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "topic": {
+        "type": "String"
+      }
+    }
+  },
+  "socialTryIcebreaker": "Try an icebreaker",
+  "socialSaveFailed": "Could not save locally. Please try again.",
+  "socialSearchHint": "Search people, places or interests",
+  "socialClearSearch": "Clear search",
+  "socialWithdrawn": "Invitation withdrawn on this device.",
+  "socialHiddenNotice": "This profile is hidden. Conversation drafts are read-only.",
+  "socialCloseConversation": "Close conversation",
+  "socialTabConnect": "Connect",
+  "flowChoose": "What brings you here?",
+  "flowChart": "My chart",
+  "flowMatch": "Match",
+  "flowAgent": "Agent",
+  "flowAskAgent": "Ask Agent",
+  "flowOutlook": "Recent outlook",
+  "flowTools": "Tools",
+  "flowBirthDetails": "Birth details",
+  "flowRandom": "Random match",
+  "flowPeople": "People",
+  "flowSettings": "Settings",
+  "flowReading": "Reading",
+  "flowDetails": "Chart details",
+  "flowToday": "Today",
+  "flowMonth": "This month",
+  "flowYear": "This year",
+  "flowReference": "Chart reference",
+  "flowModel": "Model",
+  "flowConnectModel": "Connect model",
+  "flowSend": "Ask",
+  "flowStop": "Stop",
+  "flowClearChat": "New conversation",
+  "flowQuestionHint": "Ask about your chart…",
+  "flowQuestionOverview": "What stands out in my chart?",
+  "flowQuestionCycle": "What is happening in my current cycles?",
+  "flowQuestionWork": "What does my chart say about work?",
+  "flowQuestionRelations": "How do the elements in my chart relate?",
+  "flowBack": "Back",
+  "flowSample": "Sample chart",
+  "flowStart": "Start",
+  "flowSaved": "Saved",
+  "flowNoPeople": "No people match these filters.",
+  "flowAddBirth": "Add birth details",
+  "flowOverview": "Birth chart",
+  "flowAskReading": "Ask about this reading",
+  "flowOutlookAsk": "Ask about this period",
+  "flowLocalPreview": "Local preview",
+  "flowNoInvites": "No invitations yet.",
+  "flowNoMessages": "No conversations yet.",
+  "flowNoSaved": "No saved profiles.",
+  "flowReadOnly": "Reading",
+  "flowQuestionPrompt": "Your question",
+  "flowProfile": "Profile",
+  "flowResetFilters": "Reset filters",
+  "flowSelfIntent": "My reading",
+  "flowGeneralBazi": "What is BaZi?",
+  "flowGeneralGods": "How do the Ten Gods work?",
+  "flowGeneralMaster": "What is a day master?",
+  "flowGeneralSolar": "How does solar time work?",
+  "flowReasonBalance": "Your combined charts have a balanced mix of elements.",
+  "flowReasonSupport": "Your core elements follow the supporting cycle.",
+  "flowReasonShared": "You share the same core element.",
+  "flowReasonBranches": "Your day branches share a traditional harmony pattern.",
+  "flowReasonContrast": "Your core elements form a contrasting pair."
 }

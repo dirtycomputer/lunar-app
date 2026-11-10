@@ -102,7 +102,7 @@ class _ReadingPanelState extends State<ReadingPanel> {
       color: lavenderTint,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         StudioHeading(
-            'A little clarity, your way.',
+            'Reading',
             answer == null
                 ? 'Local rule-based reading · No model request has generated the text below.'
                 : 'Custom model interpretation · Based on the calculated chart evidence.',
@@ -175,8 +175,8 @@ class _ReadingPanelState extends State<ReadingPanel> {
         const SizedBox(height: 12),
         Text(
             widget.store.model.baseUrl.contains('/api/model')
-                ? 'Generating sends the displayed chart evidence to DeepSeek through the local proxy. Names, exact birth dates, places and API keys are not included in chart evidence.'
-                : 'Generating sends the displayed chart evidence to your configured model provider. Names, exact birth dates and places are omitted; review your endpoint before sending.',
+                ? 'Generating sends birth inputs and the displayed context to the chart service for verification, then to DeepSeek for analysis. The service key stays on the server.'
+                : 'Generating sends birth inputs and displayed context to your configured model provider. Review your endpoint before sending.',
             style: const TextStyle(fontSize: 10, color: muted, height: 1.7)),
       ]));
 }
@@ -209,7 +209,7 @@ class _ModelSettingsPanelState extends State<ModelSettingsPanel> {
     try {
       final r = await client
           .get(Uri.parse('${url.text.replaceFirst(RegExp(r'/+$'), '')}/info'))
-          .timeout(const Duration(seconds: 5));
+          .timeout(const Duration(seconds: 20));
       if (r.statusCode == 200 && mounted) {
         setState(() => proxy = jsonDecode(r.body) as Map<String, dynamic>);
       }

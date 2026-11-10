@@ -36,8 +36,7 @@ Future<void> showLegalDocument(BuildContext context, LegalDocument doc) =>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                         Text('v${doc.version} · ${doc.effective}',
-                            style:
-                                const TextStyle(fontSize: 10, color: muted)),
+                            style: const TextStyle(fontSize: 10, color: muted)),
                         const SizedBox(height: 14),
                         Text(doc.body,
                             style: const TextStyle(
@@ -52,7 +51,7 @@ Future<void> showLegalDocument(BuildContext context, LegalDocument doc) =>
 
 String _exportJson(AppState state) =>
     const JsonEncoder.withIndent('  ').convert({
-      'app': 'Lunar',
+      'app': 'FatePair',
       'exportedAt': DateTime.now().toIso8601String(),
       'profile': {
         'name': state.name,
@@ -61,6 +60,7 @@ String _exportJson(AppState state) =>
       },
       'saved': state.saved.toList(),
       'hidden': state.hidden.toList(),
+      'social': state.social.toJson(),
       'reports': state.reports.map((r) => r.toJson()).toList(),
       'consents': state.consentStore
           .all()
@@ -91,8 +91,7 @@ Future<void> showLegalCenter(BuildContext context, AppState state) =>
                           ListTile(
                               dense: true,
                               contentPadding: EdgeInsets.zero,
-                              leading: Icon(
-                                  Icons.description_outlined,
+                              leading: Icon(Icons.description_outlined,
                                   size: 18,
                                   color: accentColors[
                                       legalDocuments.indexOf(doc) %
@@ -116,8 +115,7 @@ Future<void> showLegalCenter(BuildContext context, AppState state) =>
                                 showToast(context, l10n.exportDoneToast);
                               }
                             },
-                            icon: const Icon(Icons.download_outlined,
-                                size: 18),
+                            icon: const Icon(Icons.download_outlined, size: 18),
                             label: Text(l10n.exportMyData)),
                         const SizedBox(height: 8),
                         OutlinedButton.icon(
@@ -129,15 +127,13 @@ Future<void> showLegalCenter(BuildContext context, AppState state) =>
                                   context: context,
                                   builder: (inner) => AlertDialog(
                                           backgroundColor: canvas,
-                                          title:
-                                              Text(l10n.deleteConfirmTitle),
+                                          title: Text(l10n.deleteConfirmTitle),
                                           content: Text(l10n.deleteConfirmBody),
                                           actions: [
                                             TextButton(
                                                 onPressed: () =>
                                                     Navigator.pop(inner, false),
-                                                child:
-                                                    Text(l10n.keepAccount)),
+                                                child: Text(l10n.keepAccount)),
                                             FilledButton(
                                                 onPressed: () =>
                                                     Navigator.pop(inner, true),

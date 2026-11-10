@@ -149,6 +149,7 @@ class ChartReport {
         if (subject.birth.timeKnown) 'Body palace · 身宫': eight.getShenGong(),
       };
   Map<String, dynamic> evidence() => {
+        'calculationInput': subject.toJson(),
         'engine': 'lunar 1.7.8 + Lunar Studio rules v1',
         'timeBasis': subject.basis.name,
         'dayBoundary': subject.sect == 2 ? '00:00' : '23:00',

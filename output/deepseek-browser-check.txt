@@ -1,0 +1,9 @@
+BROWSER_CHART_FIRST_MODEL_PASS {
+  model: 'deepseek-flash',
+  chartEngine: 'lunar-python 1.4.9 / FatePair clock conventions v1',
+  verifiedChartCount: 1,
+  contextMessages: 4,
+  reasoningEffort: 'max',
+  errors: [],
+  failed: []
+}

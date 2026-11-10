@@ -32,9 +32,9 @@ enum PlanId { free, plus, pro }
 
 extension PlanInfo on PlanId {
   String get title => switch (this) {
-        PlanId.free => 'Lunar Free',
-        PlanId.plus => 'Lunar Plus',
-        PlanId.pro => 'Lunar Pro',
+        PlanId.free => 'FatePair Free',
+        PlanId.plus => 'FatePair Plus',
+        PlanId.pro => 'FatePair Pro',
       };
   String get subtitle => switch (this) {
         PlanId.free => 'Discovery, charts and saved connections.',
@@ -255,13 +255,13 @@ const legalDocuments = <LegalDocument>[
       "Dating Safety Guidelines",
       '1.0.0-draft',
       'Upon launch',
-      "Placeholder. Safety Center content: take conversations at your pace, meet in public, tell a friend, never send money or financial details, watch for scam patterns, report and block freely, and consent reminders. Lunar culture scores are a conversation starter, never a safety judgment.\n\n[Draft for legal review before launch.]"),
+      "Placeholder. Safety Center content: take conversations at your pace, meet in public, tell a friend, never send money or financial details, watch for scam patterns, report and block freely, and consent reminders. FatePair culture scores are a conversation starter, never a safety judgment.\n\n[Draft for legal review before launch.]"),
   LegalDocument(
       'csae',
       "Child Safety (CSAE) Policy",
       '1.0.0-draft',
       'Upon launch',
-      "Placeholder. Required by Google Play Child Safety Standards even though Lunar is 18+ only. Will cover: zero tolerance for child sexual abuse and exploitation (CSAE), prohibition of child sexual abuse material (CSAM), mandatory reporting paths to law enforcement and NCMEC where applicable, in-app reporting and escalation, a dedicated child-safety contact email, and account termination for violations.\n\n[Draft for legal review before launch.]"),
+      "Placeholder. Required by Google Play Child Safety Standards even though FatePair is 18+ only. Will cover: zero tolerance for child sexual abuse and exploitation (CSAE), prohibition of child sexual abuse material (CSAM), mandatory reporting paths to law enforcement and NCMEC where applicable, in-app reporting and escalation, a dedicated child-safety contact email, and account termination for violations.\n\n[Draft for legal review before launch.]"),
   LegalDocument(
       'deletion',
       "Account & Data Deletion Policy",

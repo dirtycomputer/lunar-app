@@ -6,6 +6,7 @@ import '../services/bazi.dart' as bazi;
 import '../services/platform_contracts.dart';
 import '../studio/glossary.dart';
 import 'design.dart';
+import 'social_pages.dart';
 
 String localizedReasonLabel(AppLocalizations l10n, ReportReason r) =>
     switch (r) {
@@ -24,15 +25,22 @@ Future<void> showProfileDetail(
         {VoidCallback? onCompare}) =>
     showDialog<void>(
         context: context,
-        builder: (_) =>
-            _ProfileDetail(state: state, match: match, onCompare: onCompare));
+        builder: (_) => _ProfileDetail(
+            state: state,
+            match: match,
+            onCompare: onCompare,
+            onChat: () => showLocalConversation(context, state, match.person)));
 
 class _ProfileDetail extends StatelessWidget {
   final AppState state;
   final bazi.MatchResult match;
   final VoidCallback? onCompare;
+  final VoidCallback onChat;
   const _ProfileDetail(
-      {required this.state, required this.match, this.onCompare});
+      {required this.state,
+      required this.match,
+      required this.onChat,
+      this.onCompare});
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -141,22 +149,9 @@ class _ProfileDetail extends StatelessWidget {
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600)),
-                                  const SizedBox(height: 7),
-                                  Text(
-                                      l10n.meetsText(
-                                          elementLabel(
-                                              l10n, state.chart.dayElement),
-                                          p.name,
-                                          elementLabel(
-                                              l10n, match.chart.dayElement)),
-                                      style: const TextStyle(
-                                          fontSize: 12, color: muted)),
                                   const SizedBox(height: 23),
-                                  _factor(
-                                      l10n.factorBalance,
-                                      match.balance,
-                                      l10n.factorBalanceDesc,
-                                      elementColors[0],
+                                  _factor(l10n.factorBalance, match.balance,
+                                      l10n.factorBalanceDesc, elementColors[0],
                                       tint: elementTints[0],
                                       contextText: l10n.factorContext(
                                           l10n.factorBalance, match.balance)),
@@ -206,8 +201,8 @@ class _ProfileDetail extends StatelessWidget {
                                             ]),
                                             const SizedBox(height: 8),
                                             Text(
-                                                l10n.starterText(p.interests
-                                                    .first
+                                                l10n.starterText(p
+                                                    .interests.first
                                                     .toLowerCase()),
                                                 style: const TextStyle(
                                                     fontSize: 12,
@@ -222,13 +217,57 @@ class _ProfileDetail extends StatelessWidget {
                                           height: 1.7)),
                                   if (!state.chart.timeKnown)
                                     Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8),
+                                        padding: const EdgeInsets.only(top: 8),
                                         child: Text(l10n.timeApprox,
                                             style: const TextStyle(
-                                                fontSize: 10,
-                                                color: muted))),
+                                                fontSize: 10, color: muted))),
                                   const SizedBox(height: 24),
+                                  Wrap(spacing: 10, runSpacing: 10, children: [
+                                    FilledButton.icon(
+                                        onPressed: state.social.invitations
+                                                .contains(p.id)
+                                            ? null
+                                            : () async {
+                                                final ok = await state.social
+                                                    .invite(p.id);
+                                                if (context.mounted) {
+                                                  showToast(
+                                                      context,
+                                                      ok
+                                                          ? l10n
+                                                              .socialInviteSaved
+                                                          : l10n
+                                                              .socialSaveFailed);
+                                                }
+                                              },
+                                        icon: Icon(
+                                            state.social.invitations
+                                                    .contains(p.id)
+                                                ? Icons.check
+                                                : Icons
+                                                    .person_add_alt_1_outlined,
+                                            size: 17),
+                                        label: Text(state.social.invitations
+                                                .contains(p.id)
+                                            ? l10n.socialPending
+                                            : l10n.socialInvite(p.name))),
+                                    OutlinedButton.icon(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          onChat();
+                                        },
+                                        icon: const Icon(
+                                            Icons.chat_bubble_outline,
+                                            size: 17),
+                                        label: Text(l10n.socialSayHello)),
+                                  ]),
+                                  const SizedBox(height: 12),
+                                  Text(l10n.socialLocalNotice,
+                                      style: const TextStyle(
+                                          fontSize: 10,
+                                          color: muted,
+                                          height: 1.6)),
+                                  const SizedBox(height: 20),
                                   SizedBox(
                                       width: double.infinity,
                                       child: FilledButton.icon(
@@ -279,14 +318,11 @@ class _ProfileDetail extends StatelessWidget {
                                             if (context.mounted) {
                                               if (ok) {
                                                 Navigator.pop(context);
-                                                showToast(
-                                                    context,
-                                                    l10n.hideToast(
-                                                        p.name));
+                                                showToast(context,
+                                                    l10n.hideToast(p.name));
                                               } else {
                                                 showToast(
-                                                    context,
-                                                    l10n.hideFailed);
+                                                    context, l10n.hideFailed);
                                               }
                                             }
                                           },
@@ -309,12 +345,10 @@ class _ProfileDetail extends StatelessWidget {
       await state.hide(userId);
       if (context.mounted) {
         Navigator.pop(context);
-        showToast(
-            context, AppLocalizations.of(context)!.reportReceivedToast);
+        showToast(context, AppLocalizations.of(context)!.reportReceivedToast);
       }
     } else {
-      showToast(
-          context, AppLocalizations.of(context)!.reportFailedToast);
+      showToast(context, AppLocalizations.of(context)!.reportFailedToast);
     }
   }
 
@@ -327,41 +361,43 @@ class _ProfileDetail extends StatelessWidget {
               decoration: BoxDecoration(
                   color: tint ?? Colors.transparent,
                   borderRadius: BorderRadius.circular(16)),
-              child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(children: [
-                  Expanded(
-                      child: termId == null
-                          ? Text(title,
-                              style: const TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w600))
-                          : TermLink(
-                              termId: termId,
-                              label: '$title ⓘ',
-                              contextText:
-                                  contextText ?? '$title contributed $score% to this harmony score.',
-                              style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: ink))),
-                  Text('$score%',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: color))
-                ]),
-                const SizedBox(height: 8),
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
-                        value: score / 100,
-                        color: color,
-                        backgroundColor: Colors.white,
-                        minHeight: 5)),
-                const SizedBox(height: 7),
-                Text(description,
-                    style: const TextStyle(fontSize: 10, color: muted)),
-              ])));
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      Expanded(
+                          child: termId == null
+                              ? Text(title,
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600))
+                              : TermLink(
+                                  termId: termId,
+                                  label: '$title ⓘ',
+                                  contextText: contextText ??
+                                      '$title contributed $score% to this harmony score.',
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: ink))),
+                      Text('$score%',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: color))
+                    ]),
+                    const SizedBox(height: 8),
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: LinearProgressIndicator(
+                            value: score / 100,
+                            color: color,
+                            backgroundColor: Colors.white,
+                            minHeight: 5)),
+                    const SizedBox(height: 7),
+                    Text(description,
+                        style: const TextStyle(fontSize: 10, color: muted)),
+                  ])));
 }
 
 class _ReportDialog extends StatefulWidget {
@@ -393,27 +429,26 @@ class _ReportDialogState extends State<_ReportDialog> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-              Text(l10n.reportIntro,
-                  style: const TextStyle(
-                      fontSize: 11, height: 1.7, color: muted)),
-              const SizedBox(height: 10),
-              for (final r in ReportReason.values)
-                RadioListTile<ReportReason>(
-                    value: r,
-                    groupValue: reason,
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(localizedReasonLabel(l10n, r),
-                        style: const TextStyle(fontSize: 12)),
-                    onChanged: (v) => setState(() => reason = v!)),
-              TextField(
-                  controller: note,
-                  maxLines: 3,
-                  maxLength: 500,
-                  decoration: InputDecoration(
-                      labelText: l10n.reportNoteHint,
-                      counterText: '')),
-            ]))),
+                  Text(l10n.reportIntro,
+                      style: const TextStyle(
+                          fontSize: 11, height: 1.7, color: muted)),
+                  const SizedBox(height: 10),
+                  for (final r in ReportReason.values)
+                    RadioListTile<ReportReason>(
+                        value: r,
+                        groupValue: reason,
+                        dense: true,
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(localizedReasonLabel(l10n, r),
+                            style: const TextStyle(fontSize: 12)),
+                        onChanged: (v) => setState(() => reason = v!)),
+                  TextField(
+                      controller: note,
+                      maxLines: 3,
+                      maxLength: 500,
+                      decoration: InputDecoration(
+                          labelText: l10n.reportNoteHint, counterText: '')),
+                ]))),
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(context),

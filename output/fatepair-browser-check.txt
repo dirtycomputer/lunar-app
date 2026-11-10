@@ -1,0 +1,18 @@
+FATEPAIR_E2E_PASS {
+  desktopChooser: true,
+  birthEntry: true,
+  readingFirst: true,
+  contextGlossary: true,
+  contextQuestions: true,
+  outlook: true,
+  peopleList: true,
+  sampleLabel: true,
+  filteredRandom: true,
+  rememberedEntry: true,
+  mobileChooser: true,
+  mobileMatching: true,
+  mobileQuestions: true,
+  modelInfoResponses: 3,
+  errors: [],
+  failed: []
+}

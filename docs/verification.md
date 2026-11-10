@@ -1,5 +1,43 @@
 # Verification record
 
+## Chart-first DeepSeek integration — 2026-11-10
+
+- All 60 Flutter tests and 18 Python service tests pass. Twenty shared birth fixtures match on Four Pillars, Ten Gods, hidden stems, clock instants, and known-hour fortune start.
+- Live local HTTP requests: two DeepSeek responses return HTTP 200, with `deepseek-flash`, `reasoning_effort: max`, enabled thinking, and `lunar-python 1.4.9` chart verification. Follow-up includes the complete prior conversation. Provider usage confirms reasoning tokens. Only final answers are returned.
+- Model alias/version, 1M context and supported max effort are verified against current official DeepSeek documentation and the live `/models` API.
+- No six-turn truncation; per-question snapshots preserve the original page context. Oversized context is rejected explicitly. Birth-input sharing disclosures were updated.
+- Chromium app flow with the live local Python service: birth setup → chart → contextual Agent → model answer → follow-up passes, with `verifiedChartCount: 1`, `contextMessages: 4`, max reasoning, zero page errors and no failed resources.
+- Production API access is explicitly authorized and enabled; Preview backend deployments retain SSO protection. Unauthenticated Production info and two chart-analysis requests return HTTP 200, with one verified chart, max reasoning, and 2 → 4 context messages. The Flutter release is configured with the same Production API origin.
+
+## FatePair focused-flow update — 2026-11-10
+
+- Two primary first-use cards and a secondary Ask Agent action; remembered entry route and return-to-start control. Root `product.md` records the natural-language product baseline; `AGENTS.md` requires synchronized updates for substantial product changes.
+- My chart and Match are the core destinations; Agent is a supporting destination. No Discover hero, energy sidebar, wisdom panel, or explanatory heading subtitles in the primary flows.
+- Matching exposes a vertical people list, one reason grounded in score components for each recommendation, and a filter-aware random action. Saved profiles, invitations, and messages are secondary tabs. Fictional-profile labelling appears before the list.
+- My chart exposes reading conclusions before Four Pillars, with optional recent outlook and collapsed detailed tables. Day master terminology opens a contextual explanation. Asking from a reading keeps the chart in place, using a desktop side dialog or a phone bottom sheet. Advanced tools remain available without occupying primary navigation.
+- Agent requests include the question, recent conversation turns, and computed chart evidence. Reference answers are explicitly labelled; unconfigured static hosting does not pretend to have a live model.
+- `flutter analyze`: no issues. `flutter test --reporter expanded`: 59 tests pass. Web release uses local CanvasKit, fonts, and a static unconfigured model-status response for hosting without a proxy.
+- New checks cover intent persistence/reset, eligible random draws without consecutive repeats, transit relationships, professional model context, stale-response cancellation, three-destination phone navigation, first-chart form validation, each main user path, preservation of the chart during contextual questions, and phone question entry with keyboard insets.
+
+- Chromium desktop (1440 × 1000) and phone (390 × 844): first-use choices, birth setup, conclusion-first reading, term explanation, recent outlook, inline questions and follow-up, vertical recommendations, sample notice, filtered random selection, and remembered entry pass. No page errors or failed resource requests. Screenshots: `output/playwright/fatepair-*.png`; summary: `output/fatepair-browser-check.txt`.
+- This update retains the iOS/Android projects; native builds and live provider calls were not repeated.
+
+## Repository integration — 2026-11-10
+
+The combined app is based on `dirtycomputer/lunar-app` at `a49179f`, using its existing Flutter 3.27.1 / Dart 3.6.0 toolchain and locked dependencies.
+
+- `flutter analyze`: no issues.
+- `flutter test --reporter expanded`: all 50 tests pass (42 existing + 8 social/search regression tests).
+- Web release build: local CanvasKit, bundled fonts, and no registered service worker.
+- New regressions cover separate saved/invited state, restoration, Unicode and length validation, concurrent draft saves, damaged-record recovery, privacy reset, discovery search, hidden conversations, desktop invite/message flows, and a narrow phone composer with keyboard insets.
+- The existing Chart Studio, calendar conventions, model-transport tests, multilingual settings, legal center, and moderation tests remain in the full suite.
+- Chromium at 1440 × 1100 and 390 × 844: search, saving, invitation creation, local message composition, refresh/restoration, the Connections hub, and Chart Studio pass. No page errors or failed resource requests.
+- Bundled the missing circled-information symbol so profile/chart links no longer request an external font.
+- The local model proxy reports `configured: false` / `status: not_configured` without credentials; this integration does not repeat the historical live-provider calls below.
+- Native builds were not rerun: this Linux environment does not have Xcode or an Android SDK. The existing platform projects are preserved.
+
+## Earlier project validation
+
 Validated with Flutter 3.27.1 / Dart 3.6.0; Node local proxy on port 5199.
 
 - `flutter analyze`: no issues.

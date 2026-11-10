@@ -7,7 +7,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'Lunar — 找到与你同频的能量';
+  String get appTitle => 'FatePair · 八字';
 
   @override
   String get languageName => '简体中文';
@@ -82,7 +82,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get legalCenterTitle => '法律条款与您的数据';
 
   @override
-  String get legalCenterIntro => 'Lunar 上线时生效的政策。点击查看草稿。';
+  String get legalCenterIntro => 'FatePair 上线时生效的政策。点击查看草稿。';
 
   @override
   String get actionClose => '关闭';
@@ -100,7 +100,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get deleteConfirmTitle => '删除您的账号和数据？';
 
   @override
-  String get deleteConfirmBody => '此操作将永久删除本设备上的生日档案、保存的连接、隐藏的资料、举报记录和同意记录。上线后还将同时删除 Lunar 服务器上的账号和数据。出于安全或法律要求，部分记录可能会被保留。';
+  String get deleteConfirmBody => '此操作将永久删除本设备上的生日档案、保存的连接、隐藏的资料、举报记录和同意记录。上线后还将同时删除 FatePair 服务器上的账号和数据。出于安全或法律要求，部分记录可能会被保留。';
 
   @override
   String get keepAccount => '保留账号';
@@ -148,13 +148,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get languageTitle => '语言';
 
   @override
-  String get planFree => 'Lunar 免费版';
+  String get planFree => 'FatePair 免费版';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => '发现、排盘和保存的连接。';
@@ -214,7 +214,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get topbarSub => '有意义的连接，从你的能量开始。';
 
   @override
-  String get howLunarWorks => 'Lunar 是这样运作的';
+  String get howLunarWorks => 'FatePair 是这样运作的';
 
   @override
   String get heroEyebrow => '古老智慧，崭新相遇';
@@ -336,7 +336,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get wisdomCta => '了解五行';
 
   @override
-  String get detailsYours => '你的信息只属于你。';
+  String get detailsYours => '隐私与数据';
 
   @override
   String get detailsStored => '出生信息只保存在此设备上，绝不会出现在你的公开资料中。';
@@ -506,7 +506,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get guideTitle => '古老的根，\n现代的相遇。';
 
   @override
-  String get guideIntro => '八字是一种探索出生时刻规律的传统中国体系。Lunar 让这份传统走进一个更好奇、更紧密相连的世界。';
+  String get guideIntro => '八字是一种探索出生时刻规律的传统中国体系。FatePair 让这份传统走进一个更好奇、更紧密相连的世界。';
 
   @override
   String get meetElements => '认识五行';
@@ -521,7 +521,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get guidePillarsBody => '你的出生年、月、日、时各成一柱。每柱由一位天干和一位地支组成——共八个字，这正是“八字”的含义。日柱的天干，就是你的日主。';
 
   @override
-  String get guideHarmonyTitle => 'Lunar 如何计算和谐分？';
+  String get guideHarmonyTitle => 'FatePair 如何计算和谐分？';
 
   @override
   String get guideHarmonyBody => '我们的演示分数由三个透明的因子组成：45% 来自五行平衡，以可见元素的归一化熵来衡量；35% 来自日主关系，基于五行相生；20% 来自日支共鸣，采用传统的六合、三合与对冲。分数完全由命盘计算得出，推荐按分数从高到低排序。';
@@ -536,13 +536,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get guideTimezoneTitle => '时区是如何处理的？';
 
   @override
-  String get guideTimezoneBody => 'Lunar 使用 IANA 时区数据库解析你的出生时间，包括历史上的夏令时规则。年柱与月柱采用历法库在 UTC+8 下的节气时刻；交友推荐基于出生地经度使用平太阳时，日界为午夜。排盘工作室还支持本地时钟时间、带近似均时差修正的真太阳时，以及 23:00 换日。在时钟重复的时刻，取较早的一次；不存在的时钟时刻会被拒绝。其他八字流派可能会排出不同的命盘。';
+  String get guideTimezoneBody => 'FatePair 使用 IANA 时区数据库解析你的出生时间，包括历史上的夏令时规则。年柱与月柱采用历法库在 UTC+8 下的节气时刻；交友推荐基于出生地经度使用平太阳时，日界为午夜。排盘工作室还支持本地时钟时间、带近似均时差修正的真太阳时，以及 23:00 换日。在时钟重复的时刻，取较早的一次；不存在的时钟时刻会被拒绝。其他八字流派可能会排出不同的命盘。';
 
   @override
   String get guideNoTimeTitle => '不知道出生时间怎么办？';
 
   @override
-  String get guideNoTimeBody => '你依然可以探索。Lunar 会以当地正午计算日期，省略时柱，并把结果标记为近似值。在临近节气边界的日期，年或月也可能不确定。之后补充出生时间，即可精修你的命盘。';
+  String get guideNoTimeBody => '你依然可以探索。FatePair 会以当地正午计算日期，省略时柱，并把结果标记为近似值。在临近节气边界的日期，年或月也可能不确定。之后补充出生时间，即可精修你的命盘。';
 
   @override
   String get guideCommunityTitle => '这是真实的交友社区吗？';
@@ -575,10 +575,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get guideFooter => '保持好奇，心怀善意，给缘分留一点惊喜。';
 
   @override
-  String get privacyTitle => '你的信息只属于你。';
+  String get privacyTitle => '隐私与数据';
 
   @override
-  String get privacyBody1 => '本应用将你的姓名、出生信息、工作室命盘、模型设置、保存的连接和隐藏的资料保存在此设备上。客户端 API 密钥只存在于内存中。当你选择生成解读时，计算所得的命盘证据会发送给你选择的模型服务商；姓名、确切出生日期和地点不会包含在内。重置本地数据不会清除服务商的记录，也不会清除本地服务器的 API 密钥。';
+  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。';
 
   @override
   String get privacyBody2 => '本地存储未经加密。在共用设备上使用完毕后，请清除你的数据。清除浏览器或应用数据也会同时移除你的资料。';
@@ -632,7 +632,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dateInvalid => '请输入 YYYY-MM-DD 格式的有效日期。';
 
   @override
-  String get adultsOnly => 'Lunar 仅面向 18 周岁及以上的成年人。';
+  String get adultsOnly => 'FatePair 仅面向 18 周岁及以上的成年人。';
 
   @override
   String get yearMin => '请输入 1900 年及以后的年份。';
@@ -679,16 +679,16 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => '你的出生信息只保存在此设备上，绝不会显示在你的公开资料中。';
+  String get privacyNote => '出生资料不会出现在公开资料中。提问时，相关资料会发送给排盘和解读服务。';
 
   @override
   String get findingEnergy => '正在寻找你的能量…';
 
   @override
-  String get discoverEnergy => '发现我的能量';
+  String get discoverEnergy => '保存';
 
   @override
-  String get energyReadyToast => '你的能量已就绪，连接也已刷新。';
+  String get energyReadyToast => '出生资料已保存。';
 
   @override
   String get saveFailed => '资料保存失败，请重试。';
@@ -703,7 +703,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get closeProfile => '关闭资料';
 
   @override
-  String get chemistryTitle => '连接背后的化学反应';
+  String get chemistryTitle => '匹配解读';
 
   @override
   String meetsText(String you, String name, String their) {
@@ -729,7 +729,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get factorResonanceDesc => '占分数 20% · 传统的地支组合与相合。';
 
   @override
-  String get starterTitle => '一个小话题';
+  String get starterTitle => '破冰话题';
 
   @override
   String starterText(String topic) {
@@ -871,6 +871,256 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get matchRoom => '有待发现';
+
+  @override
+  String get socialTitle => '新的故事，从一句你好开始。';
+
+  @override
+  String get socialSubtitle => '收藏的人、发出的邀请，以及开始的对话。';
+
+  @override
+  String get socialInvitations => '邀请';
+
+  @override
+  String get socialMessages => '消息';
+
+  @override
+  String socialInvite(String name) {
+    return '与$name建立连接';
+  }
+
+  @override
+  String get socialPending => '邀请待回应';
+
+  @override
+  String get socialWithdraw => '撤回邀请';
+
+  @override
+  String get socialLocalNotice => '演示模式 · 邀请和消息仅保存在此设备。';
+
+  @override
+  String get socialInviteSaved => '邀请已保存在本地，不会通知任何真实用户。';
+
+  @override
+  String get socialNotSent => '本地草稿 · 未发送';
+
+  @override
+  String get socialEmptyInvitesTitle => '下一句你好，就在前方。';
+
+  @override
+  String get socialEmptyInvitesBody => '打开个人资料，邀请你想认识的人。';
+
+  @override
+  String get socialEmptyMessagesTitle => '用心的一句你好，可能是新的开始。';
+
+  @override
+  String get socialEmptyMessagesBody => '打开个人资料并保存破冰消息，体验本地对话预览。';
+
+  @override
+  String get socialSayHello => '打个招呼';
+
+  @override
+  String get socialMessageHint => '写一句用心的问候…';
+
+  @override
+  String get socialSaveMessage => '保存本地消息';
+
+  @override
+  String get socialDraftStatus => '已保存在此设备';
+
+  @override
+  String get socialMessageDisclaimer => '本地对话预览，不会发送任何消息。';
+
+  @override
+  String socialIcebreaker(String name, String topic) {
+    return '你好$name！关于$topic，有什么是你可以聊上好几个小时的？';
+  }
+
+  @override
+  String get socialTryIcebreaker => '试试破冰话题';
+
+  @override
+  String get socialSaveFailed => '无法保存在本地，请重试。';
+
+  @override
+  String get socialSearchHint => '搜索用户、地点或兴趣';
+
+  @override
+  String get socialClearSearch => '清除搜索';
+
+  @override
+  String get socialWithdrawn => '已在此设备撤回邀请。';
+
+  @override
+  String get socialHiddenNotice => '此用户已隐藏，对话草稿为只读。';
+
+  @override
+  String get socialCloseConversation => '关闭对话';
+
+  @override
+  String get socialTabConnect => '连接';
+
+  @override
+  String get flowChoose => '你想先做什么？';
+
+  @override
+  String get flowChart => '我的命盘';
+
+  @override
+  String get flowMatch => '匹配';
+
+  @override
+  String get flowAgent => 'Agent';
+
+  @override
+  String get flowAskAgent => '问 Agent';
+
+  @override
+  String get flowOutlook => '近期运势';
+
+  @override
+  String get flowTools => '工具';
+
+  @override
+  String get flowBirthDetails => '出生资料';
+
+  @override
+  String get flowRandom => '随机匹配';
+
+  @override
+  String get flowPeople => '人员';
+
+  @override
+  String get flowSettings => '设置';
+
+  @override
+  String get flowReading => '解读';
+
+  @override
+  String get flowDetails => '命盘细节';
+
+  @override
+  String get flowToday => '今天';
+
+  @override
+  String get flowMonth => '本月';
+
+  @override
+  String get flowYear => '今年';
+
+  @override
+  String get flowReference => '命盘资料';
+
+  @override
+  String get flowModel => '模型';
+
+  @override
+  String get flowConnectModel => '连接模型';
+
+  @override
+  String get flowSend => '提问';
+
+  @override
+  String get flowStop => '停止';
+
+  @override
+  String get flowClearChat => '新对话';
+
+  @override
+  String get flowQuestionHint => '询问你的命盘…';
+
+  @override
+  String get flowQuestionOverview => '我的命盘有什么特点？';
+
+  @override
+  String get flowQuestionCycle => '我当前的流年与运势是什么？';
+
+  @override
+  String get flowQuestionWork => '我的命盘与事业有什么关系？';
+
+  @override
+  String get flowQuestionRelations => '命盘中的五行如何关联？';
+
+  @override
+  String get flowBack => '返回';
+
+  @override
+  String get flowSample => '示例命盘';
+
+  @override
+  String get flowStart => '开始';
+
+  @override
+  String get flowSaved => '收藏';
+
+  @override
+  String get flowNoPeople => '没有符合筛选条件的用户。';
+
+  @override
+  String get flowAddBirth => '添加出生资料';
+
+  @override
+  String get flowOverview => '排盘';
+
+  @override
+  String get flowAskReading => '询问这份解读';
+
+  @override
+  String get flowOutlookAsk => '询问这个时期';
+
+  @override
+  String get flowLocalPreview => '本地预览';
+
+  @override
+  String get flowNoInvites => '尚无邀请。';
+
+  @override
+  String get flowNoMessages => '尚无对话。';
+
+  @override
+  String get flowNoSaved => '尚未收藏用户。';
+
+  @override
+  String get flowReadOnly => '解读';
+
+  @override
+  String get flowQuestionPrompt => '你的问题';
+
+  @override
+  String get flowProfile => '资料';
+
+  @override
+  String get flowResetFilters => '重置筛选';
+
+  @override
+  String get flowSelfIntent => '看自己';
+
+  @override
+  String get flowGeneralBazi => '什么是八字？';
+
+  @override
+  String get flowGeneralGods => '十神是如何计算的？';
+
+  @override
+  String get flowGeneralMaster => '什么是日主？';
+
+  @override
+  String get flowGeneralSolar => '太阳时如何影响排盘？';
+
+  @override
+  String get flowReasonBalance => '你们命盘的五行组合较为均衡。';
+
+  @override
+  String get flowReasonSupport => '你们的日主五行相生。';
+
+  @override
+  String get flowReasonShared => '你们拥有相同的日主五行。';
+
+  @override
+  String get flowReasonBranches => '你们的日支构成传统的相合关系。';
+
+  @override
+  String get flowReasonContrast => '你们的日主五行呈相克关系。';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -878,7 +1128,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   AppLocalizationsZhTw(): super('zh_TW');
 
   @override
-  String get appTitle => 'Lunar — 找到與你同頻的能量';
+  String get appTitle => 'FatePair — 找到與你同頻的能量';
 
   @override
   String get languageName => '繁體中文';
@@ -953,7 +1203,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get legalCenterTitle => '法律條款與您的資料';
 
   @override
-  String get legalCenterIntro => 'Lunar 上線時生效的政策。點擊查看草稿。';
+  String get legalCenterIntro => 'FatePair 上線時生效的政策。點擊查看草稿。';
 
   @override
   String get actionClose => '關閉';
@@ -971,7 +1221,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get deleteConfirmTitle => '刪除您的帳號和資料？';
 
   @override
-  String get deleteConfirmBody => '此操作將永久刪除本裝置上的生日檔案、儲存的連結、隱藏的資料、檢舉紀錄和同意紀錄。上線後還會同時刪除 Lunar 伺服器上的帳號和資料。基於安全或法律要求，部分紀錄可能會被保留。';
+  String get deleteConfirmBody => '此操作將永久刪除本裝置上的生日檔案、儲存的連結、隱藏的資料、檢舉紀錄和同意紀錄。上線後還會同時刪除 FatePair 伺服器上的帳號和資料。基於安全或法律要求，部分紀錄可能會被保留。';
 
   @override
   String get keepAccount => '保留帳號';
@@ -1019,13 +1269,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get languageTitle => '語言';
 
   @override
-  String get planFree => 'Lunar 免費版';
+  String get planFree => 'FatePair 免費版';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => '探索、排盤和儲存的連結。';
@@ -1085,7 +1335,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get topbarSub => '有意義的連結，從你的能量開始。';
 
   @override
-  String get howLunarWorks => 'Lunar 是這樣運作的';
+  String get howLunarWorks => 'FatePair 是這樣運作的';
 
   @override
   String get heroEyebrow => '古老智慧，嶄新相遇';
@@ -1377,7 +1627,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get guideTitle => '古老的根，\n現代的相遇。';
 
   @override
-  String get guideIntro => '八字是一種探索出生時刻規律的傳統中國體系。Lunar 讓這份傳統走進一個更好奇、更緊密相連的世界。';
+  String get guideIntro => '八字是一種探索出生時刻規律的傳統中國體系。FatePair 讓這份傳統走進一個更好奇、更緊密相連的世界。';
 
   @override
   String get meetElements => '認識五行';
@@ -1392,7 +1642,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get guidePillarsBody => '你的出生年、月、日、時各成一柱。每柱由一位天干和一位地支組成——共八個字，這正是「八字」的含義。日柱的天干，就是你的日主。';
 
   @override
-  String get guideHarmonyTitle => 'Lunar 如何計算和諧分？';
+  String get guideHarmonyTitle => 'FatePair 如何計算和諧分？';
 
   @override
   String get guideHarmonyBody => '我們的示範分數由三個透明的因子組成：45% 來自五行平衡，以可見元素的歸一化熵來衡量；35% 來自日主關係，基於五行相生；20% 來自日支共鳴，採用傳統的六合、三合與對沖。分數完全由命盤計算得出，推薦按分數從高到低排序。';
@@ -1407,13 +1657,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get guideTimezoneTitle => '時區是如何處理的？';
 
   @override
-  String get guideTimezoneBody => 'Lunar 使用 IANA 時區資料庫解析你的出生時間，包括歷史上的夏令時間規則。年柱與月柱採用曆法庫在 UTC+8 下的節氣時刻；交友推薦基於出生地經度使用平太陽時，日界為午夜。排盤工作室還支援本地時鐘時間、帶近似均時差修正的真太陽時，以及 23:00 換日。在時鐘重複的時刻，取較早的一次；不存在的時鐘時刻會被拒絕。其他八字流派可能會排出不同的命盤。';
+  String get guideTimezoneBody => 'FatePair 使用 IANA 時區資料庫解析你的出生時間，包括歷史上的夏令時間規則。年柱與月柱採用曆法庫在 UTC+8 下的節氣時刻；交友推薦基於出生地經度使用平太陽時，日界為午夜。排盤工作室還支援本地時鐘時間、帶近似均時差修正的真太陽時，以及 23:00 換日。在時鐘重複的時刻，取較早的一次；不存在的時鐘時刻會被拒絕。其他八字流派可能會排出不同的命盤。';
 
   @override
   String get guideNoTimeTitle => '不知道出生時間怎麼辦？';
 
   @override
-  String get guideNoTimeBody => '你依然可以探索。Lunar 會以當地正午計算日期，省略時柱，並把結果標記為近似值。在臨近節氣邊界的日期，年或月也可能不確定。之後補充出生時間，即可精修你的命盤。';
+  String get guideNoTimeBody => '你依然可以探索。FatePair 會以當地正午計算日期，省略時柱，並把結果標記為近似值。在臨近節氣邊界的日期，年或月也可能不確定。之後補充出生時間，即可精修你的命盤。';
 
   @override
   String get guideCommunityTitle => '這是真實的交友社群嗎？';
@@ -1449,7 +1699,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get privacyTitle => '你的資訊只屬於你。';
 
   @override
-  String get privacyBody1 => '本應用將你的姓名、出生資訊、工作室命盤、模型設定、儲存的連結和隱藏的資料儲存在此裝置上。用戶端 API 金鑰只存在於記憶體中。當你選擇產生解讀時，計算所得的命盤證據會傳送給你選擇的模型服務商；姓名、確切出生日期和地點不會包含在內。重設本地資料不會清除服務商的紀錄，也不會清除本地伺服器的 API 金鑰。';
+  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。';
 
   @override
   String get privacyBody2 => '本地儲存未經加密。在共用裝置上使用完畢後，請清除你的資料。清除瀏覽器或應用程式資料也會同時移除你的資料。';
@@ -1503,7 +1753,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get dateInvalid => '請輸入 YYYY-MM-DD 格式的有效日期。';
 
   @override
-  String get adultsOnly => 'Lunar 僅供 18 歲及以上的成年人使用。';
+  String get adultsOnly => 'FatePair 僅供 18 歲及以上的成年人使用。';
 
   @override
   String get yearMin => '請輸入 1900 年及以後的年份。';
@@ -1550,7 +1800,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get privacyNote => '你的出生資訊只儲存在此裝置上，絕不會顯示在你的公開資料中。';
+  String get privacyNote => '出生资料不会出现在公开资料中。提问时，相关资料会发送给排盘和解读服务。';
 
   @override
   String get findingEnergy => '正在尋找你的能量…';

@@ -33,9 +33,6 @@ class StudioHeading extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: blue,
                     letterSpacing: -.5)),
-          const SizedBox(height: 6),
-          Text(subtitle,
-              style: const TextStyle(fontSize: 12, color: muted, height: 1.6)),
         ])),
         if (action != null) ...[const SizedBox(width: 12), action!],
       ]));
@@ -48,14 +45,6 @@ class ChartTable extends StatelessWidget {
   Widget build(BuildContext context) => Surface(
       padding: const EdgeInsets.all(18),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const Row(children: [
-          Icon(Icons.touch_app_outlined, size: 16, color: violet),
-          SizedBox(width: 7),
-          Expanded(
-              child: Text('Curious about a term? Tap an underlined label.',
-                  style: TextStyle(fontSize: 11, color: violet)))
-        ]),
-        const SizedBox(height: 14),
         LayoutBuilder(
             builder: (context, c) => SingleChildScrollView(
                 scrollDirection: Axis.horizontal,

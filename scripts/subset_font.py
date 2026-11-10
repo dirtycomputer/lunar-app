@@ -8,7 +8,9 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
 from fontTools.subset import Options, Subsetter
 root = pathlib.Path(__file__).resolve().parent.parent
-paths = list((root / 'lib').rglob('*.dart')) + list(pathlib.Path(sys.argv[2]).rglob('*.dart'))
+paths = (list((root / 'lib').rglob('*.dart')) +
+         list((root / 'lib' / 'l10n').glob('*.arb')) +
+         list(pathlib.Path(sys.argv[2]).rglob('*.dart')))
 characters = set(''.join(p.read_text() for p in paths))
 characters.update(chr(i) for i in range(32, 127))
 font = instantiateVariableFont(TTFont(sys.argv[1]), {'wght': 400}, inplace=True)

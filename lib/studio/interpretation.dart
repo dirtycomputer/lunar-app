@@ -71,7 +71,9 @@ class InterpretationClient {
       required ReadingStyle style,
       required Map<String, dynamic> evidence,
       required String topic,
-      Duration timeout = const Duration(seconds: 65)}) async {
+      String? question,
+      List<Map<String, String>> conversation = const [],
+      Duration timeout = const Duration(seconds: 285)}) async {
     if (!config.isConfigured) {
       throw const ModelFailure('Configure a base URL and model name first.');
     }
@@ -86,7 +88,31 @@ class InterpretationClient {
         'Do not invent book quotations; the verified excerpt IDs are the only permitted quotations. '
         'Do not assert strong/weak day-master, useful gods, or transformations unless an explicit computed field supports it. '
         'Write in English using plain text, short section titles and paragraphs. Do not use Markdown syntax or tables. Keep the answer under 650 words. '
+        '${question == null ? '' : 'Answer the user question directly in under 220 words. Use prior conversation only as context, never as computed chart evidence. Avoid motivational filler and invented forecasts. '}'
         '${style == ReadingStyle.professional ? 'Use precise terms, retain Chinese terminology alongside English, cite the evidence labels, distinguish combinations from successful transformations, and state uncertainties.' : 'Use everyday English, define unfamiliar terms, focus on reflection and conversation, and explain the limits simply.'}';
+    final encoded = jsonEncode({
+      'model': config.model.trim(),
+      'stream': false,
+      'messages': [
+        {'role': 'system', 'content': system},
+        for (final turn in conversation)
+          if (turn['role'] == 'user' || turn['role'] == 'assistant')
+            {'role': turn['role'], 'content': turn['content'] ?? ''},
+        {
+          'role': 'user',
+          'content': jsonEncode({
+            'topic': topic,
+            'responseStyle': style.name,
+            if (question != null) 'question': question,
+            'computedEvidence': evidence,
+          })
+        },
+      ],
+    });
+    if (utf8.encode(encoded).length > 4000000) {
+      throw const ModelFailure(
+          'This conversation is too large for one request. Its history has been kept; start a new conversation when you are ready.');
+    }
     http.Response response;
     try {
       response = await client
@@ -98,18 +124,7 @@ class InterpretationClient {
                 if (apiKey.trim().isNotEmpty)
                   'Authorization': 'Bearer ${apiKey.trim()}'
               },
-              body: jsonEncode({
-                'model': config.model.trim(),
-                'stream': false,
-                'messages': [
-                  {'role': 'system', 'content': system},
-                  {
-                    'role': 'user',
-                    'content': jsonEncode(
-                        {'topic': topic, 'computedEvidence': evidence})
-                  },
-                ]
-              }))
+              body: encoded)
           .timeout(timeout);
     } on TimeoutException {
       throw const ModelFailure(
@@ -119,6 +134,27 @@ class InterpretationClient {
           'Could not reach the model. Check the endpoint, connection, and browser CORS settings.');
     }
     if (response.statusCode != 200) {
+      try {
+        final body =
+            jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
+        final code = (body['error'] as Map?)?['code'];
+        final message = switch (code) {
+          'context_too_large' =>
+            'This conversation exceeds the request or model context limit. Your full history has been kept; start a new conversation when you are ready.',
+          'chart_validation_failed' =>
+            'The chart could not be verified. Review your birth details and chart convention before trying again.',
+          'generation_truncated' =>
+            'The model reached its output limit before finishing. Please try a more focused question.',
+          'model_timeout' =>
+            'The model did not finish in time. Your conversation has been kept. Please try again.',
+          _ => null,
+        };
+        if (message != null) throw ModelFailure(message);
+      } on FormatException {
+        // Non-JSON provider errors use the status below.
+      } on TypeError {
+        // Custom providers may use a different error structure.
+      }
       throw ModelFailure(switch (response.statusCode) {
         401 ||
         403 =>

@@ -7,7 +7,7 @@ class AppLocalizationsDa extends AppLocalizations {
   AppLocalizationsDa([String locale = 'da']) : super(locale);
 
   @override
-  String get appTitle => 'Lunar — Find din energi';
+  String get appTitle => 'FatePair — Find din energi';
 
   @override
   String get languageName => 'Dansk';
@@ -82,7 +82,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get legalCenterTitle => 'Juridisk & dine data';
 
   @override
-  String get legalCenterIntro => 'Politikker, der vil gælde for Lunar ved lancering. Tryk for at læse udkastet.';
+  String get legalCenterIntro => 'Politikker, der vil gælde for FatePair ved lancering. Tryk for at læse udkastet.';
 
   @override
   String get actionClose => 'Luk';
@@ -100,7 +100,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get deleteConfirmTitle => 'Slette din konto og dine data?';
 
   @override
-  String get deleteConfirmBody => 'Dette sletter permanent din fødselsprofil, gemte forbindelser, skjulte profiler, anmeldelser og samtykker fra denne enhed. Ved lancering slettes din konto og data også fra Lunars servere. Sikkerheds- og juridiske registre kan opbevares, hvor loven kræver det.';
+  String get deleteConfirmBody => 'Dette sletter permanent din fødselsprofil, gemte forbindelser, skjulte profiler, anmeldelser og samtykker fra denne enhed. Ved lancering slettes din konto og data også fra FatePairs servere. Sikkerheds- og juridiske registre kan opbevares, hvor loven kræver det.';
 
   @override
   String get keepAccount => 'Behold konto';
@@ -148,13 +148,13 @@ class AppLocalizationsDa extends AppLocalizations {
   String get languageTitle => 'Sprog';
 
   @override
-  String get planFree => 'Lunar Gratis';
+  String get planFree => 'FatePair Gratis';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => 'Opdagelse, kort og gemte forbindelser.';
@@ -214,7 +214,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get topbarSub => 'Meningsfulde forbindelser starter med din energi.';
 
   @override
-  String get howLunarWorks => 'Sådan fungerer Lunar';
+  String get howLunarWorks => 'Sådan fungerer FatePair';
 
   @override
   String get heroEyebrow => 'GAMMEL VISDOM. NYE FORBINDELSER.';
@@ -506,7 +506,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get guideTitle => 'Gamle rødder.\nMenneskelige forbindelser.';
 
   @override
-  String get guideIntro => 'BaZi er et traditionelt kinesisk system til at udforske mønstrene i et fødselsøjeblik. Lunar bringer den tradition ind i en mere nysgerrig, forbundet verden.';
+  String get guideIntro => 'BaZi er et traditionelt kinesisk system til at udforske mønstrene i et fødselsøjeblik. FatePair bringer den tradition ind i en mere nysgerrig, forbundet verden.';
 
   @override
   String get meetElements => 'Mød de fem elementer';
@@ -521,7 +521,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get guidePillarsBody => 'Dit fødselsår, -måned, -dag og -time danner hver sin søjle. Hver søjle har en himmelstamme og en jordgren — otte tegn i alt. Det er dét, BaZi betyder: ”otte tegn”. Din dagstam kaldes din dagsherre.';
 
   @override
-  String get guideHarmonyTitle => 'Hvordan beregner Lunar harmoni?';
+  String get guideHarmonyTitle => 'Hvordan beregner FatePair harmoni?';
 
   @override
   String get guideHarmonyBody => 'Vores demoscore kombinerer tre gennemsigtige faktorer: 45 % kombineret elementbalance, målt ved den normaliserede entropi af synlige elementer; 35 % dagsherre-forbindelse, baseret på den generende cyklus; og 20 % resonans i dagsgrenen, med traditionelle par, trigoner og oppositioner. Scores beregnes ud fra kortene, og anbefalingerne sorteres fra højeste til laveste.';
@@ -536,13 +536,13 @@ class AppLocalizationsDa extends AppLocalizations {
   String get guideTimezoneTitle => 'Hvordan fungerer tidszoner?';
 
   @override
-  String get guideTimezoneBody => 'Lunar finder din fødselstid via IANA-tidszonedatabasen, herunder historiske sommertidsregler. År og måned bruger kalenderbibliotekets solterminstidspunkter i UTC+8. Anbefalinger til dating bruger lokal middelsoltid baseret på fødestedets længdegrad, med dagskifte ved midnat. Kortstudiet understøtter desuden lokal klokkeslæt, sand soltid med en tilnærmet korrektion for tidsekvationen samt en dagsgrænse ved 23:00. Ved et gentaget klokkeskift bruges det tidligste tidspunkt; ikke-eksisterende klokkeskiftstidspunkter afvises. Andre BaZi-skoler kan give andre kort.';
+  String get guideTimezoneBody => 'FatePair finder din fødselstid via IANA-tidszonedatabasen, herunder historiske sommertidsregler. År og måned bruger kalenderbibliotekets solterminstidspunkter i UTC+8. Anbefalinger til dating bruger lokal middelsoltid baseret på fødestedets længdegrad, med dagskifte ved midnat. Kortstudiet understøtter desuden lokal klokkeslæt, sand soltid med en tilnærmet korrektion for tidsekvationen samt en dagsgrænse ved 23:00. Ved et gentaget klokkeskift bruges det tidligste tidspunkt; ikke-eksisterende klokkeskiftstidspunkter afvises. Andre BaZi-skoler kan give andre kort.';
 
   @override
   String get guideNoTimeTitle => 'Hvad hvis jeg ikke kender min fødselstid?';
 
   @override
-  String get guideNoTimeBody => 'Du kan stadig udforske. Lunar bruger lokal middagstid i datoberegningen, udelader timesøjlen og markerer dine resultater som omtrentlige. Ved datoer tæt på en soltermingrænse kan også år eller måned være usikkert. Tilføj dit tidspunkt senere for at finpudse dit kort.';
+  String get guideNoTimeBody => 'Du kan stadig udforske. FatePair bruger lokal middagstid i datoberegningen, udelader timesøjlen og markerer dine resultater som omtrentlige. Ved datoer tæt på en soltermingrænse kan også år eller måned være usikkert. Tilføj dit tidspunkt senere for at finpudse dit kort.';
 
   @override
   String get guideCommunityTitle => 'Er dette et rigtigt dating-fællesskab?';
@@ -578,7 +578,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get privacyTitle => 'Dine oplysninger forbliver dine.';
 
   @override
-  String get privacyBody1 => 'Denne app gemmer dit navn, fødselsoplysninger, studiekort, modelindstillinger, gemte forbindelser og skjulte profiler på denne enhed. Klient-API-nøgler forbliver i hukommelsen. Når du vælger at generere en tydning, sendes beregnede kortdata til din valgte modeludbyder. Navne, præcise fødselsdatoer og -steder udelades. Nulstilling af lokale data sletter ikke udbyderdata eller den lokale servers API-nøgle.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
 
   @override
   String get privacyBody2 => 'Lokal lagring er ikke krypteret. Ryd dine data på en delt enhed, når du er færdig. At rydde browser- eller appdata fjerner også din profil.';
@@ -632,7 +632,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dateInvalid => 'Indtast en gyldig dato i formatet ÅÅÅÅ-MM-DD.';
 
   @override
-  String get adultsOnly => 'Lunar er til voksne fra 18 år.';
+  String get adultsOnly => 'FatePair er til voksne fra 18 år.';
 
   @override
   String get yearMin => 'Indtast et år fra 1900 og frem.';
@@ -679,7 +679,7 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get privacyNote => 'Dine fødselsoplysninger forbliver på denne enhed og vises aldrig på din offentlige profil.';
+  String get privacyNote => 'Birth details stay off your public profile. When you ask, relevant details are sent to the chart and interpretation service.';
 
   @override
   String get findingEnergy => 'Finder din energi…';
@@ -871,4 +871,254 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get matchRoom => 'Plads til at opdage';
+
+  @override
+  String get socialTitle => 'Your next chapter starts with hello.';
+
+  @override
+  String get socialSubtitle => 'People you saved. Invitations you made. Conversations you started.';
+
+  @override
+  String get socialInvitations => 'Invitations';
+
+  @override
+  String get socialMessages => 'Messages';
+
+  @override
+  String socialInvite(String name) {
+    return 'Connect with $name';
+  }
+
+  @override
+  String get socialPending => 'Invitation pending';
+
+  @override
+  String get socialWithdraw => 'Withdraw invitation';
+
+  @override
+  String get socialLocalNotice => 'Demo mode · Invitations and messages stay on this device.';
+
+  @override
+  String get socialInviteSaved => 'Invitation saved locally. No real person is notified.';
+
+  @override
+  String get socialNotSent => 'Local draft · not sent';
+
+  @override
+  String get socialEmptyInvitesTitle => 'Your next hello is out there.';
+
+  @override
+  String get socialEmptyInvitesBody => 'Open a profile and invite someone you would like to know.';
+
+  @override
+  String get socialEmptyMessagesTitle => 'A thoughtful hello goes a long way.';
+
+  @override
+  String get socialEmptyMessagesBody => 'Open a profile and save an icebreaker to start a local conversation preview.';
+
+  @override
+  String get socialSayHello => 'Say hello';
+
+  @override
+  String get socialMessageHint => 'Write a thoughtful hello…';
+
+  @override
+  String get socialSaveMessage => 'Save message locally';
+
+  @override
+  String get socialDraftStatus => 'Saved on this device';
+
+  @override
+  String get socialMessageDisclaimer => 'Local conversation preview. No messages are delivered.';
+
+  @override
+  String socialIcebreaker(String name, String topic) {
+    return 'Hi $name! What is something about $topic you could talk about for hours?';
+  }
+
+  @override
+  String get socialTryIcebreaker => 'Try an icebreaker';
+
+  @override
+  String get socialSaveFailed => 'Could not save locally. Please try again.';
+
+  @override
+  String get socialSearchHint => 'Search people, places or interests';
+
+  @override
+  String get socialClearSearch => 'Clear search';
+
+  @override
+  String get socialWithdrawn => 'Invitation withdrawn on this device.';
+
+  @override
+  String get socialHiddenNotice => 'This profile is hidden. Conversation drafts are read-only.';
+
+  @override
+  String get socialCloseConversation => 'Close conversation';
+
+  @override
+  String get socialTabConnect => 'Connect';
+
+  @override
+  String get flowChoose => 'What brings you here?';
+
+  @override
+  String get flowChart => 'My chart';
+
+  @override
+  String get flowMatch => 'Match';
+
+  @override
+  String get flowAgent => 'Agent';
+
+  @override
+  String get flowAskAgent => 'Ask Agent';
+
+  @override
+  String get flowOutlook => 'Recent outlook';
+
+  @override
+  String get flowTools => 'Tools';
+
+  @override
+  String get flowBirthDetails => 'Birth details';
+
+  @override
+  String get flowRandom => 'Random match';
+
+  @override
+  String get flowPeople => 'People';
+
+  @override
+  String get flowSettings => 'Settings';
+
+  @override
+  String get flowReading => 'Reading';
+
+  @override
+  String get flowDetails => 'Chart details';
+
+  @override
+  String get flowToday => 'Today';
+
+  @override
+  String get flowMonth => 'This month';
+
+  @override
+  String get flowYear => 'This year';
+
+  @override
+  String get flowReference => 'Chart reference';
+
+  @override
+  String get flowModel => 'Model';
+
+  @override
+  String get flowConnectModel => 'Connect model';
+
+  @override
+  String get flowSend => 'Ask';
+
+  @override
+  String get flowStop => 'Stop';
+
+  @override
+  String get flowClearChat => 'New conversation';
+
+  @override
+  String get flowQuestionHint => 'Ask about your chart…';
+
+  @override
+  String get flowQuestionOverview => 'What stands out in my chart?';
+
+  @override
+  String get flowQuestionCycle => 'What is happening in my current cycles?';
+
+  @override
+  String get flowQuestionWork => 'What does my chart say about work?';
+
+  @override
+  String get flowQuestionRelations => 'How do the elements in my chart relate?';
+
+  @override
+  String get flowBack => 'Back';
+
+  @override
+  String get flowSample => 'Sample chart';
+
+  @override
+  String get flowStart => 'Start';
+
+  @override
+  String get flowSaved => 'Saved';
+
+  @override
+  String get flowNoPeople => 'No people match these filters.';
+
+  @override
+  String get flowAddBirth => 'Add birth details';
+
+  @override
+  String get flowOverview => 'Birth chart';
+
+  @override
+  String get flowAskReading => 'Ask about this reading';
+
+  @override
+  String get flowOutlookAsk => 'Ask about this period';
+
+  @override
+  String get flowLocalPreview => 'Local preview';
+
+  @override
+  String get flowNoInvites => 'No invitations yet.';
+
+  @override
+  String get flowNoMessages => 'No conversations yet.';
+
+  @override
+  String get flowNoSaved => 'No saved profiles.';
+
+  @override
+  String get flowReadOnly => 'Reading';
+
+  @override
+  String get flowQuestionPrompt => 'Your question';
+
+  @override
+  String get flowProfile => 'Profile';
+
+  @override
+  String get flowResetFilters => 'Reset filters';
+
+  @override
+  String get flowSelfIntent => 'My reading';
+
+  @override
+  String get flowGeneralBazi => 'What is BaZi?';
+
+  @override
+  String get flowGeneralGods => 'How do the Ten Gods work?';
+
+  @override
+  String get flowGeneralMaster => 'What is a day master?';
+
+  @override
+  String get flowGeneralSolar => 'How does solar time work?';
+
+  @override
+  String get flowReasonBalance => 'Your combined charts have a balanced mix of elements.';
+
+  @override
+  String get flowReasonSupport => 'Your core elements follow the supporting cycle.';
+
+  @override
+  String get flowReasonShared => 'You share the same core element.';
+
+  @override
+  String get flowReasonBranches => 'Your day branches share a traditional harmony pattern.';
+
+  @override
+  String get flowReasonContrast => 'Your core elements form a contrasting pair.';
 }
