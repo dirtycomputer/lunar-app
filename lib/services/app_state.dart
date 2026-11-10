@@ -4,12 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/profile.dart';
 import 'bazi.dart';
 import 'platform_contracts.dart';
+import 'social.dart';
 
 class AppState extends ChangeNotifier {
   final SharedPreferences preferences;
   final BaziService service = BaziService();
   final LocalConsentService consentStore;
   final LocalModerationService moderationStore;
+  late final LocalSocialStore social;
   late BirthData birth;
   late EnergyChart chart;
   late List<MatchResult> matches;
@@ -43,6 +45,9 @@ class AppState extends ChangeNotifier {
     hidden.addAll(preferences.getStringList('hidden') ?? []);
     reports = moderationStore.loadReports();
     localeOverride = _parseLocale(preferences.getString('locale'));
+    social = LocalSocialStore(preferences,
+        knownIds: demoPeople.map((p) => p.id).toSet());
+    social.addListener(notifyListeners);
     _recalculate();
   }
 
@@ -50,9 +55,35 @@ class AppState extends ChangeNotifier {
   Locale? localeOverride = _parseLocale(null);
 
   static const Set<String> supportedLanguageCodes = {
-    'en', 'zh', 'es', 'fr', 'de', 'ja', 'ko', 'pt', 'it', 'ru', 'ar', 'hi',
-    'id', 'tr', 'vi', 'th', 'nl', 'pl', 'sv', 'uk', 'cs', 'da', 'no', 'fi',
-    'el', 'he', 'ro', 'hu', 'ms',
+    'en',
+    'zh',
+    'es',
+    'fr',
+    'de',
+    'ja',
+    'ko',
+    'pt',
+    'it',
+    'ru',
+    'ar',
+    'hi',
+    'id',
+    'tr',
+    'vi',
+    'th',
+    'nl',
+    'pl',
+    'sv',
+    'uk',
+    'cs',
+    'da',
+    'no',
+    'fi',
+    'el',
+    'he',
+    'ro',
+    'hu',
+    'ms',
   };
 
   static Locale? _parseLocale(String? raw) {
@@ -80,6 +111,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
     return true;
   }
+
   void _recalculate() {
     chart = service.calculate(birth);
     matches = service.rank(chart, demoPeople);
@@ -182,6 +214,7 @@ class AppState extends ChangeNotifier {
     } catch (_) {
       return false;
     }
+    if (!await social.clear()) return false;
     birth = demoBirth;
     name = 'Alex';
     personalized = false;
@@ -192,5 +225,12 @@ class AppState extends ChangeNotifier {
     _recalculate();
     notifyListeners();
     return true;
+  }
+
+  @override
+  void dispose() {
+    social.removeListener(notifyListeners);
+    social.dispose();
+    super.dispose();
   }
 }

@@ -1239,7 +1239,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyBody1.
   ///
   /// In en, this message translates to:
-  /// **'This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key.'**
+  /// **'This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key. Invitations and local message drafts are also stored on this device and included in your data export.'**
   String get privacyBody1;
 
   /// No description provided for @privacyBody2.
@@ -1805,6 +1805,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Room to discover'**
   String get matchRoom;
+
+  /// No description provided for @socialTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your next chapter starts with hello.'**
+  String get socialTitle;
+
+  /// No description provided for @socialSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'People you saved. Invitations you made. Conversations you started.'**
+  String get socialSubtitle;
+
+  /// No description provided for @socialInvitations.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitations'**
+  String get socialInvitations;
+
+  /// No description provided for @socialMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get socialMessages;
+
+  /// No description provided for @socialInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with {name}'**
+  String socialInvite(String name);
+
+  /// No description provided for @socialPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation pending'**
+  String get socialPending;
+
+  /// No description provided for @socialWithdraw.
+  ///
+  /// In en, this message translates to:
+  /// **'Withdraw invitation'**
+  String get socialWithdraw;
+
+  /// No description provided for @socialLocalNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo mode · Invitations and messages stay on this device.'**
+  String get socialLocalNotice;
+
+  /// No description provided for @socialInviteSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation saved locally. No real person is notified.'**
+  String get socialInviteSaved;
+
+  /// No description provided for @socialNotSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Local draft · not sent'**
+  String get socialNotSent;
+
+  /// No description provided for @socialEmptyInvitesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your next hello is out there.'**
+  String get socialEmptyInvitesTitle;
+
+  /// No description provided for @socialEmptyInvitesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a profile and invite someone you would like to know.'**
+  String get socialEmptyInvitesBody;
+
+  /// No description provided for @socialEmptyMessagesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A thoughtful hello goes a long way.'**
+  String get socialEmptyMessagesTitle;
+
+  /// No description provided for @socialEmptyMessagesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open a profile and save an icebreaker to start a local conversation preview.'**
+  String get socialEmptyMessagesBody;
+
+  /// No description provided for @socialSayHello.
+  ///
+  /// In en, this message translates to:
+  /// **'Say hello'**
+  String get socialSayHello;
+
+  /// No description provided for @socialMessageHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a thoughtful hello…'**
+  String get socialMessageHint;
+
+  /// No description provided for @socialSaveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Save message locally'**
+  String get socialSaveMessage;
+
+  /// No description provided for @socialDraftStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this device'**
+  String get socialDraftStatus;
+
+  /// No description provided for @socialMessageDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Local conversation preview. No messages are delivered.'**
+  String get socialMessageDisclaimer;
+
+  /// No description provided for @socialIcebreaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi {name}! What is something about {topic} you could talk about for hours?'**
+  String socialIcebreaker(String name, String topic);
+
+  /// No description provided for @socialTryIcebreaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Try an icebreaker'**
+  String get socialTryIcebreaker;
+
+  /// No description provided for @socialSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save locally. Please try again.'**
+  String get socialSaveFailed;
+
+  /// No description provided for @socialSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search people, places or interests'**
+  String get socialSearchHint;
+
+  /// No description provided for @socialClearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get socialClearSearch;
+
+  /// No description provided for @socialWithdrawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation withdrawn on this device.'**
+  String get socialWithdrawn;
+
+  /// No description provided for @socialHiddenNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'This profile is hidden. Conversation drafts are read-only.'**
+  String get socialHiddenNotice;
+
+  /// No description provided for @socialCloseConversation.
+  ///
+  /// In en, this message translates to:
+  /// **'Close conversation'**
+  String get socialCloseConversation;
+
+  /// No description provided for @socialTabConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get socialTabConnect;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

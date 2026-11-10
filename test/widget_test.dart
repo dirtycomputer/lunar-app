@@ -95,7 +95,9 @@ void main() {
     expect(find.textContaining('Tell us what is wrong.'), findsOneWidget);
     await tester.tap(find.text('Impersonation or fake profile'));
     await tester.enterText(
-        find.widgetWithText(TextField, 'Anything else we should know? (optional)')
+        find
+            .widgetWithText(
+                TextField, 'Anything else we should know? (optional)')
             .first,
         'Using my photos');
     await tester.tap(find.text('Submit report'));
@@ -141,9 +143,7 @@ void main() {
         .descendant(
             of: find.byType(AlertDialog), matching: find.byType(Scrollable))
         .first;
-    for (var i = 0;
-        i < 8 && find.text('简体中文').evaluate().isEmpty;
-        i++) {
+    for (var i = 0; i < 8 && find.text('简体中文').evaluate().isEmpty; i++) {
       await tester.drag(dialogList, const Offset(0, -300));
       await tester.pumpAndSettle();
     }
@@ -225,5 +225,82 @@ void main() {
     await tester.tap(find.byTooltip('Close chart editor'));
     await tester.pumpAndSettle();
     expect(find.text('Chart details'), findsNothing);
+  });
+  testWidgets('profile invitations and local messages appear in Connections',
+      (tester) async {
+    final state = await start(tester, const Size(1440, 1100));
+    final person = state.matches.first.person;
+    await tester.tap(find.text('${person.name}, ${person.age}'));
+    await tester.pumpAndSettle();
+    final invite = find.text('Connect with ${person.name}');
+    await tester.ensureVisible(invite);
+    await tester.tap(invite);
+    await tester.pumpAndSettle();
+    expect(state.social.invitations, contains(person.id));
+    expect(find.text('Invitation pending'), findsOneWidget);
+    await tester.tap(find.text('Say hello'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const ValueKey('local-message-input')),
+        'Hello! What is your favourite trail?');
+    await tester.tap(find.byTooltip('Save message locally'));
+    await tester.pumpAndSettle();
+    expect(state.social.messagesFor(person.id).single.text,
+        'Hello! What is your favourite trail?');
+    expect(find.text('Local conversation preview. No messages are delivered.'),
+        findsOneWidget);
+    await tester.tap(find.byTooltip('Close conversation'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Connections').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('social-tab-1')));
+    await tester.pumpAndSettle();
+    expect(find.text('Invitation pending'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('social-tab-2')));
+    await tester.pumpAndSettle();
+    expect(find.text('Hello! What is your favourite trail?'), findsOneWidget);
+    await state.hide(person.id);
+    await tester.pumpAndSettle();
+    expect(find.text('Hello! What is your favourite trail?'), findsNothing);
+    expect(find.text('A thoughtful hello goes a long way.'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets('discovery search works with names, places and interests',
+      (tester) async {
+    final state = await start(tester, const Size(1440, 1100));
+    final field = find.byKey(const ValueKey('discovery-search'));
+    await tester.enterText(field, 'Paris');
+    await tester.pumpAndSettle();
+    expect(find.text('Sofia, 27'), findsOneWidget);
+    expect(find.text('Maya, 28'), findsNothing);
+    await tester.tap(find.byTooltip('Clear search'));
+    await tester.pumpAndSettle();
+    expect(find.text('6 connections to discover'), findsOneWidget);
+    await tester.enterText(field, 'Hiking');
+    await tester.pumpAndSettle();
+    expect(find.text('Maya, 28'), findsOneWidget);
+    expect(state.matches, hasLength(6));
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets(
+      'phone composer and Connections remain usable with keyboard space',
+      (tester) async {
+    final state = await start(tester, const Size(360, 800));
+    final person = state.matches.first.person;
+    await state.social.saveMessage(person.id, 'A local hello');
+    await tester.tap(find.byKey(const ValueKey('nav-connections')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('social-tab-2')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('A local hello'));
+    await tester.pumpAndSettle();
+    tester.view.viewInsets = const FakeViewPadding(bottom: 220);
+    addTearDown(tester.view.resetViewInsets);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+        find.byKey(const ValueKey('local-message-input')), 'Another hello');
+    await tester.tap(find.byTooltip('Save message locally'));
+    await tester.pumpAndSettle();
+    expect(state.social.messagesFor(person.id), hasLength(2));
+    expect(tester.takeException(), isNull);
   });
 }

@@ -34,6 +34,9 @@ The default DeepSeek proxy discovers live model IDs. Model settings accepts comp
 - Live cultural harmony scoring, not hard-coded percentages.
 - Filter by gender, age, country, minimum harmony, and discovery categories.
 - Save / unsave connections, inspect match breakdowns, and hide profiles.
+- Search discovery by name, city/country, occupation, or interests.
+- Connections hub with separate Saved, Invitations, and Messages sections.
+- Local-only invitations, withdrawal, conversation previews, and persistent message drafts with an icebreaker. No messages are delivered.
 - Validated adult birth profile, date picker, optional birth time, 16 global birthplaces, and custom birthplace with IANA zone and longitude.
 - Historical time-zone and daylight-saving handling.
 - Four Pillars, day master, visible element distribution, and English guide.
@@ -42,9 +45,19 @@ The default DeepSeek proxy discovers live model IDs. Model settings accepts comp
 
 ## Scope
 
-This version is a working local prototype. Six fictional adults with stock photos make the recommendation experience immediately explorable. There is no live community, authentication server, messaging transport, payments, or account verification. Profile details and saves remain in local SharedPreferences; this storage is not encrypted. Chart calculations run locally. Clicking Generate sends calculated evidence to the configured model provider; names, exact birth dates and places are omitted. Client keys are memory-only and the default DeepSeek key is held by the local server. See [proxy setup](server/README.md).
+This version is a working local prototype. Six fictional adults with stock photos make the recommendation experience immediately explorable. There is no live community, authentication server, messaging transport, payments, or account verification. Profile details, saves, invitations, and conversation drafts remain in local SharedPreferences; this storage is not encrypted. Chart calculations run locally. Clicking Generate sends calculated evidence to the configured model provider; names, exact birth dates and places are omitted. Client keys are memory-only and the default DeepSeek key is held by the local server. See [proxy setup](server/README.md).
 
 A real launch requires backend authentication and profiles, mutual consent and messaging, moderation/reporting, verification and age assurance, secure handling of birth data, server-side recommendation processing, retention/deletion controls, and production privacy documentation.
+
+## Yuan MVP integration
+
+This repository is the canonical project for the combined app. The integration starts from `a49179f` and keeps Lunar’s brand, Manrope/Material 3 design, `lunar` 1.7.8 engine, local mean-solar-time convention, Chart Studio, model adapter, existing localization, platform configuration, and seeded community. The earlier Yuan prototype contributes the invitation/message-preview flow and discovery search; its separate calendar/scoring implementation is not copied over.
+
+Invitations and local message drafts use the versioned `social.v1` preference. Writes are serialized and published to the UI only after successful storage. Hiding/reporting a profile removes it from the Connections hub; its local drafts remain in the data export until a confirmed local-data reset removes them. Reset also clears invitations and drafts while preserving the chosen language and unrelated preferences.
+
+New social strings are translated into English and Simplified Chinese; other existing locales currently use generated English fallbacks for these new strings. The compact phone tab is **Connect**, with Saved, Invitations, and Messages inside.
+
+The hosted preview is a static Web build. Offline charts, comparisons, discovery, and local social features work without credentials. AI generation needs a separately configured model endpoint; no provider key is bundled or provisioned by this integration. See `server/README.md` for running the preserved proxy locally.
 
 ## Chart convention
 
@@ -78,6 +91,8 @@ The local Web app was exercised with Playwright on desktop (1440 × 1000) and mo
 - `lib/models/profile.dart`: birth data, global birthplace presets, fictional profiles.
 - `lib/services/bazi.dart`: chart calculation and explainable ranking.
 - `lib/services/app_state.dart`: persistence and reactive app state.
+- `lib/services/social.dart`: serialized, local-only invitation and message-draft storage.
+- `lib/ui/social_pages.dart`: Connections hub and conversation preview.
 - `lib/ui/design.dart`: theme, reusable surfaces, brand illustration, element ring.
 - `lib/ui/app_shell.dart`: responsive navigation, discovery, filtering and saves.
 - `lib/ui/profile_editor.dart`: validated birth data editor.
@@ -86,7 +101,7 @@ The local Web app was exercised with Playwright on desktop (1440 × 1000) and mo
 
 ## Validation
 
-Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 37 tests pass. Web release and iOS simulator builds succeed. Real DeepSeek plain/professional requests returned HTTP 200. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
+Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 50 tests pass in the integrated version. Web release and iOS simulator builds succeed. Real DeepSeek plain/professional requests returned HTTP 200. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
 
 ## References and assets
 

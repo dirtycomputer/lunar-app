@@ -1,5 +1,21 @@
 # Verification record
 
+## Repository integration — 2026-11-10
+
+The combined app is based on `dirtycomputer/lunar-app` at `a49179f`, using its existing Flutter 3.27.1 / Dart 3.6.0 toolchain and locked dependencies.
+
+- `flutter analyze`: no issues.
+- `flutter test --reporter expanded`: all 50 tests pass (42 existing + 8 social/search regression tests).
+- Web release build: local CanvasKit, bundled fonts, and no registered service worker.
+- New regressions cover separate saved/invited state, restoration, Unicode and length validation, concurrent draft saves, damaged-record recovery, privacy reset, discovery search, hidden conversations, desktop invite/message flows, and a narrow phone composer with keyboard insets.
+- The existing Chart Studio, calendar conventions, model-transport tests, multilingual settings, legal center, and moderation tests remain in the full suite.
+- Chromium at 1440 × 1100 and 390 × 844: search, saving, invitation creation, local message composition, refresh/restoration, the Connections hub, and Chart Studio pass. No page errors or failed resource requests.
+- Bundled the missing circled-information symbol so profile/chart links no longer request an external font.
+- The local model proxy reports `configured: false` / `status: not_configured` without credentials; this integration does not repeat the historical live-provider calls below.
+- Native builds were not rerun: this Linux environment does not have Xcode or an Android SDK. The existing platform projects are preserved.
+
+## Earlier project validation
+
 Validated with Flutter 3.27.1 / Dart 3.6.0; Node local proxy on port 5199.
 
 - `flutter analyze`: no issues.

@@ -211,7 +211,7 @@
   "guideFooter": "Stay curious. Be kind. Leave room for a little serendipity.",
 
   "privacyTitle": "Your details stay yours.",
-  "privacyBody1": "This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key.",
+  "privacyBody1": "This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key. Invitations and local message drafts are also stored on this device and included in your data export.",
   "privacyBody2": "Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.",
   "privacyBody3": "Resetting clears your personal details and saved preferences, then returns to the sample profile.",
   "clearDataTitle": "Clear your local data?",
@@ -313,5 +313,50 @@
   "branchPig": "Pig",
   "matchNatural": "Natural harmony",
   "matchLovely": "A lovely balance",
-  "matchRoom": "Room to discover"
+  "matchRoom": "Room to discover",
+  "socialTitle": "Your next chapter starts with hello.",
+  "socialSubtitle": "People you saved. Invitations you made. Conversations you started.",
+  "socialInvitations": "Invitations",
+  "socialMessages": "Messages",
+  "socialInvite": "Connect with {name}",
+  "@socialInvite": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "socialPending": "Invitation pending",
+  "socialWithdraw": "Withdraw invitation",
+  "socialLocalNotice": "Demo mode · Invitations and messages stay on this device.",
+  "socialInviteSaved": "Invitation saved locally. No real person is notified.",
+  "socialNotSent": "Local draft · not sent",
+  "socialEmptyInvitesTitle": "Your next hello is out there.",
+  "socialEmptyInvitesBody": "Open a profile and invite someone you would like to know.",
+  "socialEmptyMessagesTitle": "A thoughtful hello goes a long way.",
+  "socialEmptyMessagesBody": "Open a profile and save an icebreaker to start a local conversation preview.",
+  "socialSayHello": "Say hello",
+  "socialMessageHint": "Write a thoughtful hello…",
+  "socialSaveMessage": "Save message locally",
+  "socialDraftStatus": "Saved on this device",
+  "socialMessageDisclaimer": "Local conversation preview. No messages are delivered.",
+  "socialIcebreaker": "Hi {name}! What is something about {topic} you could talk about for hours?",
+  "@socialIcebreaker": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "topic": {
+        "type": "String"
+      }
+    }
+  },
+  "socialTryIcebreaker": "Try an icebreaker",
+  "socialSaveFailed": "Could not save locally. Please try again.",
+  "socialSearchHint": "Search people, places or interests",
+  "socialClearSearch": "Clear search",
+  "socialWithdrawn": "Invitation withdrawn on this device.",
+  "socialHiddenNotice": "This profile is hidden. Conversation drafts are read-only.",
+  "socialCloseConversation": "Close conversation",
+  "socialTabConnect": "Connect"
 }

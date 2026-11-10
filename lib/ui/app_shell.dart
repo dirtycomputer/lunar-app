@@ -11,6 +11,7 @@ import 'design.dart';
 import 'profile_editor.dart';
 import 'profile_detail.dart';
 import 'secondary_pages.dart';
+import 'social_pages.dart';
 
 class AppShell extends StatefulWidget {
   final AppState state;
@@ -22,6 +23,8 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   int page = 0;
   int studioInitialTab = 0;
+  int connectionsInitialTab = 0;
+  final search = TextEditingController();
   late final StudioStore studio;
   String category = 'For you';
   String gender = 'Everyone';
@@ -45,14 +48,16 @@ class _AppShellState extends State<AppShell> {
   @override
   void dispose() {
     scroll.dispose();
+    search.dispose();
     studio.dispose();
     super.dispose();
   }
 
-  void navigate(int index, {int studioTab = 0}) {
+  void navigate(int index, {int studioTab = 0, int connectionsTab = 0}) {
     setState(() {
       page = index;
       studioInitialTab = studioTab;
+      connectionsInitialTab = connectionsTab;
     });
     if (scroll.hasClients) scroll.jumpTo(0);
   }
@@ -62,11 +67,19 @@ class _AppShellState extends State<AppShell> {
   bool get hasFilters =>
       gender != 'Everyone' ||
       region != 'Worldwide' ||
+      search.text.trim().isNotEmpty ||
       ageRange.start != 18 ||
       ageRange.end != 60 ||
       minScore != 0;
   List<bazi.MatchResult> get recommendations => state.matches.where((m) {
         final p = m.person;
+        final query = search.text.trim().toLowerCase();
+        if (query.isNotEmpty &&
+            !'${p.name} ${p.location} ${p.occupation} ${p.interests.join(' ')}'
+                .toLowerCase()
+                .contains(query)) {
+          return false;
+        }
         if (state.hidden.contains(p.id)) return false;
         if (page == 1 && !state.saved.contains(p.id)) return false;
         if (p.age < ageRange.start || p.age > ageRange.end) return false;
@@ -125,7 +138,14 @@ class _AppShellState extends State<AppShell> {
                                   onLearn: showGuide)
                               : page == 3
                                   ? const GuidePage()
-                                  : _discovery(width),
+                                  : page == 1
+                                      ? ConnectionsPage(
+                                          state: state,
+                                          saved: _discovery(width),
+                                          initialTab: connectionsInitialTab,
+                                          onDiscover: () => navigate(0),
+                                          onProfile: _openProfile)
+                                      : _discovery(width),
                     )),
                   )),
                 ])),
@@ -144,9 +164,10 @@ class _AppShellState extends State<AppShell> {
                           selectedIcon: const Icon(Icons.explore),
                           label: l10n.tabDiscover),
                       NavigationDestination(
+                          key: const ValueKey('nav-connections'),
                           icon: const Icon(Icons.favorite_border),
                           selectedIcon: const Icon(Icons.favorite),
-                          label: l10n.tabSaved),
+                          label: l10n.socialTabConnect),
                       NavigationDestination(
                           icon: const Icon(Icons.spa_outlined),
                           selectedIcon: const Icon(Icons.spa),
@@ -166,107 +187,115 @@ class _AppShellState extends State<AppShell> {
   Widget _sidebar() {
     final l10n = AppLocalizations.of(context)!;
     return Container(
-      width: 218,
-      decoration: const BoxDecoration(
-          color: Color(0xFFEEF1FA),
-          border: Border(right: BorderSide(color: line))),
-      padding: const EdgeInsets.fromLTRB(20, 36, 20, 20),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const Padding(
-            padding: EdgeInsets.only(left: 12),
-            child: Row(children: [
-              FlowerLogo(size: 34),
-              SizedBox(width: 11),
-              Text('lunar',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -1.8)),
-            ])),
-        Padding(
-            padding: const EdgeInsets.fromLTRB(13, 8, 0, 48),
-            child: Text(l10n.tagline,
-                style:
-                    const TextStyle(fontSize: 9, color: muted, letterSpacing: .05))),
-        Padding(
-            padding: const EdgeInsets.only(left: 15, bottom: 14),
-            child: Text(l10n.yourSpace,
-                style: TextStyle(
-                    fontSize: 9,
-                    color: muted,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.4))),
-        _navItem(0, l10n.tabDiscover, Icons.explore_outlined),
-        _navItem(1, l10n.navConnections, Icons.favorite_border,
-            count: state.saved.length),
-        _navItem(2, l10n.tabMyEnergy, Icons.spa_outlined),
-        _navItem(4, l10n.navStudio, Icons.grid_view_outlined),
-        const Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Divider(height: 1)),
-        _navItem(3, l10n.navGuide, Icons.auto_stories_outlined),
-        const Spacer(),
-        Container(
-            padding: const EdgeInsets.all(17),
-            decoration: BoxDecoration(
-                color: const Color(0xFFF0E8F7),
-                borderRadius: BorderRadius.circular(18)),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Icon(Icons.wb_sunny_outlined, color: green, size: 23),
-              const SizedBox(height: 12),
-              Text(l10n.promoTitle,
+        width: 218,
+        decoration: const BoxDecoration(
+            color: Color(0xFFEEF1FA),
+            border: Border(right: BorderSide(color: line))),
+        padding: const EdgeInsets.fromLTRB(20, 36, 20, 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Row(children: [
+                FlowerLogo(size: 34),
+                SizedBox(width: 11),
+                Text('lunar',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -1.8)),
+              ])),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(13, 8, 0, 48),
+              child: Text(l10n.tagline,
                   style: const TextStyle(
-                      fontSize: 14, height: 1.5, fontWeight: FontWeight.w600)),
-              const SizedBox(height: 6),
-              Text(l10n.promoBody,
-                  style: const TextStyle(fontSize: 11, height: 1.7, color: muted)),
-              const SizedBox(height: 8),
-              InkWell(
-                  onTap: () => navigate(2),
-                  borderRadius: BorderRadius.circular(8),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6),
-                      child: Row(children: [
-                        Expanded(
-                            child: Text(l10n.promoCta,
-                                style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    color: green))),
-                        const SizedBox(width: 10),
-                        const Icon(Icons.arrow_forward, size: 15, color: green),
-                      ]))),
-            ])),
-        const SizedBox(height: 23),
-        InkWell(
-            onTap: editProfile,
-            borderRadius: BorderRadius.circular(12),
-            child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                child: Row(children: [
-                  CircleAvatar(
-                      radius: 19,
-                      backgroundColor: const Color(0xFFDDE5D3),
-                      child: Text(state.name.characters.first.toUpperCase(),
-                          style: const TextStyle(fontSize: 15, color: green))),
-                  const SizedBox(width: 11),
-                  Expanded(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                        Text(state.name,
-                            style: const TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w700)),
-                        Text(
-                            state.personalized
-                                ? l10n.editProfileShort
-                                : l10n.demoProfile,
-                            style: const TextStyle(fontSize: 10, color: muted)),
-                      ])),
-                  const Icon(Icons.more_horiz, color: muted, size: 19),
-                ]))),
-      ]));
+                      fontSize: 9, color: muted, letterSpacing: .05))),
+          Padding(
+              padding: const EdgeInsets.only(left: 15, bottom: 14),
+              child: Text(l10n.yourSpace,
+                  style: TextStyle(
+                      fontSize: 9,
+                      color: muted,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.4))),
+          _navItem(0, l10n.tabDiscover, Icons.explore_outlined),
+          _navItem(1, l10n.navConnections, Icons.favorite_border,
+              count: state.saved.length),
+          _navItem(2, l10n.tabMyEnergy, Icons.spa_outlined),
+          _navItem(4, l10n.navStudio, Icons.grid_view_outlined),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Divider(height: 1)),
+          _navItem(3, l10n.navGuide, Icons.auto_stories_outlined),
+          const Spacer(),
+          Container(
+              padding: const EdgeInsets.all(17),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFF0E8F7),
+                  borderRadius: BorderRadius.circular(18)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.wb_sunny_outlined, color: green, size: 23),
+                    const SizedBox(height: 12),
+                    Text(l10n.promoTitle,
+                        style: const TextStyle(
+                            fontSize: 14,
+                            height: 1.5,
+                            fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 6),
+                    Text(l10n.promoBody,
+                        style: const TextStyle(
+                            fontSize: 11, height: 1.7, color: muted)),
+                    const SizedBox(height: 8),
+                    InkWell(
+                        onTap: () => navigate(2),
+                        borderRadius: BorderRadius.circular(8),
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: Row(children: [
+                              Expanded(
+                                  child: Text(l10n.promoCta,
+                                      style: const TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w700,
+                                          color: green))),
+                              const SizedBox(width: 10),
+                              const Icon(Icons.arrow_forward,
+                                  size: 15, color: green),
+                            ]))),
+                  ])),
+          const SizedBox(height: 23),
+          InkWell(
+              onTap: editProfile,
+              borderRadius: BorderRadius.circular(12),
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                  child: Row(children: [
+                    CircleAvatar(
+                        radius: 19,
+                        backgroundColor: const Color(0xFFDDE5D3),
+                        child: Text(state.name.characters.first.toUpperCase(),
+                            style:
+                                const TextStyle(fontSize: 15, color: green))),
+                    const SizedBox(width: 11),
+                    Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Text(state.name,
+                              style: const TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w700)),
+                          Text(
+                              state.personalized
+                                  ? l10n.editProfileShort
+                                  : l10n.demoProfile,
+                              style:
+                                  const TextStyle(fontSize: 10, color: muted)),
+                        ])),
+                    const Icon(Icons.more_horiz, color: muted, size: 19),
+                  ]))),
+        ]));
   }
 
   Widget _navItem(int index, String label, IconData icon, {int count = 0}) =>
@@ -303,64 +332,69 @@ class _AppShellState extends State<AppShell> {
   Widget _topbar(bool desktop) {
     final l10n = AppLocalizations.of(context)!;
     return Container(
-      height: desktop ? 86 : 74,
-      padding: EdgeInsets.symmetric(horizontal: desktop ? 38 : 20),
-      decoration:
-          const BoxDecoration(border: Border(bottom: BorderSide(color: line))),
-      child: Row(children: [
-        if (!desktop) ...[
-          const FlowerLogo(size: 27),
-          const SizedBox(width: 10)
-        ],
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                  [
-                    l10n.tabDiscover,
-                    l10n.navConnections,
-                    l10n.tabMyEnergy,
-                    l10n.navGuide,
-                    l10n.navStudio
-                  ][page],
-                  style: const TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -.5)),
-              if (desktop)
-                Text(l10n.topbarSub,
-                    style: const TextStyle(fontSize: 11, color: muted)),
-            ]),
-        const Spacer(),
-        if (desktop) ...[
-          TextButton.icon(
-              onPressed: _showFilters,
-              icon: const Icon(Icons.public, size: 16),
-              label: Text(_regionLabel(l10n, region),
-                  style: const TextStyle(fontSize: 11)),
-              style: TextButton.styleFrom(foregroundColor: muted)),
-          const SizedBox(width: 16),
-          Container(width: 1, height: 24, color: line),
-          const SizedBox(width: 16),
-        ],
-        IconButton(
-            onPressed: showGuide,
-            tooltip: l10n.howLunarWorks,
-            icon: const Icon(Icons.help_outline, size: 21, color: muted)),
-        const SizedBox(width: 8),
-        InkWell(
-            onTap: editProfile,
-            borderRadius: BorderRadius.circular(24),
-            child: CircleAvatar(
-                radius: 18,
-                backgroundColor: const Color(0xFFE4EBDA),
-                child: Text(state.name.characters.first.toUpperCase(),
+        height: desktop ? 86 : 74,
+        padding: EdgeInsets.symmetric(horizontal: desktop ? 38 : 20),
+        decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: line))),
+        child: Row(children: [
+          if (!desktop) ...[
+            const FlowerLogo(size: 27),
+            const SizedBox(width: 10)
+          ],
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                    [
+                      l10n.tabDiscover,
+                      l10n.navConnections,
+                      l10n.tabMyEnergy,
+                      l10n.navGuide,
+                      l10n.navStudio
+                    ][page],
                     style: const TextStyle(
-                        color: green,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700)))),
-      ]));
+                        fontSize: 19,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: -.5)),
+                if (desktop)
+                  Text(l10n.topbarSub,
+                      style: const TextStyle(fontSize: 11, color: muted)),
+              ]),
+          const Spacer(),
+          if (desktop) ...[
+            IconButton(
+                onPressed: () => navigate(1, connectionsTab: 2),
+                tooltip: l10n.socialMessages,
+                icon: const Icon(Icons.chat_bubble_outline,
+                    size: 20, color: muted)),
+            TextButton.icon(
+                onPressed: _showFilters,
+                icon: const Icon(Icons.public, size: 16),
+                label: Text(_regionLabel(l10n, region),
+                    style: const TextStyle(fontSize: 11)),
+                style: TextButton.styleFrom(foregroundColor: muted)),
+            const SizedBox(width: 16),
+            Container(width: 1, height: 24, color: line),
+            const SizedBox(width: 16),
+          ],
+          IconButton(
+              onPressed: showGuide,
+              tooltip: l10n.howLunarWorks,
+              icon: const Icon(Icons.help_outline, size: 21, color: muted)),
+          const SizedBox(width: 8),
+          InkWell(
+              onTap: editProfile,
+              borderRadius: BorderRadius.circular(24),
+              child: CircleAvatar(
+                  radius: 18,
+                  backgroundColor: const Color(0xFFE4EBDA),
+                  child: Text(state.name.characters.first.toUpperCase(),
+                      style: const TextStyle(
+                          color: green,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700)))),
+        ]));
   }
 
   String _categoryLabel(AppLocalizations l, String c) => switch (c) {
@@ -401,16 +435,10 @@ class _AppShellState extends State<AppShell> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                    Text(
-                        page == 0
-                            ? l10n.discoverTitle
-                            : l10n.savedTitle,
+                    Text(page == 0 ? l10n.discoverTitle : l10n.savedTitle,
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 5),
-                    Text(
-                        page == 0
-                            ? l10n.discoverSub
-                            : l10n.savedSub,
+                    Text(page == 0 ? l10n.discoverSub : l10n.savedSub,
                         style: const TextStyle(fontSize: 12, color: muted)),
                   ])),
               const SizedBox(width: 8),
@@ -426,6 +454,23 @@ class _AppShellState extends State<AppShell> {
                       backgroundColor: Colors.white)),
             ]),
         const SizedBox(height: 20),
+        TextField(
+            key: const ValueKey('discovery-search'),
+            controller: search,
+            onChanged: (_) => setState(() {}),
+            style: const TextStyle(fontSize: 12),
+            decoration: InputDecoration(
+                hintText: l10n.socialSearchHint,
+                prefixIcon: const Icon(Icons.search, size: 19, color: muted),
+                suffixIcon: search.text.isEmpty
+                    ? null
+                    : IconButton(
+                        tooltip: l10n.socialClearSearch,
+                        onPressed: () => setState(search.clear),
+                        icon: const Icon(Icons.close, size: 17)),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14))),
+        const SizedBox(height: 18),
         SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(children: [
@@ -448,15 +493,13 @@ class _AppShellState extends State<AppShell> {
                           Text(_categoryLabel(l10n, entry.$1))
                         ]),
                         selected: selected,
-                        onSelected: (_) =>
-                            setState(() => category = entry.$1),
+                        onSelected: (_) => setState(() => category = entry.$1),
                         showCheckmark: false,
                         selectedColor: accentTints[index],
                         backgroundColor: canvas,
                         side: BorderSide(
-                            color: selected
-                                ? color.withValues(alpha: .35)
-                                : line),
+                            color:
+                                selected ? color.withValues(alpha: .35) : line),
                         labelStyle: TextStyle(
                             fontSize: 10,
                             color: selected ? color : muted,
@@ -610,6 +653,21 @@ class _AppShellState extends State<AppShell> {
             ]));
       });
 
+  void _openProfile(bazi.MatchResult match) {
+    showProfileDetail(context, state, match, onCompare: () async {
+      final ok = await studio.updateSubjects(
+          ChartSubject(
+              name: state.name, birth: state.birth, sex: studio.primary.sex),
+          ChartSubject(name: match.person.name, birth: match.person.birth));
+      if (!mounted) return;
+      if (ok) {
+        navigate(4, studioTab: 2);
+      } else {
+        showToast(context, AppLocalizations.of(context)!.compareFailed);
+      }
+    });
+  }
+
   Widget _personCard(bazi.MatchResult match, double width) {
     final p = match.person;
     final saved = state.saved.contains(p.id);
@@ -621,23 +679,7 @@ class _AppShellState extends State<AppShell> {
             side: const BorderSide(color: line)),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-            onTap: () =>
-                showProfileDetail(context, state, match, onCompare: () async {
-                  final ok = await studio.updateSubjects(
-                    ChartSubject(
-                        name: state.name,
-                        birth: state.birth,
-                        sex: studio.primary.sex),
-                    ChartSubject(
-                        name: match.person.name, birth: match.person.birth),
-                  );
-                  if (!mounted) return;
-                  if (ok) {
-                    navigate(4, studioTab: 2);
-                  } else {
-                    showToast(context, l10n.compareFailed);
-                  }
-                }),
+            onTap: () => _openProfile(match),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(
@@ -778,8 +820,7 @@ class _AppShellState extends State<AppShell> {
                           const Icon(Icons.link, size: 15, color: green),
                           const SizedBox(width: 6),
                           Expanded(
-                              child: Text(
-                                  matchLabel(l10n, match.score),
+                              child: Text(matchLabel(l10n, match.score),
                                   style: const TextStyle(
                                       fontSize: 10, color: green))),
                           const Icon(Icons.arrow_forward,
@@ -792,184 +833,180 @@ class _AppShellState extends State<AppShell> {
   Widget _rightPanel() {
     final l10n = AppLocalizations.of(context)!;
     return Column(children: [
-        Surface(
-            padding: const EdgeInsets.all(20),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(children: [
-                Expanded(
-                    child: Text(l10n.glanceTitle,
-                        style: const TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.w700))),
-                InkWell(
-                    onTap: () => navigate(2),
-                    child: const Icon(Icons.north_east, size: 17, color: muted))
-              ]),
-              const SizedBox(height: 5),
-              Text(
-                  state.personalized
-                      ? l10n.glancePersonal
-                      : l10n.glanceSample,
-                  style: const TextStyle(fontSize: 10, color: muted)),
-              const SizedBox(height: 24),
-              Center(child: ElementRing(chart: state.chart, size: 155)),
-              const SizedBox(height: 23),
-              for (final element in bazi.Element.values)
-                Padding(
-                    padding: const EdgeInsets.only(bottom: 11),
-                    child: Row(children: [
-                      Container(
-                          width: 6,
-                          height: 6,
-                          decoration: BoxDecoration(
-                              color: elementColors[element.index],
-                              shape: BoxShape.circle)),
-                      const SizedBox(width: 9),
-                      SizedBox(
-                          width: 43,
-                          child: Text(elementLabel(l10n, element),
-                              style:
-                                  const TextStyle(fontSize: 10, color: muted))),
-                      Expanded(
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: LinearProgressIndicator(
-                                  value:
-                                      state.chart.distribution[element.index],
-                                  minHeight: 4,
-                                  color: elementColors[element.index],
-                                  backgroundColor: const Color(0xFFF1F3EE)))),
-                      const SizedBox(width: 10),
-                      SizedBox(
-                          width: 29,
-                          child: Text(
-                              '${(state.chart.distribution[element.index] * 100).round()}%',
-                              textAlign: TextAlign.right,
-                              style:
-                                  const TextStyle(fontSize: 9, color: muted))),
-                    ])),
-              const SizedBox(height: 11),
-              SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                      onPressed: () => navigate(2),
-                      style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15)),
-                      child: Text(l10n.seeChart,
-                          style: const TextStyle(
-                              fontSize: 10, fontWeight: FontWeight.w600)))),
-            ])),
-        const SizedBox(height: 20),
-        Surface(
-            color: const Color(0xFFF6F1E7),
-            padding: const EdgeInsets.all(21),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(children: [
-                const Icon(Icons.wb_sunny_outlined,
-                    size: 18, color: Color(0xFFAD9055)),
-                const SizedBox(width: 8),
-                Text(l10n.wisdomEyebrow,
-                    style: const TextStyle(
-                        fontSize: 8,
-                        letterSpacing: 1.1,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF98815B)))
-              ]),
-              const SizedBox(height: 17),
-              Text(l10n.wisdomTitle,
-                  style: const TextStyle(
-                      fontSize: 19,
-                      height: 1.45,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: -.5)),
-              const SizedBox(height: 11),
-              Text(l10n.wisdomBody,
-                  style: const TextStyle(
-                      fontSize: 11, height: 1.8, color: Color(0xFF8B8576))),
-              const SizedBox(height: 15),
-              InkWell(
-                  onTap: showGuide,
-                  child: Row(children: [
-                    Expanded(
-                        child: Text(l10n.wisdomCta,
-                            style: const TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF8E794F)))),
-                    const SizedBox(width: 7),
-                    const Icon(Icons.arrow_forward,
-                        size: 14, color: Color(0xFF8E794F)),
-                  ])),
-            ])),
-        const SizedBox(height: 21),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Icon(Icons.lock_outline, size: 15, color: muted),
-              const SizedBox(width: 9),
+      Surface(
+          padding: const EdgeInsets.all(20),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(children: [
               Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Text(l10n.detailsYours,
-                        style: const TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.w600)),
-                    const SizedBox(height: 5),
-                    Text(l10n.detailsStored,
-                        style:
-                            const TextStyle(fontSize: 9, color: muted, height: 1.7)),
-                    TextButton(
-                        onPressed: () => showPrivacy(context, state),
-                        style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            minimumSize: const Size(20, 32),
-                            alignment: Alignment.centerLeft),
-                        child: Text(l10n.privacyData,
-                            style: const TextStyle(fontSize: 9))),
+                  child: Text(l10n.glanceTitle,
+                      style: const TextStyle(
+                          fontSize: 13, fontWeight: FontWeight.w700))),
+              InkWell(
+                  onTap: () => navigate(2),
+                  child: const Icon(Icons.north_east, size: 17, color: muted))
+            ]),
+            const SizedBox(height: 5),
+            Text(state.personalized ? l10n.glancePersonal : l10n.glanceSample,
+                style: const TextStyle(fontSize: 10, color: muted)),
+            const SizedBox(height: 24),
+            Center(child: ElementRing(chart: state.chart, size: 155)),
+            const SizedBox(height: 23),
+            for (final element in bazi.Element.values)
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 11),
+                  child: Row(children: [
+                    Container(
+                        width: 6,
+                        height: 6,
+                        decoration: BoxDecoration(
+                            color: elementColors[element.index],
+                            shape: BoxShape.circle)),
+                    const SizedBox(width: 9),
+                    SizedBox(
+                        width: 43,
+                        child: Text(elementLabel(l10n, element),
+                            style:
+                                const TextStyle(fontSize: 10, color: muted))),
+                    Expanded(
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: LinearProgressIndicator(
+                                value: state.chart.distribution[element.index],
+                                minHeight: 4,
+                                color: elementColors[element.index],
+                                backgroundColor: const Color(0xFFF1F3EE)))),
+                    const SizedBox(width: 10),
+                    SizedBox(
+                        width: 29,
+                        child: Text(
+                            '${(state.chart.distribution[element.index] * 100).round()}%',
+                            textAlign: TextAlign.right,
+                            style: const TextStyle(fontSize: 9, color: muted))),
                   ])),
-            ])),
-      ]);
+            const SizedBox(height: 11),
+            SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                    onPressed: () => navigate(2),
+                    style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 15)),
+                    child: Text(l10n.seeChart,
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w600)))),
+          ])),
+      const SizedBox(height: 20),
+      Surface(
+          color: const Color(0xFFF6F1E7),
+          padding: const EdgeInsets.all(21),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(children: [
+              const Icon(Icons.wb_sunny_outlined,
+                  size: 18, color: Color(0xFFAD9055)),
+              const SizedBox(width: 8),
+              Text(l10n.wisdomEyebrow,
+                  style: const TextStyle(
+                      fontSize: 8,
+                      letterSpacing: 1.1,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF98815B)))
+            ]),
+            const SizedBox(height: 17),
+            Text(l10n.wisdomTitle,
+                style: const TextStyle(
+                    fontSize: 19,
+                    height: 1.45,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: -.5)),
+            const SizedBox(height: 11),
+            Text(l10n.wisdomBody,
+                style: const TextStyle(
+                    fontSize: 11, height: 1.8, color: Color(0xFF8B8576))),
+            const SizedBox(height: 15),
+            InkWell(
+                onTap: showGuide,
+                child: Row(children: [
+                  Expanded(
+                      child: Text(l10n.wisdomCta,
+                          style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF8E794F)))),
+                  const SizedBox(width: 7),
+                  const Icon(Icons.arrow_forward,
+                      size: 14, color: Color(0xFF8E794F)),
+                ])),
+          ])),
+      const SizedBox(height: 21),
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Icon(Icons.lock_outline, size: 15, color: muted),
+            const SizedBox(width: 9),
+            Expanded(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Text(l10n.detailsYours,
+                      style: const TextStyle(
+                          fontSize: 10, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 5),
+                  Text(l10n.detailsStored,
+                      style: const TextStyle(
+                          fontSize: 9, color: muted, height: 1.7)),
+                  TextButton(
+                      onPressed: () => showPrivacy(context, state),
+                      style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(20, 32),
+                          alignment: Alignment.centerLeft),
+                      child: Text(l10n.privacyData,
+                          style: const TextStyle(fontSize: 9))),
+                ])),
+          ])),
+    ]);
   }
 
   Widget _emptyState() {
     final l10n = AppLocalizations.of(context)!;
     return Surface(
-      child: Center(
-          child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40),
-              child: Column(children: [
-                Icon(page == 1 ? Icons.favorite_border : Icons.travel_explore,
-                    color: green, size: 38),
-                const SizedBox(height: 18),
-                Text(
-                    page == 1 && state.saved.isEmpty
-                        ? l10n.emptySavedTitle
-                        : l10n.emptyFilterTitle,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w600)),
-                const SizedBox(height: 9),
-                Text(
-                    page == 1 && state.saved.isEmpty
-                        ? l10n.emptySavedBody
-                        : l10n.emptyFilterBody,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: muted, fontSize: 12)),
-                const SizedBox(height: 20),
-                FilledButton(
-                    onPressed: () => setState(() {
-                          category = 'For you';
-                          gender = 'Everyone';
-                          region = 'Worldwide';
-                          ageRange = const RangeValues(18, 60);
-                          minScore = 0;
-                          if (page == 1 && state.saved.isEmpty) page = 0;
-                        }),
-                    child: Text(page == 1 && state.saved.isEmpty
-                        ? l10n.discoverPeople
-                        : l10n.resetFilters)),
-              ]))));
+        child: Center(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40),
+                child: Column(children: [
+                  Icon(page == 1 ? Icons.favorite_border : Icons.travel_explore,
+                      color: green, size: 38),
+                  const SizedBox(height: 18),
+                  Text(
+                      page == 1 && state.saved.isEmpty
+                          ? l10n.emptySavedTitle
+                          : l10n.emptyFilterTitle,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 9),
+                  Text(
+                      page == 1 && state.saved.isEmpty
+                          ? l10n.emptySavedBody
+                          : l10n.emptyFilterBody,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: muted, fontSize: 12)),
+                  const SizedBox(height: 20),
+                  FilledButton(
+                      onPressed: () => setState(() {
+                            category = 'For you';
+                            gender = 'Everyone';
+                            region = 'Worldwide';
+                            ageRange = const RangeValues(18, 60);
+                            minScore = 0;
+                            search.clear();
+                            if (page == 1 && state.saved.isEmpty) page = 0;
+                          }),
+                      child: Text(page == 1 && state.saved.isEmpty
+                          ? l10n.discoverPeople
+                          : l10n.resetFilters)),
+                ]))));
   }
 
   Future<void> _showFilters() async {
@@ -1008,8 +1045,8 @@ class _AppShellState extends State<AppShell> {
                             DropdownButtonFormField<String>(
                                 value: draftRegion,
                                 isExpanded: true,
-                                decoration: InputDecoration(
-                                    labelText: l10n.location),
+                                decoration:
+                                    InputDecoration(labelText: l10n.location),
                                 items: [
                                   'Worldwide',
                                   'USA',
@@ -1025,8 +1062,8 @@ class _AppShellState extends State<AppShell> {
                                 onChanged: (r) =>
                                     update(() => draftRegion = r!)),
                             const SizedBox(height: 22),
-                            Text(l10n.ageRangeLabel(draftAge.start.round(),
-                                draftAge.end.round())),
+                            Text(l10n.ageRangeLabel(
+                                draftAge.start.round(), draftAge.end.round())),
                             RangeSlider(
                                 values: draftAge,
                                 min: 18,
