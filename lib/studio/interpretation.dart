@@ -71,6 +71,8 @@ class InterpretationClient {
       required ReadingStyle style,
       required Map<String, dynamic> evidence,
       required String topic,
+      String? question,
+      List<Map<String, String>> conversation = const [],
       Duration timeout = const Duration(seconds: 65)}) async {
     if (!config.isConfigured) {
       throw const ModelFailure('Configure a base URL and model name first.');
@@ -86,6 +88,7 @@ class InterpretationClient {
         'Do not invent book quotations; the verified excerpt IDs are the only permitted quotations. '
         'Do not assert strong/weak day-master, useful gods, or transformations unless an explicit computed field supports it. '
         'Write in English using plain text, short section titles and paragraphs. Do not use Markdown syntax or tables. Keep the answer under 650 words. '
+        '${question == null ? '' : 'Answer the user question directly in under 220 words. Use prior conversation only as context, never as computed chart evidence. Avoid motivational filler and invented forecasts. '}'
         '${style == ReadingStyle.professional ? 'Use precise terms, retain Chinese terminology alongside English, cite the evidence labels, distinguish combinations from successful transformations, and state uncertainties.' : 'Use everyday English, define unfamiliar terms, focus on reflection and conversation, and explain the limits simply.'}';
     http.Response response;
     try {
@@ -103,10 +106,16 @@ class InterpretationClient {
                 'stream': false,
                 'messages': [
                   {'role': 'system', 'content': system},
+                  for (final turn in conversation)
+                    if (turn['role'] == 'user' || turn['role'] == 'assistant')
+                      {'role': turn['role'], 'content': turn['content'] ?? ''},
                   {
                     'role': 'user',
-                    'content': jsonEncode(
-                        {'topic': topic, 'computedEvidence': evidence})
+                    'content': jsonEncode({
+                      'topic': topic,
+                      if (question != null) 'question': question,
+                      'computedEvidence': evidence
+                    })
                   },
                 ]
               }))

@@ -7,7 +7,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get appTitle => 'Lunar — 나와 맞는 에너지를 찾다';
+  String get appTitle => 'FatePair — 나와 맞는 에너지를 찾다';
 
   @override
   String get languageName => '한국어';
@@ -82,7 +82,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get legalCenterTitle => '법적 정책 및 내 데이터';
 
   @override
-  String get legalCenterIntro => 'Lunar 출시 시 적용될 정책입니다. 탭하여 초안을 확인하세요.';
+  String get legalCenterIntro => 'FatePair 출시 시 적용될 정책입니다. 탭하여 초안을 확인하세요.';
 
   @override
   String get actionClose => '닫기';
@@ -100,7 +100,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get deleteConfirmTitle => '계정과 데이터를 삭제할까요?';
 
   @override
-  String get deleteConfirmBody => '이 작업은 이 기기의 생년월일 프로필, 저장한 연결, 숨긴 프로필, 신고 기록, 동의 기록을 영구적으로 삭제합니다. 출시 후에는 Lunar 서버의 계정과 데이터도 함께 삭제됩니다. 안전 및 법적 요건에 따라 일부 기록은 보관될 수 있습니다.';
+  String get deleteConfirmBody => '이 작업은 이 기기의 생년월일 프로필, 저장한 연결, 숨긴 프로필, 신고 기록, 동의 기록을 영구적으로 삭제합니다. 출시 후에는 FatePair 서버의 계정과 데이터도 함께 삭제됩니다. 안전 및 법적 요건에 따라 일부 기록은 보관될 수 있습니다.';
 
   @override
   String get keepAccount => '계정 유지';
@@ -148,13 +148,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get languageTitle => '언어';
 
   @override
-  String get planFree => 'Lunar 무료';
+  String get planFree => 'FatePair 무료';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => '탐색, 명식 보기, 연결 저장.';
@@ -214,7 +214,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get topbarSub => '의미 있는 연결은 나의 에너지에서 시작됩니다.';
 
   @override
-  String get howLunarWorks => 'Lunar 이용 방법';
+  String get howLunarWorks => 'FatePair 이용 방법';
 
   @override
   String get heroEyebrow => '오래된 지혜, 새로운 만남';
@@ -506,7 +506,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get guideTitle => '오래된 뿌리,\n새로운 만남.';
 
   @override
-  String get guideIntro => '사주는 태어난 순간의 리듬을 읽는 전통 중국의 체계입니다. Lunar는 그 전통을 더 호기심 많고 연결된 세계로 데려옵니다.';
+  String get guideIntro => '사주는 태어난 순간의 리듬을 읽는 전통 중국의 체계입니다. FatePair는 그 전통을 더 호기심 많고 연결된 세계로 데려옵니다.';
 
   @override
   String get meetElements => '오행 만나기';
@@ -521,7 +521,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get guidePillarsBody => '출생 연·월·일·시가 각각 하나의 기둥이 됩니다. 각 기둥은 천간 하나와 지지 하나로 이루어져 모두 여덟 글자, 이것이 \'팔자(八字)\'의 뜻입니다. 일주의 천간이 당신의 일간입니다.';
 
   @override
-  String get guideHarmonyTitle => 'Lunar는 궁합을 어떻게 계산하나요?';
+  String get guideHarmonyTitle => 'FatePair는 궁합을 어떻게 계산하나요?';
 
   @override
   String get guideHarmonyBody => '데모 점수는 세 가지 투명한 요소로 구성됩니다. 45%는 오행 균형(보이는 오행의 정규화 엔트로피), 35%는 일간 관계(상생 기준), 20%는 일지 공명(전통적인 육합·삼합·충)입니다. 점수는 명식만으로 계산되며 추천은 점수 높은 순으로 정렬됩니다.';
@@ -536,13 +536,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get guideTimezoneTitle => '시간대는 어떻게 처리되나요?';
 
   @override
-  String get guideTimezoneBody => 'Lunar는 IANA 시간대 데이터베이스(과거 서머타임 규칙 포함)로 출생 시각을 해석합니다. 년주와 월주는 역법 라이브러리의 UTC+8 절기 시각을 사용합니다. 매칭 추천은 출생지 경도 기반 평균태양시를 쓰며 일자는 자정에 바뀝니다. 명식 스튜디오는 추가로 로컬 시계 시각, 근사 균시차 보정이 적용된 진태양시, 23:00 일자 경계를 지원합니다. 시계 조정으로 같은 시각이 두 번 오면 이른 쪽을, 존재하지 않는 시각은 거절합니다. 다른 사주 유파에서는 다른 명식이 나올 수 있습니다.';
+  String get guideTimezoneBody => 'FatePair는 IANA 시간대 데이터베이스(과거 서머타임 규칙 포함)로 출생 시각을 해석합니다. 년주와 월주는 역법 라이브러리의 UTC+8 절기 시각을 사용합니다. 매칭 추천은 출생지 경도 기반 평균태양시를 쓰며 일자는 자정에 바뀝니다. 명식 스튜디오는 추가로 로컬 시계 시각, 근사 균시차 보정이 적용된 진태양시, 23:00 일자 경계를 지원합니다. 시계 조정으로 같은 시각이 두 번 오면 이른 쪽을, 존재하지 않는 시각은 거절합니다. 다른 사주 유파에서는 다른 명식이 나올 수 있습니다.';
 
   @override
   String get guideNoTimeTitle => '출생 시각을 모른다면?';
 
   @override
-  String get guideNoTimeBody => '그래도 탐색할 수 있습니다. Lunar는 날짜 계산에 현지 정오를 쓰고 시주를 생략하며 결과를 근사치로 표시합니다. 절기 경계에 가까운 날짜는 연도나 월도 불확실할 수 있습니다. 나중에 시각을 추가하면 명식을 다듬을 수 있습니다.';
+  String get guideNoTimeBody => '그래도 탐색할 수 있습니다. FatePair는 날짜 계산에 현지 정오를 쓰고 시주를 생략하며 결과를 근사치로 표시합니다. 절기 경계에 가까운 날짜는 연도나 월도 불확실할 수 있습니다. 나중에 시각을 추가하면 명식을 다듬을 수 있습니다.';
 
   @override
   String get guideCommunityTitle => '실제 데이팅 커뮤니티인가요?';
@@ -632,7 +632,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dateInvalid => 'YYYY-MM-DD 형식의 올바른 날짜를 입력해 주세요.';
 
   @override
-  String get adultsOnly => 'Lunar는 만 18세 이상 성인을 위한 서비스입니다.';
+  String get adultsOnly => 'FatePair는 만 18세 이상 성인을 위한 서비스입니다.';
 
   @override
   String get yearMin => '1900년 이후의 연도를 입력해 주세요.';
@@ -959,4 +959,166 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get socialTabConnect => 'Connect';
+
+  @override
+  String get flowChoose => 'What brings you here?';
+
+  @override
+  String get flowChart => 'My chart';
+
+  @override
+  String get flowMatch => 'Match';
+
+  @override
+  String get flowAgent => 'Agent';
+
+  @override
+  String get flowAskAgent => 'Ask Agent';
+
+  @override
+  String get flowOutlook => 'Recent outlook';
+
+  @override
+  String get flowTools => 'Tools';
+
+  @override
+  String get flowBirthDetails => 'Birth details';
+
+  @override
+  String get flowRandom => 'Random match';
+
+  @override
+  String get flowPeople => 'People';
+
+  @override
+  String get flowSettings => 'Settings';
+
+  @override
+  String get flowReading => 'Reading';
+
+  @override
+  String get flowDetails => 'Chart details';
+
+  @override
+  String get flowToday => 'Today';
+
+  @override
+  String get flowMonth => 'This month';
+
+  @override
+  String get flowYear => 'This year';
+
+  @override
+  String get flowReference => 'Chart reference';
+
+  @override
+  String get flowModel => 'Model';
+
+  @override
+  String get flowConnectModel => 'Connect model';
+
+  @override
+  String get flowSend => 'Ask';
+
+  @override
+  String get flowStop => 'Stop';
+
+  @override
+  String get flowClearChat => 'New conversation';
+
+  @override
+  String get flowQuestionHint => 'Ask about your chart…';
+
+  @override
+  String get flowQuestionOverview => 'What stands out in my chart?';
+
+  @override
+  String get flowQuestionCycle => 'What is happening in my current cycles?';
+
+  @override
+  String get flowQuestionWork => 'What does my chart say about work?';
+
+  @override
+  String get flowQuestionRelations => 'How do the elements in my chart relate?';
+
+  @override
+  String get flowBack => 'Back';
+
+  @override
+  String get flowSample => 'Sample chart';
+
+  @override
+  String get flowStart => 'Start';
+
+  @override
+  String get flowSaved => 'Saved';
+
+  @override
+  String get flowNoPeople => 'No people match these filters.';
+
+  @override
+  String get flowAddBirth => 'Add birth details';
+
+  @override
+  String get flowOverview => 'Birth chart';
+
+  @override
+  String get flowAskReading => 'Ask about this reading';
+
+  @override
+  String get flowOutlookAsk => 'Ask about this period';
+
+  @override
+  String get flowLocalPreview => 'Local preview';
+
+  @override
+  String get flowNoInvites => 'No invitations yet.';
+
+  @override
+  String get flowNoMessages => 'No conversations yet.';
+
+  @override
+  String get flowNoSaved => 'No saved profiles.';
+
+  @override
+  String get flowReadOnly => 'Reading';
+
+  @override
+  String get flowQuestionPrompt => 'Your question';
+
+  @override
+  String get flowProfile => 'Profile';
+
+  @override
+  String get flowResetFilters => 'Reset filters';
+
+  @override
+  String get flowSelfIntent => 'My reading';
+
+  @override
+  String get flowGeneralBazi => 'What is BaZi?';
+
+  @override
+  String get flowGeneralGods => 'How do the Ten Gods work?';
+
+  @override
+  String get flowGeneralMaster => 'What is a day master?';
+
+  @override
+  String get flowGeneralSolar => 'How does solar time work?';
+
+  @override
+  String get flowReasonBalance => 'Your combined charts have a balanced mix of elements.';
+
+  @override
+  String get flowReasonSupport => 'Your core elements follow the supporting cycle.';
+
+  @override
+  String get flowReasonShared => 'You share the same core element.';
+
+  @override
+  String get flowReasonBranches => 'Your day branches share a traditional harmony pattern.';
+
+  @override
+  String get flowReasonContrast => 'Your core elements form a contrasting pair.';
 }

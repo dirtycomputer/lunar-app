@@ -7,7 +7,7 @@ class AppLocalizationsSv extends AppLocalizations {
   AppLocalizationsSv([String locale = 'sv']) : super(locale);
 
   @override
-  String get appTitle => 'Lunar — Hitta din energi';
+  String get appTitle => 'FatePair — Hitta din energi';
 
   @override
   String get languageName => 'Svenska';
@@ -82,7 +82,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get legalCenterTitle => 'Juridik & dina data';
 
   @override
-  String get legalCenterIntro => 'Riktlinjer som ska gälla för Lunar vid lansering. Tryck för att läsa utkastet.';
+  String get legalCenterIntro => 'Riktlinjer som ska gälla för FatePair vid lansering. Tryck för att läsa utkastet.';
 
   @override
   String get actionClose => 'Stäng';
@@ -100,7 +100,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get deleteConfirmTitle => 'Radera ditt konto och dina data?';
 
   @override
-  String get deleteConfirmBody => 'Detta raderar permanent din födelseprofil, sparade kontakter, dolda profiler, anmälningar och samtycken från den här enheten. Vid lansering raderas även ditt konto och dina data från Lunars servrar. Säkerhets- och juridiska register kan sparas där lagen kräver det.';
+  String get deleteConfirmBody => 'Detta raderar permanent din födelseprofil, sparade kontakter, dolda profiler, anmälningar och samtycken från den här enheten. Vid lansering raderas även ditt konto och dina data från FatePairs servrar. Säkerhets- och juridiska register kan sparas där lagen kräver det.';
 
   @override
   String get keepAccount => 'Behåll kontot';
@@ -148,13 +148,13 @@ class AppLocalizationsSv extends AppLocalizations {
   String get languageTitle => 'Språk';
 
   @override
-  String get planFree => 'Lunar Gratis';
+  String get planFree => 'FatePair Gratis';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => 'Upptäck, diagram och sparade kontakter.';
@@ -214,7 +214,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get topbarSub => 'Meningsfulla kontakter börjar med din energi.';
 
   @override
-  String get howLunarWorks => 'Hur Lunar fungerar';
+  String get howLunarWorks => 'Hur FatePair fungerar';
 
   @override
   String get heroEyebrow => 'GAMMAL VISDOM. NYA KONTAKTER.';
@@ -506,7 +506,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get guideTitle => 'Gamla rötter.\nMänskliga kontakter.';
 
   @override
-  String get guideIntro => 'BaZi är ett traditionellt kinesiskt system för att utforska mönstren i ett födelseögonblick. Lunar för den traditionen in i en mer nyfiken, sammankopplad värld.';
+  String get guideIntro => 'BaZi är ett traditionellt kinesiskt system för att utforska mönstren i ett födelseögonblick. FatePair för den traditionen in i en mer nyfiken, sammankopplad värld.';
 
   @override
   String get meetElements => 'Möt de fem elementen';
@@ -521,7 +521,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get guidePillarsBody => 'Ditt födelseår, din födelsemånad, din födelsedag och din födelsetimme bildar varsin pelare. Varje pelare har en himmelstam och en jordgren — åtta tecken totalt. Det är vad BaZi betyder: ”åtta tecken”. Din dagstam kallas din dagsherre.';
 
   @override
-  String get guideHarmonyTitle => 'Hur beräknar Lunar harmoni?';
+  String get guideHarmonyTitle => 'Hur beräknar FatePair harmoni?';
 
   @override
   String get guideHarmonyBody => 'Vår demopoäng kombinerar tre transparenta faktorer: 45 % kombinerad elementbalans, mätt som den normaliserade entropin bland synliga element; 35 % dagsherre-koppling, baserad på den genererande cykeln; och 20 % resonans i dagsgrenen, med traditionella par, trigoner och motsättningar. Poängen beräknas från diagrammen och rekommendationerna sorteras från högsta till lägsta.';
@@ -536,13 +536,13 @@ class AppLocalizationsSv extends AppLocalizations {
   String get guideTimezoneTitle => 'Hur fungerar tidszoner?';
 
   @override
-  String get guideTimezoneBody => 'Lunar slår upp din födelsetid med IANA:s tidszonsdatabas, inklusive historiska sommartidsregler. År och månad använder kalenderbibliotekets solterminstillfällen i UTC+8. Dejtingsrekommendationer använder lokal medelsoltid baserad på födelseplatsens longitud, med dagsbyte vid midnatt. Diagramstudion stödjer dessutom lokal klocktid, sann soltid med en ungefärlig korrektion för tidsekvationen samt en dagsgräns vid 23:00. Vid en upprepad klockomställning används det tidigare tillfället; icke befintliga klockomställningstider avvisas. Andra BaZi-skolor kan ge andra diagram.';
+  String get guideTimezoneBody => 'FatePair slår upp din födelsetid med IANA:s tidszonsdatabas, inklusive historiska sommartidsregler. År och månad använder kalenderbibliotekets solterminstillfällen i UTC+8. Dejtingsrekommendationer använder lokal medelsoltid baserad på födelseplatsens longitud, med dagsbyte vid midnatt. Diagramstudion stödjer dessutom lokal klocktid, sann soltid med en ungefärlig korrektion för tidsekvationen samt en dagsgräns vid 23:00. Vid en upprepad klockomställning används det tidigare tillfället; icke befintliga klockomställningstider avvisas. Andra BaZi-skolor kan ge andra diagram.';
 
   @override
   String get guideNoTimeTitle => 'Vad händer om jag inte vet min födelsetid?';
 
   @override
-  String get guideNoTimeBody => 'Du kan ändå utforska. Lunar använder lokal middagstid i datumberäkningen, utelämnar timpelaren och markerar dina resultat som ungefärliga. Vid datum nära en solterminsgräns kan även år eller månad vara osäkert. Lägg till din tid senare för att finslipa ditt diagram.';
+  String get guideNoTimeBody => 'Du kan ändå utforska. FatePair använder lokal middagstid i datumberäkningen, utelämnar timpelaren och markerar dina resultat som ungefärliga. Vid datum nära en solterminsgräns kan även år eller månad vara osäkert. Lägg till din tid senare för att finslipa ditt diagram.';
 
   @override
   String get guideCommunityTitle => 'Är det här en riktig dejtinggemenskap?';
@@ -632,7 +632,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get dateInvalid => 'Ange ett giltigt datum i formatet ÅÅÅÅ-MM-DD.';
 
   @override
-  String get adultsOnly => 'Lunar är för vuxna från 18 år.';
+  String get adultsOnly => 'FatePair är för vuxna från 18 år.';
 
   @override
   String get yearMin => 'Ange ett år från 1900 och framåt.';
@@ -959,4 +959,166 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get socialTabConnect => 'Connect';
+
+  @override
+  String get flowChoose => 'What brings you here?';
+
+  @override
+  String get flowChart => 'My chart';
+
+  @override
+  String get flowMatch => 'Match';
+
+  @override
+  String get flowAgent => 'Agent';
+
+  @override
+  String get flowAskAgent => 'Ask Agent';
+
+  @override
+  String get flowOutlook => 'Recent outlook';
+
+  @override
+  String get flowTools => 'Tools';
+
+  @override
+  String get flowBirthDetails => 'Birth details';
+
+  @override
+  String get flowRandom => 'Random match';
+
+  @override
+  String get flowPeople => 'People';
+
+  @override
+  String get flowSettings => 'Settings';
+
+  @override
+  String get flowReading => 'Reading';
+
+  @override
+  String get flowDetails => 'Chart details';
+
+  @override
+  String get flowToday => 'Today';
+
+  @override
+  String get flowMonth => 'This month';
+
+  @override
+  String get flowYear => 'This year';
+
+  @override
+  String get flowReference => 'Chart reference';
+
+  @override
+  String get flowModel => 'Model';
+
+  @override
+  String get flowConnectModel => 'Connect model';
+
+  @override
+  String get flowSend => 'Ask';
+
+  @override
+  String get flowStop => 'Stop';
+
+  @override
+  String get flowClearChat => 'New conversation';
+
+  @override
+  String get flowQuestionHint => 'Ask about your chart…';
+
+  @override
+  String get flowQuestionOverview => 'What stands out in my chart?';
+
+  @override
+  String get flowQuestionCycle => 'What is happening in my current cycles?';
+
+  @override
+  String get flowQuestionWork => 'What does my chart say about work?';
+
+  @override
+  String get flowQuestionRelations => 'How do the elements in my chart relate?';
+
+  @override
+  String get flowBack => 'Back';
+
+  @override
+  String get flowSample => 'Sample chart';
+
+  @override
+  String get flowStart => 'Start';
+
+  @override
+  String get flowSaved => 'Saved';
+
+  @override
+  String get flowNoPeople => 'No people match these filters.';
+
+  @override
+  String get flowAddBirth => 'Add birth details';
+
+  @override
+  String get flowOverview => 'Birth chart';
+
+  @override
+  String get flowAskReading => 'Ask about this reading';
+
+  @override
+  String get flowOutlookAsk => 'Ask about this period';
+
+  @override
+  String get flowLocalPreview => 'Local preview';
+
+  @override
+  String get flowNoInvites => 'No invitations yet.';
+
+  @override
+  String get flowNoMessages => 'No conversations yet.';
+
+  @override
+  String get flowNoSaved => 'No saved profiles.';
+
+  @override
+  String get flowReadOnly => 'Reading';
+
+  @override
+  String get flowQuestionPrompt => 'Your question';
+
+  @override
+  String get flowProfile => 'Profile';
+
+  @override
+  String get flowResetFilters => 'Reset filters';
+
+  @override
+  String get flowSelfIntent => 'My reading';
+
+  @override
+  String get flowGeneralBazi => 'What is BaZi?';
+
+  @override
+  String get flowGeneralGods => 'How do the Ten Gods work?';
+
+  @override
+  String get flowGeneralMaster => 'What is a day master?';
+
+  @override
+  String get flowGeneralSolar => 'How does solar time work?';
+
+  @override
+  String get flowReasonBalance => 'Your combined charts have a balanced mix of elements.';
+
+  @override
+  String get flowReasonSupport => 'Your core elements follow the supporting cycle.';
+
+  @override
+  String get flowReasonShared => 'You share the same core element.';
+
+  @override
+  String get flowReasonBranches => 'Your day branches share a traditional harmony pattern.';
+
+  @override
+  String get flowReasonContrast => 'Your core elements form a contrasting pair.';
 }

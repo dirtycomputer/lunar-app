@@ -7,7 +7,7 @@ class AppLocalizationsHu extends AppLocalizations {
   AppLocalizationsHu([String locale = 'hu']) : super(locale);
 
   @override
-  String get appTitle => 'Lunar — Találd meg a Te energiádat';
+  String get appTitle => 'FatePair — Találd meg a Te energiádat';
 
   @override
   String get languageName => 'Magyar';
@@ -82,7 +82,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get legalCenterTitle => 'Jogi tudnivalók és adataid';
 
   @override
-  String get legalCenterIntro => 'A Lunar induláskor érvényes szabályzatai. Koppints a vázlat elolvasásához.';
+  String get legalCenterIntro => 'A FatePair induláskor érvényes szabályzatai. Koppints a vázlat elolvasásához.';
 
   @override
   String get actionClose => 'Bezárás';
@@ -100,7 +100,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get deleteConfirmTitle => 'Törlöd a fiókodat és az adataidat?';
 
   @override
-  String get deleteConfirmBody => 'Ez véglegesen törli erről az eszközről a születési profilodat, a mentett kapcsolatokat, a rejtett profilokat, a bejelentéseket és a hozzájárulásokat. Induláskor a fiókod és az adataid a Lunar szervereiről is törlődnek. Biztonsági és jogi nyilvántartások ott megőrizhetők, ahol a törvény előírja.';
+  String get deleteConfirmBody => 'Ez véglegesen törli erről az eszközről a születési profilodat, a mentett kapcsolatokat, a rejtett profilokat, a bejelentéseket és a hozzájárulásokat. Induláskor a fiókod és az adataid a FatePair szervereiről is törlődnek. Biztonsági és jogi nyilvántartások ott megőrizhetők, ahol a törvény előírja.';
 
   @override
   String get keepAccount => 'Fiók megtartása';
@@ -148,13 +148,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get languageTitle => 'Nyelv';
 
   @override
-  String get planFree => 'Lunar Ingyenes';
+  String get planFree => 'FatePair Ingyenes';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => 'Felfedezés, térképek és mentett kapcsolatok.';
@@ -214,7 +214,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get topbarSub => 'Az értelmes kapcsolatok az energiáddal kezdődnek.';
 
   @override
-  String get howLunarWorks => 'Így működik a Lunar';
+  String get howLunarWorks => 'Így működik a FatePair';
 
   @override
   String get heroEyebrow => 'ŐSI BÖLCSESSÉG. ÚJ KAPCSOLATOK.';
@@ -506,7 +506,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get guideTitle => 'Ősi gyökerek.\nEmberi kapcsolatok.';
 
   @override
-  String get guideIntro => 'A BaZi egy hagyományos kínai rendszer a születési pillanat mintázatainak felderítésére. A Lunar ezt a hagyományt egy kíváncsibb, összekapcsoltabb világba hozza.';
+  String get guideIntro => 'A BaZi egy hagyományos kínai rendszer a születési pillanat mintázatainak felderítésére. A FatePair ezt a hagyományt egy kíváncsibb, összekapcsoltabb világba hozza.';
 
   @override
   String get meetElements => 'Ismerd meg az Öt Elemet';
@@ -521,7 +521,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get guidePillarsBody => 'A születésed éve, hónapja, napja és órája egy-egy oszlopot alkot. Minden oszlophoz egy égi szár és egy földi ág tartozik — összesen nyolc karakter. Ezt jelenti a BaZi: „nyolc karakter”. A nap égi szárát napmesternek is nevezzük.';
 
   @override
-  String get guideHarmonyTitle => 'Hogyan számolja a Lunar a harmóniát?';
+  String get guideHarmonyTitle => 'Hogyan számolja a FatePair a harmóniát?';
 
   @override
   String get guideHarmonyBody => 'A demó pontszámunk három átlátható tényezőt ötvöz: 45% összesített elemegyensúly, amelyet a látható elemek normalizált entrópiája mér; 35% napmester-kapcsolat, a generáló ciklusra építve; valamint 20% napág-rezonancia, hagyományos párok, triádok és szembenállások alapján. A pontszámokat a térképekből számítjuk, az ajánlásokat a legmagasabbtól a legalacsonyabbig rendezzük.';
@@ -536,13 +536,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get guideTimezoneTitle => 'Hogyan működnek az időzónák?';
 
   @override
-  String get guideTimezoneBody => 'A Lunar az IANA időzóna-adatbázis alapján határozza meg a születési idődet, a nyári időszámítás történelmi szabályaival együtt. Az év és a hónap a naptárkönyvtár UTC+8 szerinti szoláris szakasz-pillanatait használja. A randijavaslatok a születési hely földrajzi hosszúsága alapján számolt helyi középnapidőt használnak, a nap éjfélkor fordul. A Térképstúdió emellett támogatja a helyi óraidőt, a valódi napidőt egy közelítő időegyenlet-korrekcióval, valamint a 23:00-s napváltást. Ismétlődő óraátállítási időnél a korábbi előfordulást használjuk; nem létező óraátállítási időket elutasítunk. Más BaZi-iskolák eltérő térképeket is készíthetnek.';
+  String get guideTimezoneBody => 'A FatePair az IANA időzóna-adatbázis alapján határozza meg a születési idődet, a nyári időszámítás történelmi szabályaival együtt. Az év és a hónap a naptárkönyvtár UTC+8 szerinti szoláris szakasz-pillanatait használja. A randijavaslatok a születési hely földrajzi hosszúsága alapján számolt helyi középnapidőt használnak, a nap éjfélkor fordul. A Térképstúdió emellett támogatja a helyi óraidőt, a valódi napidőt egy közelítő időegyenlet-korrekcióval, valamint a 23:00-s napváltást. Ismétlődő óraátállítási időnél a korábbi előfordulást használjuk; nem létező óraátállítási időket elutasítunk. Más BaZi-iskolák eltérő térképeket is készíthetnek.';
 
   @override
   String get guideNoTimeTitle => 'Mi van, ha nem ismerem a születési időmet?';
 
   @override
-  String get guideNoTimeBody => 'Így is felfedezhetsz. A Lunar a dátumszámításhoz a helyi délit használja, kihagyja az óra-oszlopot, és közelítőnek jelöli az eredményeidet. Szoláris szakasz határa közeli dátumoknál az év vagy a hónap is bizonytalan lehet. Add meg az időd később, hogy pontosítsd a térképed.';
+  String get guideNoTimeBody => 'Így is felfedezhetsz. A FatePair a dátumszámításhoz a helyi délit használja, kihagyja az óra-oszlopot, és közelítőnek jelöli az eredményeidet. Szoláris szakasz határa közeli dátumoknál az év vagy a hónap is bizonytalan lehet. Add meg az időd később, hogy pontosítsd a térképed.';
 
   @override
   String get guideCommunityTitle => 'Ez élő randiközösség?';
@@ -632,7 +632,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get dateInvalid => 'Adj meg érvényes dátumot ÉÉÉÉ-HH-NN formátumban.';
 
   @override
-  String get adultsOnly => 'A Lunar 18 év felettieknek szól.';
+  String get adultsOnly => 'A FatePair 18 év felettieknek szól.';
 
   @override
   String get yearMin => 'Adj meg 1900-tól induló évet.';
@@ -959,4 +959,166 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get socialTabConnect => 'Connect';
+
+  @override
+  String get flowChoose => 'What brings you here?';
+
+  @override
+  String get flowChart => 'My chart';
+
+  @override
+  String get flowMatch => 'Match';
+
+  @override
+  String get flowAgent => 'Agent';
+
+  @override
+  String get flowAskAgent => 'Ask Agent';
+
+  @override
+  String get flowOutlook => 'Recent outlook';
+
+  @override
+  String get flowTools => 'Tools';
+
+  @override
+  String get flowBirthDetails => 'Birth details';
+
+  @override
+  String get flowRandom => 'Random match';
+
+  @override
+  String get flowPeople => 'People';
+
+  @override
+  String get flowSettings => 'Settings';
+
+  @override
+  String get flowReading => 'Reading';
+
+  @override
+  String get flowDetails => 'Chart details';
+
+  @override
+  String get flowToday => 'Today';
+
+  @override
+  String get flowMonth => 'This month';
+
+  @override
+  String get flowYear => 'This year';
+
+  @override
+  String get flowReference => 'Chart reference';
+
+  @override
+  String get flowModel => 'Model';
+
+  @override
+  String get flowConnectModel => 'Connect model';
+
+  @override
+  String get flowSend => 'Ask';
+
+  @override
+  String get flowStop => 'Stop';
+
+  @override
+  String get flowClearChat => 'New conversation';
+
+  @override
+  String get flowQuestionHint => 'Ask about your chart…';
+
+  @override
+  String get flowQuestionOverview => 'What stands out in my chart?';
+
+  @override
+  String get flowQuestionCycle => 'What is happening in my current cycles?';
+
+  @override
+  String get flowQuestionWork => 'What does my chart say about work?';
+
+  @override
+  String get flowQuestionRelations => 'How do the elements in my chart relate?';
+
+  @override
+  String get flowBack => 'Back';
+
+  @override
+  String get flowSample => 'Sample chart';
+
+  @override
+  String get flowStart => 'Start';
+
+  @override
+  String get flowSaved => 'Saved';
+
+  @override
+  String get flowNoPeople => 'No people match these filters.';
+
+  @override
+  String get flowAddBirth => 'Add birth details';
+
+  @override
+  String get flowOverview => 'Birth chart';
+
+  @override
+  String get flowAskReading => 'Ask about this reading';
+
+  @override
+  String get flowOutlookAsk => 'Ask about this period';
+
+  @override
+  String get flowLocalPreview => 'Local preview';
+
+  @override
+  String get flowNoInvites => 'No invitations yet.';
+
+  @override
+  String get flowNoMessages => 'No conversations yet.';
+
+  @override
+  String get flowNoSaved => 'No saved profiles.';
+
+  @override
+  String get flowReadOnly => 'Reading';
+
+  @override
+  String get flowQuestionPrompt => 'Your question';
+
+  @override
+  String get flowProfile => 'Profile';
+
+  @override
+  String get flowResetFilters => 'Reset filters';
+
+  @override
+  String get flowSelfIntent => 'My reading';
+
+  @override
+  String get flowGeneralBazi => 'What is BaZi?';
+
+  @override
+  String get flowGeneralGods => 'How do the Ten Gods work?';
+
+  @override
+  String get flowGeneralMaster => 'What is a day master?';
+
+  @override
+  String get flowGeneralSolar => 'How does solar time work?';
+
+  @override
+  String get flowReasonBalance => 'Your combined charts have a balanced mix of elements.';
+
+  @override
+  String get flowReasonSupport => 'Your core elements follow the supporting cycle.';
+
+  @override
+  String get flowReasonShared => 'You share the same core element.';
+
+  @override
+  String get flowReasonBranches => 'Your day branches share a traditional harmony pattern.';
+
+  @override
+  String get flowReasonContrast => 'Your core elements form a contrasting pair.';
 }

@@ -1,11 +1,11 @@
 {
-  "name": "Lunar \u2014 Find your kind of energy",
-  "short_name": "Lunar",
+  "name": "FatePair \u2014 BaZi",
+  "short_name": "FatePair",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#FAFBF8",
-  "theme_color": "#416B54",
-  "description": "Meaningful connections, inspired by BaZi and the Five Elements.",
+  "background_color": "#F7F8FA",
+  "theme_color": "#F7F8FA",
+  "description": "BaZi charts, recent outlook, matching and Agent questions.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [

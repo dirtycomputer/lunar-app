@@ -153,7 +153,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Lunar — Find your kind of energy'**
+  /// **'FatePair — BaZi'**
   String get appTitle;
 
   /// No description provided for @languageName.
@@ -303,7 +303,7 @@ abstract class AppLocalizations {
   /// No description provided for @legalCenterIntro.
   ///
   /// In en, this message translates to:
-  /// **'Policies that will govern Lunar at launch. Tap to read the draft.'**
+  /// **'Policies that will govern FatePair at launch. Tap to read the draft.'**
   String get legalCenterIntro;
 
   /// No description provided for @actionClose.
@@ -339,7 +339,7 @@ abstract class AppLocalizations {
   /// No description provided for @deleteConfirmBody.
   ///
   /// In en, this message translates to:
-  /// **'This permanently removes your birth profile, saved connections, hidden profiles, reports and consents from this device. At launch this also deletes your account and data on Lunar servers. Safety and legal records may be retained where the law requires.'**
+  /// **'This permanently removes your birth profile, saved connections, hidden profiles, reports and consents from this device. At launch this also deletes your account and data on FatePair servers. Safety and legal records may be retained where the law requires.'**
   String get deleteConfirmBody;
 
   /// No description provided for @keepAccount.
@@ -435,19 +435,19 @@ abstract class AppLocalizations {
   /// No description provided for @planFree.
   ///
   /// In en, this message translates to:
-  /// **'Lunar Free'**
+  /// **'FatePair Free'**
   String get planFree;
 
   /// No description provided for @planPlus.
   ///
   /// In en, this message translates to:
-  /// **'Lunar Plus'**
+  /// **'FatePair Plus'**
   String get planPlus;
 
   /// No description provided for @planPro.
   ///
   /// In en, this message translates to:
-  /// **'Lunar Pro'**
+  /// **'FatePair Pro'**
   String get planPro;
 
   /// No description provided for @planFreeSub.
@@ -567,7 +567,7 @@ abstract class AppLocalizations {
   /// No description provided for @howLunarWorks.
   ///
   /// In en, this message translates to:
-  /// **'How Lunar works'**
+  /// **'How FatePair works'**
   String get howLunarWorks;
 
   /// No description provided for @heroEyebrow.
@@ -783,7 +783,7 @@ abstract class AppLocalizations {
   /// No description provided for @detailsYours.
   ///
   /// In en, this message translates to:
-  /// **'Your details stay yours.'**
+  /// **'Privacy & data'**
   String get detailsYours;
 
   /// No description provided for @detailsStored.
@@ -1095,7 +1095,7 @@ abstract class AppLocalizations {
   /// No description provided for @guideIntro.
   ///
   /// In en, this message translates to:
-  /// **'BaZi is a traditional Chinese system for exploring the patterns of a birth moment. Lunar brings that tradition into a more curious, connected world.'**
+  /// **'BaZi is a traditional Chinese system for exploring the patterns of a birth moment. FatePair brings that tradition into a more curious, connected world.'**
   String get guideIntro;
 
   /// No description provided for @meetElements.
@@ -1125,7 +1125,7 @@ abstract class AppLocalizations {
   /// No description provided for @guideHarmonyTitle.
   ///
   /// In en, this message translates to:
-  /// **'How does Lunar calculate harmony?'**
+  /// **'How does FatePair calculate harmony?'**
   String get guideHarmonyTitle;
 
   /// No description provided for @guideHarmonyBody.
@@ -1155,7 +1155,7 @@ abstract class AppLocalizations {
   /// No description provided for @guideTimezoneBody.
   ///
   /// In en, this message translates to:
-  /// **'Lunar resolves your birth time using the IANA time-zone database, including historical daylight saving rules. Year and month use the calendar library’s solar-term instants in UTC+8. Dating recommendations use local mean solar time based on birthplace longitude, with the day changing at midnight. Chart Studio additionally supports local clock time, true solar time with an approximate equation-of-time correction, and a 23:00 day boundary. During a repeated clock-change time, the earlier occurrence is used; nonexistent clock-change times are rejected. Other BaZi schools may produce different charts.'**
+  /// **'FatePair resolves your birth time using the IANA time-zone database, including historical daylight saving rules. Year and month use the calendar library’s solar-term instants in UTC+8. Dating recommendations use local mean solar time based on birthplace longitude, with the day changing at midnight. Chart Studio additionally supports local clock time, true solar time with an approximate equation-of-time correction, and a 23:00 day boundary. During a repeated clock-change time, the earlier occurrence is used; nonexistent clock-change times are rejected. Other BaZi schools may produce different charts.'**
   String get guideTimezoneBody;
 
   /// No description provided for @guideNoTimeTitle.
@@ -1167,7 +1167,7 @@ abstract class AppLocalizations {
   /// No description provided for @guideNoTimeBody.
   ///
   /// In en, this message translates to:
-  /// **'You can still explore. Lunar uses local noon for the date calculation, omits the hour pillar, and marks your results as approximate. On dates near a solar-term boundary, year or month may be uncertain too. Add your time later to refine your chart.'**
+  /// **'You can still explore. FatePair uses local noon for the date calculation, omits the hour pillar, and marks your results as approximate. On dates near a solar-term boundary, year or month may be uncertain too. Add your time later to refine your chart.'**
   String get guideNoTimeBody;
 
   /// No description provided for @guideCommunityTitle.
@@ -1233,13 +1233,13 @@ abstract class AppLocalizations {
   /// No description provided for @privacyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Your details stay yours.'**
+  /// **'Privacy & data'**
   String get privacyTitle;
 
   /// No description provided for @privacyBody1.
   ///
   /// In en, this message translates to:
-  /// **'This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key. Invitations and local message drafts are also stored on this device and included in your data export.'**
+  /// **'This app saves your name, birth details, studio charts, model settings, saved connections, and hidden profiles on this device. Client API keys stay in memory. When you choose to generate an interpretation, calculated chart evidence is sent to your selected model provider. Names, exact birth dates and places are omitted from that evidence. Resetting local data does not erase provider records or the local server’s API key. Invitations and local message drafts are also stored on this device and included in your data export. Agent questions and recent conversation turns are sent to a connected model when you ask; this includes information you type.'**
   String get privacyBody1;
 
   /// No description provided for @privacyBody2.
@@ -1347,7 +1347,7 @@ abstract class AppLocalizations {
   /// No description provided for @adultsOnly.
   ///
   /// In en, this message translates to:
-  /// **'Lunar is for adults aged 18 and over.'**
+  /// **'FatePair is for adults aged 18 and over.'**
   String get adultsOnly;
 
   /// No description provided for @yearMin.
@@ -1449,13 +1449,13 @@ abstract class AppLocalizations {
   /// No description provided for @discoverEnergy.
   ///
   /// In en, this message translates to:
-  /// **'Discover my energy'**
+  /// **'Save'**
   String get discoverEnergy;
 
   /// No description provided for @energyReadyToast.
   ///
   /// In en, this message translates to:
-  /// **'Your energy is ready. Your connections have been refreshed.'**
+  /// **'Birth details saved.'**
   String get energyReadyToast;
 
   /// No description provided for @saveFailed.
@@ -1485,7 +1485,7 @@ abstract class AppLocalizations {
   /// No description provided for @chemistryTitle.
   ///
   /// In en, this message translates to:
-  /// **'The chemistry behind your connection'**
+  /// **'Compatibility'**
   String get chemistryTitle;
 
   /// No description provided for @meetsText.
@@ -1533,7 +1533,7 @@ abstract class AppLocalizations {
   /// No description provided for @starterTitle.
   ///
   /// In en, this message translates to:
-  /// **'A little conversation starter'**
+  /// **'Conversation starter'**
   String get starterTitle;
 
   /// No description provided for @starterText.
@@ -1973,6 +1973,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect'**
   String get socialTabConnect;
+
+  /// No description provided for @flowChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'What brings you here?'**
+  String get flowChoose;
+
+  /// No description provided for @flowChart.
+  ///
+  /// In en, this message translates to:
+  /// **'My chart'**
+  String get flowChart;
+
+  /// No description provided for @flowMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Match'**
+  String get flowMatch;
+
+  /// No description provided for @flowAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Agent'**
+  String get flowAgent;
+
+  /// No description provided for @flowAskAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask Agent'**
+  String get flowAskAgent;
+
+  /// No description provided for @flowOutlook.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent outlook'**
+  String get flowOutlook;
+
+  /// No description provided for @flowTools.
+  ///
+  /// In en, this message translates to:
+  /// **'Tools'**
+  String get flowTools;
+
+  /// No description provided for @flowBirthDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth details'**
+  String get flowBirthDetails;
+
+  /// No description provided for @flowRandom.
+  ///
+  /// In en, this message translates to:
+  /// **'Random match'**
+  String get flowRandom;
+
+  /// No description provided for @flowPeople.
+  ///
+  /// In en, this message translates to:
+  /// **'People'**
+  String get flowPeople;
+
+  /// No description provided for @flowSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get flowSettings;
+
+  /// No description provided for @flowReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get flowReading;
+
+  /// No description provided for @flowDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart details'**
+  String get flowDetails;
+
+  /// No description provided for @flowToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get flowToday;
+
+  /// No description provided for @flowMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This month'**
+  String get flowMonth;
+
+  /// No description provided for @flowYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This year'**
+  String get flowYear;
+
+  /// No description provided for @flowReference.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart reference'**
+  String get flowReference;
+
+  /// No description provided for @flowModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get flowModel;
+
+  /// No description provided for @flowConnectModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect model'**
+  String get flowConnectModel;
+
+  /// No description provided for @flowSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask'**
+  String get flowSend;
+
+  /// No description provided for @flowStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get flowStop;
+
+  /// No description provided for @flowClearChat.
+  ///
+  /// In en, this message translates to:
+  /// **'New conversation'**
+  String get flowClearChat;
+
+  /// No description provided for @flowQuestionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your chart…'**
+  String get flowQuestionHint;
+
+  /// No description provided for @flowQuestionOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'What stands out in my chart?'**
+  String get flowQuestionOverview;
+
+  /// No description provided for @flowQuestionCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'What is happening in my current cycles?'**
+  String get flowQuestionCycle;
+
+  /// No description provided for @flowQuestionWork.
+  ///
+  /// In en, this message translates to:
+  /// **'What does my chart say about work?'**
+  String get flowQuestionWork;
+
+  /// No description provided for @flowQuestionRelations.
+  ///
+  /// In en, this message translates to:
+  /// **'How do the elements in my chart relate?'**
+  String get flowQuestionRelations;
+
+  /// No description provided for @flowBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get flowBack;
+
+  /// No description provided for @flowSample.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample chart'**
+  String get flowSample;
+
+  /// No description provided for @flowStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get flowStart;
+
+  /// No description provided for @flowSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get flowSaved;
+
+  /// No description provided for @flowNoPeople.
+  ///
+  /// In en, this message translates to:
+  /// **'No people match these filters.'**
+  String get flowNoPeople;
+
+  /// No description provided for @flowAddBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Add birth details'**
+  String get flowAddBirth;
+
+  /// No description provided for @flowOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth chart'**
+  String get flowOverview;
+
+  /// No description provided for @flowAskReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about this reading'**
+  String get flowAskReading;
+
+  /// No description provided for @flowOutlookAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about this period'**
+  String get flowOutlookAsk;
+
+  /// No description provided for @flowLocalPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Local preview'**
+  String get flowLocalPreview;
+
+  /// No description provided for @flowNoInvites.
+  ///
+  /// In en, this message translates to:
+  /// **'No invitations yet.'**
+  String get flowNoInvites;
+
+  /// No description provided for @flowNoMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet.'**
+  String get flowNoMessages;
+
+  /// No description provided for @flowNoSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved profiles.'**
+  String get flowNoSaved;
+
+  /// No description provided for @flowReadOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get flowReadOnly;
+
+  /// No description provided for @flowQuestionPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Your question'**
+  String get flowQuestionPrompt;
+
+  /// No description provided for @flowProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get flowProfile;
+
+  /// No description provided for @flowResetFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset filters'**
+  String get flowResetFilters;
+
+  /// No description provided for @flowSelfIntent.
+  ///
+  /// In en, this message translates to:
+  /// **'My reading'**
+  String get flowSelfIntent;
+
+  /// No description provided for @flowGeneralBazi.
+  ///
+  /// In en, this message translates to:
+  /// **'What is BaZi?'**
+  String get flowGeneralBazi;
+
+  /// No description provided for @flowGeneralGods.
+  ///
+  /// In en, this message translates to:
+  /// **'How do the Ten Gods work?'**
+  String get flowGeneralGods;
+
+  /// No description provided for @flowGeneralMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'What is a day master?'**
+  String get flowGeneralMaster;
+
+  /// No description provided for @flowGeneralSolar.
+  ///
+  /// In en, this message translates to:
+  /// **'How does solar time work?'**
+  String get flowGeneralSolar;
+
+  /// No description provided for @flowReasonBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your combined charts have a balanced mix of elements.'**
+  String get flowReasonBalance;
+
+  /// No description provided for @flowReasonSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Your core elements follow the supporting cycle.'**
+  String get flowReasonSupport;
+
+  /// No description provided for @flowReasonShared.
+  ///
+  /// In en, this message translates to:
+  /// **'You share the same core element.'**
+  String get flowReasonShared;
+
+  /// No description provided for @flowReasonBranches.
+  ///
+  /// In en, this message translates to:
+  /// **'Your day branches share a traditional harmony pattern.'**
+  String get flowReasonBranches;
+
+  /// No description provided for @flowReasonContrast.
+  ///
+  /// In en, this message translates to:
+  /// **'Your core elements form a contrasting pair.'**
+  String get flowReasonContrast;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

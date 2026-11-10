@@ -102,7 +102,7 @@ class _ReadingPanelState extends State<ReadingPanel> {
       color: lavenderTint,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         StudioHeading(
-            'A little clarity, your way.',
+            'Reading',
             answer == null
                 ? 'Local rule-based reading · No model request has generated the text below.'
                 : 'Custom model interpretation · Based on the calculated chart evidence.',

@@ -1,5 +1,18 @@
 # Verification record
 
+## FatePair focused-flow update — 2026-11-10
+
+- Two primary first-use cards and a secondary Ask Agent action; remembered entry route and return-to-start control. Root `product.md` records the natural-language product baseline; `AGENTS.md` requires synchronized updates for substantial product changes.
+- My chart and Match are the core destinations; Agent is a supporting destination. No Discover hero, energy sidebar, wisdom panel, or explanatory heading subtitles in the primary flows.
+- Matching exposes a vertical people list, one reason grounded in score components for each recommendation, and a filter-aware random action. Saved profiles, invitations, and messages are secondary tabs. Fictional-profile labelling appears before the list.
+- My chart exposes reading conclusions before Four Pillars, with optional recent outlook and collapsed detailed tables. Day master terminology opens a contextual explanation. Asking from a reading keeps the chart in place, using a desktop side dialog or a phone bottom sheet. Advanced tools remain available without occupying primary navigation.
+- Agent requests include the question, recent conversation turns, and computed chart evidence. Reference answers are explicitly labelled; unconfigured static hosting does not pretend to have a live model.
+- `flutter analyze`: no issues. `flutter test --reporter expanded`: 59 tests pass. Web release uses local CanvasKit, fonts, and a static unconfigured model-status response for hosting without a proxy.
+- New checks cover intent persistence/reset, eligible random draws without consecutive repeats, transit relationships, professional model context, stale-response cancellation, three-destination phone navigation, first-chart form validation, each main user path, preservation of the chart during contextual questions, and phone question entry with keyboard insets.
+
+- Chromium desktop (1440 × 1000) and phone (390 × 844): first-use choices, birth setup, conclusion-first reading, term explanation, recent outlook, inline questions and follow-up, vertical recommendations, sample notice, filtered random selection, and remembered entry pass. No page errors or failed resource requests. Screenshots: `output/playwright/fatepair-*.png`; summary: `output/fatepair-browser-check.txt`.
+- This update retains the iOS/Android projects; native builds and live provider calls were not repeated.
+
 ## Repository integration — 2026-11-10
 
 The combined app is based on `dirtycomputer/lunar-app` at `a49179f`, using its existing Flutter 3.27.1 / Dart 3.6.0 toolchain and locked dependencies.

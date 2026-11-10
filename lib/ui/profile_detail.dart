@@ -149,16 +149,6 @@ class _ProfileDetail extends StatelessWidget {
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600)),
-                                  const SizedBox(height: 7),
-                                  Text(
-                                      l10n.meetsText(
-                                          elementLabel(
-                                              l10n, state.chart.dayElement),
-                                          p.name,
-                                          elementLabel(
-                                              l10n, match.chart.dayElement)),
-                                      style: const TextStyle(
-                                          fontSize: 12, color: muted)),
                                   const SizedBox(height: 23),
                                   _factor(l10n.factorBalance, match.balance,
                                       l10n.factorBalanceDesc, elementColors[0],

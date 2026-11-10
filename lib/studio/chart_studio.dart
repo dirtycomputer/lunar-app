@@ -15,7 +15,12 @@ import 'tool_panels.dart';
 class ChartStudio extends StatefulWidget {
   final StudioStore store;
   final int initialTab;
-  const ChartStudio({super.key, required this.store, this.initialTab = 0});
+  final bool compact;
+  const ChartStudio(
+      {super.key,
+      required this.store,
+      this.initialTab = 0,
+      this.compact = false});
   @override
   State<ChartStudio> createState() => _ChartStudioState();
 }
@@ -63,20 +68,11 @@ class _ChartStudioState extends State<ChartStudio> {
       builder: (context, _) {
         final report = ChartEngine().calculate(store.primary);
         return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text('THE CHART STUDIO',
-              style: TextStyle(
-                  fontSize: 10,
-                  color: green,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2)),
-          const SizedBox(height: 12),
-          Text('A deeper look at your universe.',
-              style: Theme.of(context).textTheme.headlineMedium),
-          const SizedBox(height: 10),
-          const Text(
-              'Four pillars. A world of patterns. Explore the details, at your own pace.',
-              style: TextStyle(fontSize: 13, color: muted, height: 1.7)),
-          const SizedBox(height: 24),
+          if (!widget.compact) ...[
+            Text('Chart tools',
+                style: Theme.of(context).textTheme.headlineMedium),
+            const SizedBox(height: 24),
+          ],
           SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -91,9 +87,7 @@ class _ChartStudioState extends State<ChartStudio> {
                                 label: Text(tabs[i],
                                     style: TextStyle(
                                         fontSize: 12,
-                                        color: selected
-                                            ? color
-                                            : muted,
+                                        color: selected ? color : muted,
                                         fontWeight: selected
                                             ? FontWeight.w600
                                             : FontWeight.w500)),
@@ -105,8 +99,7 @@ class _ChartStudioState extends State<ChartStudio> {
                                     color: selected
                                         ? color.withValues(alpha: .35)
                                         : line),
-                                onSelected: (_) =>
-                                    setState(() => tab = i));
+                                onSelected: (_) => setState(() => tab = i));
                           }))))),
           const SizedBox(height: 27),
           if (store.loadError != null)

@@ -1,13 +1,18 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../services/app_state.dart';
-import '../studio/studio_store.dart';
-import '../studio/chart_engine.dart';
-import '../studio/glossary.dart';
-import '../studio/chart_studio.dart';
-import '../services/bazi.dart' as bazi;
 import '../l10n/generated/app_localizations.dart';
-import '../l10n/bazi_labels.dart';
+import '../services/app_state.dart';
+import '../services/bazi.dart' as bazi;
+import '../services/chart_assistant.dart';
+import '../services/intent_flow.dart';
+import '../studio/chart_engine.dart';
+import '../studio/chart_studio.dart';
+import '../studio/reading_panel.dart';
+import '../studio/studio_store.dart';
+import 'agent_page.dart';
 import 'design.dart';
+import 'intent_pages.dart';
+import 'language_picker.dart';
 import 'profile_editor.dart';
 import 'profile_detail.dart';
 import 'secondary_pages.dart';
@@ -21,994 +26,735 @@ class AppShell extends StatefulWidget {
 }
 
 class _AppShellState extends State<AppShell> {
-  int page = 0;
-  int studioInitialTab = 0;
-  int connectionsInitialTab = 0;
-  final search = TextEditingController();
+  AppState get state => widget.state;
+  AppIntent? section;
   late final StudioStore studio;
-  String category = 'For you';
-  String gender = 'Everyone';
-  String region = 'Worldwide';
+  late final ChartAgent agent;
+  final scroll = ScrollController(), search = TextEditingController();
+  final random = RandomMatchPicker();
+  int matchTab = 0;
+  bool outlook = false;
+  OutlookPeriod period = OutlookPeriod.month;
+  String gender = 'Everyone', region = 'Worldwide';
   RangeValues ageRange = const RangeValues(18, 60);
   double minScore = 0;
-  final scroll = ScrollController();
-  final matchesKey = GlobalKey();
-  AppState get state => widget.state;
+  late int generation;
+  late String profileSignature;
   @override
   void initState() {
     super.initState();
+    section = state.startIntent;
     studio = StudioStore(state);
-    if (state.persistenceError != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) showToast(context, state.persistenceError!);
-      });
+    agent = ChartAgent(studio);
+    generation = state.resetGeneration;
+    profileSignature = _profileSignature();
+    state.addListener(_changed);
+  }
+
+  String _profileSignature() =>
+      jsonEncode([state.name, state.birth.toJson(), state.personalized]);
+  void _changed() {
+    final next = _profileSignature();
+    if (next != profileSignature) {
+      profileSignature = next;
+      agent.clear();
     }
+    if (generation != state.resetGeneration) {
+      generation = state.resetGeneration;
+      section = null;
+      agent.clear();
+      search.clear();
+    }
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
+    state.removeListener(_changed);
     scroll.dispose();
     search.dispose();
+    agent.dispose();
     studio.dispose();
     super.dispose();
   }
 
-  void navigate(int index, {int studioTab = 0, int connectionsTab = 0}) {
-    setState(() {
-      page = index;
-      studioInitialTab = studioTab;
-      connectionsInitialTab = connectionsTab;
-    });
+  ChartContext get chart => ChartContext(ChartEngine().calculate(ChartSubject(
+      name: state.name,
+      birth: state.birth,
+      sex: studio.primary.sex,
+      sect: studio.primary.sect,
+      basis: studio.primary.basis)));
+  Future<void> choose(AppIntent intent) async {
+    if (intent == AppIntent.chart && !state.personalized) {
+      await showProfileEditor(context, state);
+      if (!mounted || !state.personalized) return;
+    }
+    final ok = await state.chooseIntent(intent);
+    if (!mounted) return;
+    setState(() => section = intent);
+    if (!ok) showToast(context, AppLocalizations.of(context)!.couldNotSave);
+  }
+
+  void navigate(AppIntent intent) {
+    setState(() => section = intent);
     if (scroll.hasClients) scroll.jumpTo(0);
   }
 
-  void editProfile() => showProfileEditor(context, state);
-  void showGuide() => navigate(3);
-  bool get hasFilters =>
-      gender != 'Everyone' ||
-      region != 'Worldwide' ||
-      search.text.trim().isNotEmpty ||
-      ageRange.start != 18 ||
-      ageRange.end != 60 ||
-      minScore != 0;
-  List<bazi.MatchResult> get recommendations => state.matches.where((m) {
-        final p = m.person;
-        final query = search.text.trim().toLowerCase();
-        if (query.isNotEmpty &&
-            !'${p.name} ${p.location} ${p.occupation} ${p.interests.join(' ')}'
-                .toLowerCase()
-                .contains(query)) {
-          return false;
-        }
-        if (state.hidden.contains(p.id)) return false;
-        if (page == 1 && !state.saved.contains(p.id)) return false;
-        if (p.age < ageRange.start || p.age > ageRange.end) return false;
-        if (gender != 'Everyone' && p.gender != gender) return false;
-        if (region != 'Worldwide' && !p.location.endsWith(region)) return false;
-        if (m.score < minScore) return false;
-        if (category == 'High harmony' && m.score < 80) return false;
-        if (category == 'Same birth city' &&
-            p.location != state.birth.place.name) {
-          return false;
-        }
-        if (category == 'Creative souls' &&
-            !p.interests.any((i) => [
-                  'Design',
-                  'Art',
-                  'Music',
-                  'Photography',
-                  'Architecture'
-                ].contains(i))) {
-          return false;
-        }
-        return true;
-      }).toList();
+  void ask(String question) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    agent.ask(question, context: state.personalized ? chart : null);
+    final l = AppLocalizations.of(context)!;
+    final panel = AnimatedBuilder(
+        animation: state,
+        builder: (context, _) => Scaffold(
+            key: const ValueKey('contextual-agent'),
+            backgroundColor: canvas,
+            appBar: AppBar(
+                title: Text(l.flowAskAgent),
+                leading: IconButton(
+                    tooltip: l.flowBack,
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.close))),
+            body: AgentPage(
+                agent: agent,
+                personalized: state.personalized,
+                name: state.name,
+                chart: state.personalized ? chart : null,
+                onEdit: () => showProfileEditor(context, state),
+                onSettings: modelSettings)));
+    if (MediaQuery.sizeOf(context).width >= 1000) {
+      showDialog<void>(
+          context: context,
+          builder: (_) => Dialog(
+              alignment: AlignmentDirectional.centerEnd,
+              insetPadding: const EdgeInsets.all(12),
+              clipBehavior: Clip.antiAlias,
+              child:
+                  SizedBox(width: 520, height: double.infinity, child: panel)));
+    } else {
+      showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          useSafeArea: true,
+          clipBehavior: Clip.antiAlias,
+          builder: (context) => SizedBox(
+              height: MediaQuery.sizeOf(context).height * .92, child: panel));
+    }
+  }
+
+  Future<void> openTools([int tab = 0]) async {
+    final ok =
+        await studio.updateSubjects(chart.natal.subject, studio.secondary);
+    if (!mounted) return;
+    if (!ok) {
+      showToast(context, AppLocalizations.of(context)!.couldNotSave);
+      return;
+    }
+    await _fullScreen(AppLocalizations.of(context)!.flowTools,
+        ChartStudio(store: studio, initialTab: tab, compact: true));
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _fullScreen(String title, Widget child) => showDialog<void>(
+      context: context,
+      builder: (ctx) => Dialog.fullscreen(
+          child: Scaffold(
+              appBar: AppBar(
+                  title: Text(title),
+                  leading: IconButton(
+                      tooltip: AppLocalizations.of(context)!.flowBack,
+                      onPressed: () => Navigator.pop(ctx),
+                      icon: const Icon(Icons.close))),
+              body: SingleChildScrollView(
+                  padding: const EdgeInsets.all(22),
+                  child: Center(
+                      child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1150),
+                          child: child))))));
+  void modelSettings() => _fullScreen(
+      AppLocalizations.of(context)!.flowConnectModel,
+      ModelSettingsPanel(store: studio));
+  void settings() {
+    final l = AppLocalizations.of(context)!;
+    showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+                title: Text(l.flowSettings),
+                content: SizedBox(
+                    width: 340,
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      ListTile(
+                          leading: const Icon(Icons.person_outline),
+                          title: Text(l.flowBirthDetails),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            showProfileEditor(context, state);
+                          }),
+                      ListTile(
+                          leading: const Icon(Icons.translate),
+                          title: Text(l.languageTitle),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            showLanguagePicker(context, state);
+                          }),
+                      ListTile(
+                          leading: const Icon(Icons.tune),
+                          title: Text(l.flowConnectModel),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            modelSettings();
+                          }),
+                      ListTile(
+                          leading: const Icon(Icons.lock_outline),
+                          title: Text(l.privacyData),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            showPrivacy(context, state);
+                          }),
+                      ListTile(
+                          leading: const Icon(Icons.auto_stories_outlined),
+                          title: Text(l.navGuide),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            _fullScreen(l.navGuide, const GuidePage());
+                          }),
+                    ])),
+                actions: [
+                  TextButton(
+                      onPressed: () => Navigator.pop(ctx),
+                      child: Text(l.actionClose))
+                ]));
+  }
 
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
-      listenable: state,
-      builder: (context, _) {
-        final width = MediaQuery.sizeOf(context).width;
-        final desktop = width >= 950;
-        final l10n = AppLocalizations.of(context)!;
-        return Scaffold(
-          body: SafeArea(
-              child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                if (desktop) _sidebar(),
-                Expanded(
-                    child: Column(children: [
-                  _topbar(desktop),
-                  Expanded(
-                      child: SingleChildScrollView(
-                    controller: scroll,
-                    padding: EdgeInsets.fromLTRB(desktop ? 36 : 20,
-                        desktop ? 30 : 22, desktop ? 36 : 20, 36),
-                    child: Center(
-                        child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1330),
-                      child: page == 4
-                          ? ChartStudio(
-                              store: studio, initialTab: studioInitialTab)
-                          : page == 2
-                              ? EnergyPage(
-                                  state: state,
-                                  onEdit: editProfile,
-                                  onLearn: showGuide)
-                              : page == 3
-                                  ? const GuidePage()
-                                  : page == 1
-                                      ? ConnectionsPage(
-                                          state: state,
-                                          saved: _discovery(width),
-                                          initialTab: connectionsInitialTab,
-                                          onDiscover: () => navigate(0),
-                                          onProfile: _openProfile)
-                                      : _discovery(width),
-                    )),
-                  )),
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context)!;
+    if (section == null) {
+      return IntentChooser(onChoose: choose, onSettings: settings);
+    }
+    final desktop = MediaQuery.sizeOf(context).width >= 1000;
+    final labels = [l.flowChart, l.flowMatch, l.flowAgent];
+    return Scaffold(
+        bottomNavigationBar: desktop
+            ? null
+            : NavigationBar(
+                height: 70,
+                selectedIndex: section!.index,
+                onDestinationSelected: (i) => navigate(AppIntent.values[i]),
+                backgroundColor: Colors.white,
+                indicatorColor: blueTint,
+                destinations: [
+                    NavigationDestination(
+                        key: const ValueKey('nav-chart'),
+                        icon: const Icon(Icons.grid_view_outlined),
+                        selectedIcon: const Icon(Icons.grid_view_rounded),
+                        label: l.flowChart),
+                    NavigationDestination(
+                        key: const ValueKey('nav-match'),
+                        icon: const Icon(Icons.people_outline),
+                        selectedIcon: const Icon(Icons.people),
+                        label: l.flowMatch),
+                    NavigationDestination(
+                        key: const ValueKey('nav-agent'),
+                        icon: const Icon(Icons.forum_outlined),
+                        selectedIcon: const Icon(Icons.forum),
+                        label: l.flowAgent),
+                  ]),
+        body: SafeArea(
+            child: Row(children: [
+          if (desktop) _sidebar(labels),
+          Expanded(
+              child: Column(children: [
+            Container(
+                height: 76,
+                padding: EdgeInsets.symmetric(horizontal: desktop ? 34 : 18),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    border: Border(bottom: BorderSide(color: line))),
+                child: Row(children: [
+                  if (!desktop) ...[
+                    IconButton(
+                        tooltip: l.flowStart,
+                        onPressed: () => setState(() => section = null),
+                        icon: const FlowerLogo(size: 24)),
+                    const SizedBox(width: 6)
+                  ],
+                  Text(labels[section!.index],
+                      style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: -.7)),
+                  const Spacer(),
+                  IconButton(
+                      tooltip: l.flowSettings,
+                      onPressed: settings,
+                      icon: const Icon(Icons.settings_outlined, size: 21)),
                 ])),
-              ])),
-          bottomNavigationBar: desktop
-              ? null
-              : NavigationBar(
-                  height: 72,
-                  backgroundColor: Colors.white,
-                  indicatorColor: const Color(0xFFDDE7FF),
-                  selectedIndex: page,
-                  onDestinationSelected: navigate,
-                  destinations: [
-                      NavigationDestination(
-                          icon: const Icon(Icons.explore_outlined),
-                          selectedIcon: const Icon(Icons.explore),
-                          label: l10n.tabDiscover),
-                      NavigationDestination(
-                          key: const ValueKey('nav-connections'),
-                          icon: const Icon(Icons.favorite_border),
-                          selectedIcon: const Icon(Icons.favorite),
-                          label: l10n.socialTabConnect),
-                      NavigationDestination(
-                          icon: const Icon(Icons.spa_outlined),
-                          selectedIcon: const Icon(Icons.spa),
-                          label: l10n.tabMyEnergy),
-                      NavigationDestination(
-                          icon: const Icon(Icons.auto_stories_outlined),
-                          selectedIcon: const Icon(Icons.auto_stories),
-                          label: l10n.tabGuide),
-                      NavigationDestination(
-                          icon: const Icon(Icons.grid_view_outlined),
-                          selectedIcon: const Icon(Icons.grid_view),
-                          label: l10n.tabStudio),
-                    ]),
-        );
+            Expanded(
+                child: section == AppIntent.agent
+                    ? AgentPage(
+                        agent: agent,
+                        personalized: state.personalized,
+                        name: state.name,
+                        chart: state.personalized ? chart : null,
+                        onEdit: () => showProfileEditor(context, state),
+                        onSettings: modelSettings)
+                    : SingleChildScrollView(
+                        controller: scroll,
+                        padding: EdgeInsets.fromLTRB(
+                            desktop ? 34 : 18, 26, desktop ? 34 : 18, 30),
+                        child: Center(
+                            child: ConstrainedBox(
+                                constraints:
+                                    const BoxConstraints(maxWidth: 1320),
+                                child: section == AppIntent.chart
+                                    ? MyChartPage(
+                                        state: state,
+                                        contextData: chart,
+                                        outlook: outlook,
+                                        period: period,
+                                        onMode: (v) =>
+                                            setState(() => outlook = v),
+                                        onPeriod: (v) =>
+                                            setState(() => period = v),
+                                        onAsk: ask,
+                                        onEdit: () =>
+                                            showProfileEditor(context, state),
+                                        onTools: () => openTools())
+                                    : _matches())))),
+          ]))
+        ])));
+  }
+
+  Widget _sidebar(List<String> labels) {
+    final l = AppLocalizations.of(context)!;
+    return Container(
+        width: 194,
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            border: BorderDirectional(end: BorderSide(color: line))),
+        padding: const EdgeInsets.fromLTRB(16, 27, 16, 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          InkWell(
+              onTap: () => setState(() => section = null),
+              borderRadius: BorderRadius.circular(12),
+              child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
+                  child: Row(children: [
+                    FlowerLogo(size: 30),
+                    SizedBox(width: 11),
+                    Text('FatePair',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: -1.3))
+                  ]))),
+          const SizedBox(height: 55),
+          for (final i in AppIntent.values)
+            Padding(
+                padding: EdgeInsets.only(
+                    bottom: 10, top: i == AppIntent.agent ? 28 : 0),
+                child: Material(
+                    color: section == i ? blueTint : Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                    child: InkWell(
+                        key: ValueKey('nav-${i.name}'),
+                        onTap: () => navigate(i),
+                        borderRadius: BorderRadius.circular(12),
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 16),
+                            child: Row(children: [
+                              Icon(
+                                  [
+                                    Icons.grid_view_outlined,
+                                    Icons.people_outline,
+                                    Icons.forum_outlined
+                                  ][i.index],
+                                  size: 20,
+                                  color: section == i ? blue : muted),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                  child: Text(labels[i.index],
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: section == i
+                                              ? FontWeight.w600
+                                              : FontWeight.w500,
+                                          color: section == i ? blue : ink)))
+                            ]))))),
+          const Spacer(),
+          ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 9),
+              leading: CircleAvatar(
+                  radius: 17,
+                  backgroundColor: mintTint,
+                  child: Text(
+                      state.name.isEmpty ? '?' : state.name.characters.first,
+                      style: const TextStyle(fontSize: 13, color: green))),
+              title: Text(state.personalized ? state.name : l.flowProfile,
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w600)),
+              onTap: () => showProfileEditor(context, state)),
+        ]));
+  }
+
+  List<bazi.MatchResult> get recommendations => state.matches.where((m) {
+        final p = m.person;
+        final q = search.text.trim().toLowerCase();
+        return !state.hidden.contains(p.id) &&
+            (matchTab != 1 || state.saved.contains(p.id)) &&
+            (gender == 'Everyone' || p.gender == gender) &&
+            (region == 'Worldwide' || p.location.endsWith(region)) &&
+            p.age >= ageRange.start &&
+            p.age <= ageRange.end &&
+            m.score >= minScore &&
+            (q.isEmpty ||
+                '${p.name} ${p.location} ${p.occupation} ${p.interests.join(' ')}'
+                    .toLowerCase()
+                    .contains(q));
+      }).toList();
+  void _openProfile(bazi.MatchResult m) =>
+      showProfileDetail(context, state, m, onCompare: () async {
+        final ok = await studio.updateSubjects(chart.natal.subject,
+            ChartSubject(name: m.person.name, birth: m.person.birth));
+        if (!mounted) return;
+        if (ok) {
+          _fullScreen(AppLocalizations.of(context)!.flowTools,
+              ChartStudio(store: studio, initialTab: 2, compact: true));
+        } else {
+          showToast(context, AppLocalizations.of(context)!.compareFailed);
+        }
+      });
+  void _random() {
+    final m = random.pick(recommendations);
+    if (m != null) _openProfile(m);
+  }
+
+  void resetFilters() => setState(() {
+        search.clear();
+        gender = 'Everyone';
+        region = 'Worldwide';
+        ageRange = const RangeValues(18, 60);
+        minScore = 0;
       });
 
-  Widget _sidebar() {
-    final l10n = AppLocalizations.of(context)!;
-    return Container(
-        width: 218,
-        decoration: const BoxDecoration(
-            color: Color(0xFFEEF1FA),
-            border: Border(right: BorderSide(color: line))),
-        padding: const EdgeInsets.fromLTRB(20, 36, 20, 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Padding(
-              padding: EdgeInsets.only(left: 12),
-              child: Row(children: [
-                FlowerLogo(size: 34),
-                SizedBox(width: 11),
-                Text('lunar',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: -1.8)),
-              ])),
-          Padding(
-              padding: const EdgeInsets.fromLTRB(13, 8, 0, 48),
-              child: Text(l10n.tagline,
-                  style: const TextStyle(
-                      fontSize: 9, color: muted, letterSpacing: .05))),
-          Padding(
-              padding: const EdgeInsets.only(left: 15, bottom: 14),
-              child: Text(l10n.yourSpace,
-                  style: TextStyle(
-                      fontSize: 9,
-                      color: muted,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.4))),
-          _navItem(0, l10n.tabDiscover, Icons.explore_outlined),
-          _navItem(1, l10n.navConnections, Icons.favorite_border,
-              count: state.saved.length),
-          _navItem(2, l10n.tabMyEnergy, Icons.spa_outlined),
-          _navItem(4, l10n.navStudio, Icons.grid_view_outlined),
-          const Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              child: Divider(height: 1)),
-          _navItem(3, l10n.navGuide, Icons.auto_stories_outlined),
-          const Spacer(),
-          Container(
-              padding: const EdgeInsets.all(17),
-              decoration: BoxDecoration(
-                  color: const Color(0xFFF0E8F7),
-                  borderRadius: BorderRadius.circular(18)),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.wb_sunny_outlined, color: green, size: 23),
-                    const SizedBox(height: 12),
-                    Text(l10n.promoTitle,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            height: 1.5,
-                            fontWeight: FontWeight.w600)),
-                    const SizedBox(height: 6),
-                    Text(l10n.promoBody,
-                        style: const TextStyle(
-                            fontSize: 11, height: 1.7, color: muted)),
-                    const SizedBox(height: 8),
-                    InkWell(
-                        onTap: () => navigate(2),
-                        borderRadius: BorderRadius.circular(8),
-                        child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 6),
-                            child: Row(children: [
-                              Expanded(
-                                  child: Text(l10n.promoCta,
-                                      style: const TextStyle(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w700,
-                                          color: green))),
-                              const SizedBox(width: 10),
-                              const Icon(Icons.arrow_forward,
-                                  size: 15, color: green),
-                            ]))),
-                  ])),
-          const SizedBox(height: 23),
-          InkWell(
-              onTap: editProfile,
-              borderRadius: BorderRadius.circular(12),
-              child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                  child: Row(children: [
-                    CircleAvatar(
-                        radius: 19,
-                        backgroundColor: const Color(0xFFDDE5D3),
-                        child: Text(state.name.characters.first.toUpperCase(),
-                            style:
-                                const TextStyle(fontSize: 15, color: green))),
-                    const SizedBox(width: 11),
-                    Expanded(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                          Text(state.name,
-                              style: const TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w700)),
-                          Text(
-                              state.personalized
-                                  ? l10n.editProfileShort
-                                  : l10n.demoProfile,
-                              style:
-                                  const TextStyle(fontSize: 10, color: muted)),
-                        ])),
-                    const Icon(Icons.more_horiz, color: muted, size: 19),
-                  ]))),
-        ]));
-  }
-
-  Widget _navItem(int index, String label, IconData icon, {int count = 0}) =>
-      Padding(
-          padding: const EdgeInsets.only(bottom: 5),
-          child: Material(
-              color:
-                  page == index ? const Color(0xFFDBE5FC) : Colors.transparent,
-              borderRadius: BorderRadius.circular(28),
-              child: InkWell(
-                  onTap: () => navigate(index),
-                  borderRadius: BorderRadius.circular(28),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 17, vertical: 15),
-                      child: Row(children: [
-                        Icon(icon,
-                            size: 20, color: page == index ? green : muted),
-                        const SizedBox(width: 13),
-                        Expanded(
-                            child: Text(label,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: page == index ? ink : muted,
-                                    fontWeight: page == index
-                                        ? FontWeight.w700
-                                        : FontWeight.w500))),
-                        if (count > 0)
-                          Text('$count',
-                              style:
-                                  const TextStyle(fontSize: 10, color: green)),
-                      ])))));
-
-  Widget _topbar(bool desktop) {
-    final l10n = AppLocalizations.of(context)!;
-    return Container(
-        height: desktop ? 86 : 74,
-        padding: EdgeInsets.symmetric(horizontal: desktop ? 38 : 20),
-        decoration: const BoxDecoration(
-            border: Border(bottom: BorderSide(color: line))),
-        child: Row(children: [
-          if (!desktop) ...[
-            const FlowerLogo(size: 27),
-            const SizedBox(width: 10)
-          ],
-          Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    [
-                      l10n.tabDiscover,
-                      l10n.navConnections,
-                      l10n.tabMyEnergy,
-                      l10n.navGuide,
-                      l10n.navStudio
-                    ][page],
-                    style: const TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: -.5)),
-                if (desktop)
-                  Text(l10n.topbarSub,
-                      style: const TextStyle(fontSize: 11, color: muted)),
-              ]),
-          const Spacer(),
-          if (desktop) ...[
-            IconButton(
-                onPressed: () => navigate(1, connectionsTab: 2),
-                tooltip: l10n.socialMessages,
-                icon: const Icon(Icons.chat_bubble_outline,
-                    size: 20, color: muted)),
-            TextButton.icon(
+  Widget _matches() {
+    final l = AppLocalizations.of(context)!;
+    final list = recommendations;
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: [
+            for (final (i, label) in [
+              l.flowPeople,
+              l.flowSaved,
+              l.socialInvitations,
+              l.socialMessages
+            ].indexed)
+              Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 20),
+                  child: InkWell(
+                      key: ValueKey('match-tab-$i'),
+                      onTap: () => setState(() => matchTab = i),
+                      child: Container(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      width: 2,
+                                      color: matchTab == i
+                                          ? blue
+                                          : Colors.transparent))),
+                          child: Text(label,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: matchTab == i ? blue : muted,
+                                  fontWeight: matchTab == i
+                                      ? FontWeight.w600
+                                      : FontWeight.w400)))))
+          ])),
+      const Divider(height: 1),
+      const SizedBox(height: 22),
+      if (matchTab < 2) ...[
+        LayoutBuilder(builder: (context, c) {
+          final searchBox = TextField(
+              key: const ValueKey('discovery-search'),
+              controller: search,
+              onChanged: (_) => setState(() {}),
+              style: const TextStyle(fontSize: 12),
+              decoration: InputDecoration(
+                  hintText: l.socialSearchHint,
+                  prefixIcon: const Icon(Icons.search, size: 19),
+                  suffixIcon: search.text.isEmpty
+                      ? null
+                      : IconButton(
+                          tooltip: l.socialClearSearch,
+                          onPressed: () => setState(search.clear),
+                          icon: const Icon(Icons.close, size: 17)),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 14, horizontal: 15)));
+          final actions = Row(mainAxisSize: MainAxisSize.min, children: [
+            if (matchTab == 0) ...[
+              FilledButton.icon(
+                  key: const ValueKey('random-match'),
+                  onPressed: list.isEmpty ? null : _random,
+                  icon: const Icon(Icons.shuffle_rounded, size: 17),
+                  label: Text(l.flowRandom)),
+              const SizedBox(width: 10)
+            ],
+            OutlinedButton.icon(
                 onPressed: _showFilters,
-                icon: const Icon(Icons.public, size: 16),
-                label: Text(_regionLabel(l10n, region),
-                    style: const TextStyle(fontSize: 11)),
-                style: TextButton.styleFrom(foregroundColor: muted)),
-            const SizedBox(width: 16),
-            Container(width: 1, height: 24, color: line),
-            const SizedBox(width: 16),
-          ],
-          IconButton(
-              onPressed: showGuide,
-              tooltip: l10n.howLunarWorks,
-              icon: const Icon(Icons.help_outline, size: 21, color: muted)),
-          const SizedBox(width: 8),
-          InkWell(
-              onTap: editProfile,
-              borderRadius: BorderRadius.circular(24),
-              child: CircleAvatar(
-                  radius: 18,
-                  backgroundColor: const Color(0xFFE4EBDA),
-                  child: Text(state.name.characters.first.toUpperCase(),
-                      style: const TextStyle(
-                          color: green,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700)))),
-        ]));
+                icon: const Icon(Icons.tune, size: 16),
+                label: Text(l.filters))
+          ]);
+          return c.maxWidth > 720
+              ? Row(children: [
+                  Expanded(child: searchBox),
+                  const SizedBox(width: 16),
+                  actions
+                ])
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [searchBox, const SizedBox(height: 13), actions]);
+        }),
+        if (!state.personalized)
+          Padding(
+              padding: const EdgeInsets.only(top: 9),
+              child: TextButton.icon(
+                  onPressed: () => showProfileEditor(context, state),
+                  icon: const Icon(Icons.person_outline, size: 15),
+                  label: Text(l.flowAddBirth,
+                      style: const TextStyle(fontSize: 11)))),
+        const SizedBox(height: 23),
+        if (list.isEmpty)
+          _empty(
+              matchTab == 1 && state.saved.isEmpty
+                  ? l.flowNoSaved
+                  : l.flowNoPeople,
+              onTap: resetFilters,
+              action: l.flowResetFilters)
+        else ...[
+          Text(l.demoNotice,
+              style: const TextStyle(fontSize: 11, color: muted)),
+          const SizedBox(height: 12),
+          for (final m in list)
+            Padding(
+                padding: const EdgeInsets.only(bottom: 12), child: _person(m)),
+        ],
+      ] else
+        _socialList(),
+    ]);
   }
 
-  String _categoryLabel(AppLocalizations l, String c) => switch (c) {
-        'High harmony' => l.catHighHarmony,
-        'Same birth city' => l.catSameCity,
-        'Creative souls' => l.catCreative,
-        _ => l.catForYou,
-      };
+  Widget _person(bazi.MatchResult m) {
+    final l = AppLocalizations.of(context)!;
+    final p = m.person;
+    final reason = switch (matchReason(m)) {
+      MatchReason.balance => l.flowReasonBalance,
+      MatchReason.support => l.flowReasonSupport,
+      MatchReason.shared => l.flowReasonShared,
+      MatchReason.branches => l.flowReasonBranches,
+      MatchReason.contrast => l.flowReasonContrast,
+    };
+    return Semantics(
+        button: true,
+        label: '${p.name}, ${p.age}, ${p.location}',
+        child: Material(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: const BorderSide(color: line)),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+                onTap: () => _openProfile(m),
+                child: LayoutBuilder(builder: (context, c) {
+                  final compact = c.maxWidth < 600;
+                  return Padding(
+                      padding: EdgeInsets.all(compact ? 14 : 18),
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.asset(p.image,
+                                    width: compact ? 76 : 106,
+                                    height: compact ? 112 : 124,
+                                    fit: BoxFit.cover,
+                                    alignment: const Alignment(0, -.3))),
+                            SizedBox(width: compact ? 14 : 22),
+                            Expanded(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                  Row(children: [
+                                    Expanded(
+                                        child: Text('${p.name}, ${p.age}',
+                                            style: TextStyle(
+                                                fontSize: compact ? 18 : 21,
+                                                fontWeight: FontWeight.w500,
+                                                letterSpacing: -.4))),
+                                    SizedBox(
+                                        width: 32,
+                                        height: 32,
+                                        child: IconButton(
+                                            padding: EdgeInsets.zero,
+                                            tooltip: state.saved.contains(p.id)
+                                                ? l.unsave(p.name)
+                                                : l.saveTo(p.name),
+                                            onPressed: () async {
+                                              final ok =
+                                                  await state.toggleSaved(p.id);
+                                              if (!ok && context.mounted) {
+                                                showToast(
+                                                    context, l.couldNotSave);
+                                              }
+                                            },
+                                            icon: Icon(
+                                                state.saved.contains(p.id)
+                                                    ? Icons.favorite
+                                                    : Icons.favorite_border,
+                                                size: 19,
+                                                color:
+                                                    state.saved.contains(p.id)
+                                                        ? coral
+                                                        : muted)))
+                                  ]),
+                                  Text(p.location,
+                                      style: const TextStyle(
+                                          fontSize: 11, color: muted)),
+                                  const SizedBox(height: 10),
+                                  Text(reason,
+                                      style: const TextStyle(
+                                          fontSize: 12,
+                                          height: 1.5,
+                                          color: ink)),
+                                  const SizedBox(height: 10),
+                                  Row(children: [
+                                    Text(l.harmonyPct(m.score),
+                                        style: const TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            color: green)),
+                                    const Spacer(),
+                                    const Icon(Icons.arrow_forward,
+                                        size: 17, color: muted)
+                                  ])
+                                ]))
+                          ]));
+                }))));
+  }
+
+  Widget _empty(String title,
+          {required VoidCallback onTap, required String action}) =>
+      Surface(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 42),
+              child: Center(
+                  child: Column(children: [
+                const Icon(Icons.people_outline, size: 35, color: muted),
+                const SizedBox(height: 19),
+                Text(title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w500)),
+                const SizedBox(height: 23),
+                OutlinedButton(onPressed: onTap, child: Text(action))
+              ]))));
+  Widget _socialList() {
+    final l = AppLocalizations.of(context)!;
+    final rows = state.matches
+        .where((m) =>
+            !state.hidden.contains(m.person.id) &&
+            (matchTab == 2
+                ? state.social.invitations.contains(m.person.id)
+                : state.social.messagesFor(m.person.id).isNotEmpty))
+        .toList();
+    if (matchTab == 3) {
+      rows.sort((a, b) => state.social
+          .messagesFor(b.person.id)
+          .last
+          .createdAt
+          .compareTo(state.social.messagesFor(a.person.id).last.createdAt));
+    }
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(children: [
+        const Icon(Icons.lock_outline, size: 13, color: muted),
+        const SizedBox(width: 6),
+        Text(l.flowLocalPreview,
+            style: const TextStyle(fontSize: 10, color: muted))
+      ]),
+      const SizedBox(height: 17),
+      if (rows.isEmpty)
+        _empty(matchTab == 2 ? l.flowNoInvites : l.flowNoMessages,
+            onTap: () => setState(() => matchTab = 0), action: l.flowPeople)
+      else
+        for (final m in rows)
+          Padding(
+              padding: const EdgeInsets.only(bottom: 13),
+              child: Surface(
+                  padding: const EdgeInsets.all(17),
+                  child: Column(children: [
+                    InkWell(
+                        onTap: () => matchTab == 2
+                            ? _openProfile(m)
+                            : showLocalConversation(context, state, m.person),
+                        child: Row(children: [
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(13),
+                              child: Image.asset(m.person.image,
+                                  width: 52, height: 59, fit: BoxFit.cover)),
+                          const SizedBox(width: 15),
+                          Expanded(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                Text(m.person.name,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600)),
+                                const SizedBox(height: 7),
+                                Text(
+                                    matchTab == 2
+                                        ? l.socialPending
+                                        : state.social
+                                            .messagesFor(m.person.id)
+                                            .last
+                                            .text,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 11, color: muted))
+                              ])),
+                          const Icon(Icons.chevron_right,
+                              size: 20, color: muted)
+                        ])),
+                    if (matchTab == 2)
+                      Align(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: TextButton(
+                              onPressed: () =>
+                                  state.social.withdraw(m.person.id),
+                              child: Text(l.socialWithdraw,
+                                  style: const TextStyle(fontSize: 10))))
+                  ])))
+    ]);
+  }
 
   String _genderLabel(AppLocalizations l, String g) => switch (g) {
         'Women' => l.genderWomen,
         'Men' => l.genderMen,
-        _ => l.genderEveryone,
+        _ => l.genderEveryone
       };
-
   String _regionLabel(AppLocalizations l, String r) => switch (r) {
         'USA' => l.regionUSA,
         'UK' => l.regionUK,
         'France' => l.regionFrance,
         'Australia' => l.regionAustralia,
         'Singapore' => l.regionSingapore,
-        _ => l.regionWorldwide,
+        _ => l.regionWorldwide
       };
-
-  Widget _discovery(double width) {
-    final sidePanel = width >= 1250;
-    final l10n = AppLocalizations.of(context)!;
-    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Expanded(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        if (page == 0) ...[_hero(), const SizedBox(height: 32)],
-        Row(
-            key: matchesKey,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Text(page == 0 ? l10n.discoverTitle : l10n.savedTitle,
-                        style: Theme.of(context).textTheme.titleLarge),
-                    const SizedBox(height: 5),
-                    Text(page == 0 ? l10n.discoverSub : l10n.savedSub,
-                        style: const TextStyle(fontSize: 12, color: muted)),
-                  ])),
-              const SizedBox(width: 8),
-              OutlinedButton.icon(
-                  onPressed: _showFilters,
-                  icon: Icon(Icons.tune,
-                      size: 16, color: hasFilters ? green : ink),
-                  label: Text(hasFilters ? l10n.filtered : l10n.filters,
-                      style: const TextStyle(fontSize: 11)),
-                  style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 17, vertical: 16),
-                      backgroundColor: Colors.white)),
-            ]),
-        const SizedBox(height: 20),
-        TextField(
-            key: const ValueKey('discovery-search'),
-            controller: search,
-            onChanged: (_) => setState(() {}),
-            style: const TextStyle(fontSize: 12),
-            decoration: InputDecoration(
-                hintText: l10n.socialSearchHint,
-                prefixIcon: const Icon(Icons.search, size: 19, color: muted),
-                suffixIcon: search.text.isEmpty
-                    ? null
-                    : IconButton(
-                        tooltip: l10n.socialClearSearch,
-                        onPressed: () => setState(search.clear),
-                        icon: const Icon(Icons.close, size: 17)),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14))),
-        const SizedBox(height: 18),
-        SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(children: [
-              for (final (index, entry) in [
-                ('For you', Icons.auto_awesome_outlined),
-                ('High harmony', Icons.favorite_border),
-                ('Same birth city', Icons.near_me_outlined),
-                ('Creative souls', Icons.palette_outlined)
-              ].indexed)
-                Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Builder(builder: (context) {
-                      final selected = category == entry.$1;
-                      final color = accentColors[index];
-                      return ChoiceChip(
-                        label: Row(mainAxisSize: MainAxisSize.min, children: [
-                          Icon(entry.$2,
-                              size: 14, color: selected ? color : muted),
-                          const SizedBox(width: 6),
-                          Text(_categoryLabel(l10n, entry.$1))
-                        ]),
-                        selected: selected,
-                        onSelected: (_) => setState(() => category = entry.$1),
-                        showCheckmark: false,
-                        selectedColor: accentTints[index],
-                        backgroundColor: canvas,
-                        side: BorderSide(
-                            color:
-                                selected ? color.withValues(alpha: .35) : line),
-                        labelStyle: TextStyle(
-                            fontSize: 10,
-                            color: selected ? color : muted,
-                            fontWeight: FontWeight.w600),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(22)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 10),
-                      );
-                    })),
-            ])),
-        const SizedBox(height: 21),
-        Row(children: [
-          Container(
-              width: 5,
-              height: 5,
-              decoration:
-                  const BoxDecoration(color: green, shape: BoxShape.circle)),
-          const SizedBox(width: 7),
-          Expanded(
-              child: Text(
-                  page == 0
-                      ? l10n.countDiscover(recommendations.length)
-                      : l10n.countSaved(recommendations.length),
-                  style: const TextStyle(fontSize: 10, color: muted))),
-          const Icon(Icons.sort, size: 13, color: muted),
-          const SizedBox(width: 5),
-          Text(l10n.bestHarmony,
-              style: const TextStyle(fontSize: 10, color: muted)),
-        ]),
-        const SizedBox(height: 15),
-        if (recommendations.isEmpty)
-          _emptyState()
-        else
-          LayoutBuilder(builder: (context, c) {
-            final columns = c.maxWidth >= 700
-                ? 3
-                : c.maxWidth >= 460
-                    ? 2
-                    : 1;
-            final cardWidth = (c.maxWidth - (columns - 1) * 18) / columns;
-            return Wrap(
-                spacing: 18,
-                runSpacing: 22,
-                children: recommendations
-                    .map((m) => SizedBox(
-                        width: cardWidth, child: _personCard(m, cardWidth)))
-                    .toList());
-          }),
-        const SizedBox(height: 28),
-        Center(
-            child: Row(mainAxisSize: MainAxisSize.min, children: [
-          const Icon(Icons.spa_outlined, size: 14, color: muted),
-          const SizedBox(width: 8),
-          Flexible(
-              child: Text(l10n.curiosity,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 10, color: muted.withValues(alpha: .8)))),
-        ])),
-        const SizedBox(height: 12),
-        Center(
-            child: Text(l10n.demoNotice,
-                style: const TextStyle(fontSize: 9, color: muted))),
-      ])),
-      if (sidePanel) ...[
-        const SizedBox(width: 27),
-        SizedBox(width: 254, child: _rightPanel())
-      ],
-    ]);
-  }
-
-  Widget _hero() => LayoutBuilder(builder: (context, c) {
-        final compact = c.maxWidth < 550;
-        final l10n = AppLocalizations.of(context)!;
-        return Container(
-            height: compact ? 290 : 273,
-            decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFFE3EEFF),
-                      Color(0xFFEDE7F8),
-                      Color(0xFFF8E9DF)
-                    ]),
-                borderRadius: BorderRadius.circular(25)),
-            clipBehavior: Clip.antiAlias,
-            child: Stack(children: [
-              Positioned(
-                  right: compact ? -72 : -5,
-                  top: compact ? 47 : -15,
-                  child: Opacity(
-                      opacity: compact ? .55 : 1,
-                      child: SizedBox(
-                          width: compact ? 260 : 280,
-                          height: compact ? 260 : 280,
-                          child: const OrbitArt()))),
-              Padding(
-                  padding: EdgeInsets.all(compact ? 26 : 30),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Container(
-                              width: 5,
-                              height: 5,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: green)),
-                          const SizedBox(width: 7),
-                          Text(l10n.heroEyebrow,
-                              style: const TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w700,
-                                  color: green,
-                                  letterSpacing: 1.2))
-                        ]),
-                        const SizedBox(height: 14),
-                        Text(l10n.heroTitle,
-                            style: TextStyle(
-                                fontSize: compact ? 29 : 33,
-                                height: 1.18,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: -1.4,
-                                color: blue)),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                            width: compact ? 220 : 295,
-                            child: Text(l10n.heroBody,
-                                style: const TextStyle(
-                                    fontSize: 11, height: 1.6, color: muted))),
-                        const Spacer(),
-                        FilledButton(
-                            onPressed: state.personalized
-                                ? () => navigate(2)
-                                : editProfile,
-                            style: FilledButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 18, vertical: 16)),
-                            child:
-                                Row(mainAxisSize: MainAxisSize.min, children: [
-                              Text(
-                                  state.personalized
-                                      ? l10n.exploreEnergy
-                                      : l10n.findEnergy,
-                                  style: const TextStyle(fontSize: 11)),
-                              const SizedBox(width: 13),
-                              const Icon(Icons.arrow_forward, size: 15)
-                            ])),
-                      ])),
-            ]));
-      });
-
-  void _openProfile(bazi.MatchResult match) {
-    showProfileDetail(context, state, match, onCompare: () async {
-      final ok = await studio.updateSubjects(
-          ChartSubject(
-              name: state.name, birth: state.birth, sex: studio.primary.sex),
-          ChartSubject(name: match.person.name, birth: match.person.birth));
-      if (!mounted) return;
-      if (ok) {
-        navigate(4, studioTab: 2);
-      } else {
-        showToast(context, AppLocalizations.of(context)!.compareFailed);
-      }
-    });
-  }
-
-  Widget _personCard(bazi.MatchResult match, double width) {
-    final p = match.person;
-    final saved = state.saved.contains(p.id);
-    final l10n = AppLocalizations.of(context)!;
-    return Material(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(21),
-            side: const BorderSide(color: line)),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-            onTap: () => _openProfile(match),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                  height: width > 330 ? 315 : 240,
-                  child: Stack(fit: StackFit.expand, children: [
-                    Image.asset(p.image,
-                        fit: BoxFit.cover,
-                        alignment: const Alignment(0, -.35),
-                        errorBuilder: (_, __, ___) => Container(
-                            color: const Color(0xFFE4EBDA),
-                            child: const Icon(Icons.person,
-                                size: 70, color: green))),
-                    Positioned.fill(
-                        child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                          Colors.black.withValues(alpha: .05),
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: .52)
-                        ],
-                                    stops: const [
-                          0,
-                          .5,
-                          1
-                        ])))),
-                    Positioned(
-                        top: 13,
-                        left: 12,
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 7),
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFF2F6E9),
-                                borderRadius: BorderRadius.circular(20)),
-                            child:
-                                Row(mainAxisSize: MainAxisSize.min, children: [
-                              const Icon(Icons.auto_awesome,
-                                  size: 12, color: green),
-                              const SizedBox(width: 5),
-                              Text(l10n.harmonyPct(match.score),
-                                  style: const TextStyle(
-                                      fontSize: 10,
-                                      color: green,
-                                      fontWeight: FontWeight.w700))
-                            ]))),
-                    Positioned(
-                        right: 8,
-                        top: 7,
-                        child: IconButton.filledTonal(
-                            onPressed: () async {
-                              final ok = await state.toggleSaved(p.id);
-                              if (mounted) {
-                                showToast(
-                                    context,
-                                    ok
-                                        ? (saved
-                                            ? l10n.removedToast(p.name)
-                                            : l10n.savedToast(p.name))
-                                        : l10n.couldNotSave);
-                              }
-                            },
-                            tooltip: saved
-                                ? l10n.unsave(p.name)
-                                : l10n.saveTo(p.name),
-                            style: IconButton.styleFrom(
-                                backgroundColor:
-                                    Colors.white.withValues(alpha: .95),
-                                minimumSize: const Size(34, 34)),
-                            icon: Icon(
-                                saved ? Icons.favorite : Icons.favorite_border,
-                                color: saved ? const Color(0xFFBA776D) : ink,
-                                size: 17))),
-                    Positioned(
-                        bottom: 16,
-                        left: 17,
-                        right: 14,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('${p.name}, ${p.age}',
-                                  style: const TextStyle(
-                                      fontSize: 23,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: -.5)),
-                              const SizedBox(height: 3),
-                              Row(children: [
-                                const Icon(Icons.location_on_outlined,
-                                    color: Colors.white, size: 12),
-                                const SizedBox(width: 4),
-                                Expanded(
-                                    child: Text(p.location,
-                                        style: const TextStyle(
-                                            fontSize: 10, color: Colors.white)))
-                              ]),
-                            ])),
-                  ])),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 15, 16, 14),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TermTap(
-                            termId: 'master',
-                            contextText: l10n.dayMasterContext(
-                                p.name, identityLabel(l10n, match.chart)),
-                            radius: BorderRadius.circular(20),
-                            child: ElementPill(match.chart.dayElement,
-                                label:
-                                    '${identityLabel(l10n, match.chart)} · ${elementQualityShort(l10n, match.chart.dayElement)} ⓘ')),
-                        const SizedBox(height: 10),
-                        Text(p.occupation,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(fontSize: 10, color: muted)),
-                        const SizedBox(height: 12),
-                        Wrap(
-                            spacing: 5,
-                            runSpacing: 5,
-                            children: p.interests
-                                .map((i) => Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: line),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Text(i,
-                                        style: const TextStyle(
-                                            fontSize: 8, color: muted))))
-                                .toList()),
-                        const SizedBox(height: 13),
-                        const Divider(height: 1),
-                        const SizedBox(height: 12),
-                        Row(children: [
-                          const Icon(Icons.link, size: 15, color: green),
-                          const SizedBox(width: 6),
-                          Expanded(
-                              child: Text(matchLabel(l10n, match.score),
-                                  style: const TextStyle(
-                                      fontSize: 10, color: green))),
-                          const Icon(Icons.arrow_forward,
-                              size: 15, color: green)
-                        ]),
-                      ])),
-            ])));
-  }
-
-  Widget _rightPanel() {
-    final l10n = AppLocalizations.of(context)!;
-    return Column(children: [
-      Surface(
-          padding: const EdgeInsets.all(20),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Row(children: [
-              Expanded(
-                  child: Text(l10n.glanceTitle,
-                      style: const TextStyle(
-                          fontSize: 13, fontWeight: FontWeight.w700))),
-              InkWell(
-                  onTap: () => navigate(2),
-                  child: const Icon(Icons.north_east, size: 17, color: muted))
-            ]),
-            const SizedBox(height: 5),
-            Text(state.personalized ? l10n.glancePersonal : l10n.glanceSample,
-                style: const TextStyle(fontSize: 10, color: muted)),
-            const SizedBox(height: 24),
-            Center(child: ElementRing(chart: state.chart, size: 155)),
-            const SizedBox(height: 23),
-            for (final element in bazi.Element.values)
-              Padding(
-                  padding: const EdgeInsets.only(bottom: 11),
-                  child: Row(children: [
-                    Container(
-                        width: 6,
-                        height: 6,
-                        decoration: BoxDecoration(
-                            color: elementColors[element.index],
-                            shape: BoxShape.circle)),
-                    const SizedBox(width: 9),
-                    SizedBox(
-                        width: 43,
-                        child: Text(elementLabel(l10n, element),
-                            style:
-                                const TextStyle(fontSize: 10, color: muted))),
-                    Expanded(
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: LinearProgressIndicator(
-                                value: state.chart.distribution[element.index],
-                                minHeight: 4,
-                                color: elementColors[element.index],
-                                backgroundColor: const Color(0xFFF1F3EE)))),
-                    const SizedBox(width: 10),
-                    SizedBox(
-                        width: 29,
-                        child: Text(
-                            '${(state.chart.distribution[element.index] * 100).round()}%',
-                            textAlign: TextAlign.right,
-                            style: const TextStyle(fontSize: 9, color: muted))),
-                  ])),
-            const SizedBox(height: 11),
-            SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                    onPressed: () => navigate(2),
-                    style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 15)),
-                    child: Text(l10n.seeChart,
-                        style: const TextStyle(
-                            fontSize: 10, fontWeight: FontWeight.w600)))),
-          ])),
-      const SizedBox(height: 20),
-      Surface(
-          color: const Color(0xFFF6F1E7),
-          padding: const EdgeInsets.all(21),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Row(children: [
-              const Icon(Icons.wb_sunny_outlined,
-                  size: 18, color: Color(0xFFAD9055)),
-              const SizedBox(width: 8),
-              Text(l10n.wisdomEyebrow,
-                  style: const TextStyle(
-                      fontSize: 8,
-                      letterSpacing: 1.1,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF98815B)))
-            ]),
-            const SizedBox(height: 17),
-            Text(l10n.wisdomTitle,
-                style: const TextStyle(
-                    fontSize: 19,
-                    height: 1.45,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: -.5)),
-            const SizedBox(height: 11),
-            Text(l10n.wisdomBody,
-                style: const TextStyle(
-                    fontSize: 11, height: 1.8, color: Color(0xFF8B8576))),
-            const SizedBox(height: 15),
-            InkWell(
-                onTap: showGuide,
-                child: Row(children: [
-                  Expanded(
-                      child: Text(l10n.wisdomCta,
-                          style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF8E794F)))),
-                  const SizedBox(width: 7),
-                  const Icon(Icons.arrow_forward,
-                      size: 14, color: Color(0xFF8E794F)),
-                ])),
-          ])),
-      const SizedBox(height: 21),
-      Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Icon(Icons.lock_outline, size: 15, color: muted),
-            const SizedBox(width: 9),
-            Expanded(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                  Text(l10n.detailsYours,
-                      style: const TextStyle(
-                          fontSize: 10, fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 5),
-                  Text(l10n.detailsStored,
-                      style: const TextStyle(
-                          fontSize: 9, color: muted, height: 1.7)),
-                  TextButton(
-                      onPressed: () => showPrivacy(context, state),
-                      style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size(20, 32),
-                          alignment: Alignment.centerLeft),
-                      child: Text(l10n.privacyData,
-                          style: const TextStyle(fontSize: 9))),
-                ])),
-          ])),
-    ]);
-  }
-
-  Widget _emptyState() {
-    final l10n = AppLocalizations.of(context)!;
-    return Surface(
-        child: Center(
-            child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40),
-                child: Column(children: [
-                  Icon(page == 1 ? Icons.favorite_border : Icons.travel_explore,
-                      color: green, size: 38),
-                  const SizedBox(height: 18),
-                  Text(
-                      page == 1 && state.saved.isEmpty
-                          ? l10n.emptySavedTitle
-                          : l10n.emptyFilterTitle,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w600)),
-                  const SizedBox(height: 9),
-                  Text(
-                      page == 1 && state.saved.isEmpty
-                          ? l10n.emptySavedBody
-                          : l10n.emptyFilterBody,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: muted, fontSize: 12)),
-                  const SizedBox(height: 20),
-                  FilledButton(
-                      onPressed: () => setState(() {
-                            category = 'For you';
-                            gender = 'Everyone';
-                            region = 'Worldwide';
-                            ageRange = const RangeValues(18, 60);
-                            minScore = 0;
-                            search.clear();
-                            if (page == 1 && state.saved.isEmpty) page = 0;
-                          }),
-                      child: Text(page == 1 && state.saved.isEmpty
-                          ? l10n.discoverPeople
-                          : l10n.resetFilters)),
-                ]))));
-  }
-
   Future<void> _showFilters() async {
     final l10n = AppLocalizations.of(context)!;
     var draftGender = gender;
@@ -1020,7 +766,7 @@ class _AppShellState extends State<AppShell> {
         builder: (context) => StatefulBuilder(
             builder: (context, update) => AlertDialog(
                   backgroundColor: canvas,
-                  title: Text(l10n.filterTitle),
+                  title: Text(l10n.filters),
                   content: SizedBox(
                       width: 410,
                       child: SingleChildScrollView(

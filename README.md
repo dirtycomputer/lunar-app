@@ -1,6 +1,6 @@
-# Lunar
+# FatePair
 
-An English-language Flutter app for meaningful connections inspired by BaZi and the Five Elements. Built with Material 3, a soft botanical palette, Manrope typography, and responsive mobile / desktop layouts.
+An English-language Flutter app for BaZi charts, recent outlook, matching, and chart-grounded Agent questions. Built with Material 3, a soft botanical palette, Manrope typography, and responsive mobile / desktop layouts.
 
 ## Run
 
@@ -28,14 +28,23 @@ Professional four-pillar table, solar-time options, fortune-cycle drilldown, sym
 
 The default DeepSeek proxy discovers live model IDs. Model settings accepts compatible custom/local endpoints. This is a working local implementation, not full feature parity with Wen Zhen. See the [open-source audit and complete scope matrix](docs/open-source-audit.md) for rules, sources and unimplemented auxiliary tools.
 
+## Product requirements
+
+[`product.md`](product.md) is the product baseline. Substantial changes to user flows must update that document in natural language. Repository contributors follow [`AGENTS.md`](AGENTS.md).
+
 ## Working features
 
-- Responsive Discover page with ranked profile cards and Five Elements overview.
+- First-use chooser with two primary cards, My reading and Match, plus a secondary Ask Agent action. The chosen starting task is remembered.
+- Two core tasks, My chart and Match, with Agent as a supporting destination.
+- Focused Match page with a vertical people list, one computed recommendation reason per person, filter-aware random matching, and search/filters.
+- My chart opens with the main reading before Four Pillars; recent outlook switches between day, month, and year transits. Detailed chart tables are collapsed by default. Day master terminology can be explained in place.
+- Contextual questions open beside the current reading on desktop or in a phone bottom sheet, preserving the reading position. Agent also accepts general questions before birth setup and chart-specific questions with follow-ups using computed chart evidence. Without a configured provider it shows labelled chart-reference answers.
+- Advanced Chart Studio tools are available from My chart → Tools; model settings, language, privacy, and guide remain in Settings.
 - Live cultural harmony scoring, not hard-coded percentages.
-- Filter by gender, age, country, minimum harmony, and discovery categories.
+- Filter by gender, age, country, and minimum harmony.
 - Save / unsave connections, inspect match breakdowns, and hide profiles.
 - Search discovery by name, city/country, occupation, or interests.
-- Connections hub with separate Saved, Invitations, and Messages sections.
+- Secondary Saved, Invitations, and Messages tabs within Match.
 - Local-only invitations, withdrawal, conversation previews, and persistent message drafts with an icebreaker. No messages are delivered.
 - Validated adult birth profile, date picker, optional birth time, 16 global birthplaces, and custom birthplace with IANA zone and longitude.
 - Historical time-zone and daylight-saving handling.
@@ -45,17 +54,19 @@ The default DeepSeek proxy discovers live model IDs. Model settings accepts comp
 
 ## Scope
 
-This version is a working local prototype. Six fictional adults with stock photos make the recommendation experience immediately explorable. There is no live community, authentication server, messaging transport, payments, or account verification. Profile details, saves, invitations, and conversation drafts remain in local SharedPreferences; this storage is not encrypted. Chart calculations run locally. Clicking Generate sends calculated evidence to the configured model provider; names, exact birth dates and places are omitted. Client keys are memory-only and the default DeepSeek key is held by the local server. See [proxy setup](server/README.md).
+This version is a working local prototype. Six fictional adults with stock photos make the recommendation experience immediately explorable. There is no live community, authentication server, messaging transport, payments, or account verification. Profile details, saves, invitations, and conversation drafts remain in local SharedPreferences; this storage is not encrypted. Agent conversation state lives in memory for the current app session and is cleared when birth details change or local data is reset. When a model is connected, questions and recent turns are transmitted alongside computed chart evidence. Text typed by the user is not automatically redacted. Chart calculations run locally. Clicking Generate sends calculated evidence to the configured model provider; names, exact birth dates and places are omitted. Client keys are memory-only and the default DeepSeek key is held by the local server. See [proxy setup](server/README.md).
 
 A real launch requires backend authentication and profiles, mutual consent and messaging, moderation/reporting, verification and age assurance, secure handling of birth data, server-side recommendation processing, retention/deletion controls, and production privacy documentation.
 
 ## Yuan MVP integration
 
-This repository is the canonical project for the combined app. The integration starts from `a49179f` and keeps Lunar’s brand, Manrope/Material 3 design, `lunar` 1.7.8 engine, local mean-solar-time convention, Chart Studio, model adapter, existing localization, platform configuration, and seeded community. The earlier Yuan prototype contributes the invitation/message-preview flow and discovery search; its separate calendar/scoring implementation is not copied over.
+This repository is the canonical project for the combined app. The integration starts from `a49179f` and keeps the repository’s Manrope/Material 3 design, `lunar` 1.7.8 engine, local mean-solar-time convention, Chart Studio, model adapter, existing localization, platform configuration, and seeded community. The earlier Yuan prototype contributes the invitation/message-preview flow and discovery search; its separate calendar/scoring implementation is not copied over.
+
+The original Discover hero, duplicate energy overview, wisdom panel, and heading subtitles have been removed from the main flows.
 
 Invitations and local message drafts use the versioned `social.v1` preference. Writes are serialized and published to the UI only after successful storage. Hiding/reporting a profile removes it from the Connections hub; its local drafts remain in the data export until a confirmed local-data reset removes them. Reset also clears invitations and drafts while preserving the chosen language and unrelated preferences.
 
-New social strings are translated into English and Simplified Chinese; other existing locales currently use generated English fallbacks for these new strings. The compact phone tab is **Connect**, with Saved, Invitations, and Messages inside.
+New task-flow and social strings are translated into English and Simplified Chinese; other existing locales currently use generated English fallbacks for these new strings. Saved, Invitations, and Messages are secondary tabs inside **Match**.
 
 The hosted preview is a static Web build. Offline charts, comparisons, discovery, and local social features work without credentials. AI generation needs a separately configured model endpoint; no provider key is bundled or provisioned by this integration. See `server/README.md` for running the preserved proxy locally.
 
@@ -84,7 +95,7 @@ Recommendations sort by total score descending, with a stable profile-ID tiebrea
 
 ## Browser verification
 
-The local Web app was exercised with Playwright on desktop (1440 × 1000) and mobile (390 × 844), including birth-profile editing, live re-ranking, saved connections, profile details, local profile restoration, and the confirmed local-data reset. Browser console: zero errors and zero warnings. Preview images are in `output/playwright/`.
+The current Web app was exercised with Playwright in Chromium at 1440 × 1000 and 390 × 844: two primary entry cards, birth setup, reading-first chart, contextual glossary, outlook, inline questions and a follow-up, vertical recommendations, sample labelling, filtered random matching, and remembered entry. There were no page errors or failed resource requests. Current screenshots are `output/playwright/fatepair-*.png`; the machine-readable summary is `output/fatepair-browser-check.txt`.
 
 ## Structure
 
@@ -92,16 +103,19 @@ The local Web app was exercised with Playwright on desktop (1440 × 1000) and mo
 - `lib/services/bazi.dart`: chart calculation and explainable ranking.
 - `lib/services/app_state.dart`: persistence and reactive app state.
 - `lib/services/social.dart`: serialized, local-only invitation and message-draft storage.
-- `lib/ui/social_pages.dart`: Connections hub and conversation preview.
+- `lib/ui/social_pages.dart`: local conversation preview.
 - `lib/ui/design.dart`: theme, reusable surfaces, brand illustration, element ring.
-- `lib/ui/app_shell.dart`: responsive navigation, discovery, filtering and saves.
+- `lib/ui/app_shell.dart`: intent-based navigation, the focused people list, filtering, random matching, and saves.
+- `lib/ui/intent_pages.dart`: first-use chooser, Four Pillars, reading, and recent outlook.
+- `lib/ui/agent_page.dart`: conversation and question composer.
+- `lib/services/chart_assistant.dart`: computed context, reference answers, model routing, conversation context, and cancellation.
 - `lib/ui/profile_editor.dart`: validated birth data editor.
 - `lib/ui/profile_detail.dart`: profile and match breakdown.
-- `lib/ui/secondary_pages.dart`: energy page, BaZi guide, privacy controls.
+- `lib/ui/secondary_pages.dart`: optional BaZi guide and privacy controls.
 
 ## Validation
 
-Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 50 tests pass in the integrated version. Web release and iOS simulator builds succeed. Real DeepSeek plain/professional requests returned HTTP 200. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
+Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 59 tests pass in the current UX update, and the Web release builds successfully. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
 
 ## References and assets
 
@@ -118,4 +132,4 @@ Automated checks cover calculation fixtures, solar-term boundaries, selected tim
   - Aisha: https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43
   - Ethan: https://images.unsplash.com/photo-1535713875002-d1d0cf377fde
 
-The people pictured are not represented as actual Lunar members. The flower mark and orbit illustration are drawn in Flutter and have no external image dependency.
+The people pictured are not represented as actual FatePair members. The flower mark and orbit illustration are drawn in Flutter and have no external image dependency.

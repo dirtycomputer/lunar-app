@@ -5,6 +5,7 @@ import '../models/profile.dart';
 import 'bazi.dart';
 import 'platform_contracts.dart';
 import 'social.dart';
+import 'intent_flow.dart';
 
 class AppState extends ChangeNotifier {
   final SharedPreferences preferences;
@@ -22,6 +23,7 @@ class AppState extends ChangeNotifier {
   List<ReportRecord> reports = [];
   String? persistenceError;
   int resetGeneration = 0;
+  AppIntent? startIntent;
   AppState(this.preferences)
       : consentStore = LocalConsentService(preferences),
         moderationStore = LocalModerationService(preferences) {
@@ -45,6 +47,10 @@ class AppState extends ChangeNotifier {
     hidden.addAll(preferences.getStringList('hidden') ?? []);
     reports = moderationStore.loadReports();
     localeOverride = _parseLocale(preferences.getString('locale'));
+    final intent = preferences.getString('start.intent');
+    for (final value in AppIntent.values) {
+      if (value.name == intent) startIntent = value;
+    }
     social = LocalSocialStore(preferences,
         knownIds: demoPeople.map((p) => p.id).toSet());
     social.addListener(notifyListeners);
@@ -115,6 +121,19 @@ class AppState extends ChangeNotifier {
   void _recalculate() {
     chart = service.calculate(birth);
     matches = service.rank(chart, demoPeople);
+  }
+
+  Future<bool> chooseIntent(AppIntent intent) async {
+    try {
+      if (!await preferences.setString('start.intent', intent.name)) {
+        return false;
+      }
+    } catch (_) {
+      return false;
+    }
+    startIntent = intent;
+    notifyListeners();
+    return true;
   }
 
   Future<bool> updateProfile(String newName, BirthData newBirth) async {
@@ -207,7 +226,8 @@ class AppState extends ChangeNotifier {
         'reports',
         'studio.charts',
         'studio.model',
-        'studio.style'
+        'studio.style',
+        'start.intent'
       ]) {
         if (!await preferences.remove(key)) return false;
       }
@@ -218,6 +238,7 @@ class AppState extends ChangeNotifier {
     birth = demoBirth;
     name = 'Alex';
     personalized = false;
+    startIntent = null;
     saved.clear();
     hidden.clear();
     reports = [];

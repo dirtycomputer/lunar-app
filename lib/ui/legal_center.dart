@@ -51,7 +51,7 @@ Future<void> showLegalDocument(BuildContext context, LegalDocument doc) =>
 
 String _exportJson(AppState state) =>
     const JsonEncoder.withIndent('  ').convert({
-      'app': 'Lunar',
+      'app': 'FatePair',
       'exportedAt': DateTime.now().toIso8601String(),
       'profile': {
         'name': state.name,

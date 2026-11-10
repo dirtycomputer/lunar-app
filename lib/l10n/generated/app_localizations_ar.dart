@@ -7,7 +7,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appTitle => 'Lunar — اعثر على طاقتك';
+  String get appTitle => 'FatePair — اعثر على طاقتك';
 
   @override
   String get languageName => 'العربية';
@@ -82,7 +82,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get legalCenterTitle => 'الشؤون القانونية وبياناتك';
 
   @override
-  String get legalCenterIntro => 'السياسات التي ستنظّم Lunar عند الإطلاق. انقر لقراءة المسودة.';
+  String get legalCenterIntro => 'السياسات التي ستنظّم FatePair عند الإطلاق. انقر لقراءة المسودة.';
 
   @override
   String get actionClose => 'إغلاق';
@@ -100,7 +100,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteConfirmTitle => 'حذف حسابك وبياناتك؟';
 
   @override
-  String get deleteConfirmBody => 'يزيل هذا الإجراء نهائيًا من هذا الجهاز ملف ميلادك، واتصالاتك المحفوظة، والملفات الشخصية المخفية، والبلاغات، والموافقات. وعند الإطلاق سيتم أيضًا حذف حسابك وبياناتك من خوادم Lunar. قد يُحتفظ بسجلات السلامة والسجلات القانونية حيث يتطلب القانون ذلك.';
+  String get deleteConfirmBody => 'يزيل هذا الإجراء نهائيًا من هذا الجهاز ملف ميلادك، واتصالاتك المحفوظة، والملفات الشخصية المخفية، والبلاغات، والموافقات. وعند الإطلاق سيتم أيضًا حذف حسابك وبياناتك من خوادم FatePair. قد يُحتفظ بسجلات السلامة والسجلات القانونية حيث يتطلب القانون ذلك.';
 
   @override
   String get keepAccount => 'الاحتفاظ بالحساب';
@@ -148,13 +148,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get languageTitle => 'اللغة';
 
   @override
-  String get planFree => 'Lunar مجانًا';
+  String get planFree => 'FatePair مجانًا';
 
   @override
-  String get planPlus => 'Lunar Plus';
+  String get planPlus => 'FatePair Plus';
 
   @override
-  String get planPro => 'Lunar Pro';
+  String get planPro => 'FatePair Pro';
 
   @override
   String get planFreeSub => 'الاستكشاف والخرائط والاتصالات المحفوظة.';
@@ -214,7 +214,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get topbarSub => 'الاتصالات ذات المعنى تبدأ من طاقتك.';
 
   @override
-  String get howLunarWorks => 'كيف يعمل Lunar';
+  String get howLunarWorks => 'كيف يعمل FatePair';
 
   @override
   String get heroEyebrow => 'حكمة قديمة. تواصلٌ جديد.';
@@ -506,7 +506,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get guideTitle => 'جذور قديمة.\nتواصلٌ إنساني.';
 
   @override
-  String get guideIntro => 'BaZi نظام صيني تقليدي لاستكشاف أنماط لحظة الميلاد. يُدخل Lunar هذا التقليد إلى عالم أكثر فضولًا وأكثر ترابطًا.';
+  String get guideIntro => 'BaZi نظام صيني تقليدي لاستكشاف أنماط لحظة الميلاد. يُدخل FatePair هذا التقليد إلى عالم أكثر فضولًا وأكثر ترابطًا.';
 
   @override
   String get meetElements => 'تعرّف على العناصر الخمسة';
@@ -521,7 +521,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get guidePillarsBody => 'تكوّن سنة ميلادك وشهرها ويومها وساعتها كلٌّ منها عمودًا. ويتألف كل عمود من جذع سماوي وفرع أرضي — ثمانية أحرف في المجموع. وهذا هو معنى BaZi: «ثمانية أحرف». ويُسمّى جذع يومك سيّد اليوم.';
 
   @override
-  String get guideHarmonyTitle => 'كيف يحسب Lunar درجة الانسجام؟';
+  String get guideHarmonyTitle => 'كيف يحسب FatePair درجة الانسجام؟';
 
   @override
   String get guideHarmonyBody => 'يجمع العرض التوضيحي لدينا ثلاثة عوامل شفافة: 45% لتوازن العناصر المجمّع، يُقاس بالإنتروبيا المعيارية للعناصر الظاهرة؛ و35% لارتباط سيّد اليوم، استنادًا إلى دورة التوليد؛ و20% لرنين الفرع اليومي، باستخدام الأزواج والثلثيات والتقابلات التقليدية. تُحسب الدرجات من الخرائط، وتُرتَّب التوصيات من الأعلى إلى الأدنى.';
@@ -536,13 +536,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get guideTimezoneTitle => 'كيف تُعالَج المناطق الزمنية؟';
 
   @override
-  String get guideTimezoneBody => 'يحدّد Lunar وقت ميلادك باستخدام قاعدة بيانات المناطق الزمنية IANA، بما في ذلك قواعد التوقيت الصيفي التاريخية. وتعتمد السنة والشهر على لحظات المراحل الشمسية في مكتبة التقويم بتوقيت UTC+8. وتستخدم توصيات المواعدة متوسط التوقيت الشمسي المحلي بناءً على خط طول مكان الميلاد، مع تغيّر اليوم عند منتصف الليل. ويضيف Chart Studio دعمًا لوقت الساعة المحلي، وللتوقيت الشمسي الحقيقي مع تصحيح تقريبي لمعادلة الزمن، ولحدّ اليوم عند الساعة 23:00. وعند تكرار وقت تعديل الساعة يُعتمد التكرار الأبكر؛ وتُرفض أوقات تعديل الساعة غير الموجودة. وقد تنتج مدارس BaZi الأخرى خرائط مختلفة.';
+  String get guideTimezoneBody => 'يحدّد FatePair وقت ميلادك باستخدام قاعدة بيانات المناطق الزمنية IANA، بما في ذلك قواعد التوقيت الصيفي التاريخية. وتعتمد السنة والشهر على لحظات المراحل الشمسية في مكتبة التقويم بتوقيت UTC+8. وتستخدم توصيات المواعدة متوسط التوقيت الشمسي المحلي بناءً على خط طول مكان الميلاد، مع تغيّر اليوم عند منتصف الليل. ويضيف Chart Studio دعمًا لوقت الساعة المحلي، وللتوقيت الشمسي الحقيقي مع تصحيح تقريبي لمعادلة الزمن، ولحدّ اليوم عند الساعة 23:00. وعند تكرار وقت تعديل الساعة يُعتمد التكرار الأبكر؛ وتُرفض أوقات تعديل الساعة غير الموجودة. وقد تنتج مدارس BaZi الأخرى خرائط مختلفة.';
 
   @override
   String get guideNoTimeTitle => 'ماذا لو لم أعرف وقت ميلادي؟';
 
   @override
-  String get guideNoTimeBody => 'لا يزال بإمكانك الاستكشاف. يستخدم Lunar الظهر المحلي لحساب التاريخ، ويترك عمود الساعة جانبًا، ويشير إلى أن نتائجك تقريبية. وفي التواريخ القريبة من حدود المراحل الشمسية قد يكون العام أو الشهر غير مؤكد أيضًا. أضف وقتك لاحقًا لتنقيح خريطتك.';
+  String get guideNoTimeBody => 'لا يزال بإمكانك الاستكشاف. يستخدم FatePair الظهر المحلي لحساب التاريخ، ويترك عمود الساعة جانبًا، ويشير إلى أن نتائجك تقريبية. وفي التواريخ القريبة من حدود المراحل الشمسية قد يكون العام أو الشهر غير مؤكد أيضًا. أضف وقتك لاحقًا لتنقيح خريطتك.';
 
   @override
   String get guideCommunityTitle => 'هل هذا مجتمع مواعدة حقيقي؟';
@@ -632,7 +632,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dateInvalid => 'أدخل تاريخًا صحيحًا بصيغة YYYY-MM-DD.';
 
   @override
-  String get adultsOnly => 'Lunar مخصص للبالغين من عمر 18 عامًا فأكثر.';
+  String get adultsOnly => 'FatePair مخصص للبالغين من عمر 18 عامًا فأكثر.';
 
   @override
   String get yearMin => 'يُرجى إدخال سنة من عام 1900 فصاعدًا.';
@@ -959,4 +959,166 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get socialTabConnect => 'Connect';
+
+  @override
+  String get flowChoose => 'What brings you here?';
+
+  @override
+  String get flowChart => 'My chart';
+
+  @override
+  String get flowMatch => 'Match';
+
+  @override
+  String get flowAgent => 'Agent';
+
+  @override
+  String get flowAskAgent => 'Ask Agent';
+
+  @override
+  String get flowOutlook => 'Recent outlook';
+
+  @override
+  String get flowTools => 'Tools';
+
+  @override
+  String get flowBirthDetails => 'Birth details';
+
+  @override
+  String get flowRandom => 'Random match';
+
+  @override
+  String get flowPeople => 'People';
+
+  @override
+  String get flowSettings => 'Settings';
+
+  @override
+  String get flowReading => 'Reading';
+
+  @override
+  String get flowDetails => 'Chart details';
+
+  @override
+  String get flowToday => 'Today';
+
+  @override
+  String get flowMonth => 'This month';
+
+  @override
+  String get flowYear => 'This year';
+
+  @override
+  String get flowReference => 'Chart reference';
+
+  @override
+  String get flowModel => 'Model';
+
+  @override
+  String get flowConnectModel => 'Connect model';
+
+  @override
+  String get flowSend => 'Ask';
+
+  @override
+  String get flowStop => 'Stop';
+
+  @override
+  String get flowClearChat => 'New conversation';
+
+  @override
+  String get flowQuestionHint => 'Ask about your chart…';
+
+  @override
+  String get flowQuestionOverview => 'What stands out in my chart?';
+
+  @override
+  String get flowQuestionCycle => 'What is happening in my current cycles?';
+
+  @override
+  String get flowQuestionWork => 'What does my chart say about work?';
+
+  @override
+  String get flowQuestionRelations => 'How do the elements in my chart relate?';
+
+  @override
+  String get flowBack => 'Back';
+
+  @override
+  String get flowSample => 'Sample chart';
+
+  @override
+  String get flowStart => 'Start';
+
+  @override
+  String get flowSaved => 'Saved';
+
+  @override
+  String get flowNoPeople => 'No people match these filters.';
+
+  @override
+  String get flowAddBirth => 'Add birth details';
+
+  @override
+  String get flowOverview => 'Birth chart';
+
+  @override
+  String get flowAskReading => 'Ask about this reading';
+
+  @override
+  String get flowOutlookAsk => 'Ask about this period';
+
+  @override
+  String get flowLocalPreview => 'Local preview';
+
+  @override
+  String get flowNoInvites => 'No invitations yet.';
+
+  @override
+  String get flowNoMessages => 'No conversations yet.';
+
+  @override
+  String get flowNoSaved => 'No saved profiles.';
+
+  @override
+  String get flowReadOnly => 'Reading';
+
+  @override
+  String get flowQuestionPrompt => 'Your question';
+
+  @override
+  String get flowProfile => 'Profile';
+
+  @override
+  String get flowResetFilters => 'Reset filters';
+
+  @override
+  String get flowSelfIntent => 'My reading';
+
+  @override
+  String get flowGeneralBazi => 'What is BaZi?';
+
+  @override
+  String get flowGeneralGods => 'How do the Ten Gods work?';
+
+  @override
+  String get flowGeneralMaster => 'What is a day master?';
+
+  @override
+  String get flowGeneralSolar => 'How does solar time work?';
+
+  @override
+  String get flowReasonBalance => 'Your combined charts have a balanced mix of elements.';
+
+  @override
+  String get flowReasonSupport => 'Your core elements follow the supporting cycle.';
+
+  @override
+  String get flowReasonShared => 'You share the same core element.';
+
+  @override
+  String get flowReasonBranches => 'Your day branches share a traditional harmony pattern.';
+
+  @override
+  String get flowReasonContrast => 'Your core elements form a contrasting pair.';
 }
