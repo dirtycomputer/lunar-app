@@ -56,7 +56,7 @@ The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) wi
 
 This version is a working prototype with six fictional adults and stock photos, local social interactions, and no live community or messaging transport. Local profiles and drafts use unencrypted SharedPreferences. Agent history stays in memory for the session and resets when birth details change or local data is cleared.
 
-The new analysis service verifies birth charts with lunar-python before sending verified evidence and the user's complete session context to DeepSeek-V4.1-Flash-1017 (official API name `deepseek-flash`, 1M context, maximum reasoning). Context includes name, birth inputs, chart convention, current reading, and all earlier turns; typed text is not automatically redacted. Service keys are server-only. See [chart service setup, deployment protection, and limits](server/README.md). The existing public preview remains on its published configuration until the protected service can be made available to its intended users.
+The new analysis service verifies birth charts with lunar-python before sending verified evidence and the user's complete session context to DeepSeek-V4.1-Flash-1017 (official API name `deepseek-flash`, 1M context, maximum reasoning). Context includes name, birth inputs, chart convention, current reading, and all earlier turns; typed text is not automatically redacted. Service keys are server-only. See [chart service setup, deployment protection, and limits](server/README.md). The public App uses the Production chart service; Preview backend deployments retain their access protection.
 
 A real launch requires backend authentication and profiles, mutual consent and messaging, moderation/reporting, verification and age assurance, secure handling of birth data, server-side recommendation processing, retention/deletion controls, and production privacy documentation.
 
@@ -70,7 +70,7 @@ Invitations and local message drafts use the versioned `social.v1` preference. W
 
 New task-flow and social strings are translated into English and Simplified Chinese; other existing locales currently use generated English fallbacks for these new strings. Saved, Invitations, and Messages are secondary tabs inside **Match**.
 
-The current hosted preview remains on its published static configuration while access to the new protected analysis service is pending. Offline charts, comparisons, matching and local social features work without credentials. The new service credential is provisioned only in the protected backend, never in Flutter. See `server/README.md` for the chart-first local preview and deployment setup.
+The hosted Flutter app calls the public Production chart service. Offline charts, comparisons, matching and local social features work without credentials. The service credential is provisioned only on the backend, never in Flutter. See `server/README.md` for the chart-first local preview and deployment setup.
 
 ## Chart convention
 

@@ -7,7 +7,7 @@
 - Model alias/version, 1M context and supported max effort are verified against current official DeepSeek documentation and the live `/models` API.
 - No six-turn truncation; per-question snapshots preserve the original page context. Oversized context is rejected explicitly. Birth-input sharing disclosures were updated.
 - Chromium app flow with the live local Python service: birth setup → chart → contextual Agent → model answer → follow-up passes, with `verifiedChartCount: 1`, `contextMessages: 4`, max reasoning, zero page errors and no failed resources.
-- Vercel production SSO protection remains in place. Public access is not enabled; the public preview is not claimed to use the new protected service.
+- Production API access is explicitly authorized and enabled; Preview backend deployments retain SSO protection. Unauthenticated Production info and two chart-analysis requests return HTTP 200, with one verified chart, max reasoning, and 2 → 4 context messages. The Flutter release is configured with the same Production API origin.
 
 ## FatePair focused-flow update — 2026-11-10
 

@@ -42,7 +42,7 @@ The key stays in the server process. Do not put it in Flutter defines, frontend 
 
 The Vercel project `fatepair-api` uses this `server` directory as its root, `api/index.py` as the Python entrypoint, and a 300-second function duration. `DEEPSEEK_API_KEY` is a sensitive Production runtime variable. A repository Actions secret is separate: GitHub does not automatically copy it into Vercel runtime configuration.
 
-Production access remains protected by the project's current Vercel SSO policy until public API access is explicitly authorized. Preview deployments keep their protection. No authentication credential may be embedded in Flutter to work around that policy.
+Public Production API access is authorized for `fatepair-api`; Preview deployments retain Vercel SSO protection. The Production origin is `https://fatepair-api-buaa42wxys-projects.vercel.app`. No authentication credential is embedded in Flutter.
 
 Once the endpoint is available to intended users, build **all platforms**, including Web, with the returned API origin:
 
