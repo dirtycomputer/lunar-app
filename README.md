@@ -26,7 +26,7 @@ Open http://127.0.0.1:5199 after building. Web renderer resources, fonts, and pr
 
 Professional four-pillar table, solar-time options, fortune-cycle drilldown, symbolic stars and palaces, two-chart comparison, almanac/date filtering, Five Movements/Six Qi, a small sourced classical library, and custom model explanations in plain English or professional language.
 
-The default DeepSeek proxy discovers live model IDs. Model settings accepts compatible custom/local endpoints. This is a working local implementation, not full feature parity with Wen Zhen. See the [open-source audit and complete scope matrix](docs/open-source-audit.md) for rules, sources and unimplemented auxiliary tools.
+The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) with maximum reasoning. Model settings also accepts compatible custom/local endpoints. This is a working local implementation, not full feature parity with Wen Zhen. See the [open-source audit and complete scope matrix](docs/open-source-audit.md) for rules, sources and unimplemented auxiliary tools.
 
 ## Product requirements
 
@@ -70,7 +70,7 @@ Invitations and local message drafts use the versioned `social.v1` preference. W
 
 New task-flow and social strings are translated into English and Simplified Chinese; other existing locales currently use generated English fallbacks for these new strings. Saved, Invitations, and Messages are secondary tabs inside **Match**.
 
-The hosted preview is a static Web build. Offline charts, comparisons, discovery, and local social features work without credentials. AI generation needs a separately configured model endpoint; no provider key is bundled or provisioned by this integration. See `server/README.md` for running the preserved proxy locally.
+The current hosted preview remains on its published static configuration while access to the new protected analysis service is pending. Offline charts, comparisons, matching and local social features work without credentials. The new service credential is provisioned only in the protected backend, never in Flutter. See `server/README.md` for the chart-first local preview and deployment setup.
 
 ## Chart convention
 
