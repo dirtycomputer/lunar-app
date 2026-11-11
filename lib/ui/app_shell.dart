@@ -35,6 +35,7 @@ class _AppShellState extends State<AppShell> {
   final scroll = ScrollController(), search = TextEditingController();
   final random = RandomMatchPicker();
   int matchTab = 0;
+  final chartCache = ChartContextCache();
   bool outlook = false;
   OutlookPeriod period = OutlookPeriod.month;
   String gender = 'Everyone', region = 'Worldwide';
@@ -80,13 +81,13 @@ class _AppShellState extends State<AppShell> {
     super.dispose();
   }
 
-  ChartContext get chart => ChartContext(
-          ChartEngine().calculate(ChartSubject(
+  ChartContext get chart => chartCache.get(
+          ChartSubject(
               name: state.name,
               birth: state.birth,
               sex: studio.primary.sex,
               sect: studio.primary.sect,
-              basis: studio.primary.basis)),
+              basis: studio.primary.basis),
           viewContext: {
             'task': section?.name,
             'readingMode': outlook ? 'outlook' : 'natal',
@@ -248,7 +249,8 @@ class _AppShellState extends State<AppShell> {
                 title: Text(l.flowSettings),
                 content: SizedBox(
                     width: 340,
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    child: SingleChildScrollView(
+                        child: Column(mainAxisSize: MainAxisSize.min, children: [
                       ListTile(
                           leading: const Icon(Icons.person_outline),
                           title: Text(l.flowBirthDetails),
@@ -278,13 +280,25 @@ class _AppShellState extends State<AppShell> {
                             showPrivacy(context, state);
                           }),
                       ListTile(
+                          leading: const Icon(Icons.info_outline),
+                          title: Text(l.releasePreviewTitle),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            showAboutDialog(
+                                context: context,
+                                applicationName: 'FatePair',
+                                applicationVersion: '1.0.0 preview',
+                                applicationIcon: const FlowerLogo(size: 38),
+                                children: [Text(l.releasePreviewBody)]);
+                          }),
+                      ListTile(
                           leading: const Icon(Icons.auto_stories_outlined),
                           title: Text(l.navGuide),
                           onTap: () {
                             Navigator.pop(ctx);
                             _fullScreen(l.navGuide, const GuidePage());
                           }),
-                    ])),
+                    ]))),
                 actions: [
                   TextButton(
                       onPressed: () => Navigator.pop(ctx),
@@ -292,15 +306,43 @@ class _AppShellState extends State<AppShell> {
                 ]));
   }
 
+  Widget _storageNotice(AppLocalizations l) => MaterialBanner(
+        content: Text(state.storage.deletionPending
+            ? l.releaseDeletePending
+            : state.persistenceError!),
+        actions: [
+          TextButton(
+              onPressed: () async {
+                if (state.storage.deletionPending) {
+                  await state.reset();
+                } else {
+                  await showProfileEditor(context, state);
+                }
+              },
+              child: Text(state.storage.deletionPending
+                  ? l.releaseRetry
+                  : l.flowBirthDetails))
+        ],
+      );
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     if (section == null) {
-      return IntentChooser(
+      final chooser = IntentChooser(
           onChoose: choose,
           onSettings: settings,
           journeyAction:
               JourneyBadge(store: state.journey, onTap: openJourney));
+      if (state.storage.deletionPending || state.persistenceError != null) {
+        return Scaffold(
+            body: SafeArea(
+                child: Column(children: [
+          _storageNotice(l),
+          Expanded(child: chooser),
+        ])));
+      }
+      return chooser;
     }
     final desktop = MediaQuery.sizeOf(context).width >= 1000;
     final labels = [l.flowChart, l.flowMatch, l.flowAgent];
@@ -364,6 +406,8 @@ class _AppShellState extends State<AppShell> {
                       onPressed: settings,
                       icon: const Icon(Icons.settings_outlined, size: 21)),
                 ])),
+            if (state.storage.deletionPending || state.persistenceError != null)
+              _storageNotice(l),
             Expanded(
                 child: section == AppIntent.agent
                     ? AgentPage(
@@ -578,14 +622,13 @@ class _AppShellState extends State<AppShell> {
                           icon: const Icon(Icons.close, size: 17)),
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 14, horizontal: 15)));
-          final actions = Row(mainAxisSize: MainAxisSize.min, children: [
+          final actions = Wrap(spacing: 10, runSpacing: 10, children: [
             if (matchTab == 0) ...[
               FilledButton.icon(
                   key: const ValueKey('random-match'),
                   onPressed: list.isEmpty ? null : _random,
                   icon: const Icon(Icons.shuffle_rounded, size: 17),
                   label: Text(l.flowRandom)),
-              const SizedBox(width: 10)
             ],
             OutlinedButton.icon(
                 onPressed: _showFilters,

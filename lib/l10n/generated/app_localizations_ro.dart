@@ -34,7 +34,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get reportProfile => 'Raportează acest profil';
 
   @override
-  String get reportIntro => 'Spune-ne ce nu este în regulă. Echipa noastră de moderare analizează fiecare raport, iar profilul este ascuns imediat din recomandările tale.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Hărțuire sau bullying';
@@ -67,13 +67,13 @@ class AppLocalizationsRo extends AppLocalizations {
   String get actionCancel => 'Anulare';
 
   @override
-  String get submitReport => 'Trimite raportul';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Raport primit. Acest profil a fost ascuns.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Raportul nu a putut fi trimis. Încearcă din nou.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Ascunde acest profil';
@@ -88,31 +88,31 @@ class AppLocalizationsRo extends AppLocalizations {
   String get actionClose => 'Închide';
 
   @override
-  String get exportMyData => 'Exportă datele mele (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'O copie a datelor tale este în clipboard.';
 
   @override
-  String get deleteAccount => 'Șterge contul și datele';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Ștergi contul și datele tale?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Această acțiune șterge definitiv de pe acest dispozitiv profilul tău de naștere, conexiunile salvate, profilurile ascunse, rapoartele și consimțămintele. La lansare, contul și datele tale vor fi șterse și de pe serverele FatePair. Înregistrările de securitate și cele legale pot fi păstrate acolo unde legea o cere.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Păstrează contul';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Șterge tot';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Contul și datele tale au fost șterse de pe acest dispozitiv.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Ștergerea a eșuat. Încearcă din nou.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Termeni și Condiții';
@@ -1209,4 +1209,25 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

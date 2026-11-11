@@ -32,6 +32,19 @@ class BirthClock {
       };
   DateTime get calendarTime => utc.add(const Duration(hours: 8));
   static BirthClock resolve(BirthData data) {
+    if (data.date.year < 1900 ||
+        data.date.year > 2100 ||
+        !data.place.longitude.isFinite ||
+        data.place.longitude < -180 ||
+        data.place.longitude > 180 ||
+        (data.timeKnown &&
+            (data.hour < 0 ||
+                data.hour > 23 ||
+                data.minute < 0 ||
+                data.minute > 59))) {
+      throw const FormatException(
+          'Check the birth date, time and birthplace coordinates.');
+    }
     final location = tz.getLocation(data.place.zone);
     final wall = tz.TZDateTime(
         location,

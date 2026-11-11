@@ -25,7 +25,7 @@ class StudioStore extends ChangeNotifier {
     _resetGeneration = source.resetGeneration;
     _defaults();
     try {
-      final raw = source.preferences.getString('studio.charts');
+      final raw = source.storage.read<String>('studio.charts');
       if (raw != null) {
         final j = jsonDecode(raw) as Map<String, dynamic>;
         final a = ChartSubject.fromJson(j['primary'] as Map<String, dynamic>);
@@ -35,7 +35,7 @@ class StudioStore extends ChangeNotifier {
         primary = a;
         secondary = b;
       }
-      final settings = source.preferences.getString('studio.model');
+      final settings = source.storage.read<String>('studio.model');
       if (settings != null) {
         model =
             ModelConfig.fromJson(jsonDecode(settings) as Map<String, dynamic>);
@@ -46,7 +46,7 @@ class StudioStore extends ChangeNotifier {
           model = defaultModel();
         }
       }
-      final s = source.preferences.getString('studio.style');
+      final s = source.storage.read<String>('studio.style');
       if (s != null) style = ReadingStyle.values.byName(s);
     } catch (_) {
       loadError =
@@ -71,51 +71,53 @@ class StudioStore extends ChangeNotifier {
     }
   }
 
-  Future<bool> updateSubjects(ChartSubject a, ChartSubject b) async {
-    ChartEngine().calculate(a);
-    ChartEngine().calculate(b);
-    try {
-      if (!await source.preferences.setString('studio.charts',
-          jsonEncode({'primary': a.toJson(), 'secondary': b.toJson()}))) {
-        return false;
-      }
-    } catch (_) {
-      return false;
-    }
-    primary = a;
-    secondary = b;
-    notifyListeners();
-    return true;
-  }
+  Future<bool> updateSubjects(ChartSubject a, ChartSubject b) =>
+      source.storage.write(() async {
+        ChartEngine().calculate(a);
+        ChartEngine().calculate(b);
+        try {
+          if (!await source.preferences.setString('studio.charts',
+              jsonEncode({'primary': a.toJson(), 'secondary': b.toJson()}))) {
+            return false;
+          }
+        } catch (_) {
+          return false;
+        }
+        primary = a;
+        secondary = b;
+        notifyListeners();
+        return true;
+      }, failure: false);
 
-  Future<bool> configure(ModelConfig config, String key) async {
-    if (config.isConfigured) config.endpoint;
-    try {
-      if (!await source.preferences
-          .setString('studio.model', jsonEncode(config.toJson()))) {
-        return false;
-      }
-    } catch (_) {
-      return false;
-    }
-    model = config;
-    apiKey = key;
-    notifyListeners();
-    return true;
-  }
+  Future<bool> configure(ModelConfig config, String key) =>
+      source.storage.write(() async {
+        if (config.baseUrl.trim().isNotEmpty) config.endpoint;
+        try {
+          if (!await source.preferences
+              .setString('studio.model', jsonEncode(config.toJson()))) {
+            return false;
+          }
+        } catch (_) {
+          return false;
+        }
+        model = config;
+        apiKey = key;
+        notifyListeners();
+        return true;
+      }, failure: false);
 
-  Future<bool> setStyle(ReadingStyle value) async {
-    try {
-      if (!await source.preferences.setString('studio.style', value.name)) {
-        return false;
-      }
-    } catch (_) {
-      return false;
-    }
-    style = value;
-    notifyListeners();
-    return true;
-  }
+  Future<bool> setStyle(ReadingStyle value) => source.storage.write(() async {
+        try {
+          if (!await source.preferences.setString('studio.style', value.name)) {
+            return false;
+          }
+        } catch (_) {
+          return false;
+        }
+        style = value;
+        notifyListeners();
+        return true;
+      }, failure: false);
 
   @override
   void dispose() {

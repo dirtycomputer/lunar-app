@@ -34,7 +34,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get reportProfile => 'このプロフィールを通報';
 
   @override
-  String get reportIntro => '問題をお知らせください。モデレーションチームがすべての通報を確認し、該当するプロフィールはすぐにあなたのおすすめから非表示になります。';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => '嫌がらせまたはいじめ';
@@ -67,13 +67,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get actionCancel => 'キャンセル';
 
   @override
-  String get submitReport => '通報を送信';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => '通報を受け付けました。このプロフィールは非表示になりました。';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => '通報を送信できませんでした。もう一度お試しください。';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'このプロフィールを非表示';
@@ -88,31 +88,31 @@ class AppLocalizationsJa extends AppLocalizations {
   String get actionClose => '閉じる';
 
   @override
-  String get exportMyData => '自分のデータをエクスポート（JSON）';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'データのコピーをクリップボードに保存しました。';
 
   @override
-  String get deleteAccount => 'アカウントとデータを削除';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'アカウントとデータを削除しますか？';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'この操作により、この端末上の生年月日プロフィール、保存したつながり、非表示にしたプロフィール、通報履歴、同意履歴が完全に削除されます。公開後は FatePair サーバー上のアカウントとデータも同時に削除されます。安全および法令上の理由により、一部の記録は保持される場合があります。';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'アカウントを保持';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'すべて削除';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'アカウントとデータをこの端末から削除しました。';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => '削除に失敗しました。もう一度お試しください。';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => '利用規約';
@@ -1209,4 +1209,25 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

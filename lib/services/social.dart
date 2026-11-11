@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'device_storage.dart';
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,12 +28,23 @@ class LocalSocialStore extends ChangeNotifier {
   final Set<String> knownIds;
   Set<String> _invitations = {};
   Map<String, List<LocalMessage>> _threads = {};
-  Future<void> _pending = Future.value();
+  DeviceStorage get storage => DeviceStorage(preferences);
+  bool _disposed = false;
+  void _notify() {
+    if (!_disposed) notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   int _sequence = 0;
 
   LocalSocialStore(this.preferences, {required this.knownIds}) {
     try {
-      final raw = preferences.getString(storageKey);
+      final raw = storage.read<String>(storageKey);
       if (raw == null) return;
       final value = jsonDecode(raw) as Map<String, dynamic>;
       if (value['version'] != 1) return;
@@ -83,7 +95,7 @@ class LocalSocialStore extends ChangeNotifier {
   Future<bool> _change(
       void Function(Set<String>, Map<String, List<LocalMessage>>) change,
       {bool remove = false}) {
-    final operation = _pending.then((_) async {
+    return storage.write(() async {
       final invitations = {..._invitations};
       final threads =
           _threads.map((id, messages) => MapEntry(id, [...messages]));
@@ -99,11 +111,9 @@ class LocalSocialStore extends ChangeNotifier {
       }
       _invitations = invitations;
       _threads = threads;
-      notifyListeners();
+      _notify();
       return true;
-    });
-    _pending = operation.then((_) {});
-    return operation;
+    }, failure: false);
   }
 
   Future<bool> invite(String id) => !knownIds.contains(id)
@@ -123,6 +133,11 @@ class LocalSocialStore extends ChangeNotifier {
       (threads[id] ??= []).add(LocalMessage(
           '${now.microsecondsSinceEpoch}-${_sequence++}', trimmed, now));
     });
+  }
+
+  void forget() {
+    _invitations = {};
+    _threads = {};
   }
 
   Future<bool> clear() => _change((invitations, threads) {

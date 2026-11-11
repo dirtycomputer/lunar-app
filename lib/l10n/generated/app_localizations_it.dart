@@ -34,7 +34,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get reportProfile => 'Segnala questo profilo';
 
   @override
-  String get reportIntro => 'Dicci cosa non va. Il nostro team di moderazione esamina ogni segnalazione e il profilo viene subito nascosto dai tuoi consigli.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Molestie o bullismo';
@@ -67,13 +67,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get actionCancel => 'Annulla';
 
   @override
-  String get submitReport => 'Invia segnalazione';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Segnalazione ricevuta. Questo profilo è stato nascosto.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Impossibile inviare la segnalazione. Riprova.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Nascondi questo profilo';
@@ -88,31 +88,31 @@ class AppLocalizationsIt extends AppLocalizations {
   String get actionClose => 'Chiudi';
 
   @override
-  String get exportMyData => 'Esporta i miei dati (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Una copia dei tuoi dati è negli appunti.';
 
   @override
-  String get deleteAccount => 'Elimina account e dati';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Eliminare il tuo account e i tuoi dati?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Questa azione rimuove in modo definitivo da questo dispositivo il tuo profilo di nascita, le connessioni salvate, i profili nascosti, le segnalazioni e i consensi. Al lancio verranno eliminati anche il tuo account e i tuoi dati dai server di FatePair. I registri di sicurezza e legali possono essere conservati dove la legge lo richiede.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Conserva l\'account';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Elimina tutto';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Il tuo account e i tuoi dati sono stati eliminati da questo dispositivo.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Eliminazione non riuscita. Riprova.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Termini di Servizio';
@@ -1209,4 +1209,25 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

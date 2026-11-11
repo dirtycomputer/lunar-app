@@ -34,7 +34,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get reportProfile => 'Поскаржитися на цей профіль';
 
   @override
-  String get reportIntro => 'Розкажіть, що не так. Наша команда модерації розглядає кожну скаргу, а профіль одразу приховується з ваших рекомендацій.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Домагання або цькування';
@@ -67,13 +67,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get actionCancel => 'Скасувати';
 
   @override
-  String get submitReport => 'Надіслати скаргу';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Скаргу отримано. Цей профіль приховано.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Не вдалося надіслати скаргу. Спробуйте ще раз.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Приховати цей профіль';
@@ -88,31 +88,31 @@ class AppLocalizationsUk extends AppLocalizations {
   String get actionClose => 'Закрити';
 
   @override
-  String get exportMyData => 'Експортувати мої дані (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Копію ваших даних скопійовано в буфер обміну.';
 
   @override
-  String get deleteAccount => 'Видалити акаунт і дані';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Видалити ваш акаунт і дані?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Ця дія назавжди видаляє з цього пристрою ваш профіль народження, збережені зв\'язки, приховані профілі, скарги та згоди. Під час запуску ваш акаунт і дані також буде видалено з серверів FatePair. Записи про безпеку та юридичні записи можуть зберігатися там, де цього вимагає закон.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Зберегти акаунт';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Видалити все';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Ваш акаунт і дані видалено з цього пристрою.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Не вдалося видалити. Спробуйте ще раз.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Умови користування';
@@ -1209,4 +1209,25 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

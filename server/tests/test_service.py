@@ -90,6 +90,18 @@ class ChartTests(unittest.TestCase):
         self.assertEqual(charts,[])
         self.assertIn('Never invent',m[0]['content'])
 
+    def test_malformed_calculation_inputs_are_rejected_explicitly(self):
+        for subject in (None, [], {'birth': []}, {'birth': {'date': 3}}):
+            with self.subTest(subject=subject), self.assertRaises(ValueError):
+                calculate(subject, NOW)
+
+    def test_booleans_cannot_impersonate_calendar_numbers(self):
+        for path in ('hour', 'minute', 'longitude', 'sect', 'sex'):
+            subject=copy.deepcopy(FIXTURES[0]['subject'])
+            (subject if path in ('sect', 'sex') else subject['birth'])[path]=True
+            with self.subTest(field=path), self.assertRaises(ValueError):
+                calculate(subject, NOW)
+
 
 class ApiTests(unittest.TestCase):
     def setUp(self):

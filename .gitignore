@@ -61,3 +61,8 @@ output/
 __pycache__/
 .venv/
 .pytest_cache/
+
+# Native release signing is configured on the build machine only.
+android/key.properties
+*.jks
+*.keystore

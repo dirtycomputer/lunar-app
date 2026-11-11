@@ -34,7 +34,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get reportProfile => 'Báo cáo hồ sơ này';
 
   @override
-  String get reportIntro => 'Hãy cho chúng tôi biết điều gì không đúng. Đội kiểm duyệt của chúng tôi xem xét mọi báo cáo và hồ sơ sẽ ngay lập tức bị ẩn khỏi đề xuất của bạn.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Quấy rối hoặc bắt nạt';
@@ -67,13 +67,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get actionCancel => 'Hủy';
 
   @override
-  String get submitReport => 'Gửi báo cáo';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Đã nhận báo cáo. Hồ sơ này đã bị ẩn.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Không thể gửi báo cáo. Vui lòng thử lại.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Ẩn hồ sơ này';
@@ -88,31 +88,31 @@ class AppLocalizationsVi extends AppLocalizations {
   String get actionClose => 'Đóng';
 
   @override
-  String get exportMyData => 'Xuất dữ liệu của tôi (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Bản sao dữ liệu của bạn đã có trong bộ nhớ tạm.';
 
   @override
-  String get deleteAccount => 'Xóa tài khoản & dữ liệu';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Xóa tài khoản và dữ liệu của bạn?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Thao tác này xóa vĩnh viễn khỏi thiết bị này hồ sơ ngày sinh, các kết nối đã lưu, các hồ sơ đã ẩn, báo cáo và sự đồng ý của bạn. Khi ra mắt, tài khoản và dữ liệu của bạn cũng sẽ bị xóa khỏi máy chủ của FatePair. Hồ sơ an toàn và pháp lý có thể được lưu giữ khi luật yêu cầu.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Giữ tài khoản';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Xóa tất cả';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Tài khoản và dữ liệu của bạn đã bị xóa khỏi thiết bị này.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Xóa thất bại. Vui lòng thử lại.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Điều khoản Dịch vụ';
@@ -1209,4 +1209,25 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

@@ -1,0 +1,12 @@
+{
+  "channel": "preview",
+  "product": "FatePair",
+  "blocking": [
+    {"id": "live-community", "reason": "People, invitations and messages are device-local samples; authenticated durable accounts and mutual messaging are not connected."},
+    {"id": "durable-quotas", "reason": "The public model API has per-instance limits, without durable account quotas or a global spend cap."},
+    {"id": "moderation-operations", "reason": "Reports are local records; an operational review queue, child-safety contact and appeals channel are not connected."},
+    {"id": "operator-policies", "reason": "The operating entity, support contact and production data-retention commitments have not been supplied."},
+    {"id": "native-release", "reason": "Store signing, current store requirements and physical-device release checks remain unverified."},
+    {"id": "browser-acceptance", "reason": "This update cannot repeat browser QA because the managed environment lacks the supported browser-control tool."}
+  ]
+}

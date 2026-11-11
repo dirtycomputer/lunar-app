@@ -34,7 +34,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get reportProfile => 'Anmäl den här profilen';
 
   @override
-  String get reportIntro => 'Berätta vad som är fel. Vårt modereringsteam granskar varje anmälan och profilen döljs omedelbart från dina rekommendationer.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Trakasserier eller mobbning';
@@ -67,13 +67,13 @@ class AppLocalizationsSv extends AppLocalizations {
   String get actionCancel => 'Avbryt';
 
   @override
-  String get submitReport => 'Skicka anmälan';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Anmälan mottagen. Profilen är nu dold.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Kunde inte skicka anmälan. Försök igen.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Dölj den här profilen';
@@ -88,31 +88,31 @@ class AppLocalizationsSv extends AppLocalizations {
   String get actionClose => 'Stäng';
 
   @override
-  String get exportMyData => 'Exportera mina data (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'En kopia av dina data finns i urklipp.';
 
   @override
-  String get deleteAccount => 'Radera konto & data';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Radera ditt konto och dina data?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Detta raderar permanent din födelseprofil, sparade kontakter, dolda profiler, anmälningar och samtycken från den här enheten. Vid lansering raderas även ditt konto och dina data från FatePairs servrar. Säkerhets- och juridiska register kan sparas där lagen kräver det.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Behåll kontot';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Radera allt';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Ditt konto och dina data har raderats från den här enheten.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Kunde inte radera. Försök igen.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Användarvillkor';
@@ -1209,4 +1209,25 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

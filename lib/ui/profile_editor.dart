@@ -89,9 +89,14 @@ class _ProfileEditorState extends State<ProfileEditor> {
               place: birthplace));
       if (!mounted) return;
       if (ok) {
-        await widget.state.acceptConsent(
+        final consentSaved = await widget.state.acceptConsent(
             'age-terms', legalDocById('terms')?.version ?? 'unknown');
         if (!mounted) return;
+        if (!consentSaved) {
+          setState(() =>
+              error = AppLocalizations.of(context)!.releaseConsentSaveFailed);
+          return;
+        }
         Navigator.pop(context);
         showToast(context, AppLocalizations.of(context)!.energyReadyToast);
       } else {

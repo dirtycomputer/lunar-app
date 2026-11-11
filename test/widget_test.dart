@@ -279,7 +279,7 @@ void main() {
     await tester.tap(report);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Impersonation or fake profile'));
-    await tester.tap(find.text('Submit report'));
+    await tester.tap(find.text('Save local report'));
     await tester.pumpAndSettle();
     expect(state.reports.single.reasonIndex, ReportReason.impersonation.index);
     expect(state.hidden, contains('sofia'));

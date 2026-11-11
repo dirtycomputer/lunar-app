@@ -1,0 +1,5 @@
+# Copy to key.properties on the release machine; never commit real values.
+storeFile=/absolute/path/to/fatepair-upload.jks
+storePassword=
+keyAlias=
+keyPassword=
