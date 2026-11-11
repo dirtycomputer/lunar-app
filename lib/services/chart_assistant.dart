@@ -166,13 +166,22 @@ class ChartAgent extends ChangeNotifier {
     }
   }
 
-  Future<void> ask(String question, {ChartContext? context}) async {
+  Future<void> ask(String question,
+      {ChartContext? context,
+      Map<String, dynamic> userContext = const {}}) async {
     final q = question.trim();
     if (q.isEmpty || busy || q.length > 2000) return;
     final id = ++_request;
     busy = true;
     error = null;
-    final snapshot = context?.evidence() ?? {'personalChartAvailable': false};
+    final Map<String, dynamic> snapshot =
+        context?.evidence() ?? {'personalChartAvailable': false};
+    if (userContext.isNotEmpty) {
+      snapshot['userContext'] = {
+        ...?snapshot['userContext'] as Map<String, dynamic>?,
+        ...userContext
+      };
+    }
     final history = _turns
         .map((t) => {
               'role': t.role,

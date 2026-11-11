@@ -6,6 +6,7 @@ import 'bazi.dart';
 import 'platform_contracts.dart';
 import 'social.dart';
 import 'intent_flow.dart';
+import 'journey.dart';
 
 class AppState extends ChangeNotifier {
   final SharedPreferences preferences;
@@ -13,6 +14,7 @@ class AppState extends ChangeNotifier {
   final LocalConsentService consentStore;
   final LocalModerationService moderationStore;
   late final LocalSocialStore social;
+  late final JourneyStore journey;
   late BirthData birth;
   late EnergyChart chart;
   late List<MatchResult> matches;
@@ -54,6 +56,8 @@ class AppState extends ChangeNotifier {
     social = LocalSocialStore(preferences,
         knownIds: demoPeople.map((p) => p.id).toSet());
     social.addListener(notifyListeners);
+    journey = JourneyStore(preferences);
+    journey.addListener(notifyListeners);
     _recalculate();
   }
 
@@ -235,6 +239,7 @@ class AppState extends ChangeNotifier {
       return false;
     }
     if (!await social.clear()) return false;
+    if (!await journey.reset()) return false;
     birth = demoBirth;
     name = 'Alex';
     personalized = false;
@@ -252,6 +257,8 @@ class AppState extends ChangeNotifier {
   void dispose() {
     social.removeListener(notifyListeners);
     social.dispose();
+    journey.removeListener(notifyListeners);
+    journey.dispose();
     super.dispose();
   }
 }

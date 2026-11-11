@@ -34,6 +34,8 @@ The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) wi
 
 ## Working features
 
+- Optional light exploration: a Journey trail, a personal-element practice game with hints, one-time sparks, and a short encounter reveal. All three discoveries remain available in any order; progress restores locally and clears with local data.
+
 - First-use chooser with two primary cards, My reading and Match, plus a secondary Ask Agent action. The chosen starting task is remembered.
 - Two core tasks, My chart and Match, with Agent as a supporting destination.
 - Focused Match page with a vertical people list, one computed recommendation reason per person, filter-aware random matching, and search/filters.
@@ -54,7 +56,7 @@ The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) wi
 
 ## Scope
 
-This version is a working prototype with six fictional adults and stock photos, local social interactions, and no live community or messaging transport. Local profiles and drafts use unencrypted SharedPreferences. Agent history stays in memory for the session and resets when birth details change or local data is cleared.
+This version is a working prototype with six fictional adults and stock photos, local social interactions, and no live community or messaging transport. Local profiles and drafts use unencrypted SharedPreferences. Agent history stays in memory for the session and resets when birth details change or local data is cleared. Exploration progress is local, exported and cleared with local data; the question context includes learning progress as app context. Sparks do not alter chart calculations or recommendation scores.
 
 The new analysis service verifies birth charts with lunar-python before sending verified evidence and the user's complete session context to DeepSeek-V4.1-Flash-1017 (official API name `deepseek-flash`, 1M context, maximum reasoning). Context includes name, birth inputs, chart convention, current reading, and all earlier turns; typed text is not automatically redacted. Service keys are server-only. See [chart service setup, deployment protection, and limits](server/README.md). The public App uses the Production chart service; Preview backend deployments retain their access protection.
 
@@ -97,7 +99,7 @@ Recommendations sort by total score descending, with a stable profile-ID tiebrea
 
 ## Browser verification
 
-The current Web app was exercised with Playwright in Chromium at 1440 × 1000 and 390 × 844: two primary entry cards, birth setup, reading-first chart, contextual glossary, outlook, inline questions and a follow-up, vertical recommendations, sample labelling, filtered random matching, and remembered entry. There were no page errors or failed resource requests. Current screenshots are `output/playwright/fatepair-*.png`; the machine-readable summary is `output/fatepair-browser-check.txt`.
+The earlier model-integration flows were exercised with Playwright in Chromium at 1440 × 1000 and 390 × 844: two primary entry cards, birth setup, reading-first chart, contextual glossary, outlook, inline questions and a follow-up, vertical recommendations, sample labelling, filtered random matching, and remembered entry. There were no page errors or failed resource requests. Earlier browser screenshots are `output/playwright/fatepair-*.png`. The exploration update uses Flutter-rendered desktop/phone captures in `output/flutter-render/`, alongside the widget flow tests; browser interaction could not be repeated because the supported browser-control tool was unavailable. See `docs/verification.md`.
 
 ## Structure
 
@@ -110,6 +112,8 @@ The current Web app was exercised with Playwright in Chromium at 1440 × 1000 an
 - `lib/ui/app_shell.dart`: intent-based navigation, the focused people list, filtering, random matching, and saves.
 - `lib/ui/intent_pages.dart`: first-use chooser, Four Pillars, reading, and recent outlook.
 - `lib/ui/agent_page.dart`: conversation and question composer.
+- `lib/ui/journey.dart`: original element spirits, quest trail, hints, result feedback, and reduced-motion support.
+- `lib/services/journey.dart`: serialized one-time awards and local progress persistence.
 - `lib/services/chart_assistant.dart`: computed context, reference answers, full-history snapshots, model routing, and cancellation.
 - `server/chart_engine.py` and `server/api/index.py`: authoritative lunar-python calculation and chart-first DeepSeek analysis.
 - `lib/ui/profile_editor.dart`: validated birth data editor.
@@ -118,7 +122,7 @@ The current Web app was exercised with Playwright in Chromium at 1440 × 1000 an
 
 ## Validation
 
-Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 60 Flutter tests and 18 Python service tests pass in the model integration, and the Web release builds successfully. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
+Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 69 Flutter tests pass in the exploration update. The unchanged Python service retains its 18 passing tests from the model integration, and the Web release builds successfully. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
 
 ## References and assets
 

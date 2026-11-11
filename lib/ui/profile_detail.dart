@@ -21,26 +21,44 @@ String localizedReasonLabel(AppLocalizations l10n, ReportReason r) =>
     };
 
 Future<void> showProfileDetail(
-        BuildContext context, AppState state, bazi.MatchResult match,
-        {VoidCallback? onCompare}) =>
-    showDialog<void>(
-        context: context,
-        builder: (_) => _ProfileDetail(
-            state: state,
-            match: match,
-            onCompare: onCompare,
-            onChat: () => showLocalConversation(context, state, match.person)));
+    BuildContext context, AppState state, bazi.MatchResult match,
+    {VoidCallback? onCompare, bool encounter = false}) {
+  Widget profile(BuildContext _) => _ProfileDetail(
+      state: state,
+      match: match,
+      onCompare: onCompare,
+      encounter: encounter,
+      onChat: () => showLocalConversation(context, state, match.person));
+  if (!encounter) return showDialog<void>(context: context, builder: profile);
+  return showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: AppLocalizations.of(context)!.actionClose,
+      barrierColor: Colors.black54,
+      transitionDuration: MediaQuery.of(context).disableAnimations
+          ? Duration.zero
+          : const Duration(milliseconds: 420),
+      pageBuilder: (ctx, _, __) => profile(ctx),
+      transitionBuilder: (ctx, a, _, child) => FadeTransition(
+          opacity: a,
+          child: ScaleTransition(
+              scale: Tween<double>(begin: .9, end: 1).animate(
+                  CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
+              child: child)));
+}
 
 class _ProfileDetail extends StatelessWidget {
   final AppState state;
   final bazi.MatchResult match;
   final VoidCallback? onCompare;
   final VoidCallback onChat;
+  final bool encounter;
   const _ProfileDetail(
       {required this.state,
       required this.match,
       required this.onChat,
-      this.onCompare});
+      this.onCompare,
+      this.encounter = false});
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -74,6 +92,27 @@ class _ProfileDetail extends StatelessWidget {
                                     Colors.transparent,
                                     Colors.black54
                                   ]))),
+                              Positioned(
+                                  left: 16,
+                                  top: 17,
+                                  child: Container(
+                                    constraints:
+                                        const BoxConstraints(maxWidth: 230),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(18)),
+                                    child: Text(
+                                        encounter
+                                            ? '${l10n.journeyNewEncounter} · ${l10n.journeyDemoProfile}'
+                                            : l10n.journeyDemoProfile,
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w600,
+                                            color: ink)),
+                                  )),
                               Positioned(
                                   right: 15,
                                   top: 15,

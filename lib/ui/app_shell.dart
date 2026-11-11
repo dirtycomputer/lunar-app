@@ -5,6 +5,7 @@ import '../services/app_state.dart';
 import '../services/bazi.dart' as bazi;
 import '../services/chart_assistant.dart';
 import '../services/intent_flow.dart';
+import '../services/journey.dart';
 import '../studio/chart_engine.dart';
 import '../studio/chart_studio.dart';
 import '../studio/reading_panel.dart';
@@ -12,6 +13,7 @@ import '../studio/studio_store.dart';
 import 'agent_page.dart';
 import 'design.dart';
 import 'intent_pages.dart';
+import 'journey.dart';
 import 'language_picker.dart';
 import 'profile_editor.dart';
 import 'profile_detail.dart';
@@ -90,7 +92,61 @@ class _AppShellState extends State<AppShell> {
             'readingMode': outlook ? 'outlook' : 'natal',
             'period': period.name,
             'language': state.localeOverride?.toLanguageTag() ?? 'en',
+            ...learningContext,
           });
+  Map<String, dynamic> get learningContext => {
+        'learningProgress': {
+          ...state.journey.toJson(),
+          'sparks': state.journey.sparks
+        },
+        'learningMeaning':
+            'Optional exploration milestones only; these do not change a birth chart, fortune, or compatibility.',
+      };
+
+  Future<void> awardJourney(JourneyQuest quest) async {
+    final earned = await state.journey.complete(quest);
+    if (!mounted) return;
+    final l = AppLocalizations.of(context)!;
+    if (earned == null) {
+      showToast(context, l.couldNotSave);
+    } else if (earned > 0 && !Navigator.of(context).canPop()) {
+      showToast(context, l.journeyReward(earned));
+    }
+  }
+
+  Future<void> openJourney() async {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    while (true) {
+      if (!mounted) return;
+      final quest = await showJourney(context, state.journey);
+      if (!mounted || quest == null) return;
+      if (quest == JourneyQuest.element) {
+        final back = await showElementQuest(context,
+            element: chart.natal.energy.dayElement,
+            sample: !state.personalized,
+            store: state.journey);
+        if (!mounted || back != true) return;
+        continue;
+      }
+      final intent =
+          quest == JourneyQuest.outlook ? AppIntent.chart : AppIntent.match;
+      final ok = await state.chooseIntent(intent);
+      if (!mounted) return;
+      navigate(intent);
+      if (!ok) showToast(context, AppLocalizations.of(context)!.couldNotSave);
+      if (quest == JourneyQuest.outlook) {
+        setState(() {
+          outlook = true;
+          period = OutlookPeriod.month;
+        });
+        await awardJourney(JourneyQuest.outlook);
+      } else {
+        setState(() => matchTab = 0);
+      }
+      return;
+    }
+  }
+
   Future<void> choose(AppIntent intent) async {
     if (intent == AppIntent.chart && !state.personalized) {
       await showProfileEditor(context, state);
@@ -109,7 +165,9 @@ class _AppShellState extends State<AppShell> {
 
   void ask(String question) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    agent.ask(question, context: state.personalized ? chart : null);
+    agent.ask(question,
+        context: state.personalized ? chart : null,
+        userContext: learningContext);
     final l = AppLocalizations.of(context)!;
     final panel = AnimatedBuilder(
         animation: state,
@@ -128,7 +186,8 @@ class _AppShellState extends State<AppShell> {
                 name: state.name,
                 chart: state.personalized ? chart : null,
                 onEdit: () => showProfileEditor(context, state),
-                onSettings: modelSettings)));
+                onSettings: modelSettings,
+                userContext: learningContext)));
     if (MediaQuery.sizeOf(context).width >= 1000) {
       showDialog<void>(
           context: context,
@@ -237,7 +296,11 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     if (section == null) {
-      return IntentChooser(onChoose: choose, onSettings: settings);
+      return IntentChooser(
+          onChoose: choose,
+          onSettings: settings,
+          journeyAction:
+              JourneyBadge(store: state.journey, onTap: openJourney));
     }
     final desktop = MediaQuery.sizeOf(context).width >= 1000;
     final labels = [l.flowChart, l.flowMatch, l.flowAgent];
@@ -286,12 +349,16 @@ class _AppShellState extends State<AppShell> {
                         icon: const FlowerLogo(size: 24)),
                     const SizedBox(width: 6)
                   ],
-                  Text(labels[section!.index],
-                      style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: -.7)),
-                  const Spacer(),
+                  Expanded(
+                      child: Text(labels[section!.index],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -.7))),
+                  JourneyBadge(store: state.journey, onTap: openJourney),
+                  const SizedBox(width: 8),
                   IconButton(
                       tooltip: l.flowSettings,
                       onPressed: settings,
@@ -305,7 +372,8 @@ class _AppShellState extends State<AppShell> {
                         name: state.name,
                         chart: state.personalized ? chart : null,
                         onEdit: () => showProfileEditor(context, state),
-                        onSettings: modelSettings)
+                        onSettings: modelSettings,
+                        userContext: learningContext)
                     : SingleChildScrollView(
                         controller: scroll,
                         padding: EdgeInsets.fromLTRB(
@@ -320,8 +388,12 @@ class _AppShellState extends State<AppShell> {
                                         contextData: chart,
                                         outlook: outlook,
                                         period: period,
-                                        onMode: (v) =>
-                                            setState(() => outlook = v),
+                                        onMode: (v) {
+                                          setState(() => outlook = v);
+                                          if (v) {
+                                            awardJourney(JourneyQuest.outlook);
+                                          }
+                                        },
                                         onPeriod: (v) =>
                                             setState(() => period = v),
                                         onAsk: ask,
@@ -351,6 +423,7 @@ class _AppShellState extends State<AppShell> {
                     FlowerLogo(size: 30),
                     SizedBox(width: 11),
                     Text('FatePair',
+                        textScaler: TextScaler.noScaling,
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -421,21 +494,25 @@ class _AppShellState extends State<AppShell> {
                     .toLowerCase()
                     .contains(q));
       }).toList();
-  void _openProfile(bazi.MatchResult m) =>
-      showProfileDetail(context, state, m, onCompare: () async {
-        final ok = await studio.updateSubjects(chart.natal.subject,
-            ChartSubject(name: m.person.name, birth: m.person.birth));
-        if (!mounted) return;
-        if (ok) {
-          _fullScreen(AppLocalizations.of(context)!.flowTools,
-              ChartStudio(store: studio, initialTab: 2, compact: true));
-        } else {
-          showToast(context, AppLocalizations.of(context)!.compareFailed);
-        }
-      });
+  Future<void> _openProfile(bazi.MatchResult m, {bool surprise = false}) async {
+    await showProfileDetail(context, state, m, encounter: surprise,
+        onCompare: () async {
+      final ok = await studio.updateSubjects(chart.natal.subject,
+          ChartSubject(name: m.person.name, birth: m.person.birth));
+      if (!mounted) return;
+      if (ok) {
+        _fullScreen(AppLocalizations.of(context)!.flowTools,
+            ChartStudio(store: studio, initialTab: 2, compact: true));
+      } else {
+        showToast(context, AppLocalizations.of(context)!.compareFailed);
+      }
+    });
+    if (mounted) await awardJourney(JourneyQuest.encounter);
+  }
+
   void _random() {
     final m = random.pick(recommendations);
-    if (m != null) _openProfile(m);
+    if (m != null) _openProfile(m, surprise: true);
   }
 
   void resetFilters() => setState(() {

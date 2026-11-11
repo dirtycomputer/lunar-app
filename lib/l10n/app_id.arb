@@ -203,7 +203,7 @@
   "guideFooter": "Tetap ingin tahu. Tetap baik hati. Sisakan ruang untuk sedikit kebetulan yang indah.",
 
   "privacyTitle": "Datamu tetap milikmu.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Penyimpanan lokal tidak terenkripsi. Di perangkat bersama, bersihkan datamu setelah selesai. Membersihkan data browser atau aplikasi juga menghapus profilmu.",
   "privacyBody3": "Reset membersihkan detail pribadi dan preferensi tersimpanmu, lalu kembali ke profil contoh.",
   "clearDataTitle": "Bersihkan data lokal kamu?",

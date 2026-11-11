@@ -61,6 +61,7 @@ String _exportJson(AppState state) =>
       'saved': state.saved.toList(),
       'hidden': state.hidden.toList(),
       'social': state.social.toJson(),
+      'journey': state.journey.toJson(),
       'reports': state.reports.map((r) => r.toJson()).toList(),
       'consents': state.consentStore
           .all()

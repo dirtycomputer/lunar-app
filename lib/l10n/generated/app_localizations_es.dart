@@ -578,7 +578,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get privacyTitle => 'Tus datos siguen siendo tuyos.';
 
   @override
-  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.';
+  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.';
 
   @override
   String get privacyBody2 => 'El almacenamiento local no está cifrado. En un dispositivo compartido, borra tus datos al terminar. Borrar los datos del navegador o de la app también elimina tu perfil.';
@@ -1121,4 +1121,92 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get flowReasonContrast => 'Your core elements form a contrasting pair.';
+
+  @override
+  String get journeyTitle => 'Your journey';
+
+  @override
+  String get journeyChoose => 'Choose your path';
+
+  @override
+  String journeySparks(int n) {
+    return '$n sparks';
+  }
+
+  @override
+  String journeyProgress(int n) {
+    return '$n of 3 discoveries';
+  }
+
+  @override
+  String get journeyChapter => 'First discoveries';
+
+  @override
+  String get journeyAllDone => 'Trail complete';
+
+  @override
+  String get journeyElementTask => 'Learn your element';
+
+  @override
+  String get journeyOutlookTask => 'Read an outlook';
+
+  @override
+  String get journeyEncounterTask => 'Explore a match';
+
+  @override
+  String get journeyCompleted => 'Completed';
+
+  @override
+  String get journeyKeepExploring => 'Keep exploring';
+
+  @override
+  String get journeyElementTitle => 'Element quest';
+
+  @override
+  String journeyQuestion(String element) {
+    return 'What does $element support?';
+  }
+
+  @override
+  String get journeyShowCycle => 'Show a hint';
+
+  @override
+  String journeyCycle(String first, String next) {
+    return '$first supports $next in the Five Elements cycle.';
+  }
+
+  @override
+  String get journeyTryAgain => 'A little hint';
+
+  @override
+  String get journeyCorrect => 'Nice discovery!';
+
+  @override
+  String get journeyRemembered => 'Well remembered!';
+
+  @override
+  String journeyReward(int n) {
+    return '+$n sparks';
+  }
+
+  @override
+  String get journeySaveFailed => 'Your answer is right. Try saving your progress again.';
+
+  @override
+  String get journeyRetrySave => 'Save progress';
+
+  @override
+  String get journeyBack => 'Back to journey';
+
+  @override
+  String get journeySample => 'Sample element';
+
+  @override
+  String get journeyNewEncounter => 'New encounter';
+
+  @override
+  String get journeyDemoProfile => 'Sample profile';
+
+  @override
+  String get journeyShort => 'Journey';
 }

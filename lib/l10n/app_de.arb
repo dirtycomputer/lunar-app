@@ -203,7 +203,7 @@
   "guideFooter": "Bleib neugierig. Sei freundlich. Lass Raum für ein wenig Zufall.",
 
   "privacyTitle": "Deine Angaben bleiben deine.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Lokale Speicherung ist nicht verschlüsselt. Lösche deine Daten auf einem gemeinsam genutzten Gerät, wenn du fertig bist. Das Löschen von Browser- oder App-Daten entfernt auch dein Profil.",
   "privacyBody3": "Beim Zurücksetzen werden deine persönlichen Angaben und gespeicherten Einstellungen gelöscht, dann kehrst du zum Beispielprofil zurück.",
   "clearDataTitle": "Lokale Daten löschen?",

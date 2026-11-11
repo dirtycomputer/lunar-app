@@ -195,7 +195,7 @@
   "termSolarTime": "Valódi napidő",
   "guideFooter": "Maradj kíváncsi. Légy kedves. Hagyj teret egy kellemes véletlennek.",
   "privacyTitle": "Az adataid a tieid maradnak.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "A helyi tárolás nincs titkosítva. Megosztott eszközön használat után töröld az adataidat. A böngésző vagy alkalmazás adatainak törlése a profilodat is eltávolítja.",
   "privacyBody3": "A visszaállítás törli a személyes adataidat és a mentett beállításokat, majd visszatér a minta profilhoz.",
   "clearDataTitle": "Töröljük a helyi adatokat?",

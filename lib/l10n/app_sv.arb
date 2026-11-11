@@ -203,7 +203,7 @@
   "guideFooter": "Fortsätt vara nyfiken. Var snäll. Lämna utrymme för en lycklig slump.",
 
   "privacyTitle": "Dina uppgifter är dina.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Lokal lagring är inte krypterad. Rensa dina data på en delad enhet när du är klar. Att rensa webbläsar- eller appdata tar också bort din profil.",
   "privacyBody3": "Vid återställning rensas dina personliga uppgifter och sparade inställningar, och du går tillbaka till exempelprofilen.",
   "clearDataTitle": "Rensa dina lokala data?",

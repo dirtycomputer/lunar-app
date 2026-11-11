@@ -578,7 +578,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privacyTitle => '隐私与数据';
 
   @override
-  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。';
+  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。 探索进度也保存在本地，包含在资料导出中，并会随本地资料一起清除。';
 
   @override
   String get privacyBody2 => '本地存储未经加密。在共用设备上使用完毕后，请清除你的数据。清除浏览器或应用数据也会同时移除你的资料。';
@@ -1121,6 +1121,94 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get flowReasonContrast => '你们的日主五行呈相克关系。';
+
+  @override
+  String get journeyTitle => '我的旅程';
+
+  @override
+  String get journeyChoose => '选择你的探索路线';
+
+  @override
+  String journeySparks(int n) {
+    return '$n 个探索火花';
+  }
+
+  @override
+  String journeyProgress(int n) {
+    return '已完成 $n/3 个探索';
+  }
+
+  @override
+  String get journeyChapter => '初次探索';
+
+  @override
+  String get journeyAllDone => '探索完成';
+
+  @override
+  String get journeyElementTask => '认识五行';
+
+  @override
+  String get journeyOutlookTask => '看看近期运势';
+
+  @override
+  String get journeyEncounterTask => '探索一次匹配';
+
+  @override
+  String get journeyCompleted => '已完成';
+
+  @override
+  String get journeyKeepExploring => '继续自由探索';
+
+  @override
+  String get journeyElementTitle => '五行小探索';
+
+  @override
+  String journeyQuestion(String element) {
+    return '$element生什么？';
+  }
+
+  @override
+  String get journeyShowCycle => '看看提示';
+
+  @override
+  String journeyCycle(String first, String next) {
+    return '在五行相生中，$first生$next。';
+  }
+
+  @override
+  String get journeyTryAgain => '一个小提示';
+
+  @override
+  String get journeyCorrect => '发现新知识！';
+
+  @override
+  String get journeyRemembered => '记得很牢！';
+
+  @override
+  String journeyReward(int n) {
+    return '+$n 个探索火花';
+  }
+
+  @override
+  String get journeySaveFailed => '回答正确，请再试一次保存进度。';
+
+  @override
+  String get journeyRetrySave => '保存进度';
+
+  @override
+  String get journeyBack => '回到旅程';
+
+  @override
+  String get journeySample => '示例命盘的五行';
+
+  @override
+  String get journeyNewEncounter => '新的相遇';
+
+  @override
+  String get journeyDemoProfile => '示例资料';
+
+  @override
+  String get journeyShort => '旅程';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -1699,7 +1787,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get privacyTitle => '你的資訊只屬於你。';
 
   @override
-  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。';
+  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。 探索进度也保存在本地，包含在资料导出中，并会随本地资料一起清除。';
 
   @override
   String get privacyBody2 => '本地儲存未經加密。在共用裝置上使用完畢後，請清除你的資料。清除瀏覽器或應用程式資料也會同時移除你的資料。';

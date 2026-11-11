@@ -203,7 +203,7 @@
   "guideFooter": "Fortsett å være nysgjerrig. Vær snill. Gi plass til litt lykkelig tilfeldighet.",
 
   "privacyTitle": "Opplysningene dine forblir dine.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Lokal lagring er ikke kryptert. På en delt enhet: slett dataene dine når du er ferdig. Å slette nettleser- eller appdata fjerner også profilen din.",
   "privacyBody3": "Ved tilbakestilling tømmes personlige opplysninger og lagrede innstillinger, og du går tilbake til eksempelprofilen.",
   "clearDataTitle": "Slette de lokale dataene dine?",
