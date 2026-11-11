@@ -38,7 +38,9 @@ The current public release is a **preview**, with an explicit production gate in
 
 A shared device-storage coordinator orders writes across profiles, drafts, consents, progress and Chart Studio. A durable deletion marker prevents interrupted deletion or queued writes restoring old personal data. Startup and deletion have retry paths. Questions also support retry with the original context and without duplicate turns. Chart reports are cached while page context changes. Data exports include comparison charts and language, excluding model keys.
 
-GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build and an unsigned iOS simulator build. These compilation checks do not replace store signing, current store requirements, browser acceptance or physical-device release testing. Android releases use a local ignored `key.properties`, with no debug-signing fallback; see `android/key.properties.example`.
+Pinned Python and Pub dependencies are queried against OSV through `scripts/audit_dependencies.py`; network/incomplete responses and findings fail the audit. The timestamped result is `output/dependency-audit.json`.
+
+GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build and an unsigned iOS simulator build, with downloadable native test artifacts. These compilation checks do not replace store signing, current store requirements, browser acceptance or physical-device release testing. Android releases use a local ignored `key.properties`, with no debug-signing fallback; see `android/key.properties.example`.
 
 ## Working features
 

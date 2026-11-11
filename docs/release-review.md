@@ -31,9 +31,15 @@ Using the actual bundled fonts, a 320 × 740 phone at 200% text revealed overflo
 - Added repeatable CI for Flutter analysis/tests/Web, the Python service, an Android debug build, and an unsigned iOS simulator build. Native compilation and signed store acceptance are different checks.
 - A package check validates icons and source credential exclusion. `--channel production` intentionally refuses the current preview and enumerates open release gates; it is not a certification based on checkboxes.
 
+## Loop 5: dependency advisories
+
+An OSV query for the exact Python and Pub package versions identified public Starlette advisories in the previous 0.49.3 runtime (including request/path handling and form limits). The framework pair is now FastAPI 0.162.4 / Starlette 1.10.0, and all Python runtime/transitive dependencies are pinned together. The 20 service tests pass on that environment. A fresh query covers 65 checked-in Python/Pub versions with no matching advisories; the checked scope and timestamp are preserved in `output/dependency-audit.json`. This does not certify native, infrastructure or application security.
+
+`python3 scripts/audit_dependencies.py` repeats the query, fails on incomplete/network responses or findings, and runs in CI. The initial CI run also passed Android debug and unsigned iOS simulator compilation; artifacts are now uploaded on subsequent runs so those builds can be inspected.
+
 ## Remaining release blockers
 
-The exact current gates are in [`release/launch.json`](../release/launch.json). Real accounts, durable community records, mutual messaging, effective moderation, durable AI authorization/quotas and spend limits remain unimplemented. Precise birth data needs the corresponding production protection, retention and deletion design. The operator identity and contact details have been requested; they have not been invented.
+The exact current gates are in [`release/launch.json`](../release/launch.json). Real accounts, durable community records, mutual messaging, effective moderation, durable AI authorization/quotas and spend limits remain unimplemented. Precise birth data needs the corresponding production protection, retention and deletion design. The user confirmed the operator identity and contact details are not yet determined; they have not been invented.
 
 Provisioning is blocked by Vercel's `403 forbidden` for `GET /v1/integrations/configurations` in the existing team (`team_oHtL5Trw5vuzwHSE6QBoQLw2`). No Vercel CLI executable/credential fallback is configured in this executor. The current API also has no retrievable custom firewall configuration (`404 Seawall Config not found`). No firewall or access policy was changed, and CORS/per-instance limits are not represented as account authorization or a global quota.
 

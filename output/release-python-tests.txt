@@ -1,3 +1,5 @@
+/workspace/work/fatepair-python/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
 test_calculated_chart_is_sent_before_analysis_and_reasoning_is_not_exposed (test_service.ApiTests.test_calculated_chart_is_sent_before_analysis_and_reasoning_is_not_exposed) ... ok
 test_cors_allows_the_actual_app (test_service.ApiTests.test_cors_allows_the_actual_app) ... ok
 test_cross_origin_browser_request_is_rejected (test_service.ApiTests.test_cross_origin_browser_request_is_rejected) ... ok
@@ -20,6 +22,6 @@ test_two_chart_comparison_calculates_both_inputs (test_service.ChartTests.test_t
 test_unknown_hour_has_no_fabricated_start_or_palaces (test_service.ChartTests.test_unknown_hour_has_no_fabricated_start_or_palaces) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 0.354s
+Ran 20 tests in 0.387s
 
 OK

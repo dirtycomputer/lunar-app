@@ -41,6 +41,12 @@ jobs:
           cache-dependency-path: server/requirements.txt
       - run: pip install -r server/requirements.txt
       - run: python -m unittest discover -s server/tests -v
+      - run: python scripts/audit_dependencies.py --output dependency-audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dependency-audit
+          path: dependency-audit.json
+          retention-days: 7
   android:
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -57,6 +63,11 @@ jobs:
           cache: true
       - run: flutter pub get --enforce-lockfile
       - run: flutter build apk --debug --dart-define=LUNAR_MODEL_BASE_URL=https://fatepair-api-buaa42wxys-projects.vercel.app/api/model
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fatepair-android-debug
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 7
   ios:
     runs-on: macos-15
     timeout-minutes: 25
@@ -69,3 +80,9 @@ jobs:
           cache: true
       - run: flutter pub get --enforce-lockfile
       - run: flutter build ios --simulator --no-codesign --dart-define=LUNAR_MODEL_BASE_URL=https://fatepair-api-buaa42wxys-projects.vercel.app/api/model
+      - run: ditto -c -k --sequesterRsrc --keepParent build/ios/iphonesimulator/Runner.app fatepair-ios-simulator.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fatepair-ios-simulator
+          path: fatepair-ios-simulator.zip
+          retention-days: 7
