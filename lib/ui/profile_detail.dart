@@ -381,7 +381,13 @@ class _ProfileDetail extends StatelessWidget {
     final ok = await state.submitReport(userId, submitted.$1, submitted.$2);
     if (!context.mounted) return;
     if (ok) {
-      await state.hide(userId);
+      final hidden = await state.hide(userId);
+      if (!context.mounted) return;
+      if (!hidden) {
+        showToast(
+            context, AppLocalizations.of(context)!.releaseReportHideFailed);
+        return;
+      }
       if (context.mounted) {
         Navigator.pop(context);
         showToast(context, AppLocalizations.of(context)!.reportReceivedToast);

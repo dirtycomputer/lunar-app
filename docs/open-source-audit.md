@@ -1,6 +1,6 @@
 # Open-source engine audit and feature scope
 
-Checked 2026-09-17. The product is an original English Flutter implementation using Wen Zhen as a functional reference; no proprietary Wen Zhen code, data, interpretations or visual assets are copied. No claim of output parity with an unpublished proprietary ruleset is made.
+Updated 2026-11-11. Calculation-library audit originally checked 2026-09-17. The product is an original English Flutter implementation using Wen Zhen as a functional reference; no proprietary Wen Zhen code, data, interpretations or visual assets are copied. No claim of output parity with an unpublished proprietary ruleset is made.
 
 ## Library decision
 
@@ -28,7 +28,7 @@ The app uses the calendar library for calculations; DeepSeek explains the result
 | Classical references | Three short public-domain excerpts, original English plain/professional commentary, source links | Starter library only, no full-text retrieval/RAG and no copied modern copyrighted translations |
 | Five Movements / Six Qi | Annual movement, excess/insufficiency, governing heaven/earth, five host/guest movement sequences; six host/guest Qi stages and solar-term boundaries; interactive stage cards | Five-movement diagram shows order, not exact turnover instants or detailed 太少相生 rules. Six-Qi boundary convention uses listed solar terms in UTC+8. Cultural calendar only |
 | Almanac / date selection | Month calendar, lunar date, term/day details, full daily and hourly Yi/Ji; early/late Rat split; next-30-day activity filter requiring Yi and absence from Ji | Calendar lookup, not personalized marriage/burial date selection. Some rare activities retain Chinese terms with a generic English label |
-| Custom interpretation | OpenAI-compatible chat endpoint, plain/professional styles, local fallback, loading/cancel/error handling; DeepSeek model discovery through local proxy | No streaming, history storage or hosted production inference service; a generated explanation may be wrong and needs practitioner review |
+| Custom interpretation | Chart-verified lunar-python service with DeepSeek maximum reasoning, full session context, compatible custom endpoints, plain/professional styles, labelled reference fallback, cancellation and retry | No streaming, durable history, account authorization or global quota; a generated explanation may be wrong and needs practitioner review |
 | Auxiliary tools | Not implemented: bone weighing, natal astronomical sky chart, celebrity birth database, wealth/blind-school analyses, Bagua/He Tu/Luo Shu study modules | These need independently reviewed rules/data/ephemerides; they are not represented as functioning features |
 
 ## Calculation conventions

@@ -34,7 +34,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get reportProfile => 'Anmeld denne profil';
 
   @override
-  String get reportIntro => 'Fortæl os, hvad der er galt. Vores moderationsteam gennemgår hver anmeldelse, og profilen skjules straks fra dine anbefalinger.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Chikane eller mobning';
@@ -67,13 +67,13 @@ class AppLocalizationsDa extends AppLocalizations {
   String get actionCancel => 'Annuller';
 
   @override
-  String get submitReport => 'Indsend anmeldelse';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Anmeldelse modtaget. Denne profil er nu skjult.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Kunne ikke indsende anmeldelsen. Prøv igen.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Skjul denne profil';
@@ -88,31 +88,31 @@ class AppLocalizationsDa extends AppLocalizations {
   String get actionClose => 'Luk';
 
   @override
-  String get exportMyData => 'Eksportér mine data (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'En kopi af dine data er på udklipsholderen.';
 
   @override
-  String get deleteAccount => 'Slet konto & data';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Slette din konto og dine data?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Dette sletter permanent din fødselsprofil, gemte forbindelser, skjulte profiler, anmeldelser og samtykker fra denne enhed. Ved lancering slettes din konto og data også fra FatePairs servere. Sikkerheds- og juridiske registre kan opbevares, hvor loven kræver det.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Behold konto';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Slet alt';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Din konto og dine data er blevet slettet fra denne enhed.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Sletning mislykkedes. Prøv igen.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Servicevilkår';
@@ -1209,4 +1209,25 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

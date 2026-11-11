@@ -34,7 +34,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get reportProfile => 'Laporkan profil ini';
 
   @override
-  String get reportIntro => 'Beritahu kami apa yang tidak kena. Pasukan pemoderatan kami menyemak setiap laporan, dan profil ini disembunyikan serta-merta daripada cadangan anda.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Gangguan atau buli';
@@ -67,13 +67,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get actionCancel => 'Batal';
 
   @override
-  String get submitReport => 'Hantar laporan';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Laporan diterima. Profil ini kini disembunyikan.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Laporan tidak dapat dihantar. Sila cuba lagi.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Sembunyikan profil ini';
@@ -88,31 +88,31 @@ class AppLocalizationsMs extends AppLocalizations {
   String get actionClose => 'Tutup';
 
   @override
-  String get exportMyData => 'Eksport data saya (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Salinan data anda berada dalam papan keratan.';
 
   @override
-  String get deleteAccount => 'Padam akaun & data';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Padam akaun dan data anda?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Tindakan ini memadamkan secara kekal daripada peranti ini profil kelahiran anda, sambungan tersimpan, profil tersembunyi, laporan dan persetujuan. Semasa pelancaran, akaun dan data anda turut dipadamkan daripada pelayan FatePair. Rekod keselamatan dan rekod undang-undang mungkin disimpan di mana undang-undang menghendakinya.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Kekalkan akaun';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Padam semua';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Akaun dan data anda telah dipadamkan daripada peranti ini.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Pemadaman gagal. Sila cuba lagi.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Terma Perkhidmatan';
@@ -1209,4 +1209,25 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

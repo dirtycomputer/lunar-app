@@ -1,4 +1,4 @@
-import 'dart:convert';
+import '../services/data_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../l10n/generated/app_localizations.dart';
@@ -49,26 +49,6 @@ Future<void> showLegalDocument(BuildContext context, LegalDocument doc) =>
               ]);
         });
 
-String _exportJson(AppState state) =>
-    const JsonEncoder.withIndent('  ').convert({
-      'app': 'FatePair',
-      'exportedAt': DateTime.now().toIso8601String(),
-      'profile': {
-        'name': state.name,
-        'birth': state.birth.toJson(),
-        'personalized': state.personalized,
-      },
-      'saved': state.saved.toList(),
-      'hidden': state.hidden.toList(),
-      'social': state.social.toJson(),
-      'journey': state.journey.toJson(),
-      'reports': state.reports.map((r) => r.toJson()).toList(),
-      'consents': state.consentStore
-          .all()
-          .map((c) => {'id': c.id, 'version': c.version, 'at': c.at})
-          .toList(),
-    });
-
 Future<void> showLegalCenter(BuildContext context, AppState state) =>
     showDialog<void>(
         context: context,
@@ -111,7 +91,7 @@ Future<void> showLegalCenter(BuildContext context, AppState state) =>
                         OutlinedButton.icon(
                             onPressed: () async {
                               await Clipboard.setData(
-                                  ClipboardData(text: _exportJson(state)));
+                                  ClipboardData(text: exportDeviceData(state)));
                               if (context.mounted) {
                                 showToast(context, l10n.exportDoneToast);
                               }
@@ -123,7 +103,7 @@ Future<void> showLegalCenter(BuildContext context, AppState state) =>
                             onPressed: () async {
                               final account = LocalAccountService(
                                   onLocalReset: state.reset,
-                                  exportJson: () => _exportJson(state));
+                                  exportJson: () => exportDeviceData(state));
                               final confirm = await showDialog<bool>(
                                   context: context,
                                   builder: (inner) => AlertDialog(

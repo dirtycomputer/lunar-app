@@ -34,7 +34,7 @@ class AppLocalizationsCs extends AppLocalizations {
   String get reportProfile => 'Nahlásit tento profil';
 
   @override
-  String get reportIntro => 'Řekněte nám, co je špatně. Náš moderátorský tým posuzuje každé hlášení a profil je okamžitě skryt z vašich doporučení.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Obtěžování nebo šikana';
@@ -67,13 +67,13 @@ class AppLocalizationsCs extends AppLocalizations {
   String get actionCancel => 'Zrušit';
 
   @override
-  String get submitReport => 'Odeslat hlášení';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Hlášení přijato. Tento profil je nyní skrytý.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Hlášení se nepodařilo odeslat. Zkuste to prosím znovu.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Skrýt tento profil';
@@ -88,31 +88,31 @@ class AppLocalizationsCs extends AppLocalizations {
   String get actionClose => 'Zavřít';
 
   @override
-  String get exportMyData => 'Exportovat moje data (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Kopie vašich dat je ve schránce.';
 
   @override
-  String get deleteAccount => 'Smazat účet a data';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Smazat váš účet a data?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Tímto se trvale odstraní z tohoto zařízení váš rodný profil, uložená spojení, skryté profily, hlášení a souhlasy. Při spuštění budou váš účet a data odstraněna také ze serverů FatePair. Bezpečnostní a právní záznamy mohou být tam, kde to zákon vyžaduje, uchovány.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Ponechat účet';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Smazat vše';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Váš účet a data byla z tohoto zařízení smazána.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Smazání se nezdařilo. Zkuste to prosím znovu.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Podmínky užívání';
@@ -1209,4 +1209,25 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

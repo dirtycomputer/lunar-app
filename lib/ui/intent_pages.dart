@@ -159,7 +159,7 @@ class _IntentCardState extends State<_IntentCard> {
             height: widget.compact
                 ? 166 *
                     (MediaQuery.textScalerOf(context).scale(14) / 14)
-                        .clamp(1.0, 1.8)
+                        .clamp(1.0, 3.0)
                 : 332,
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -302,12 +302,11 @@ class MyChartPage extends StatelessWidget {
                   '${dateLabel(state.birth.date)} · ${state.birth.timeKnown ? '${state.birth.hour.toString().padLeft(2, '0')}:${state.birth.minute.toString().padLeft(2, '0')}' : '—'} · ${state.birth.place.name}',
                   style: const TextStyle(fontSize: 12, color: muted))
             ]),
-            Row(mainAxisSize: MainAxisSize.min, children: [
+            Wrap(spacing: 10, runSpacing: 8, children: [
               OutlinedButton.icon(
                   onPressed: onEdit,
                   icon: const Icon(Icons.edit_outlined, size: 15),
                   label: Text(l.flowBirthDetails)),
-              const SizedBox(width: 10),
               TextButton.icon(
                   onPressed: onTools,
                   icon: const Icon(Icons.tune, size: 16),
@@ -462,15 +461,20 @@ class _Reading extends StatelessWidget {
     final l = AppLocalizations.of(context)!;
     return Surface(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(children: [
-        Text(l.flowReading,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-        const Spacer(),
-        TextButton.icon(
-            onPressed: onAsk,
-            icon: const Icon(Icons.chat_bubble_outline, size: 16),
-            label: Text(l.flowAskAgent))
-      ]),
+      Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 16,
+          runSpacing: 8,
+          children: [
+            Text(l.flowReading,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+            TextButton.icon(
+                onPressed: onAsk,
+                icon: const Icon(Icons.chat_bubble_outline, size: 16),
+                label: Text(l.flowAskAgent))
+          ]),
       const SizedBox(height: 13),
       SelectableText(text,
           style: const TextStyle(fontSize: 14, height: 1.9, color: ink))

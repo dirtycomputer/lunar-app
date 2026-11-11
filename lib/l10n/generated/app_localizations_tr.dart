@@ -34,7 +34,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get reportProfile => 'Bu profili bildir';
 
   @override
-  String get reportIntro => 'Sorunun ne olduğunu bize anlatın. Denetim ekibimiz her bildirimi inceler ve profil önerilerinizden hemen gizlenir.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Taciz veya zorbalık';
@@ -67,13 +67,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get actionCancel => 'İptal';
 
   @override
-  String get submitReport => 'Bildirimi gönder';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Bildirim alındı. Bu profil artık gizli.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Bildirim gönderilemedi. Lütfen tekrar deneyin.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Bu profili gizle';
@@ -88,31 +88,31 @@ class AppLocalizationsTr extends AppLocalizations {
   String get actionClose => 'Kapat';
 
   @override
-  String get exportMyData => 'Verilerimi dışa aktar (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Verilerinizin bir kopyası panoya kopyalandı.';
 
   @override
-  String get deleteAccount => 'Hesabı ve verileri sil';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Hesabınızı ve verilerinizi silmek istiyor musunuz?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Bu işlem bu cihazdan doğum profilinizi, kaydedilen bağlantıları, gizlenen profilleri, bildirimleri ve onayları kalıcı olarak kaldırır. Lansmanda hesabınız ve verileriniz FatePair sunucularından da silinir. Güvenlik ve hukuki kayıtlar yasaların gerektirdiği durumlarda saklanabilir.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Hesabı koru';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Her şeyi sil';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Hesabınız ve verileriniz bu cihazdan silindi.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Silme başarısız oldu. Lütfen tekrar deneyin.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Hizmet Şartları';
@@ -1209,4 +1209,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

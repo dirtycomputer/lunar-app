@@ -207,7 +207,7 @@ abstract class AppLocalizations {
   /// No description provided for @reportIntro.
   ///
   /// In en, this message translates to:
-  /// **'Tell us what is wrong. Reports are reviewed by our moderation team, and the profile is hidden from your recommendations right away.'**
+  /// **'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.'**
   String get reportIntro;
 
   /// No description provided for @reasonHarassment.
@@ -273,19 +273,19 @@ abstract class AppLocalizations {
   /// No description provided for @submitReport.
   ///
   /// In en, this message translates to:
-  /// **'Submit report'**
+  /// **'Save local report'**
   String get submitReport;
 
   /// No description provided for @reportReceivedToast.
   ///
   /// In en, this message translates to:
-  /// **'Report received. This profile is now hidden.'**
+  /// **'Local report saved. Sample profile hidden.'**
   String get reportReceivedToast;
 
   /// No description provided for @reportFailedToast.
   ///
   /// In en, this message translates to:
-  /// **'Could not submit the report. Please try again.'**
+  /// **'Could not save the local report. Please try again.'**
   String get reportFailedToast;
 
   /// No description provided for @actionHide.
@@ -303,7 +303,7 @@ abstract class AppLocalizations {
   /// No description provided for @legalCenterIntro.
   ///
   /// In en, this message translates to:
-  /// **'Policies that will govern FatePair at launch. Tap to read the draft.'**
+  /// **'Information about this preview and how your data is used.'**
   String get legalCenterIntro;
 
   /// No description provided for @actionClose.
@@ -315,7 +315,7 @@ abstract class AppLocalizations {
   /// No description provided for @exportMyData.
   ///
   /// In en, this message translates to:
-  /// **'Export my data (JSON)'**
+  /// **'Copy my data (JSON)'**
   String get exportMyData;
 
   /// No description provided for @exportDoneToast.
@@ -327,43 +327,43 @@ abstract class AppLocalizations {
   /// No description provided for @deleteAccount.
   ///
   /// In en, this message translates to:
-  /// **'Delete account & data'**
+  /// **'Clear local data'**
   String get deleteAccount;
 
   /// No description provided for @deleteConfirmTitle.
   ///
   /// In en, this message translates to:
-  /// **'Delete your account and data?'**
+  /// **'Clear your data on this device?'**
   String get deleteConfirmTitle;
 
   /// No description provided for @deleteConfirmBody.
   ///
   /// In en, this message translates to:
-  /// **'This permanently removes your birth profile, saved connections, hidden profiles, reports and consents from this device. At launch this also deletes your account and data on FatePair servers. Safety and legal records may be retained where the law requires.'**
+  /// **'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.'**
   String get deleteConfirmBody;
 
   /// No description provided for @keepAccount.
   ///
   /// In en, this message translates to:
-  /// **'Keep account'**
+  /// **'Keep my data'**
   String get keepAccount;
 
   /// No description provided for @deleteEverything.
   ///
   /// In en, this message translates to:
-  /// **'Delete everything'**
+  /// **'Clear local data'**
   String get deleteEverything;
 
   /// No description provided for @deleteDoneToast.
   ///
   /// In en, this message translates to:
-  /// **'Your account and data have been deleted from this device.'**
+  /// **'Your local data has been cleared.'**
   String get deleteDoneToast;
 
   /// No description provided for @deleteFailedToast.
   ///
   /// In en, this message translates to:
-  /// **'Deletion failed. Please try again.'**
+  /// **'Data could not be fully cleared. Retry to finish.'**
   String get deleteFailedToast;
 
   /// No description provided for @docTerms.
@@ -2453,6 +2453,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Journey'**
   String get journeyShort;
+
+  /// No description provided for @releaseRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get releaseRetry;
+
+  /// No description provided for @releaseDeletePending.
+  ///
+  /// In en, this message translates to:
+  /// **'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.'**
+  String get releaseDeletePending;
+
+  /// No description provided for @releaseStorageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved data needs attention'**
+  String get releaseStorageTitle;
+
+  /// No description provided for @releasePreviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About this release'**
+  String get releasePreviewTitle;
+
+  /// No description provided for @releasePreviewBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.'**
+  String get releasePreviewBody;
+
+  /// No description provided for @releaseConsentSaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your details were saved, but the consent record could not be saved. Please try again.'**
+  String get releaseConsentSaveFailed;
+
+  /// No description provided for @releaseReportHideFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Local report saved, but the profile could not be hidden. Please try Hide this profile again.'**
+  String get releaseReportHideFailed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -58,6 +58,10 @@ Personal analysis sends names, birth date/time/place/timezone, chart conventions
 
 Only the configured DeepSeek model and destination are used; client input cannot disable thinking or select a different model. The service validates browser origins, headers, body size, and chart inputs, limits concurrent generations to two per instance and bursts to six per minute per IP per instance. CORS is not authentication, and in-process limits are not a global or account-level quota. A public production launch still needs durable user authorization and quotas, consistent with the app's prototype scope.
 
+## Runtime maintenance
+
+FastAPI 0.162.4 and Starlette 1.10.0 replace the older Starlette runtime with public advisories. `requirements.txt` pins the complete tested Python runtime dependency set. After updates, run the service tests and `python3 scripts/audit_dependencies.py` from the repository root. The latter sends only public package/version metadata to OSV and does not prove application or infrastructure security.
+
 ## Checks
 
 ```sh

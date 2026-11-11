@@ -12,6 +12,8 @@ class FlakyPreferences extends Fake implements SharedPreferences {
   @override
   String? getString(String key) => value;
   @override
+  Object? get(String key) => key == JourneyStore.storageKey ? value : null;
+  @override
   Future<bool> setString(String key, String next) async {
     if (fail) return false;
     value = next;

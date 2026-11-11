@@ -35,7 +35,10 @@ class _AgentPageState extends State<AgentPage> {
   void update() {
     if (mounted) setState(() {});
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scroll.hasClients) {
+      if (!mounted || !scroll.hasClients) return;
+      if (MediaQuery.disableAnimationsOf(context)) {
+        scroll.jumpTo(scroll.position.maxScrollExtent);
+      } else {
         scroll.animateTo(scroll.position.maxScrollExtent,
             duration: const Duration(milliseconds: 180), curve: Curves.easeOut);
       }
@@ -52,7 +55,7 @@ class _AgentPageState extends State<AgentPage> {
 
   void ask([String? text]) {
     final q = (text ?? input.text).trim();
-    if (q.isEmpty) return;
+    if (q.isEmpty || widget.agent.busy || q.length > 2000) return;
     input.clear();
     widget.agent.ask(q, context: widget.chart, userContext: widget.userContext);
   }
@@ -69,33 +72,40 @@ class _AgentPageState extends State<AgentPage> {
                 padding: EdgeInsets.fromLTRB(compact ? 18 : 34, 18,
                     compact ? 18 : 34, compact ? 14 : 24),
                 child: Column(children: [
-                  Row(children: [
-                    if (widget.personalized)
-                      Expanded(
-                          child: Text(widget.name,
-                              style: const TextStyle(
-                                  fontSize: 13, fontWeight: FontWeight.w600)))
-                    else
-                      Expanded(
-                          child: Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: OutlinedButton.icon(
-                                  onPressed: widget.onEdit,
-                                  icon: const Icon(Icons.person_add_alt,
-                                      size: 15),
-                                  label: Text(l.flowAddBirth)))),
-                    TextButton(
-                        onPressed: widget.onSettings,
-                        child: Text(l.flowConnectModel,
-                            style: const TextStyle(fontSize: 11))),
-                    IconButton(
-                        tooltip: l.flowClearChat,
-                        onPressed: () {
-                          input.clear();
-                          a.clear();
-                        },
-                        icon: const Icon(Icons.add_comment_outlined, size: 19))
-                  ]),
+                  SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 12,
+                        runSpacing: 6,
+                        children: [
+                          if (widget.personalized)
+                            Text(widget.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.w600))
+                          else
+                            OutlinedButton.icon(
+                                onPressed: widget.onEdit,
+                                icon:
+                                    const Icon(Icons.person_add_alt, size: 15),
+                                label: Text(l.flowAddBirth)),
+                          TextButton(
+                              onPressed: widget.onSettings,
+                              child: Text(l.flowConnectModel,
+                                  style: const TextStyle(fontSize: 11))),
+                          IconButton(
+                              tooltip: l.flowClearChat,
+                              onPressed: () {
+                                input.clear();
+                                a.clear();
+                              },
+                              icon: const Icon(Icons.add_comment_outlined,
+                                  size: 19)),
+                        ],
+                      )),
                   const SizedBox(height: 12),
                   Expanded(
                       child: a.turns.isEmpty
@@ -210,6 +220,25 @@ class _AgentPageState extends State<AgentPage> {
                                                       height: 1.9,
                                                       color: ink))
                                             ]))),
+                              if (a.error != null)
+                                Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(a.error!,
+                                              style: const TextStyle(
+                                                  fontSize: 11, color: coral)),
+                                          if (a.canRetry)
+                                            TextButton.icon(
+                                              key:
+                                                  const ValueKey('agent-retry'),
+                                              onPressed: a.retry,
+                                              icon: const Icon(Icons.refresh,
+                                                  size: 16),
+                                              label: Text(l.releaseRetry),
+                                            ),
+                                        ])),
                               if (a.busy)
                                 const Align(
                                     alignment: AlignmentDirectional.centerStart,
@@ -220,12 +249,6 @@ class _AgentPageState extends State<AgentPage> {
                                             child: CircularProgressIndicator(
                                                 strokeWidth: 2))))
                             ])),
-                  if (a.error != null)
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: Text(a.error!,
-                            style:
-                                const TextStyle(fontSize: 11, color: coral))),
                   const SizedBox(height: 12),
                   Container(
                       decoration: BoxDecoration(
@@ -241,7 +264,7 @@ class _AgentPageState extends State<AgentPage> {
                                     key: const ValueKey('agent-question'),
                                     controller: input,
                                     minLines: 1,
-                                    maxLines: 5,
+                                    maxLines: compact ? 3 : 5,
                                     maxLength: 2000,
                                     enabled: !a.busy,
                                     textInputAction: TextInputAction.send,

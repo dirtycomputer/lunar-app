@@ -121,7 +121,8 @@ async def endpoint(request: Request, path: str):
         # Recomputed chart evidence also counts against the transport budget.
         if len(json.dumps(body, ensure_ascii=False).encode()) > 4_300_000:
             return reply(413, {'error': {'code': 'context_too_large'}})
-    except (ValueError, KeyError, TypeError, OverflowError, RecursionError) as error:
+    except (ValueError, KeyError, TypeError, AttributeError, IndexError,
+            OverflowError, RecursionError) as error:
         return reply(422, {'error': {'code': 'chart_validation_failed',
                                     'message': str(error)[:220]}})
     try:

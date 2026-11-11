@@ -34,7 +34,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get reportProfile => '举报此资料';
 
   @override
-  String get reportIntro => '请告诉我们问题所在。我们的审核团队会处理每一条举报，该资料会立即从您的推荐中隐藏。';
+  String get reportIntro => '在当前设备保存一份关于示例人物的举报记录，不会发送给审核团队。保存成功后会隐藏该示例人物。';
 
   @override
   String get reasonHarassment => '骚扰或欺凌';
@@ -67,13 +67,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get actionCancel => '取消';
 
   @override
-  String get submitReport => '提交举报';
+  String get submitReport => '保存本地举报';
 
   @override
-  String get reportReceivedToast => '举报已收到。该资料已被隐藏。';
+  String get reportReceivedToast => '本地举报已保存，示例人物已隐藏。';
 
   @override
-  String get reportFailedToast => '举报提交失败，请重试。';
+  String get reportFailedToast => '无法保存本地举报，请重试。';
 
   @override
   String get actionHide => '隐藏此资料';
@@ -82,37 +82,37 @@ class AppLocalizationsZh extends AppLocalizations {
   String get legalCenterTitle => '法律条款与您的数据';
 
   @override
-  String get legalCenterIntro => 'FatePair 上线时生效的政策。点击查看草稿。';
+  String get legalCenterIntro => '了解当前预览版及资料的使用方式。';
 
   @override
   String get actionClose => '关闭';
 
   @override
-  String get exportMyData => '导出我的数据（JSON）';
+  String get exportMyData => '复制我的资料（JSON）';
 
   @override
   String get exportDoneToast => '您的数据副本已复制到剪贴板。';
 
   @override
-  String get deleteAccount => '删除账号与数据';
+  String get deleteAccount => '清除本地资料';
 
   @override
-  String get deleteConfirmTitle => '删除您的账号和数据？';
+  String get deleteConfirmTitle => '清除当前设备上的资料？';
 
   @override
-  String get deleteConfirmBody => '此操作将永久删除本设备上的生日档案、保存的连接、隐藏的资料、举报记录和同意记录。上线后还将同时删除 FatePair 服务器上的账号和数据。出于安全或法律要求，部分记录可能会被保留。';
+  String get deleteConfirmBody => '清除出生资料、收藏和隐藏记录、同意和举报记录、对比命盘、模型设置、示例邀请、草稿及探索进度，并清空当前对话。保留语言设置。这不会删除 AI 服务商持有的记录。';
 
   @override
-  String get keepAccount => '保留账号';
+  String get keepAccount => '保留资料';
 
   @override
-  String get deleteEverything => '全部删除';
+  String get deleteEverything => '清除本地资料';
 
   @override
-  String get deleteDoneToast => '您的账号和数据已从此设备删除。';
+  String get deleteDoneToast => '本地资料已清除。';
 
   @override
-  String get deleteFailedToast => '删除失败，请重试。';
+  String get deleteFailedToast => '资料尚未完全清除，请重试完成删除。';
 
   @override
   String get docTerms => '服务条款';
@@ -1209,6 +1209,27 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get journeyShort => '旅程';
+
+  @override
+  String get releaseRetry => '重试';
+
+  @override
+  String get releaseDeletePending => '资料尚未完全清除，旧资料已隐藏。请重试完成删除。';
+
+  @override
+  String get releaseStorageTitle => '本地资料需要处理';
+
+  @override
+  String get releasePreviewTitle => '关于当前版本';
+
+  @override
+  String get releasePreviewBody => '可以使用排盘和 AI 解读。人物、邀请、消息和举报是当前设备上的示例体验，不会实际发送消息或提交举报。';
+
+  @override
+  String get releaseConsentSaveFailed => '资料已保存，但未能保存同意记录，请重试。';
+
+  @override
+  String get releaseReportHideFailed => '本地举报已保存，但未能隐藏人物，请再次选择隐藏。';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -1243,7 +1264,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get reportProfile => '檢舉此資料';
 
   @override
-  String get reportIntro => '請告訴我們問題所在。我們的審核團隊會處理每一筆檢舉，該資料會立即從您的推薦中隱藏。';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => '騷擾或霸凌';
@@ -1276,13 +1297,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get actionCancel => '取消';
 
   @override
-  String get submitReport => '送出檢舉';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => '檢舉已收到。該資料已被隱藏。';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => '檢舉送出失敗，請再試一次。';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => '隱藏此資料';
@@ -1297,31 +1318,31 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get actionClose => '關閉';
 
   @override
-  String get exportMyData => '匯出我的資料（JSON）';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => '您的資料副本已複製到剪貼簿。';
 
   @override
-  String get deleteAccount => '刪除帳號與資料';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => '刪除您的帳號和資料？';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => '此操作將永久刪除本裝置上的生日檔案、儲存的連結、隱藏的資料、檢舉紀錄和同意紀錄。上線後還會同時刪除 FatePair 伺服器上的帳號和資料。基於安全或法律要求，部分紀錄可能會被保留。';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => '保留帳號';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => '全部刪除';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => '您的帳號和資料已從此裝置刪除。';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => '刪除失敗，請再試一次。';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => '服務條款';

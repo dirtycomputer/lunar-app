@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'device_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bazi.dart';
@@ -15,10 +16,21 @@ class JourneyStore extends ChangeNotifier {
   static const reward = 20;
   final SharedPreferences preferences;
   Set<JourneyQuest> _completed = {};
-  Future<void> _pending = Future.value();
+  DeviceStorage get storage => DeviceStorage(preferences);
+  bool _disposed = false;
+  void _notify() {
+    if (!_disposed) notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
   JourneyStore(this.preferences) {
     try {
-      final raw = preferences.getString(storageKey);
+      final raw = storage.read<String>(storageKey);
       if (raw == null) return;
       final value = jsonDecode(raw) as Map<String, dynamic>;
       if (value['version'] != 1 || value['completed'] is! List) return;
@@ -42,7 +54,7 @@ class JourneyStore extends ChangeNotifier {
 
   // Writes are serialized; retrying or replaying a quest cannot mint more sparks.
   Future<int?> complete(JourneyQuest quest) {
-    final operation = _pending.then((_) async {
+    return storage.write(() async {
       if (_completed.contains(quest)) return 0;
       final next = {..._completed, quest};
       try {
@@ -57,25 +69,25 @@ class JourneyStore extends ChangeNotifier {
         return null;
       }
       _completed = next;
-      notifyListeners();
+      _notify();
       return reward;
-    });
-    _pending = operation.then((_) {});
-    return operation;
+    }, failure: null);
+  }
+
+  void forget() {
+    _completed = {};
   }
 
   Future<bool> reset() {
-    final operation = _pending.then((_) async {
+    return storage.write(() async {
       try {
         if (!await preferences.remove(storageKey)) return false;
       } catch (_) {
         return false;
       }
       _completed = {};
-      notifyListeners();
+      _notify();
       return true;
-    });
-    _pending = operation.then((_) {});
-    return operation;
+    }, failure: false);
   }
 }

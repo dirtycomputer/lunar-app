@@ -29,6 +29,9 @@ class ChartContext {
   final DateTime instant;
   final Map<String, dynamic> viewContext;
   late final ChartReport transit;
+  ChartContext._(this.natal, this.instant, this.transit, this.viewContext);
+  ChartContext withViewContext(Map<String, dynamic> value) =>
+      ChartContext._(natal, instant, transit, value);
   ChartContext(this.natal, {DateTime? now, this.viewContext = const {}})
       : instant = now ?? DateTime.now() {
     final local = tz.TZDateTime.from(
@@ -127,11 +130,41 @@ class ChartContext {
   }
 }
 
+/// Reuse the expensive natal/transit reports while only UI context changes.
+/// Time, birth data, and calculation conventions participate in invalidation.
+class ChartContextCache {
+  String? _key;
+  ChartContext? _value;
+  ChartContext get(
+    ChartSubject subject, {
+    DateTime? now,
+    Map<String, dynamic> viewContext = const {},
+  }) {
+    final instant = now ?? DateTime.now();
+    final key =
+        jsonEncode([subject.toJson(), instant.millisecondsSinceEpoch ~/ 60000]);
+    if (key != _key) {
+      _value = ChartContext(ChartEngine().calculate(subject), now: instant);
+      _key = key;
+    }
+    return _value!.withViewContext(viewContext);
+  }
+}
+
 class AgentTurn {
   final String role, text, source;
   final Map<String, dynamic>? contextSnapshot;
   const AgentTurn(this.role, this.text,
       {this.source = '', this.contextSnapshot});
+}
+
+class _RetryQuestion {
+  final String question;
+  final ChartContext? context;
+  final Map<String, dynamic> snapshot;
+  final List<Map<String, String>> history;
+  const _RetryQuestion(
+      this.question, this.context, this.snapshot, this.history);
 }
 
 class ChartAgent extends ChangeNotifier {
@@ -142,27 +175,33 @@ class ChartAgent extends ChangeNotifier {
   bool busy = false;
   String? error;
   http.Client? _client;
+  _RetryQuestion? _retry;
   int _request = 0;
+  bool get canRetry => !busy && error != null && _retry != null;
   ChartAgent(this.studio, {http.Client Function()? clientFactory})
       : clientFactory = clientFactory ?? http.Client.new;
 
   Future<bool> _modelAvailable(http.Client client) async {
     final config = studio.model;
     if (!config.isConfigured) return false;
-    if (!config.baseUrl
-        .replaceFirst(RegExp(r'/+$'), '')
-        .endsWith('/api/model')) {
+    if (!config.baseUrl.replaceFirst(RegExp(r'/+$'), '').endsWith('/api/model')) {
       return true;
     }
     try {
-      final r = await client
+      final response = await client
           .get(Uri.parse(
               '${config.baseUrl.replaceFirst(RegExp(r'/+$'), '')}/info'))
           .timeout(const Duration(seconds: 20));
-      if (r.statusCode != 200) return false;
-      return (jsonDecode(r.body) as Map<String, dynamic>)['configured'] == true;
-    } catch (_) {
-      return false;
+      if (response.statusCode != 200) {
+        throw const ModelFailure(
+            'Could not connect to the interpretation service. Your question is kept.');
+      }
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      return data['configured'] == true;
+    } catch (error) {
+      if (error is ModelFailure) rethrow;
+      throw const ModelFailure(
+          'Could not connect to the interpretation service. Your question is kept.');
     }
   }
 
@@ -171,9 +210,6 @@ class ChartAgent extends ChangeNotifier {
       Map<String, dynamic> userContext = const {}}) async {
     final q = question.trim();
     if (q.isEmpty || busy || q.length > 2000) return;
-    final id = ++_request;
-    busy = true;
-    error = null;
     final Map<String, dynamic> snapshot =
         context?.evidence() ?? {'personalChartAvailable': false};
     if (userContext.isNotEmpty) {
@@ -182,49 +218,75 @@ class ChartAgent extends ChangeNotifier {
         ...userContext
       };
     }
+    final frozen = jsonDecode(jsonEncode(snapshot)) as Map<String, dynamic>;
     final history = _turns
-        .map((t) => {
+        .map((t) => <String, String>{
               'role': t.role,
               'content': t.contextSnapshot == null
                   ? t.text
                   : jsonEncode({
                       'question': t.text,
-                      'computedEvidence': t.contextSnapshot
-                    })
+                      'computedEvidence': t.contextSnapshot,
+                    }),
             })
         .toList();
-    _turns.add(AgentTurn('user', q, contextSnapshot: snapshot));
+    _retry = _RetryQuestion(q, context, frozen, history);
+    _turns.add(AgentTurn('user', q, contextSnapshot: frozen));
+    await _run(_retry!);
+  }
+
+  Future<void> retry() async {
+    if (!canRetry) return;
+    if (_turns.isNotEmpty &&
+        _turns.last.role == 'assistant' &&
+        _turns.last.source == 'reference') {
+      _turns.removeLast();
+    }
+    await _run(_retry!);
+  }
+
+  Future<void> _run(_RetryQuestion question) async {
+    final id = ++_request;
+    busy = true;
+    error = null;
     notifyListeners();
-    String reference() => context?.referenceAnswer(q) ?? generalReference(q);
-    _client = clientFactory();
+    final client = clientFactory();
+    _client = client;
+    String reference() =>
+        question.context?.referenceAnswer(question.question) ??
+        generalReference(question.question);
     try {
-      if (await _modelAvailable(_client!)) {
-        if (id != _request) return;
-        final answer = await InterpretationClient(_client!).generate(
-            config: studio.model,
-            apiKey: studio.apiKey,
-            style: ReadingStyle.professional,
-            evidence: snapshot,
-            topic: context == null
-                ? 'General BaZi study question'
-                : 'BaZi question and answer',
-            question: q,
-            conversation: history);
+      final available = await _modelAvailable(client);
+      if (id != _request) return;
+      if (available) {
+        final answer = await InterpretationClient(client).generate(
+          config: studio.model,
+          apiKey: studio.apiKey,
+          style: ReadingStyle.professional,
+          evidence: question.snapshot,
+          topic: question.context == null
+              ? 'General BaZi study question'
+              : 'BaZi question and answer',
+          question: question.question,
+          conversation: question.history,
+        );
         if (id == _request) {
           _turns.add(AgentTurn('assistant', answer, source: 'model'));
         }
-      } else if (id == _request) {
+      } else {
         _turns.add(AgentTurn('assistant', reference(), source: 'reference'));
       }
     } catch (e) {
       if (id == _request) {
-        error = e is ModelFailure ? e.message : 'The model is unavailable.';
+        error = e is ModelFailure
+            ? e.message
+            : 'The model is unavailable. Your question is kept.';
         _turns.add(AgentTurn('assistant', reference(), source: 'reference'));
       }
     } finally {
+      client.close();
       if (id == _request) {
         busy = false;
-        _client?.close();
         _client = null;
         notifyListeners();
       }
@@ -232,16 +294,24 @@ class ChartAgent extends ChangeNotifier {
   }
 
   void cancel() {
+    final wasBusy = busy;
     _request++;
     _client?.close();
     _client = null;
     busy = false;
+    if (wasBusy) {
+      error = 'Request stopped. Your question is kept and can be retried.';
+    }
     notifyListeners();
   }
 
   void clear() {
-    cancel();
+    _request++;
+    _client?.close();
+    _client = null;
+    busy = false;
     _turns.clear();
+    _retry = null;
     error = null;
     notifyListeners();
   }

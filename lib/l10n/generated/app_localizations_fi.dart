@@ -34,7 +34,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get reportProfile => 'Ilmianna tämä profiili';
 
   @override
-  String get reportIntro => 'Kerro, mikä on vialla. Moderointitiimimme käsittelee jokaisen ilmoituksen, ja profiili piilotetaan heti suosituksistasi.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'Häirintä tai kiusaaminen';
@@ -67,13 +67,13 @@ class AppLocalizationsFi extends AppLocalizations {
   String get actionCancel => 'Peruuta';
 
   @override
-  String get submitReport => 'Lähetä ilmoitus';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'Ilmoitus vastaanotettu. Tämä profiili on nyt piilotettu.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'Ilmoitusta ei voitu lähettää. Yritä uudelleen.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'Piilota tämä profiili';
@@ -88,31 +88,31 @@ class AppLocalizationsFi extends AppLocalizations {
   String get actionClose => 'Sulje';
 
   @override
-  String get exportMyData => 'Vie tietoni (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'Kopio tiedoistasi on leikepöydällä.';
 
   @override
-  String get deleteAccount => 'Poista tili ja tiedot';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'Poistetaanko tilisi ja tietosi?';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'Tämä poistaa pysyvästi täältä laitteelta syntymäprofiilisi, tallennetut yhteydet, piilotetut profiilit, ilmoitukset ja suostumukset. Julkaisussa tilisi ja tietosi poistetaan myös FatePair-palvelimilta. Turvallisuus- ja oikeustietueita voidaan säilyttää, kun laki sitä vaatii.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'Säilytä tili';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'Poista kaikki';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'Tilisi ja tietosi on poistettu tästä laitteesta.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'Poisto epäonnistui. Yritä uudelleen.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'Käyttöehdot';
@@ -1209,4 +1209,25 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

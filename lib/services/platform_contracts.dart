@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'device_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -161,28 +162,30 @@ class LocalModerationService implements ModerationService {
   // Launch wiring: POST /reports into the Trust & Safety queue with a
   // 48-hour removal SLA for non-consensual imagery (TAKE IT DOWN Act).
   @override
-  Future<bool> reportUser(ReportRecord record) async {
-    try {
-      final raw = preferences.getStringList('reports') ?? [];
-      final updated = [...raw, jsonEncode(record.toJson())];
-      return await preferences.setStringList('reports', updated);
-    } catch (_) {
-      return false;
-    }
-  }
-
-  List<ReportRecord> loadReports() => (preferences.getStringList('reports') ??
-          [])
-      .map((line) {
+  Future<bool> reportUser(ReportRecord record) =>
+      DeviceStorage(preferences).write(() async {
         try {
-          return ReportRecord.fromJson(
-              jsonDecode(line) as Map<String, dynamic>);
+          final raw =
+              DeviceStorage(preferences).read<List<String>>('reports') ?? [];
+          final updated = [...raw, jsonEncode(record.toJson())];
+          return await preferences.setStringList('reports', updated);
         } catch (_) {
-          return null;
+          return false;
         }
-      })
-      .whereType<ReportRecord>()
-      .toList();
+      }, failure: false);
+
+  List<ReportRecord> loadReports() =>
+      (DeviceStorage(preferences).read<List<String>>('reports') ?? [])
+          .map((line) {
+            try {
+              return ReportRecord.fromJson(
+                  jsonDecode(line) as Map<String, dynamic>);
+            } catch (_) {
+              return null;
+            }
+          })
+          .whereType<ReportRecord>()
+          .toList();
 }
 
 abstract class ConsentService {
@@ -204,82 +207,93 @@ class ConsentRecord {
 class LocalConsentService implements ConsentService {
   final SharedPreferences preferences;
   LocalConsentService(this.preferences);
-  List<String> _keys() => preferences.getStringList('consents') ?? [];
+  List<String> _keys() =>
+      DeviceStorage(preferences).read<List<String>>('consents') ?? [];
   @override
   bool accepted(String id, String version) =>
-      _keys().any((k) => k.startsWith('$id@$version@'));
+      all().any((record) => record.id == id && record.version == version);
   @override
-  Future<bool> accept(String id, String version) async {
-    final key = ConsentRecord(id, version, DateTime.now().toIso8601String()).key;
-    final updated = [..._keys().where((k) => !k.startsWith('$id@')), key];
-    try {
-      return await preferences.setStringList('consents', updated);
-    } catch (_) {
-      return false;
-    }
-  }
+  Future<bool> accept(String id, String version) =>
+      DeviceStorage(preferences).write(() async {
+        final key =
+            ConsentRecord(id, version, DateTime.now().toIso8601String()).key;
+        final updated = [..._keys().where((k) => !k.startsWith('$id@')), key];
+        try {
+          return await preferences.setStringList('consents', updated);
+        } catch (_) {
+          return false;
+        }
+      }, failure: false);
 
   @override
-  List<ConsentRecord> all() => _keys().map(ConsentRecord.fromKey).toList();
+  List<ConsentRecord> all() => _keys()
+      .where((key) {
+        final parts = key.split('@');
+        return parts.length == 3 &&
+            parts[0].isNotEmpty &&
+            parts[1].isNotEmpty &&
+            DateTime.tryParse(parts[2]) != null;
+      })
+      .map(ConsentRecord.fromKey)
+      .toList();
 }
 
 class LegalDocument {
   final String id, title, version, effective, body;
-  const LegalDocument(this.id, this.title, this.version, this.effective,
-      this.body);
+  const LegalDocument(
+      this.id, this.title, this.version, this.effective, this.body);
 }
 
-// Placeholder drafts for the eight launch documents. Have counsel review
-// before shipping to production; bodies are intentionally short summaries.
+// Current, scoped preview notices. Production operator details remain a release gate.
 const legalDocuments = <LegalDocument>[
   LegalDocument(
-      'terms',
+      "terms",
       "Terms of Service",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Will cover: eligibility (18+), your account, acceptable use, the cultural-and-entertainment nature of BaZi insights (no guarantee of accuracy or relationship outcomes), subscriptions and renewals, termination, disclaimers, limitation of liability, governing law of the Hong Kong operating entity, and dispute resolution.\n\n[Draft for legal review before launch.]"),
+      "preview-2026-11-11",
+      "11 November 2026",
+      "FatePair is currently a public preview for adults aged 18 and over. You can calculate a chart, read cultural interpretations, ask the configured AI service questions, and explore clearly labelled fictional profiles. Invitations, message drafts and reports remain on this device and are not delivered. There are no paid plans or live community accounts in this release.\n\nBaZi is a cultural tradition, not a scientifically validated prediction or a guarantee of personality, safety or relationship outcomes. AI explanations may be incorrect. Do not rely on them for medical, legal, financial or other consequential decisions. You are responsible for the information you enter. Do not submit someone else’s private birth information without permission."),
   LegalDocument(
-      'privacy',
-      "Privacy Policy",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Will cover: data we collect (birth date, time, place, gender, preferences, photos, messages), purposes and legal bases, sensitive-category handling (birth details, orientation) with explicit consent under GDPR, retention and deletion, processors (hosting, payments, moderation), your rights (access, rectification, erasure, portability, objection), California privacy rights, children (18+ only), international transfers, and our contact address.\n\n[Draft for legal review before launch.]"),
+      "privacy",
+      "Privacy Notice",
+      "preview-2026-11-11",
+      "11 November 2026",
+      "Your name and birth date, time, birthplace, time zone and longitude are used to calculate your chart on this device. Saved profiles, hidden profiles, consent records, sample invitations, message drafts, reports, chart settings and exploration progress are stored in this browser or app installation. This local storage is not an encrypted account vault. No profile is published to other members in this release.\n\nWhen you ask the configured interpretation service, the app sends your question, available birth inputs, calculated charts, selected conventions, the reading you are viewing, learning progress and the complete current conversation to that service. The default server recalculates the chart with lunar-python before asking DeepSeek. The service does not store request bodies; hosting providers and DeepSeek process requests under their own policies. Text you type is not automatically redacted. Custom model endpoints receive the data you submit to them.\n\nConversation history and custom model keys remain in session memory. Copy my data exports local records; Clear local data removes this app’s stored personal records and conversation state, while preserving language and unrelated preferences. Clearing this device does not erase hosting or model-provider records. Browser storage can be removed by the browser or operating system, and is not a backup. The operating entity, production support contact and live-community retention policy must be established before a commercial launch."),
   LegalDocument(
-      'community',
+      "community",
       "Community Guidelines",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Will cover: be 18+, be real (no impersonation), be respectful (no harassment, hate, threats), no nudity or sexual content in photos or messages, no solicitation or scamming, respect consent, and consequences (warning, removal, ban) plus how to appeal a moderation decision.\n\n[Draft for legal review before launch.]"),
+      "preview-2026-11-11",
+      "11 November 2026",
+      "Use the preview respectfully. Do not impersonate another person, harass or threaten others, share private information or images without permission, exploit children, solicit money, or attempt fraud. Only adults may use FatePair.\n\nThe people shown in this release are fictional samples. The local invitation and message tools do not contact them. A real community requires authenticated accounts, mutual consent and operational moderation before it can open."),
   LegalDocument(
-      'safety',
-      "Dating Safety Guidelines",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Safety Center content: take conversations at your pace, meet in public, tell a friend, never send money or financial details, watch for scam patterns, report and block freely, and consent reminders. FatePair culture scores are a conversation starter, never a safety judgment.\n\n[Draft for legal review before launch.]"),
+      "safety",
+      "Dating Safety",
+      "preview-2026-11-11",
+      "11 November 2026",
+      "A compatibility score is a cultural conversation starter, never a safety assessment. If you meet someone through an online service, take your time, protect your address and financial information, never send money, and meet in a public place. Tell a trusted person where you will be. Consent can be withdrawn at any time.\n\nIf there is an immediate threat or a child is in danger, contact appropriate local emergency or child-protection services. The preview’s local report record is not an emergency or monitored support channel."),
   LegalDocument(
-      'csae',
-      "Child Safety (CSAE) Policy",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Required by Google Play Child Safety Standards even though FatePair is 18+ only. Will cover: zero tolerance for child sexual abuse and exploitation (CSAE), prohibition of child sexual abuse material (CSAM), mandatory reporting paths to law enforcement and NCMEC where applicable, in-app reporting and escalation, a dedicated child-safety contact email, and account termination for violations.\n\n[Draft for legal review before launch.]"),
+      "csae",
+      "Child Safety",
+      "preview-2026-11-11",
+      "11 November 2026",
+      "FatePair is for adults aged 18 and over. Child sexual abuse, exploitation and related material are prohibited. Do not upload or share such material. If a child is in immediate danger, contact the appropriate local authority.\n\nThis preview has no public uploads or delivered messages. Its report tool stores a record locally and does not notify a safety team. A dedicated child-safety contact, an operational escalation process and the applicable reporting arrangements are required before a live community launches."),
   LegalDocument(
-      'deletion',
-      "Account & Data Deletion Policy",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Will cover: in-app account deletion (Settings → Privacy & your data), the web deletion request URL for users who have uninstalled, what is deleted versus retained (legal-hold and safety records), retention windows, and expected completion time.\n\n[Draft for legal review before launch.]"),
+      "deletion",
+      "Local Data Deletion",
+      "preview-2026-11-11",
+      "11 November 2026",
+      "Open Settings → Privacy & your data to copy or clear your local records. Clearing removes the birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress from this installation. In-memory conversations and model keys are cleared. The chosen language and unrelated preferences are preserved.\n\nIf deletion is interrupted, old personal records remain hidden and the app offers a retry. Startup also attempts to finish pending deletion. A failed deletion is not reported as successful. Copy data you want to keep before clearing. There is no cloud account to delete in this release, and local deletion cannot erase records held by an AI provider."),
   LegalDocument(
-      'subscription',
-      "Subscription Terms",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Will cover: plan names and prices per storefront, billing cycle, auto-renewal terms, how to cancel (store subscription settings), refunds per Apple/Google policy, price-change notice, and free-trial conversion terms if offered.\n\n[Draft for legal review before launch.]"),
+      "subscription",
+      "Payments",
+      "preview-2026-11-11",
+      "11 November 2026",
+      "This release does not sell subscriptions, process payments, offer paid trials or activate paid entitlements. All exploration tasks are optional and accessible without payment. Prices, billing policies and store purchase flows will be presented only if paid services are implemented."),
   LegalDocument(
-      'moderation',
-      "Content Moderation & Reporting Policy",
-      '1.0.0-draft',
-      'Upon launch',
-      "Placeholder. Will cover: what we moderate (profiles, photos, messages), automated and human review, report categories and response targets, the 48-hour removal process for non-consensual intimate imagery under the US TAKE IT DOWN Act (effective May 19, 2026), enforcement ladder, appeals, and moderation transparency commitments.\n\n[Draft for legal review before launch.]"),
+      "moderation",
+      "Reporting in this Preview",
+      "preview-2026-11-11",
+      "11 November 2026",
+      "You can hide a fictional sample profile and save a local report with a reason and optional note. Hidden profiles are removed from your visible recommendations and local conversation list. Reports are included in your device data export and cleared with local data.\n\nReports are not delivered to moderators, and no response time or enforcement action is promised by this preview. Do not use this feature for urgent safety requests. A staffed review queue, contact and appeals process are required before real members can publish content or exchange messages."),
 ];
 
 LegalDocument? legalDocById(String id) {

@@ -34,7 +34,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reportProfile => 'الإبلاغ عن هذا الملف الشخصي';
 
   @override
-  String get reportIntro => 'أخبرنا بما الذي خطأ. يراجع فريق الإشراف لدينا كل بلاغ، ويُخفى الملف الشخصي فورًا من توصياتك.';
+  String get reportIntro => 'Save a report about this sample on your device. It is not delivered to a moderation team. The sample profile will be hidden if saving succeeds.';
 
   @override
   String get reasonHarassment => 'مضايقة أو تنمّر';
@@ -67,13 +67,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get actionCancel => 'إلغاء';
 
   @override
-  String get submitReport => 'إرسال البلاغ';
+  String get submitReport => 'Save local report';
 
   @override
-  String get reportReceivedToast => 'تم استلام البلاغ. تم إخفاء هذا الملف الشخصي.';
+  String get reportReceivedToast => 'Local report saved. Sample profile hidden.';
 
   @override
-  String get reportFailedToast => 'تعذّر إرسال البلاغ. يُرجى المحاولة مرة أخرى.';
+  String get reportFailedToast => 'Could not save the local report. Please try again.';
 
   @override
   String get actionHide => 'إخفاء هذا الملف الشخصي';
@@ -88,31 +88,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get actionClose => 'إغلاق';
 
   @override
-  String get exportMyData => 'تصدير بياناتي (JSON)';
+  String get exportMyData => 'Copy my data (JSON)';
 
   @override
   String get exportDoneToast => 'تم نسخ نسخة من بياناتك إلى الحافظة.';
 
   @override
-  String get deleteAccount => 'حذف الحساب والبيانات';
+  String get deleteAccount => 'Clear local data';
 
   @override
-  String get deleteConfirmTitle => 'حذف حسابك وبياناتك؟';
+  String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'يزيل هذا الإجراء نهائيًا من هذا الجهاز ملف ميلادك، واتصالاتك المحفوظة، والملفات الشخصية المخفية، والبلاغات، والموافقات. وعند الإطلاق سيتم أيضًا حذف حسابك وبياناتك من خوادم FatePair. قد يُحتفظ بسجلات السلامة والسجلات القانونية حيث يتطلب القانون ذلك.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
 
   @override
-  String get keepAccount => 'الاحتفاظ بالحساب';
+  String get keepAccount => 'Keep my data';
 
   @override
-  String get deleteEverything => 'حذف كل شيء';
+  String get deleteEverything => 'Clear local data';
 
   @override
-  String get deleteDoneToast => 'تم حذف حسابك وبياناتك من هذا الجهاز.';
+  String get deleteDoneToast => 'Your local data has been cleared.';
 
   @override
-  String get deleteFailedToast => 'فشل الحذف. يُرجى المحاولة مرة أخرى.';
+  String get deleteFailedToast => 'Data could not be fully cleared. Retry to finish.';
 
   @override
   String get docTerms => 'شروط الخدمة';
@@ -1209,4 +1209,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get journeyShort => 'Journey';
+
+  @override
+  String get releaseRetry => 'Try again';
+
+  @override
+  String get releaseDeletePending => 'Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.';
+
+  @override
+  String get releaseStorageTitle => 'Saved data needs attention';
+
+  @override
+  String get releasePreviewTitle => 'About this release';
+
+  @override
+  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+
+  @override
+  String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
+
+  @override
+  String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
 }

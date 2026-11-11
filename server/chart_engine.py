@@ -25,6 +25,8 @@ def equation_of_time(instant):
 
 
 def resolve_clock(birth):
+    if not isinstance(birth, dict) or not isinstance(birth.get('date'), str):
+        raise ValueError('A birth date is required.')
     date = datetime.fromisoformat(birth['date']).date()
     if not 1900 <= date.year <= 2100:
         raise ValueError('Birth year must be between 1900 and 2100.')
@@ -33,8 +35,12 @@ def resolve_clock(birth):
         raise ValueError('timeKnown must be a boolean.')
     hour = birth.get('hour', 12) if known else 12
     minute = birth.get('minute', 0) if known else 0
-    if not isinstance(hour, int) or not isinstance(minute, int):
+    if type(hour) is not int or type(minute) is not int:
         raise ValueError('Birth time must contain whole hours and minutes.')
+    if not isinstance(birth.get('zone'), str) or not birth['zone']:
+        raise ValueError('An IANA birth timezone is required.')
+    if type(birth.get('longitude')) not in (int, float):
+        raise ValueError('Birthplace longitude must be a number.')
     wall = datetime(date.year, date.month, date.day, hour, minute)
     zone = ZoneInfo(birth['zone'])
     longitude = float(birth['longitude'])
@@ -94,9 +100,13 @@ def pillar_detail(label, value, master):
 
 
 def calculate(subject, now=None):
+    if not isinstance(subject, dict) or not isinstance(subject.get('birth'), dict):
+        raise ValueError('A complete birth profile is required.')
     birth = subject['birth']
     basis, sect, sex = subject.get('basis', 'meanSolar'), subject.get('sect', 2), subject.get('sex', 1)
-    if basis not in ('civil', 'meanSolar', 'apparentSolar') or sect not in (1, 2) or sex not in (0, 1):
+    if (basis not in ('civil', 'meanSolar', 'apparentSolar')
+            or type(sect) is not int or sect not in (1, 2)
+            or type(sex) is not int or sex not in (0, 1)):
         raise ValueError('Invalid chart convention.')
     clock = resolve_clock(birth)
     e = HybridEightChar(eight_at(clock['calendar'], sect), eight_at(clock[basis], sect), sect)

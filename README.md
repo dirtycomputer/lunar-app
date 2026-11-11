@@ -32,6 +32,16 @@ The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) wi
 
 [`product.md`](product.md) is the product baseline. Substantial changes to user flows must update that document in natural language. Repository contributors follow [`AGENTS.md`](AGENTS.md).
 
+## Release quality
+
+The current public release is a **preview**, with an explicit production gate in [`release/launch.json`](release/launch.json). [`docs/release-review.md`](docs/release-review.md) records the use → feedback → fix → regression loops and the remaining infrastructure/operational blockers. `python3 scripts/check_release.py --channel preview` checks package integrity; the `production` channel intentionally fails until the open gates have evidence.
+
+A shared device-storage coordinator orders writes across profiles, drafts, consents, progress and Chart Studio. A durable deletion marker prevents interrupted deletion or queued writes restoring old personal data. Startup and deletion have retry paths. Questions also support retry with the original context and without duplicate turns. Chart reports are cached while page context changes. Data exports include comparison charts and language, excluding model keys.
+
+Pinned Python and Pub dependencies are queried against OSV through `scripts/audit_dependencies.py`; network/incomplete responses and findings fail the audit. The timestamped result is `output/dependency-audit.json`.
+
+GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build and an unsigned iOS simulator build, with downloadable native test artifacts. These compilation checks do not replace store signing, current store requirements, browser acceptance or physical-device release testing. Android releases use a local ignored `key.properties`, with no debug-signing fallback; see `android/key.properties.example`.
+
 ## Working features
 
 - Optional light exploration: a Journey trail, a personal-element practice game with hints, one-time sparks, and a short encounter reveal. All three discoveries remain available in any order; progress restores locally and clears with local data.
@@ -105,7 +115,9 @@ The earlier model-integration flows were exercised with Playwright in Chromium a
 
 - `lib/models/profile.dart`: birth data, global birthplace presets, fictional profiles.
 - `lib/services/bazi.dart`: chart calculation and explainable ranking.
-- `lib/services/app_state.dart`: persistence and reactive app state.
+- `lib/services/app_state.dart`: reactive app state and validated profile updates.
+- `lib/services/device_storage.dart`: shared write ordering, crash-safe deletion intent and typed reads.
+- `lib/services/data_export.dart`: portable device data export without session credentials.
 - `lib/services/social.dart`: serialized, local-only invitation and message-draft storage.
 - `lib/ui/social_pages.dart`: local conversation preview.
 - `lib/ui/design.dart`: theme, reusable surfaces, brand illustration, element ring.
@@ -122,7 +134,7 @@ The earlier model-integration flows were exercised with Playwright in Chromium a
 
 ## Validation
 
-Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. All 69 Flutter tests pass in the exploration update. The unchanged Python service retains its 18 passing tests from the model integration, and the Web release builds successfully. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
+Automated checks cover calculation fixtures, solar-term boundaries, selected time/day conventions, historical DST, unknown hour, cross-chart relations, Five Movements/Six Qi, lunar leap months, model transport/error handling, privacy/reset, and desktop/mobile flows. The exploration update passed 69 Flutter tests; the release-hardening checks add failure/retry, concurrent persistence, interrupted deletion, startup recovery and accessibility regressions. The Python service now also rejects malformed/boolean calendar inputs. Current command results are recorded in the verification record. Desktop and phone Chromium checks cover the main paths. Native builds and live provider calls were not repeated in this Linux environment; the earlier project validation is recorded separately. See [verification record](docs/verification.md); full test output is in `output/test-results.txt`. Browser screenshots are in `output/playwright/`.
 
 ## References and assets
 
