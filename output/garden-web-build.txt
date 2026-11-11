@@ -1,0 +1,42 @@
+
+Compiling lib/main.dart for the Web...                          
+"ar": 156 untranslated message(s).
+"cs": 156 untranslated message(s).
+"da": 156 untranslated message(s).
+"de": 156 untranslated message(s).
+"el": 156 untranslated message(s).
+"es": 156 untranslated message(s).
+"fi": 156 untranslated message(s).
+"fr": 156 untranslated message(s).
+"he": 156 untranslated message(s).
+"hi": 156 untranslated message(s).
+"hu": 156 untranslated message(s).
+"id": 156 untranslated message(s).
+"it": 156 untranslated message(s).
+"ja": 156 untranslated message(s).
+"ko": 156 untranslated message(s).
+"ms": 156 untranslated message(s).
+"nl": 156 untranslated message(s).
+"no": 156 untranslated message(s).
+"pl": 156 untranslated message(s).
+"pt": 156 untranslated message(s).
+"ro": 156 untranslated message(s).
+"ru": 156 untranslated message(s).
+"sv": 156 untranslated message(s).
+"th": 156 untranslated message(s).
+"tr": 156 untranslated message(s).
+"uk": 156 untranslated message(s).
+"vi": 156 untranslated message(s).
+"zh_TW": 156 untranslated message(s).
+To see a detailed report, use the untranslated-messages-file 
+option in the l10n.yaml file:
+untranslated-messages-file: desiredFileName.txt
+<other option>: <other selection> 
+
+
+This will generate a JSON format file containing all messages that 
+need to be translated.
+Font asset "CupertinoIcons.ttf" was tree-shaken, reducing it from 257628 to 1172 bytes (99.5% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 16464 bytes (99.0% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Compiling lib/main.dart for the Web...                             45.8s
+✓ Built build/web

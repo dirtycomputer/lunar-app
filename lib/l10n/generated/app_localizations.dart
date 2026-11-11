@@ -2495,6 +2495,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Local report saved, but the profile could not be hidden. Please try Hide this profile again.'**
   String get releaseReportHideFailed;
+
+  /// No description provided for @gardenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Element Garden'**
+  String get gardenTitle;
+
+  /// No description provided for @gardenGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Field notes'**
+  String get gardenGuide;
+
+  /// No description provided for @gardenChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'CHAPTER 01'**
+  String get gardenChapter;
+
+  /// No description provided for @gardenFirstLight.
+  ///
+  /// In en, this message translates to:
+  /// **'First light'**
+  String get gardenFirstLight;
+
+  /// No description provided for @gardenBloom.
+  ///
+  /// In en, this message translates to:
+  /// **'A garden in bloom'**
+  String get gardenBloom;
+
+  /// No description provided for @gardenRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore the cycle'**
+  String get gardenRestore;
+
+  /// No description provided for @gardenCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Your collection'**
+  String get gardenCollection;
+
+  /// No description provided for @gardenReplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore again'**
+  String get gardenReplay;
+
+  /// No description provided for @gardenSeals.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} / 5 seals'**
+  String gardenSeals(int n);
+
+  /// No description provided for @gardenResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue · {n} / 5 links'**
+  String gardenResume(int n);
+
+  /// No description provided for @gardenSayHello.
+  ///
+  /// In en, this message translates to:
+  /// **'Say hello to your guardian'**
+  String get gardenSayHello;
+
+  /// No description provided for @gardenYourElement.
+  ///
+  /// In en, this message translates to:
+  /// **'Your element · {name}'**
+  String gardenYourElement(String name);
+
+  /// No description provided for @gardenLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} / 5 links'**
+  String gardenLinks(int n);
+
+  /// No description provided for @gardenWakeNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Wake the next guardian'**
+  String get gardenWakeNext;
+
+  /// No description provided for @gardenCloseLoop.
+  ///
+  /// In en, this message translates to:
+  /// **'Bring it full circle'**
+  String get gardenCloseLoop;
+
+  /// No description provided for @gardenLinkRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'A new link is alive'**
+  String get gardenLinkRestored;
+
+  /// No description provided for @gardenTapOrDrag.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a spirit, or drag it onto the glowing stone.'**
+  String get gardenTapOrDrag;
+
+  /// No description provided for @gardenGentleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Take another look'**
+  String get gardenGentleHint;
+
+  /// No description provided for @gardenCircleComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'The garden is awake'**
+  String get gardenCircleComplete;
+
+  /// No description provided for @gardenAllSeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Five links. Five element seals for your field notes.'**
+  String get gardenAllSeals;
+
+  /// No description provided for @gardenPracticeAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice again'**
+  String get gardenPracticeAgain;
+
+  /// No description provided for @gardenReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to garden'**
+  String get gardenReturn;
+
+  /// No description provided for @gardenContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get gardenContinue;
+
+  /// No description provided for @gardenDropTarget.
+  ///
+  /// In en, this message translates to:
+  /// **'Place the next element here'**
+  String get gardenDropTarget;
+
+  /// No description provided for @gardenSleeping.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleeping guardian'**
+  String get gardenSleeping;
+
+  /// No description provided for @gardenCollected.
+  ///
+  /// In en, this message translates to:
+  /// **'Seal collected'**
+  String get gardenCollected;
+
+  /// No description provided for @gardenNotCollected.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover this seal in the cycle'**
+  String get gardenNotCollected;
+
+  /// No description provided for @gardenWoodMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Wood represents growth, flexibility and new direction in the Five Elements tradition.'**
+  String get gardenWoodMeaning;
+
+  /// No description provided for @gardenFireMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire represents warmth, expression and visibility in the Five Elements tradition.'**
+  String get gardenFireMeaning;
+
+  /// No description provided for @gardenEarthMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Earth represents steadiness, nourishment and connection in the Five Elements tradition.'**
+  String get gardenEarthMeaning;
+
+  /// No description provided for @gardenMetalMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Metal represents structure, clarity and refinement in the Five Elements tradition.'**
+  String get gardenMetalMeaning;
+
+  /// No description provided for @gardenWaterMeaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Water represents movement, reflection and adaptability in the Five Elements tradition.'**
+  String get gardenWaterMeaning;
+
+  /// No description provided for @gardenWoodFact.
+  ///
+  /// In en, this message translates to:
+  /// **'Wood feeds a flame. In the supporting cycle, Wood supports Fire.'**
+  String get gardenWoodFact;
+
+  /// No description provided for @gardenFireFact.
+  ///
+  /// In en, this message translates to:
+  /// **'Ash returns to the soil. In the supporting cycle, Fire supports Earth.'**
+  String get gardenFireFact;
+
+  /// No description provided for @gardenEarthFact.
+  ///
+  /// In en, this message translates to:
+  /// **'The earth holds minerals. In the supporting cycle, Earth supports Metal.'**
+  String get gardenEarthFact;
+
+  /// No description provided for @gardenMetalFact.
+  ///
+  /// In en, this message translates to:
+  /// **'Metal gathering water is a traditional image. In the supporting cycle, Metal supports Water.'**
+  String get gardenMetalFact;
+
+  /// No description provided for @gardenWaterFact.
+  ///
+  /// In en, this message translates to:
+  /// **'Water nourishes new growth. In the supporting cycle, Water supports Wood.'**
+  String get gardenWaterFact;
+
+  /// No description provided for @gardenTradition.
+  ///
+  /// In en, this message translates to:
+  /// **'These are traditional symbolic relationships. They do not measure your personality, luck or relationship success.'**
+  String get gardenTradition;
+
+  /// No description provided for @gardenSavedCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved cycle · {name}'**
+  String gardenSavedCycle(String name);
+
+  /// No description provided for @gardenShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Garden'**
+  String get gardenShort;
+
+  /// No description provided for @gardenCollectSeals.
+  ///
+  /// In en, this message translates to:
+  /// **'Collect the five seals'**
+  String get gardenCollectSeals;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

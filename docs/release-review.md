@@ -2,6 +2,18 @@
 
 This update uses a repeatable use → feedback → fix → regression loop. The shipped channel remains **preview**. Passing tests or deploying the website does not establish readiness for a real dating community.
 
+## Element Garden redesign — 2026-11-11
+
+The previous three task cards and single-answer quiz did not give the game a distinct place, a sustained interaction or a satisfying return visit. The redesign keeps the core tasks directly available and builds one optional garden chapter around them.
+
+- **Explore:** an original vector world has a grove, hearth, meadow, mineral habitat and pond. Each guardian opens its field notes. Collected seals wake guardians and add flowers; the three discoveries light the lanterns. The companion responds to a tap with a short finite motion.
+- **Play:** reconstruct five supporting links from the current day element. Each correct tap/drop reveals the relation and fact, saves the next position and collects a seal. A wrong choice offers a hint without losing progress. Closing and reopening resumes the same practice seed, including after a birth-profile edit; it is explicitly labelled as a saved cycle.
+- **Collect and revisit:** all five field-note entries remain readable before collection. Completing the circle awards the existing one-time reward; migrated rewards remain intact, and replay cannot mint more. Existing players see the new seal goal instead of a finished chapter that hides the new content; their old spark balance is preserved. Clearing local data removes the cycle and seals through the existing deletion barrier.
+- **Feedback loop:** the first phone rendering put the fifth answer below the fold and left the primary footer action awkwardly centred. A compact five-spirit inventory and a right-aligned fixed action resolve this. Larger text retains spacious choices and scrolling. A full 320px/160% walkthrough also exposed prior first-use and profile-detail overflows; flexible branding, adaptive decorative artwork and wrapping profile rows fix those paths.
+- **Verification:** clean analysis, 94 Flutter tests and five renderer walkthroughs (40 captures) cover desktop, phone, larger text/reduced motion, Chinese and legacy progress. Tests exercise dragging, collection-before-reading, all five seeds, duplicate/wrong inputs, failed saves/retry, resume, migration, replay and deletion. The final Web release builds. Native CI is available through the PR checks; browser interaction remains unverified because the supported managed browser tool is absent.
+
+This is an educational game within the existing preview. It introduces no network image dependency, new paid model call, timed penalty, energy meter, streak pressure, gate on charts/matching or effect on compatibility scores. The production community/operations gates below remain open.
+
 ## Loop 1: saved data and deletion
 
 | Feedback from code and interaction review | Change | Verification |

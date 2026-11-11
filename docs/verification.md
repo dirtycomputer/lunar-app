@@ -1,5 +1,14 @@
 # Verification record
 
+## Element Garden redesign — 2026-11-11
+
+- `flutter analyze`: no issues. All **94 Flutter tests** pass. The full supporting cycle is exercised for every starting element, with atomic step/seal/reward persistence, migration, resume, replay, failure recovery and clearing. Widget coverage verifies tap and drag, unlocked field notes, the phone inventory above Continue, and the narrow larger-text route through the sample profile.
+- Five additional renderer walkthroughs pass: desktop 1440 × 1000, phone 390 × 844, narrow 320 × 740 with 160% text and reduced motion, Chinese on phone, and a restored legacy completion record on desktop. All three discoveries complete in each run. **40 captures** show map, field notes, puzzle, hints, a restored link, completion, collection and final bloom. Selected evidence: `output/flutter-render/garden-*.png`.
+- Reproduce with `flutter test --update-goldens test/render/capture_garden.dart`. It loads bundled text/icon fonts, drives actual widget interactions, and writes to `output/garden/`. These are Flutter-renderer captures, not browser screenshots.
+- The final Web release builds with local CanvasKit and the existing Production model origin. No server/model, compatibility algorithm, dependencies or external access settings change. Native compile results are recorded in the PR's existing Quality workflow.
+- The managed environment is running/connected with current observations, but still exposes no supported `cua_repl.js`/browser-control tool (`ccarenv_b64_Y2NhcmVudl83MzJlMTAxZDcyMmM4MTkxYjE0ZTg5NGJhMWI4ODFmZQ`). The Sites workflow requires skipping browser QA in that condition. Native physical-device and browser acceptance remain unverified. Existing real-community/operating-info blockers are not removed.
+
+
 ## Release-hardening loops — 2026-11-11
 
 - Five documented use/review → feedback → repair → regression loops are recorded in `docs/release-review.md`. Updated `product.md` describes recovery, truthful preview behavior, and the conditions for a real community launch in natural language.

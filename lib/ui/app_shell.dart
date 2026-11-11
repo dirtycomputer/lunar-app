@@ -119,7 +119,8 @@ class _AppShellState extends State<AppShell> {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     while (true) {
       if (!mounted) return;
-      final quest = await showJourney(context, state.journey);
+      final quest = await showJourney(context, state.journey,
+          element: chart.natal.energy.dayElement, sample: !state.personalized);
       if (!mounted || quest == null) return;
       if (quest == JourneyQuest.element) {
         final back = await showElementQuest(context,

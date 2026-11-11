@@ -46,6 +46,19 @@ void main() {
     return state;
   }
 
+  Future<void> finishCycle(WidgetTester tester) async {
+    for (final name in ['water', 'wood', 'fire', 'earth', 'metal']) {
+      final choice = find.byKey(ValueKey('element-answer-$name'));
+      await tester.ensureVisible(choice);
+      await tester.tap(choice);
+      await tester.pumpAndSettle();
+      if (name != 'metal') {
+        await tester.tap(find.byKey(const ValueKey('quest-continue')));
+        await tester.pumpAndSettle();
+      }
+    }
+  }
+
   testWidgets(
       'first visit gives two primary cards and a secondary question entry',
       (tester) async {
@@ -67,7 +80,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
   testWidgets(
-      'element practice provides a hint, saves one reward and supports replay',
+      'the garden cycle gives feedback, collects five seals and rewards only once',
       (tester) async {
     final state = await start(tester);
     await tester.tap(find.byKey(const ValueKey('journey-open')));
@@ -78,28 +91,109 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('quest-element')));
     await tester.pumpAndSettle();
     expect(find.text('Sample element'), findsOneWidget);
-    expect(find.text('What does Metal support?'), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('element-answer-fire')));
     await tester.pumpAndSettle();
     expect(state.journey.sparks, 0);
-    expect(find.text('A little hint'), findsOneWidget);
-    expect(find.text('Metal supports Water in the Five Elements cycle.'),
-        findsOneWidget);
-    await tester.tap(find.byKey(const ValueKey('element-answer-water')));
-    await tester.pumpAndSettle();
+    expect(find.text('Take another look'), findsOneWidget);
+    await finishCycle(tester);
     expect(state.journey.sparks, 20);
-    expect(find.text('Nice discovery!'), findsOneWidget);
+    expect(state.journey.seals.length, 5);
+    expect(find.text('The garden is awake'), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('quest-continue')));
     await tester.pumpAndSettle();
     expect(find.text('1 of 3 discoveries'), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('quest-element')));
     await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const ValueKey('element-answer-water')));
-    await tester.pumpAndSettle();
+    await finishCycle(tester);
     expect(find.text('Well remembered!'), findsOneWidget);
     expect(state.journey.sparks, 20);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets(
+      'existing rewards still invite players into the new seal collection',
+      (tester) async {
+    final state = await start(tester);
+    for (final quest in JourneyQuest.values) {
+      await state.journey.complete(quest);
+    }
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    expect(state.journey.sparks, 60);
+    expect(find.text('2 of 3 discoveries'), findsOneWidget);
+    expect(find.text('Collect the five seals'), findsOneWidget);
+    expect(find.text('First light'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    await finishCycle(tester);
+    expect(state.journey.sparks, 60);
+    expect(state.journey.gardenCompleted.length, 3);
+    expect(find.text('Well remembered!'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('field notes can be read before collecting a seal',
+      (tester) async {
+    final state = await start(tester);
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('garden-guide')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('guide-fire')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Fire represents warmth'), findsOneWidget);
+    expect(find.text('Discover this seal in the cycle'), findsOneWidget);
+    expect(state.journey.sparks, 0);
+    expect(state.journey.seals, isEmpty);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+      'a spirit can be dragged onto its stone and the next link resumes after closing',
+      (tester) async {
+    final state = await start(tester);
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    final token = find.byKey(const ValueKey('element-answer-water'));
+    final target = find.byKey(const ValueKey('cycle-drop-target'));
+    await tester.timedDrag(
+        token,
+        tester.getCenter(target) - tester.getCenter(token),
+        const Duration(milliseconds: 500));
+    await tester.pumpAndSettle();
+    expect(state.journey.cycleSteps, 1);
+    expect(state.journey.sparks, 0);
+    await tester.tap(find.byTooltip('Close').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    expect(find.text('1 / 5 links'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('element-answer-wood')));
+    await tester.pumpAndSettle();
+    expect(state.journey.cycleSteps, 2);
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets('all five spirits are visible above Continue on a phone',
+      (tester) async {
+    await start(tester, size: const Size(390, 844));
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('quest-element')));
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    final footer = tester.getRect(find.byKey(const ValueKey('quest-continue')));
+    for (final name in ['wood', 'fire', 'earth', 'metal', 'water']) {
+      final token = find.byKey(ValueKey('element-answer-$name'));
+      expect(token.hitTestable(), findsOneWidget);
+      expect(tester.getRect(token).bottom, lessThan(footer.top));
+    }
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
       'a journey task opens a sample outlook without locking core features',
       (tester) async {
@@ -121,22 +215,27 @@ void main() {
       'journey and quiz fit a small screen with larger text and reduced motion',
       (tester) async {
     final state = await start(tester,
-        size: const Size(360, 740), reducedMotion: true, scale: 1.6);
+        size: const Size(320, 740), reducedMotion: true, scale: 1.6);
     await tester.tap(find.byKey(const ValueKey('journey-open')));
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.byKey(const ValueKey('quest-element')));
     await tester.tap(find.byKey(const ValueKey('quest-element')));
     await tester.pumpAndSettle();
-    final answer = find.byKey(const ValueKey('element-answer-water'));
-    await tester.ensureVisible(answer);
-    await tester.tap(answer);
-    await tester.pumpAndSettle();
+    await finishCycle(tester);
     expect(state.journey.sparks, 20);
     expect(tester.takeException(), isNull);
     await tester.ensureVisible(find.byKey(const ValueKey('quest-continue')));
     await tester.tap(find.byKey(const ValueKey('quest-continue')));
     await tester.pumpAndSettle();
     expect(find.text('1 of 3 discoveries'), findsOneWidget);
+    await tester.ensureVisible(find.byKey(const ValueKey('quest-encounter')));
+    await tester.tap(find.byKey(const ValueKey('quest-encounter')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('random-match')));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    await tester.tap(find.byTooltip('Close profile'));
+    await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
   });
   testWidgets(

@@ -143,20 +143,32 @@ class _ProfileDetail extends StatelessWidget {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(children: [
-                                    ElementPill(match.chart.dayElement,
-                                        label:
-                                            identityLabel(l10n, match.chart)),
-                                    const Spacer(),
-                                    const Icon(Icons.auto_awesome,
-                                        size: 17, color: green),
-                                    const SizedBox(width: 6),
-                                    Text(l10n.harmonyPct(match.score),
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            color: green))
-                                  ]),
+                                  Wrap(
+                                      spacing: 12,
+                                      runSpacing: 10,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
+                                      children: [
+                                        ElementPill(match.chart.dayElement,
+                                            label: identityLabel(
+                                                l10n, match.chart)),
+                                        Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              const Icon(Icons.auto_awesome,
+                                                  size: 17, color: green),
+                                              const SizedBox(width: 6),
+                                              Flexible(
+                                                  child: Text(
+                                                      l10n.harmonyPct(
+                                                          match.score),
+                                                      style: const TextStyle(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: green))),
+                                            ]),
+                                      ]),
                                   const SizedBox(height: 20),
                                   Text(p.occupation,
                                       style: Theme.of(context)
@@ -231,12 +243,13 @@ class _ProfileDetail extends StatelessWidget {
                                                   size: 16,
                                                   color: green),
                                               const SizedBox(width: 8),
-                                              Text(l10n.starterTitle,
-                                                  style: const TextStyle(
-                                                      fontSize: 11,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: green))
+                                              Expanded(
+                                                  child: Text(l10n.starterTitle,
+                                                      style: const TextStyle(
+                                                          fontSize: 11,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: green)))
                                             ]),
                                             const SizedBox(height: 8),
                                             Text(
