@@ -203,7 +203,7 @@
   "guideFooter": "Hãy giữ sự tò mò. Hãy tử tế. Và chừa lại chút không gian cho duyên xô.",
 
   "privacyTitle": "Thông tin của bạn vẫn thuộc về bạn.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Bộ nhớ cục bộ không được mã hóa. Trên thiết bị dùng chung, hãy xóa dữ liệu của bạn khi dùng xong. Xóa dữ liệu trình duyệt hoặc ứng dụng cũng sẽ xóa hồ sơ của bạn.",
   "privacyBody3": "Đặt lại sẽ xóa thông tin cá nhân và tùy chọn đã lưu của bạn, rồi quay về hồ sơ mẫu.",
   "clearDataTitle": "Xóa dữ liệu cục bộ của bạn?",

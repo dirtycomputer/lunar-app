@@ -196,7 +196,7 @@
   "termSolarTime": "Hora solar verdadera",
   "guideFooter": "Mantén la curiosidad. Sé amable. Deja espacio para un poco de serendipia.",
   "privacyTitle": "Tus datos siguen siendo tuyos.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "El almacenamiento local no está cifrado. En un dispositivo compartido, borra tus datos al terminar. Borrar los datos del navegador o de la app también elimina tu perfil.",
   "privacyBody3": "Al restablecer se borran tus datos personales y preferencias guardadas, y se vuelve al perfil de muestra.",
   "clearDataTitle": "¿Borrar tus datos locales?",

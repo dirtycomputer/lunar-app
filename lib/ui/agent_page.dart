@@ -8,6 +8,7 @@ class AgentPage extends StatefulWidget {
   final bool personalized;
   final String name;
   final ChartContext? chart;
+  final Map<String, dynamic> userContext;
   final VoidCallback onEdit, onSettings;
   const AgentPage(
       {super.key,
@@ -16,7 +17,8 @@ class AgentPage extends StatefulWidget {
       required this.name,
       required this.chart,
       required this.onEdit,
-      required this.onSettings});
+      required this.onSettings,
+      this.userContext = const {}});
   @override
   State<AgentPage> createState() => _AgentPageState();
 }
@@ -52,7 +54,7 @@ class _AgentPageState extends State<AgentPage> {
     final q = (text ?? input.text).trim();
     if (q.isEmpty) return;
     input.clear();
-    widget.agent.ask(q, context: widget.chart);
+    widget.agent.ask(q, context: widget.chart, userContext: widget.userContext);
   }
 
   @override

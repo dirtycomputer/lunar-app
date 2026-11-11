@@ -1,5 +1,13 @@
 # Verification record
 
+## Light exploration update — 2026-11-11
+
+- An optional three-discovery Journey: learn the supporting relationship for the current chart element, read an outlook, and explore a profile. Anonymous practice is labelled as a sample. Every task can be selected directly; charts and people remain accessible through their original entry points.
+- Correct answers reveal the element pair with instant feedback; hints and unlimited retries are available. Each discovery awards 20 sparks once. Replays, concurrent completion, restart/restoration, damaged records, failed storage, local reset, and unchanged chart/matching results are covered.
+- All 69 Flutter tests pass and analysis is clean. Two additional rendering runs complete the whole journey on desktop (1440 × 1000) and phone (390 × 844), generating 18 screenshots. Larger text and reduced motion are covered by widget tests. Web release builds with the existing Production API origin.
+- Screenshot captures use the Flutter test renderer, not a browser. The current managed environment `ccarenv_b64_Y2NhcmVudl83MzJlMTAxZDcyMmM4MTkxYjE0ZTg5NGJhMWI4ODFmZQ` reports a remote desktop enabled with state unknown, but does not offer `cua_repl.js` or another supported browser-control tool. Browser interaction was not re-tested in this update. The existing backend is unchanged.
+- Visual evidence is in `output/flutter-render/`; automated output is in `output/test-results.txt` and `output/exploration-render-results.txt`.
+
 ## Chart-first DeepSeek integration — 2026-11-10
 
 - All 60 Flutter tests and 18 Python service tests pass. Twenty shared birth fixtures match on Four Pillars, Ten Gods, hidden stems, clock instants, and known-hour fortune start.

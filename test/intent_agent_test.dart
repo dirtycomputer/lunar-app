@@ -218,9 +218,18 @@ void main() {
                   '{"choices":[{"message":{"content":"A general explanation."}}]}',
                   200);
             }));
-    await agent.ask('How do the Ten Gods work?');
+    await agent.ask('How do the Ten Gods work?', userContext: {
+      'learningProgress': {
+        'completed': ['element'],
+        'sparks': 20
+      }
+    });
     final packet = jsonDecode((body['messages'] as List).last['content']);
-    expect(packet['computedEvidence'], {'personalChartAvailable': false});
+    expect(packet['computedEvidence']['personalChartAvailable'], false);
+    expect(
+        packet['computedEvidence']['userContext']['learningProgress']['sparks'],
+        20);
+    expect(packet['computedEvidence'].containsKey('natal'), isFalse);
     expect(agent.turns.last.source, 'model');
     agent.dispose();
     studio.dispose();

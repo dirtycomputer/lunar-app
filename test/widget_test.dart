@@ -7,6 +7,7 @@ import 'package:lunar_social/main.dart';
 import 'package:lunar_social/models/profile.dart';
 import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/intent_flow.dart';
+import 'package:lunar_social/services/journey.dart';
 import 'package:lunar_social/services/platform_contracts.dart';
 
 void main() {
@@ -23,7 +24,9 @@ void main() {
   Future<AppState> start(WidgetTester tester,
       {Size size = const Size(1440, 1100),
       AppIntent? intent,
-      bool personal = false}) async {
+      bool personal = false,
+      bool reducedMotion = false,
+      double scale = 1}) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -32,7 +35,13 @@ void main() {
     final state = AppState(await SharedPreferences.getInstance());
     if (personal) await state.updateProfile('Alex', demoBirth);
     if (intent != null) await state.chooseIntent(intent);
-    await tester.pumpWidget(LunarApp(state: state));
+    await tester.pumpWidget(MediaQuery(
+        data: MediaQueryData(
+            size: size,
+            devicePixelRatio: 1,
+            disableAnimations: reducedMotion,
+            textScaler: TextScaler.linear(scale)),
+        child: LunarApp(state: state)));
     await tester.pumpAndSettle();
     return state;
   }
@@ -41,7 +50,7 @@ void main() {
       'first visit gives two primary cards and a secondary question entry',
       (tester) async {
     await start(tester);
-    expect(find.text('What brings you here?'), findsOneWidget);
+    expect(find.text('Choose your path'), findsOneWidget);
     for (final value in AppIntent.values) {
       expect(find.byKey(ValueKey('intent-${value.name}')), findsOneWidget);
     }
@@ -55,6 +64,79 @@ void main() {
     expect(find.byType(NavigationBar), findsNothing);
     expect(find.text('Your energy, at a glance'), findsNothing);
     expect(find.text('A MOMENT OF WISDOM'), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets(
+      'element practice provides a hint, saves one reward and supports replay',
+      (tester) async {
+    final state = await start(tester);
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    for (final q in JourneyQuest.values) {
+      expect(find.byKey(ValueKey('quest-${q.name}')), findsOneWidget);
+    }
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    expect(find.text('Sample element'), findsOneWidget);
+    expect(find.text('What does Metal support?'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('element-answer-fire')));
+    await tester.pumpAndSettle();
+    expect(state.journey.sparks, 0);
+    expect(find.text('A little hint'), findsOneWidget);
+    expect(find.text('Metal supports Water in the Five Elements cycle.'),
+        findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('element-answer-water')));
+    await tester.pumpAndSettle();
+    expect(state.journey.sparks, 20);
+    expect(find.text('Nice discovery!'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('quest-continue')));
+    await tester.pumpAndSettle();
+    expect(find.text('1 of 3 discoveries'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('element-answer-water')));
+    await tester.pumpAndSettle();
+    expect(find.text('Well remembered!'), findsOneWidget);
+    expect(state.journey.sparks, 20);
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets(
+      'a journey task opens a sample outlook without locking core features',
+      (tester) async {
+    final state = await start(tester, size: const Size(390, 844));
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('quest-outlook')));
+    await tester.pumpAndSettle();
+    expect(find.text('This month'), findsOneWidget);
+    expect(find.text('Sample chart'), findsOneWidget);
+    expect(state.journey.sparks, 20);
+    expect(state.personalized, isFalse);
+    await tester.tap(find.byKey(const ValueKey('nav-match')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('random-match')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+  testWidgets(
+      'journey and quiz fit a small screen with larger text and reduced motion',
+      (tester) async {
+    final state = await start(tester,
+        size: const Size(360, 740), reducedMotion: true, scale: 1.6);
+    await tester.tap(find.byKey(const ValueKey('journey-open')));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('quest-element')));
+    await tester.tap(find.byKey(const ValueKey('quest-element')));
+    await tester.pumpAndSettle();
+    final answer = find.byKey(const ValueKey('element-answer-water'));
+    await tester.ensureVisible(answer);
+    await tester.tap(answer);
+    await tester.pumpAndSettle();
+    expect(state.journey.sparks, 20);
+    expect(tester.takeException(), isNull);
+    await tester.ensureVisible(find.byKey(const ValueKey('quest-continue')));
+    await tester.tap(find.byKey(const ValueKey('quest-continue')));
+    await tester.pumpAndSettle();
+    expect(find.text('1 of 3 discoveries'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
   testWidgets(
@@ -107,10 +189,10 @@ void main() {
       'returning users open their chosen task and can return to intent selection',
       (tester) async {
     await start(tester, intent: AppIntent.match);
-    expect(find.text('What brings you here?'), findsNothing);
+    expect(find.text('Choose your path'), findsNothing);
     await tester.tap(find.text('FatePair'));
     await tester.pumpAndSettle();
-    expect(find.text('What brings you here?'), findsOneWidget);
+    expect(find.text('Choose your path'), findsOneWidget);
   });
   testWidgets(
       'matching search, empty state and reset work without energy cards',
@@ -145,6 +227,11 @@ void main() {
     expect(find.text('Sofia, 27'), findsNWidgets(2));
     expect(find.text('Compatibility'), findsOneWidget);
     expect(state.hidden, isEmpty);
+    expect(state.journey.completed.contains(JourneyQuest.encounter), isFalse);
+    await tester.tap(find.byTooltip('Close profile'));
+    await tester.pumpAndSettle();
+    expect(state.journey.completed.contains(JourneyQuest.encounter), isTrue);
+    expect(state.journey.sparks, 20);
     expect(tester.takeException(), isNull);
   });
   testWidgets(

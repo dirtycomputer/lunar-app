@@ -203,7 +203,7 @@
   "guideFooter": "ابقَ فضوليًا، وكن لطيفًا، واترك مجالًا لقليل من الصدفة الجميلة.",
 
   "privacyTitle": "بياناتك تبقى ملكك وحدك.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "التخزين المحلي غير مشفّر. على جهاز مشترك، امسح بياناتك عند الانتهاء. ومسح بيانات المتصفح أو التطبيق يزيل ملفك الشخصي أيضًا.",
   "privacyBody3": "تؤدي إعادة التعيين إلى مسح تفاصيلك الشخصية وتفضيلاتك المحفوظة، ثم العودة إلى الملف النموذجي.",
   "clearDataTitle": "مسح بياناتك المحلية؟",

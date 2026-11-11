@@ -203,7 +203,7 @@
   "guideFooter": "好奇心を忘れず、やさしく、偶然の出会いにも余地を。",
 
   "privacyTitle": "あなたの情報はあなたのもの。",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "ローカル保存は暗号化されていません。共用の端末では、使い終わったらデータを消してください。ブラウザやアプリのデータを消すと、プロフィールも削除されます。",
   "privacyBody3": "リセットすると個人情報と保存した設定が消え、サンプルプロフィールに戻ります。",
   "clearDataTitle": "ローカルデータを消しますか？",

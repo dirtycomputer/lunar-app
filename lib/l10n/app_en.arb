@@ -292,7 +292,7 @@
   "termSolarTime": "True solar time",
   "guideFooter": "Stay curious. Be kind. Leave room for a little serendipity.",
   "privacyTitle": "Privacy & data",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.",
   "privacyBody3": "Resetting clears your personal details and saved preferences, then returns to the sample profile.",
   "clearDataTitle": "Clear your local data?",
@@ -529,5 +529,69 @@
   "flowReasonSupport": "Your core elements follow the supporting cycle.",
   "flowReasonShared": "You share the same core element.",
   "flowReasonBranches": "Your day branches share a traditional harmony pattern.",
-  "flowReasonContrast": "Your core elements form a contrasting pair."
+  "flowReasonContrast": "Your core elements form a contrasting pair.",
+  "journeyTitle": "Your journey",
+  "journeyChoose": "Choose your path",
+  "journeySparks": "{n} sparks",
+  "@journeySparks": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyProgress": "{n} of 3 discoveries",
+  "@journeyProgress": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "journeyChapter": "First discoveries",
+  "journeyAllDone": "Trail complete",
+  "journeyElementTask": "Learn your element",
+  "journeyOutlookTask": "Read an outlook",
+  "journeyEncounterTask": "Explore a match",
+  "journeyCompleted": "Completed",
+  "journeyKeepExploring": "Keep exploring",
+  "journeyElementTitle": "Element quest",
+  "journeyQuestion": "What does {element} support?",
+  "@journeyQuestion": {
+    "placeholders": {
+      "element": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyShowCycle": "Show a hint",
+  "journeyCycle": "{first} supports {next} in the Five Elements cycle.",
+  "@journeyCycle": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "next": {
+        "type": "String"
+      }
+    }
+  },
+  "journeyTryAgain": "A little hint",
+  "journeyCorrect": "Nice discovery!",
+  "journeyRemembered": "Well remembered!",
+  "journeyReward": "+{n} sparks",
+  "@journeyReward": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "journeySaveFailed": "Your answer is right. Try saving your progress again.",
+  "journeyRetrySave": "Save progress",
+  "journeyBack": "Back to journey",
+  "journeySample": "Sample element",
+  "journeyNewEncounter": "New encounter",
+  "journeyDemoProfile": "Sample profile",
+  "journeyShort": "Journey"
 }

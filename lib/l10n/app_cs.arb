@@ -195,7 +195,7 @@
   "termSolarTime": "Pravý sluneční čas",
   "guideFooter": "Zůstaňte zvědaví. Buďte laskaví. Nechte prostor pro trochu šťastné náhody.",
   "privacyTitle": "Vaše údaje zůstávají vaše.",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Místní úložiště není šifrované. Ve sdíleném zařízení po dokončení vymažte svá data. Vymazání dat prohlížeče nebo aplikace odstraní i váš profil.",
   "privacyBody3": "Resetování vymaže osobní údaje a uložené preference a poté se vrátí k ukázkovému profilu.",
   "clearDataTitle": "Vymazat místní data?",

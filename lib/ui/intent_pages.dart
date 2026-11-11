@@ -8,12 +8,17 @@ import '../studio/chart_engine.dart';
 import '../studio/chart_widgets.dart';
 import '../studio/glossary.dart';
 import 'design.dart';
+import 'journey.dart';
 
 class IntentChooser extends StatelessWidget {
   final ValueChanged<AppIntent> onChoose;
   final VoidCallback onSettings;
+  final Widget? journeyAction;
   const IntentChooser(
-      {super.key, required this.onChoose, required this.onSettings});
+      {super.key,
+      required this.onChoose,
+      required this.onSettings,
+      this.journeyAction});
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
@@ -27,11 +32,16 @@ class IntentChooser extends StatelessWidget {
                 const FlowerLogo(size: 29),
                 const SizedBox(width: 10),
                 const Text('FatePair',
+                    textScaler: TextScaler.noScaling,
                     style: TextStyle(
                         fontSize: 27,
                         fontWeight: FontWeight.w600,
                         letterSpacing: -1.3)),
                 const Spacer(),
+                if (journeyAction != null) ...[
+                  journeyAction!,
+                  const SizedBox(width: 8)
+                ],
                 IconButton(
                     tooltip: l.flowSettings,
                     onPressed: onSettings,
@@ -48,7 +58,7 @@ class IntentChooser extends StatelessWidget {
                             return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(l.flowChoose,
+                                  Text(l.journeyChoose,
                                       style: TextStyle(
                                           fontSize: compact ? 34 : 46,
                                           fontWeight: FontWeight.w500,
@@ -127,30 +137,40 @@ class _IntentCard extends StatefulWidget {
 }
 
 class _IntentCardState extends State<_IntentCard> {
-  bool hover = false;
+  bool hover = false, pressed = false;
   @override
   Widget build(BuildContext context) {
-    final i = widget.intent.index,
-        color = [green, blue, violet][i],
-        tint = [mintTint, blueTint, lavenderTint][i];
+    final i = widget.intent.index, color = [green, blue, violet][i];
     return MouseRegion(
         onEnter: (_) => setState(() => hover = true),
         onExit: (_) => setState(() => hover = false),
         child: AnimatedContainer(
-            duration: const Duration(milliseconds: 160),
-            transform: Matrix4.translationValues(0, hover ? -4 : 0, 0),
-            height: widget.compact ? 166 : 332,
+            duration: MediaQuery.of(context).disableAnimations
+                ? Duration.zero
+                : const Duration(milliseconds: 160),
+            transform: Matrix4.translationValues(
+                0,
+                pressed
+                    ? 4
+                    : hover
+                        ? -4
+                        : 0,
+                0),
+            height: widget.compact
+                ? 166 *
+                    (MediaQuery.textScalerOf(context).scale(14) / 14)
+                        .clamp(1.0, 1.8)
+                : 332,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(
                     color: hover ? color.withValues(alpha: .4) : line),
                 boxShadow: [
-                  if (hover)
-                    BoxShadow(
-                        color: color.withValues(alpha: .08),
-                        blurRadius: 25,
-                        offset: const Offset(0, 10))
+                  BoxShadow(
+                      color: color.withValues(alpha: .18),
+                      offset: Offset(0, pressed ? 2 : 6),
+                      blurRadius: hover ? 12 : 0)
                 ]),
             child: Material(
                 color: Colors.transparent,
@@ -158,6 +178,9 @@ class _IntentCardState extends State<_IntentCard> {
                 child: InkWell(
                     key: ValueKey('intent-${widget.intent.name}'),
                     onTap: widget.onTap,
+                    onTapDown: (_) => setState(() => pressed = true),
+                    onTapUp: (_) => setState(() => pressed = false),
+                    onTapCancel: () => setState(() => pressed = false),
                     borderRadius: BorderRadius.circular(25),
                     child: Padding(
                         padding: const EdgeInsets.all(25),
@@ -186,10 +209,9 @@ class _IntentCardState extends State<_IntentCard> {
                                 SizedBox(
                                     width: 112,
                                     height: 112,
-                                    child: _IntentArt(
-                                        intent: widget.intent,
-                                        color: color,
-                                        tint: tint))
+                                    child: PortalArt(
+                                        matching:
+                                            widget.intent == AppIntent.match))
                               ])
                             : Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,10 +226,9 @@ class _IntentCardState extends State<_IntentCard> {
                                             child: SizedBox(
                                                 width: 162,
                                                 height: 162,
-                                                child: _IntentArt(
-                                                    intent: widget.intent,
-                                                    color: color,
-                                                    tint: tint)))),
+                                                child: PortalArt(
+                                                    matching: widget.intent ==
+                                                        AppIntent.match)))),
                                     Row(children: [
                                       Expanded(
                                           child: Text(widget.title,
@@ -220,32 +241,6 @@ class _IntentCardState extends State<_IntentCard> {
                                     ])
                                   ]))))));
   }
-}
-
-class _IntentArt extends StatelessWidget {
-  final AppIntent intent;
-  final Color color, tint;
-  const _IntentArt(
-      {required this.intent, required this.color, required this.tint});
-  @override
-  Widget build(BuildContext context) => Container(
-      decoration: BoxDecoration(color: tint, shape: BoxShape.circle),
-      child: Center(
-          child: switch (intent) {
-        AppIntent.chart =>
-          Icon(Icons.grid_view_rounded, size: 63, color: color),
-        AppIntent.match => Stack(alignment: Alignment.center, children: [
-            Transform.translate(
-                offset: const Offset(-20, -7),
-                child: Icon(Icons.person_outline_rounded,
-                    size: 65, color: color.withValues(alpha: .55))),
-            Transform.translate(
-                offset: const Offset(20, 7),
-                child:
-                    Icon(Icons.person_outline_rounded, size: 65, color: color))
-          ]),
-        AppIntent.agent => Icon(Icons.forum_outlined, size: 65, color: color),
-      }));
 }
 
 class MyChartPage extends StatelessWidget {

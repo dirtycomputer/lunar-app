@@ -1239,7 +1239,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyBody1.
   ///
   /// In en, this message translates to:
-  /// **'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.'**
+  /// **'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.'**
   String get privacyBody1;
 
   /// No description provided for @privacyBody2.
@@ -2297,6 +2297,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your core elements form a contrasting pair.'**
   String get flowReasonContrast;
+
+  /// No description provided for @journeyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your journey'**
+  String get journeyTitle;
+
+  /// No description provided for @journeyChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your path'**
+  String get journeyChoose;
+
+  /// No description provided for @journeySparks.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} sparks'**
+  String journeySparks(int n);
+
+  /// No description provided for @journeyProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} of 3 discoveries'**
+  String journeyProgress(int n);
+
+  /// No description provided for @journeyChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'First discoveries'**
+  String get journeyChapter;
+
+  /// No description provided for @journeyAllDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Trail complete'**
+  String get journeyAllDone;
+
+  /// No description provided for @journeyElementTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn your element'**
+  String get journeyElementTask;
+
+  /// No description provided for @journeyOutlookTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Read an outlook'**
+  String get journeyOutlookTask;
+
+  /// No description provided for @journeyEncounterTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore a match'**
+  String get journeyEncounterTask;
+
+  /// No description provided for @journeyCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get journeyCompleted;
+
+  /// No description provided for @journeyKeepExploring.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep exploring'**
+  String get journeyKeepExploring;
+
+  /// No description provided for @journeyElementTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Element quest'**
+  String get journeyElementTitle;
+
+  /// No description provided for @journeyQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'What does {element} support?'**
+  String journeyQuestion(String element);
+
+  /// No description provided for @journeyShowCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Show a hint'**
+  String get journeyShowCycle;
+
+  /// No description provided for @journeyCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'{first} supports {next} in the Five Elements cycle.'**
+  String journeyCycle(String first, String next);
+
+  /// No description provided for @journeyTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'A little hint'**
+  String get journeyTryAgain;
+
+  /// No description provided for @journeyCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Nice discovery!'**
+  String get journeyCorrect;
+
+  /// No description provided for @journeyRemembered.
+  ///
+  /// In en, this message translates to:
+  /// **'Well remembered!'**
+  String get journeyRemembered;
+
+  /// No description provided for @journeyReward.
+  ///
+  /// In en, this message translates to:
+  /// **'+{n} sparks'**
+  String journeyReward(int n);
+
+  /// No description provided for @journeySaveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answer is right. Try saving your progress again.'**
+  String get journeySaveFailed;
+
+  /// No description provided for @journeyRetrySave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save progress'**
+  String get journeyRetrySave;
+
+  /// No description provided for @journeyBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to journey'**
+  String get journeyBack;
+
+  /// No description provided for @journeySample.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample element'**
+  String get journeySample;
+
+  /// No description provided for @journeyNewEncounter.
+  ///
+  /// In en, this message translates to:
+  /// **'New encounter'**
+  String get journeyNewEncounter;
+
+  /// No description provided for @journeyDemoProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample profile'**
+  String get journeyDemoProfile;
+
+  /// No description provided for @journeyShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Journey'**
+  String get journeyShort;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

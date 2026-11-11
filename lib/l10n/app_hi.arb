@@ -203,7 +203,7 @@
   "guideFooter": "उत्सुक रहें। दयालु रहें। थोड़े से संयोग के लिए जगह छोड़ें।",
 
   "privacyTitle": "आपकी जानकारी आपकी ही रहती है।",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records.",
+  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "स्थानीय संग्रहण एन्क्रिप्टेड नहीं है। साझा डिवाइस पर काम पूरा होने पर अपना डेटा साफ़ कर लें। ब्राउज़र या ऐप डेटा साफ़ करने से आपकी प्रोफ़ाइल भी हट जाती है।",
   "privacyBody3": "रीसेट करने पर आपकी व्यक्तिगत जानकारी और सहेजी गई प्राथमिकताएँ साफ़ हो जाती हैं और फिर नमूना प्रोफ़ाइल पर लौट आया जाता है।",
   "clearDataTitle": "अपना स्थानीय डेटा साफ़ करें?",
