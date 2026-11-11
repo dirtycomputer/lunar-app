@@ -1230,6 +1230,139 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get releaseReportHideFailed => '本地举报已保存，但未能隐藏人物，请再次选择隐藏。';
+
+  @override
+  String get gardenTitle => '五行花园';
+
+  @override
+  String get gardenGuide => '五行手札';
+
+  @override
+  String get gardenChapter => '第一章';
+
+  @override
+  String get gardenFirstLight => '初光';
+
+  @override
+  String get gardenBloom => '花园苏醒了';
+
+  @override
+  String get gardenRestore => '点亮相生循环';
+
+  @override
+  String get gardenCollection => '我的收藏';
+
+  @override
+  String get gardenReplay => '再次探索';
+
+  @override
+  String gardenSeals(int n) {
+    return '$n / 5 枚印记';
+  }
+
+  @override
+  String gardenResume(int n) {
+    return '继续 · $n / 5 条连接';
+  }
+
+  @override
+  String get gardenSayHello => '向你的守护精灵打招呼';
+
+  @override
+  String gardenYourElement(String name) {
+    return '我的五行 · $name';
+  }
+
+  @override
+  String gardenLinks(int n) {
+    return '$n / 5 条连接';
+  }
+
+  @override
+  String get gardenWakeNext => '唤醒下一位守护精灵';
+
+  @override
+  String get gardenCloseLoop => '让循环回到起点';
+
+  @override
+  String get gardenLinkRestored => '一条新的连接亮起来了';
+
+  @override
+  String get gardenTapOrDrag => '点选精灵，或把它拖到发光的石台上。';
+
+  @override
+  String get gardenGentleHint => '换个角度再看看';
+
+  @override
+  String get gardenCircleComplete => '花园苏醒了';
+
+  @override
+  String get gardenAllSeals => '完成五条连接，将五枚五行印记收入手札。';
+
+  @override
+  String get gardenPracticeAgain => '再练一次';
+
+  @override
+  String get gardenReturn => '回到花园';
+
+  @override
+  String get gardenContinue => '继续';
+
+  @override
+  String get gardenDropTarget => '把下一位五行精灵放在这里';
+
+  @override
+  String get gardenSleeping => '沉睡的守护精灵';
+
+  @override
+  String get gardenCollected => '已收集印记';
+
+  @override
+  String get gardenNotCollected => '在相生循环中发现这枚印记';
+
+  @override
+  String get gardenWoodMeaning => '在五行传统中，木象征生长、灵活与新的方向。';
+
+  @override
+  String get gardenFireMeaning => '在五行传统中，火象征温暖、表达与展现。';
+
+  @override
+  String get gardenEarthMeaning => '在五行传统中，土象征稳定、滋养与联结。';
+
+  @override
+  String get gardenMetalMeaning => '在五行传统中，金象征条理、清晰与打磨。';
+
+  @override
+  String get gardenWaterMeaning => '在五行传统中，水象征流动、思考与适应。';
+
+  @override
+  String get gardenWoodFact => '木材助燃，以此理解相生关系中的木生火。';
+
+  @override
+  String get gardenFireFact => '灰烬归于土地，以此理解相生关系中的火生土。';
+
+  @override
+  String get gardenEarthFact => '矿物蕴藏于大地，以此理解相生关系中的土生金。';
+
+  @override
+  String get gardenMetalFact => '金聚水是传统的象征意象，对应相生关系中的金生水。';
+
+  @override
+  String get gardenWaterFact => '水滋养新的生长，以此理解相生关系中的水生木。';
+
+  @override
+  String get gardenTradition => '这些是传统的象征关系，不用来衡量你的性格、运气或关系的成败。';
+
+  @override
+  String gardenSavedCycle(String name) {
+    return '继续上次的循环 · $name';
+  }
+
+  @override
+  String get gardenShort => '花园';
+
+  @override
+  String get gardenCollectSeals => '收集五枚五行印记';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).

@@ -77,7 +77,7 @@ void main() {
     await prefs.setString(
         JourneyStore.storageKey,
         jsonEncode({
-          'version': 2,
+          'version': 99,
           'completed': ['element']
         }));
     expect(JourneyStore(prefs).sparks, 0);

@@ -31,13 +31,16 @@ class IntentChooser extends StatelessWidget {
               child: Row(children: [
                 const FlowerLogo(size: 29),
                 const SizedBox(width: 10),
-                const Text('FatePair',
-                    textScaler: TextScaler.noScaling,
-                    style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: -1.3)),
-                const Spacer(),
+                const Expanded(
+                    child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text('FatePair',
+                            textScaler: TextScaler.noScaling,
+                            style: TextStyle(
+                                fontSize: 27,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -1.3)))),
                 if (journeyAction != null) ...[
                   journeyAction!,
                   const SizedBox(width: 8)
@@ -207,7 +210,11 @@ class _IntentCardState extends State<_IntentCard> {
                                           size: 20, color: color)
                                     ])),
                                 SizedBox(
-                                    width: 112,
+                                    width: 112 /
+                                        (MediaQuery.textScalerOf(context)
+                                                    .scale(14) /
+                                                14)
+                                            .clamp(1.0, 2.0),
                                     height: 112,
                                     child: PortalArt(
                                         matching:

@@ -44,7 +44,7 @@ GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build
 
 ## Working features
 
-- Optional light exploration: a Journey trail, a personal-element practice game with hints, one-time sparks, and a short encounter reveal. All three discoveries remain available in any order; progress restores locally and clears with local data.
+- Optional Element Garden: an original five-habitat map, a tap/drag supporting-cycle puzzle, waking guardians, a five-seal collection and readable field notes. Each of five links saves immediately; old rewards migrate and replay never duplicates sparks. All three discoveries remain freely selectable and clear with local data.
 
 - First-use chooser with two primary cards, My reading and Match, plus a secondary Ask Agent action. The chosen starting task is remembered.
 - Two core tasks, My chart and Match, with Agent as a supporting destination.
@@ -124,8 +124,12 @@ The earlier model-integration flows were exercised with Playwright in Chromium a
 - `lib/ui/app_shell.dart`: intent-based navigation, the focused people list, filtering, random matching, and saves.
 - `lib/ui/intent_pages.dart`: first-use chooser, Four Pillars, reading, and recent outlook.
 - `lib/ui/agent_page.dart`: conversation and question composer.
-- `lib/ui/journey.dart`: original element spirits, quest trail, hints, result feedback, and reduced-motion support.
-- `lib/services/journey.dart`: serialized one-time awards and local progress persistence.
+- `lib/ui/journey.dart`: the compact Garden entry badge.
+- `lib/ui/element_garden.dart` and `lib/ui/garden_guide.dart`: garden map, free task routing and field notes.
+- `lib/ui/garden_workshop.dart`: tap/drag cycle gameplay, hints, per-link feedback and completion.
+- `lib/ui/garden_art.dart` and `lib/ui/element_art.dart`: original vector habitats and waking element guardians.
+- `test/render/capture_garden.dart`: repeatable renderer walkthroughs for desktop, phone, larger text and Chinese. Run with `flutter test --update-goldens test/render/capture_garden.dart`; captures go to `output/garden/`. These are Flutter-renderer captures, not browser screenshots.
+- `lib/services/journey.dart`: serialized one-time awards, v1/v2 progress migration, per-link resume and seal collection.
 - `lib/services/chart_assistant.dart`: computed context, reference answers, full-history snapshots, model routing, and cancellation.
 - `server/chart_engine.py` and `server/api/index.py`: authoritative lunar-python calculation and chart-first DeepSeek analysis.
 - `lib/ui/profile_editor.dart`: validated birth data editor.

@@ -1230,4 +1230,137 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get releaseReportHideFailed => 'Local report saved, but the profile could not be hidden. Please try Hide this profile again.';
+
+  @override
+  String get gardenTitle => 'Element Garden';
+
+  @override
+  String get gardenGuide => 'Field notes';
+
+  @override
+  String get gardenChapter => 'CHAPTER 01';
+
+  @override
+  String get gardenFirstLight => 'First light';
+
+  @override
+  String get gardenBloom => 'A garden in bloom';
+
+  @override
+  String get gardenRestore => 'Restore the cycle';
+
+  @override
+  String get gardenCollection => 'Your collection';
+
+  @override
+  String get gardenReplay => 'Explore again';
+
+  @override
+  String gardenSeals(int n) {
+    return '$n / 5 seals';
+  }
+
+  @override
+  String gardenResume(int n) {
+    return 'Continue · $n / 5 links';
+  }
+
+  @override
+  String get gardenSayHello => 'Say hello to your guardian';
+
+  @override
+  String gardenYourElement(String name) {
+    return 'Your element · $name';
+  }
+
+  @override
+  String gardenLinks(int n) {
+    return '$n / 5 links';
+  }
+
+  @override
+  String get gardenWakeNext => 'Wake the next guardian';
+
+  @override
+  String get gardenCloseLoop => 'Bring it full circle';
+
+  @override
+  String get gardenLinkRestored => 'A new link is alive';
+
+  @override
+  String get gardenTapOrDrag => 'Tap a spirit, or drag it onto the glowing stone.';
+
+  @override
+  String get gardenGentleHint => 'Take another look';
+
+  @override
+  String get gardenCircleComplete => 'The garden is awake';
+
+  @override
+  String get gardenAllSeals => 'Five links. Five element seals for your field notes.';
+
+  @override
+  String get gardenPracticeAgain => 'Practice again';
+
+  @override
+  String get gardenReturn => 'Back to garden';
+
+  @override
+  String get gardenContinue => 'Continue';
+
+  @override
+  String get gardenDropTarget => 'Place the next element here';
+
+  @override
+  String get gardenSleeping => 'Sleeping guardian';
+
+  @override
+  String get gardenCollected => 'Seal collected';
+
+  @override
+  String get gardenNotCollected => 'Discover this seal in the cycle';
+
+  @override
+  String get gardenWoodMeaning => 'Wood represents growth, flexibility and new direction in the Five Elements tradition.';
+
+  @override
+  String get gardenFireMeaning => 'Fire represents warmth, expression and visibility in the Five Elements tradition.';
+
+  @override
+  String get gardenEarthMeaning => 'Earth represents steadiness, nourishment and connection in the Five Elements tradition.';
+
+  @override
+  String get gardenMetalMeaning => 'Metal represents structure, clarity and refinement in the Five Elements tradition.';
+
+  @override
+  String get gardenWaterMeaning => 'Water represents movement, reflection and adaptability in the Five Elements tradition.';
+
+  @override
+  String get gardenWoodFact => 'Wood feeds a flame. In the supporting cycle, Wood supports Fire.';
+
+  @override
+  String get gardenFireFact => 'Ash returns to the soil. In the supporting cycle, Fire supports Earth.';
+
+  @override
+  String get gardenEarthFact => 'The earth holds minerals. In the supporting cycle, Earth supports Metal.';
+
+  @override
+  String get gardenMetalFact => 'Metal gathering water is a traditional image. In the supporting cycle, Metal supports Water.';
+
+  @override
+  String get gardenWaterFact => 'Water nourishes new growth. In the supporting cycle, Water supports Wood.';
+
+  @override
+  String get gardenTradition => 'These are traditional symbolic relationships. They do not measure your personality, luck or relationship success.';
+
+  @override
+  String gardenSavedCycle(String name) {
+    return 'Saved cycle · $name';
+  }
+
+  @override
+  String get gardenShort => 'Garden';
+
+  @override
+  String get gardenCollectSeals => 'Collect the five seals';
 }
