@@ -7,77 +7,89 @@
 00:00 +4: /workspace/work/lunar-app/test/journey_test.dart: reset is ordered after pending writes and preserves unrelated settings
 00:00 +5: /workspace/work/lunar-app/test/journey_test.dart: learning progress never changes a chart or recommendation ranking
 00:00 +6: /workspace/work/lunar-app/test/journey_test.dart: (tearDownAll)
-00:00 +6: /workspace/work/lunar-app/test/social_test.dart: (setUpAll)
-00:00 +6: /workspace/work/lunar-app/test/social_test.dart: invitations persist, are idempotent, and remain separate from saves
-00:00 +7: /workspace/work/lunar-app/test/social_test.dart: messages are validated local drafts and survive restoration
-00:00 +8: /workspace/work/lunar-app/test/social_test.dart: concurrent actions preserve every draft and invitation
-00:00 +9: /workspace/work/lunar-app/test/social_test.dart: a malformed draft does not erase valid records or expose unknown profiles
-00:00 +10: /workspace/work/lunar-app/test/social_test.dart: privacy reset clears social data and preserves other preferences
-00:00 +11: /workspace/work/lunar-app/test/social_test.dart: (tearDownAll)
-00:00 +11: /workspace/work/lunar-app/test/app_state_test.dart: (setUpAll)
-00:00 +11: /workspace/work/lunar-app/test/app_state_test.dart: saved connections survive state restoration
-00:00 +12: /workspace/work/lunar-app/test/app_state_test.dart: profile save recalculates chart and survives restoration
-00:00 +13: /workspace/work/lunar-app/test/app_state_test.dart: privacy reset removes personal state but preserves unrelated settings
-00:00 +14: /workspace/work/lunar-app/test/app_state_test.dart: corrupt profile falls back to an explicit sample
-00:00 +15: /workspace/work/lunar-app/test/app_state_test.dart: consents and reports persist and reset with the account
-00:00 +16: /workspace/work/lunar-app/test/app_state_test.dart: (tearDownAll)
-00:01 +16: /workspace/work/lunar-app/test/intent_agent_test.dart: (setUpAll)
-00:01 +16: /workspace/work/lunar-app/test/intent_agent_test.dart: intent selection survives restart and privacy reset returns to chooser
-00:01 +17: /workspace/work/lunar-app/test/intent_agent_test.dart: random matching stays within eligible people and avoids consecutive repeats
-00:01 +18: /workspace/work/lunar-app/test/intent_agent_test.dart: recent outlook uses current transit stems relative to the natal day master
-00:01 +19: /workspace/work/lunar-app/test/intent_agent_test.dart: an unconfigured model gives a labelled calculated reference without a completion request
-00:01 +20: /workspace/work/lunar-app/test/intent_agent_test.dart: professional model Q&A includes the question, prior turns and calculated evidence
-00:01 +21: /workspace/work/lunar-app/test/intent_agent_test.dart: a long conversation retains its first question and original reading context
-00:01 +22: /workspace/work/lunar-app/test/intent_agent_test.dart: cancelled answers do not arrive in a new conversation
-00:01 +23: /workspace/work/lunar-app/test/intent_agent_test.dart: general Agent questions work before birth details are entered
-00:01 +24: /workspace/work/lunar-app/test/intent_agent_test.dart: connected general Q&A does not manufacture a personal chart
-00:01 +25: /workspace/work/lunar-app/test/intent_agent_test.dart: (tearDownAll)
-00:01 +25: /workspace/work/lunar-app/test/bazi_test.dart: (setUpAll)
-00:01 +25: /workspace/work/lunar-app/test/bazi_test.dart: known eight-character fixture at standard meridian
-00:01 +26: /workspace/work/lunar-app/test/bazi_test.dart: year changes at start of spring, not January 1
-00:01 +27: /workspace/work/lunar-app/test/bazi_test.dart: day boundary is midnight, including late Rat hour
-00:01 +28: /workspace/work/lunar-app/test/bazi_test.dart: historical daylight saving and longitude affect solar time
-00:01 +29: /workspace/work/lunar-app/test/bazi_test.dart: nonexistent DST time is rejected
-00:01 +30: /workspace/work/lunar-app/test/bazi_test.dart: repeated DST time resolves to earlier instant
-00:01 +31: /workspace/work/lunar-app/test/bazi_test.dart: unknown time excludes fourth pillar and renormalizes
-00:01 +32: /workspace/work/lunar-app/test/bazi_test.dart: scores are bounded, deterministic, sorted and respond to profile changes
-00:01 +33: /workspace/work/lunar-app/test/bazi_test.dart: age respects birthday rather than just birth year
-00:01 +34: /workspace/work/lunar-app/test/bazi_test.dart: (tearDownAll)
-00:02 +34: /workspace/work/lunar-app/test/widget_test.dart: (setUpAll)
-00:02 +34: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +35: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +36: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +37: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +38: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +39: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +40: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +41: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +42: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +43: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +44: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +45: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +46: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +47: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +48: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +49: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +50: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +51: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +52: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
-00:02 +53: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
-00:03 +54: /workspace/work/lunar-app/test/widget_test.dart: a journey task opens a sample outlook without locking core features
-00:03 +55: /workspace/work/lunar-app/test/widget_test.dart: journey and quiz fit a small screen with larger text and reduced motion
-00:04 +56: /workspace/work/lunar-app/test/widget_test.dart: phone matching entry shows people and random matching with three primary destinations
-00:04 +57: /workspace/work/lunar-app/test/widget_test.dart: first chart entry validates birth details and consent before opening the chart
-00:04 +58: /workspace/work/lunar-app/test/widget_test.dart: returning users open their chosen task and can return to intent selection
-00:04 +59: /workspace/work/lunar-app/test/widget_test.dart: matching search, empty state and reset work without energy cards
-00:05 +60: /workspace/work/lunar-app/test/widget_test.dart: random matching opens a real eligible profile with compatibility details
-00:05 +61: /workspace/work/lunar-app/test/widget_test.dart: saved profiles, invitations and local conversation drafts share the Match workflow
-00:05 +62: /workspace/work/lunar-app/test/widget_test.dart: profile report flow still records the report and hides the person
-00:06 +63: /workspace/work/lunar-app/test/widget_test.dart: chart and recent outlook expose the reading and a direct Agent action
-00:06 +64: /workspace/work/lunar-app/test/widget_test.dart: asking from a reading retains the chart and returns to it
-00:06 +65: /workspace/work/lunar-app/test/widget_test.dart: phone contextual questions remain usable with the keyboard open
-00:06 +66: /workspace/work/lunar-app/test/widget_test.dart: advanced tools stay available without the old promotional heading
-00:07 +67: /workspace/work/lunar-app/test/widget_test.dart: Agent has a question composer and chart-specific suggested questions
-00:07 +68: /workspace/work/lunar-app/test/widget_test.dart: settings preserve language and privacy access from every task
-00:08 +69: /workspace/work/lunar-app/test/widget_test.dart: (tearDownAll)
-00:08 +69: All tests passed!
+00:00 +6: /workspace/work/lunar-app/test/agent_recovery_test.dart: (setUpAll)
+00:00 +6: /workspace/work/lunar-app/test/agent_recovery_test.dart: retry preserves the original question and context without duplicate turns
+00:00 +7: /workspace/work/lunar-app/test/agent_recovery_test.dart: an offline status check is an explicit retryable failure
+00:00 +8: /workspace/work/lunar-app/test/agent_recovery_test.dart: cancel can be retried and a late answer cannot replace the new result
+00:00 +9: /workspace/work/lunar-app/test/agent_recovery_test.dart: chart cache reuses reports and invalidates when time or convention changes
+00:00 +10: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:00 +11: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:00 +12: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:00 +13: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:00 +14: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:00 +15: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:01 +16: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:01 +17: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:01 +18: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:01 +19: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:01 +20: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:01 +21: /workspace/work/lunar-app/test/agent_recovery_test.dart: (tearDownAll)
+00:02 +21: /workspace/work/lunar-app/test/intent_agent_test.dart: (setUpAll)
+00:02 +21: /workspace/work/lunar-app/test/intent_agent_test.dart: intent selection survives restart and privacy reset returns to chooser
+00:02 +22: /workspace/work/lunar-app/test/intent_agent_test.dart: random matching stays within eligible people and avoids consecutive repeats
+00:02 +23: /workspace/work/lunar-app/test/intent_agent_test.dart: recent outlook uses current transit stems relative to the natal day master
+00:02 +24: /workspace/work/lunar-app/test/intent_agent_test.dart: an unconfigured model gives a labelled calculated reference without a completion request
+00:02 +25: /workspace/work/lunar-app/test/intent_agent_test.dart: professional model Q&A includes the question, prior turns and calculated evidence
+00:02 +26: /workspace/work/lunar-app/test/bazi_test.dart: (setUpAll)
+00:02 +26: /workspace/work/lunar-app/test/intent_agent_test.dart: a long conversation retains its first question and original reading context
+00:02 +27: /workspace/work/lunar-app/test/intent_agent_test.dart: a long conversation retains its first question and original reading context
+00:02 +28: /workspace/work/lunar-app/test/bazi_test.dart: year changes at start of spring, not January 1
+00:02 +29: /workspace/work/lunar-app/test/intent_agent_test.dart: cancelled answers do not arrive in a new conversation
+00:02 +30: /workspace/work/lunar-app/test/intent_agent_test.dart: cancelled answers do not arrive in a new conversation
+00:02 +31: /workspace/work/lunar-app/test/intent_agent_test.dart: cancelled answers do not arrive in a new conversation
+00:02 +32: /workspace/work/lunar-app/test/bazi_test.dart: nonexistent DST time is rejected
+00:02 +33: /workspace/work/lunar-app/test/intent_agent_test.dart: general Agent questions work before birth details are entered
+00:02 +34: /workspace/work/lunar-app/test/intent_agent_test.dart: general Agent questions work before birth details are entered
+00:02 +35: /workspace/work/lunar-app/test/intent_agent_test.dart: general Agent questions work before birth details are entered
+00:02 +36: /workspace/work/lunar-app/test/bazi_test.dart: scores are bounded, deterministic, sorted and respond to profile changes
+00:02 +37: /workspace/work/lunar-app/test/bazi_test.dart: scores are bounded, deterministic, sorted and respond to profile changes
+00:02 +38: /workspace/work/lunar-app/test/bazi_test.dart: age respects birthday rather than just birth year
+00:02 +39: /workspace/work/lunar-app/test/bazi_test.dart: (tearDownAll)
+00:03 +39: /workspace/work/lunar-app/test/release_recovery_test.dart: (setUpAll)
+00:03 +39: /workspace/work/lunar-app/test/release_recovery_test.dart: unfinished deletion exposes a retry from the first-use screen
+00:04 +40: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +41: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +42: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +43: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +44: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +45: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +46: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:04 +47: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on landscape phone
+00:05 +48: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on desktop
+00:05 +49: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +50: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +51: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +52: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +53: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +54: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +55: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +56: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +57: /workspace/work/lunar-app/test/widget_test.dart: first visit gives two primary cards and a secondary question entry
+00:06 +58: /workspace/work/lunar-app/test/studio_test.dart: fortune reverses with traditional sex and matches pinned engine start
+00:06 +59: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +60: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +61: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +62: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +63: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +64: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +65: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +66: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +67: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +68: /workspace/work/lunar-app/test/widget_test.dart: element practice provides a hint, saves one reward and supports replay
+00:06 +69: /workspace/work/lunar-app/test/widget_test.dart: a journey task opens a sample outlook without locking core features
+00:07 +70: /workspace/work/lunar-app/test/widget_test.dart: journey and quiz fit a small screen with larger text and reduced motion
+00:07 +71: /workspace/work/lunar-app/test/widget_test.dart: phone matching entry shows people and random matching with three primary destinations
+00:07 +72: /workspace/work/lunar-app/test/widget_test.dart: first chart entry validates birth details and consent before opening the chart
+00:07 +73: /workspace/work/lunar-app/test/widget_test.dart: returning users open their chosen task and can return to intent selection
+00:08 +74: /workspace/work/lunar-app/test/widget_test.dart: matching search, empty state and reset work without energy cards
+00:08 +75: /workspace/work/lunar-app/test/widget_test.dart: random matching opens a real eligible profile with compatibility details
+00:08 +76: /workspace/work/lunar-app/test/widget_test.dart: saved profiles, invitations and local conversation drafts share the Match workflow
+00:09 +77: /workspace/work/lunar-app/test/widget_test.dart: profile report flow still records the report and hides the person
+00:09 +78: /workspace/work/lunar-app/test/widget_test.dart: chart and recent outlook expose the reading and a direct Agent action
+00:09 +79: /workspace/work/lunar-app/test/widget_test.dart: asking from a reading retains the chart and returns to it
+00:09 +80: /workspace/work/lunar-app/test/widget_test.dart: phone contextual questions remain usable with the keyboard open
+00:10 +81: /workspace/work/lunar-app/test/widget_test.dart: advanced tools stay available without the old promotional heading
+00:11 +82: /workspace/work/lunar-app/test/widget_test.dart: Agent has a question composer and chart-specific suggested questions
+00:11 +83: /workspace/work/lunar-app/test/widget_test.dart: settings preserve language and privacy access from every task
+00:11 +84: /workspace/work/lunar-app/test/widget_test.dart: (tearDownAll)
+00:11 +84: All tests passed!

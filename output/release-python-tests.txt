@@ -1,0 +1,25 @@
+test_calculated_chart_is_sent_before_analysis_and_reasoning_is_not_exposed (test_service.ApiTests.test_calculated_chart_is_sent_before_analysis_and_reasoning_is_not_exposed) ... ok
+test_cors_allows_the_actual_app (test_service.ApiTests.test_cors_allows_the_actual_app) ... ok
+test_cross_origin_browser_request_is_rejected (test_service.ApiTests.test_cross_origin_browser_request_is_rejected) ... ok
+test_incomplete_generation_is_not_presented_as_complete (test_service.ApiTests.test_incomplete_generation_is_not_presented_as_complete) ... ok
+test_invalid_chart_never_reaches_the_provider (test_service.ApiTests.test_invalid_chart_never_reaches_the_provider) ... ok
+test_oversized_context_is_rejected_without_provider_call (test_service.ApiTests.test_oversized_context_is_rejected_without_provider_call) ... ok
+test_per_instance_request_burst_is_limited (test_service.ApiTests.test_per_instance_request_burst_is_limited) ... ok
+test_provider_errors_do_not_echo_sensitive_details (test_service.ApiTests.test_provider_errors_do_not_echo_sensitive_details) ... ok
+test_status_reports_model_context_reasoning_and_engine_without_key (test_service.ApiTests.test_status_reports_model_context_reasoning_and_engine_without_key) ... ok
+test_all_flutter_fixtures_match_python_pillars_and_clocks (test_service.ChartTests.test_all_flutter_fixtures_match_python_pillars_and_clocks) ... ok
+test_altered_client_pillars_are_rejected (test_service.ChartTests.test_altered_client_pillars_are_rejected) ... ok
+test_booleans_cannot_impersonate_calendar_numbers (test_service.ChartTests.test_booleans_cannot_impersonate_calendar_numbers) ... ok
+test_dst_gap_is_rejected (test_service.ChartTests.test_dst_gap_is_rejected) ... ok
+test_full_conversation_preserves_early_context_and_actual_current_chart (test_service.ChartTests.test_full_conversation_preserves_early_context_and_actual_current_chart) ... ok
+test_general_questions_do_not_create_a_personal_chart (test_service.ChartTests.test_general_questions_do_not_create_a_personal_chart) ... ok
+test_malformed_calculation_inputs_are_rejected_explicitly (test_service.ChartTests.test_malformed_calculation_inputs_are_rejected_explicitly) ... ok
+test_personal_chart_cannot_skip_birth_inputs (test_service.ChartTests.test_personal_chart_cannot_skip_birth_inputs) ... ok
+test_provider_model_and_maximum_reasoning_are_fixed (test_service.ChartTests.test_provider_model_and_maximum_reasoning_are_fixed) ... ok
+test_two_chart_comparison_calculates_both_inputs (test_service.ChartTests.test_two_chart_comparison_calculates_both_inputs) ... ok
+test_unknown_hour_has_no_fabricated_start_or_palaces (test_service.ChartTests.test_unknown_hour_has_no_fabricated_start_or_palaces) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.354s
+
+OK
