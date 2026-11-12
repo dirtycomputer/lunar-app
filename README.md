@@ -1,6 +1,6 @@
 # FatePair
 
-An English-language Flutter app for BaZi charts, recent outlook, matching, and chart-grounded Agent questions. Built with Material 3, a soft botanical palette, Manrope typography, and responsive mobile / desktop layouts.
+An English-language Flutter app for BaZi charts, recent outlook, matching, and chart-grounded Agent questions. Built with Material 3, cobalt and jade accents, original elemental companions, bundled Manrope typography, and responsive mobile / desktop layouts.
 
 ## Run
 
@@ -32,6 +32,8 @@ The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) wi
 
 [`product.md`](product.md) is the product baseline. Substantial changes to user flows must update that document in natural language. Repository contributors follow [`AGENTS.md`](AGENTS.md).
 
+[`docs/ui-design.md`](docs/ui-design.md) records the visual direction and review against the brief, applying the official frontend-design guidance. Reproduce the core UI and garden renderer walkthroughs with `flutter test --update-goldens test/render/capture_ui.dart test/render/capture_garden.dart`; these use bundled fonts and are not browser acceptance tests.
+
 ## Release quality
 
 The current public release is a **preview**, with an explicit production gate in [`release/launch.json`](release/launch.json). [`docs/release-review.md`](docs/release-review.md) records the use → feedback → fix → regression loops and the remaining infrastructure/operational blockers. `python3 scripts/check_release.py --channel preview` checks package integrity; the `production` channel intentionally fails until the open gates have evidence.
@@ -49,7 +51,7 @@ GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build
 - First-use chooser with two primary cards, My reading and Match, plus a secondary Ask Agent action. The chosen starting task is remembered.
 - Two core tasks, My chart and Match, with Agent as a supporting destination.
 - Focused Match page with a vertical people list, one computed recommendation reason per person, filter-aware random matching, and search/filters.
-- My chart opens with the main reading before Four Pillars; recent outlook switches between day, month, and year transits. Detailed chart tables are collapsed by default. Day master terminology can be explained in place.
+- My chart opens with a reading conclusion and expandable details. Reading and Four Pillars sit side by side on desktop and stack on phones; recent outlook switches between day, month, and year transits. Detailed chart tables are collapsed by default. Day master terminology can be explained in place.
 - Contextual questions open beside the current reading on desktop or in a phone bottom sheet, preserving the reading position. Agent also accepts general questions before birth setup and chart-specific questions with follow-ups using computed chart evidence and complete conversation history. Without a configured provider it shows labelled chart-reference answers.
 - Advanced Chart Studio tools are available from My chart → Tools; model settings, language, privacy, and guide remain in Settings.
 - Live cultural harmony scoring, not hard-coded percentages.

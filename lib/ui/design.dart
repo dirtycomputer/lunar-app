@@ -2,16 +2,16 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../services/bazi.dart' as bazi;
 
-const ink = Color(0xFF273653);
-const muted = Color(0xFF64708A);
-const green = Color(0xFF35695D);
-const blue = Color(0xFF355CA8);
+const ink = Color(0xFF202D47);
+const muted = Color(0xFF5E6D85);
+const green = Color(0xFF25765A);
+const blue = Color(0xFF245ACB);
 const violet = Color(0xFF76509D);
 const coral = Color(0xFFAB5145);
 const amber = Color(0xFF87621D);
-const line = Color(0xFFE1E6F0);
-const canvas = Color(0xFFF7F8FA);
-const blueTint = Color(0xFFEBF1FF);
+const line = Color(0xFFDCE3EE);
+const canvas = Color(0xFFF5F7FC);
+const blueTint = Color(0xFFE9F1FF);
 const lavenderTint = Color(0xFFF1EBFA);
 const coralTint = Color(0xFFFBEDE7);
 const amberTint = Color(0xFFFAF3DF);
@@ -44,12 +44,12 @@ ThemeData lunarTheme() => ThemeData(
             fontSize: 38,
             fontWeight: FontWeight.w600,
             letterSpacing: -1.6,
-            color: blue),
+            color: ink),
         headlineMedium: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.w600,
             letterSpacing: -1,
-            color: blue),
+            color: ink),
         titleLarge: TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.w600,
@@ -57,9 +57,9 @@ ThemeData lunarTheme() => ThemeData(
             color: ink),
         titleMedium:
             TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: ink),
-        bodyLarge: TextStyle(fontSize: 15, height: 1.6, color: ink),
-        bodyMedium: TextStyle(fontSize: 13, height: 1.55, color: ink),
-        bodySmall: TextStyle(fontSize: 11, height: 1.5, color: muted),
+        bodyLarge: TextStyle(fontSize: 16, height: 1.65, color: ink),
+        bodyMedium: TextStyle(fontSize: 14, height: 1.6, color: ink),
+        bodySmall: TextStyle(fontSize: 12, height: 1.5, color: muted),
       ),
       dividerColor: line,
       filledButtonTheme: FilledButtonThemeData(
@@ -67,18 +67,34 @@ ThemeData lunarTheme() => ThemeData(
         backgroundColor: blue,
         foregroundColor: Colors.white,
         elevation: 0,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        minimumSize: const Size(48, 48),
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 17),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         textStyle: const TextStyle(
-            fontFamily: 'Manrope', fontWeight: FontWeight.w600, fontSize: 13),
+            fontFamily: 'Manrope', fontWeight: FontWeight.w600, fontSize: 14),
       )),
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
         foregroundColor: ink,
         side: const BorderSide(color: line),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        minimumSize: const Size(48, 48),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       )),
+      textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+              minimumSize: const Size(48, 48),
+              foregroundColor: blue,
+              textStyle: const TextStyle(
+                  fontFamily: 'Manrope',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600))),
+      iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(minimumSize: const Size(48, 48))),
+      navigationBarTheme: const NavigationBarThemeData(
+          labelTextStyle: WidgetStatePropertyAll(
+              TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+          elevation: 0),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.white,
@@ -91,6 +107,22 @@ ThemeData lunarTheme() => ThemeData(
             borderSide: const BorderSide(color: line)),
       ),
     );
+
+class BrandMark extends StatelessWidget {
+  const BrandMark({super.key});
+  @override
+  Widget build(BuildContext context) =>
+      const Row(mainAxisSize: MainAxisSize.min, children: [
+        FlowerLogo(size: 30),
+        SizedBox(width: 10),
+        Text('FatePair',
+            textScaler: TextScaler.noScaling,
+            style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -1.2)),
+      ]);
+}
 
 class FlowerLogo extends StatelessWidget {
   final double size;

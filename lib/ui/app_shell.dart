@@ -15,6 +15,7 @@ import 'design.dart';
 import 'intent_pages.dart';
 import 'journey.dart';
 import 'language_picker.dart';
+import 'match_card.dart';
 import 'profile_editor.dart';
 import 'profile_detail.dart';
 import 'secondary_pages.dart';
@@ -351,10 +352,10 @@ class _AppShellState extends State<AppShell> {
         bottomNavigationBar: desktop
             ? null
             : NavigationBar(
-                height: 70,
+                height: 76,
                 selectedIndex: section!.index,
                 onDestinationSelected: (i) => navigate(AppIntent.values[i]),
-                backgroundColor: Colors.white,
+                backgroundColor: canvas,
                 indicatorColor: blueTint,
                 destinations: [
                     NavigationDestination(
@@ -379,11 +380,9 @@ class _AppShellState extends State<AppShell> {
           Expanded(
               child: Column(children: [
             Container(
-                height: 76,
+                height: 86,
                 padding: EdgeInsets.symmetric(horizontal: desktop ? 34 : 18),
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    border: Border(bottom: BorderSide(color: line))),
+                color: canvas,
                 child: Row(children: [
                   if (!desktop) ...[
                     IconButton(
@@ -396,9 +395,9 @@ class _AppShellState extends State<AppShell> {
                       child: Text(labels[section!.index],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
+                          style: TextStyle(
+                              fontSize: desktop ? 32 : 24,
+                              fontWeight: FontWeight.w600,
                               letterSpacing: -.7))),
                   JourneyBadge(store: state.journey, onTap: openJourney),
                   const SizedBox(width: 8),
@@ -422,11 +421,11 @@ class _AppShellState extends State<AppShell> {
                     : SingleChildScrollView(
                         controller: scroll,
                         padding: EdgeInsets.fromLTRB(
-                            desktop ? 34 : 18, 26, desktop ? 34 : 18, 30),
+                            desktop ? 34 : 18, 14, desktop ? 34 : 18, 30),
                         child: Center(
                             child: ConstrainedBox(
                                 constraints:
-                                    const BoxConstraints(maxWidth: 1320),
+                                    const BoxConstraints(maxWidth: 1120),
                                 child: section == AppIntent.chart
                                     ? MyChartPage(
                                         state: state,
@@ -453,10 +452,8 @@ class _AppShellState extends State<AppShell> {
   Widget _sidebar(List<String> labels) {
     final l = AppLocalizations.of(context)!;
     return Container(
-        width: 194,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            border: BorderDirectional(end: BorderSide(color: line))),
+        width: 212,
+        color: canvas,
         padding: const EdgeInsets.fromLTRB(16, 27, 16, 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           InkWell(
@@ -464,23 +461,14 @@ class _AppShellState extends State<AppShell> {
               borderRadius: BorderRadius.circular(12),
               child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
-                  child: Row(children: [
-                    FlowerLogo(size: 30),
-                    SizedBox(width: 11),
-                    Text('FatePair',
-                        textScaler: TextScaler.noScaling,
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: -1.3))
-                  ]))),
+                  child: BrandMark())),
           const SizedBox(height: 55),
           for (final i in AppIntent.values)
             Padding(
                 padding: EdgeInsets.only(
                     bottom: 10, top: i == AppIntent.agent ? 28 : 0),
                 child: Material(
-                    color: section == i ? blueTint : Colors.transparent,
+                    color: section == i ? blue : Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
                     child: InkWell(
                         key: ValueKey('nav-${i.name}'),
@@ -497,16 +485,18 @@ class _AppShellState extends State<AppShell> {
                                     Icons.forum_outlined
                                   ][i.index],
                                   size: 20,
-                                  color: section == i ? blue : muted),
+                                  color: section == i ? Colors.white : muted),
                               const SizedBox(width: 12),
                               Expanded(
                                   child: Text(labels[i.index],
                                       style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 14,
                                           fontWeight: section == i
                                               ? FontWeight.w600
                                               : FontWeight.w500,
-                                          color: section == i ? blue : ink)))
+                                          color: section == i
+                                              ? Colors.white
+                                              : ink)))
                             ]))))),
           const Spacer(),
           ListTile(
@@ -587,7 +577,7 @@ class _AppShellState extends State<AppShell> {
                       key: ValueKey('match-tab-$i'),
                       onTap: () => setState(() => matchTab = i),
                       child: Container(
-                          padding: const EdgeInsets.only(bottom: 15),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -597,7 +587,7 @@ class _AppShellState extends State<AppShell> {
                                           : Colors.transparent))),
                           child: Text(label,
                               style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: matchTab == i ? blue : muted,
                                   fontWeight: matchTab == i
                                       ? FontWeight.w600
@@ -611,7 +601,7 @@ class _AppShellState extends State<AppShell> {
               key: const ValueKey('discovery-search'),
               controller: search,
               onChanged: (_) => setState(() {}),
-              style: const TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                   hintText: l.socialSearchHint,
                   prefixIcon: const Icon(Icons.search, size: 19),
@@ -675,104 +665,16 @@ class _AppShellState extends State<AppShell> {
     ]);
   }
 
-  Widget _person(bazi.MatchResult m) {
-    final l = AppLocalizations.of(context)!;
-    final p = m.person;
-    final reason = switch (matchReason(m)) {
-      MatchReason.balance => l.flowReasonBalance,
-      MatchReason.support => l.flowReasonSupport,
-      MatchReason.shared => l.flowReasonShared,
-      MatchReason.branches => l.flowReasonBranches,
-      MatchReason.contrast => l.flowReasonContrast,
-    };
-    return Semantics(
-        button: true,
-        label: '${p.name}, ${p.age}, ${p.location}',
-        child: Material(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-                side: const BorderSide(color: line)),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-                onTap: () => _openProfile(m),
-                child: LayoutBuilder(builder: (context, c) {
-                  final compact = c.maxWidth < 600;
-                  return Padding(
-                      padding: EdgeInsets.all(compact ? 14 : 18),
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.asset(p.image,
-                                    width: compact ? 76 : 106,
-                                    height: compact ? 112 : 124,
-                                    fit: BoxFit.cover,
-                                    alignment: const Alignment(0, -.3))),
-                            SizedBox(width: compact ? 14 : 22),
-                            Expanded(
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                  Row(children: [
-                                    Expanded(
-                                        child: Text('${p.name}, ${p.age}',
-                                            style: TextStyle(
-                                                fontSize: compact ? 18 : 21,
-                                                fontWeight: FontWeight.w500,
-                                                letterSpacing: -.4))),
-                                    SizedBox(
-                                        width: 32,
-                                        height: 32,
-                                        child: IconButton(
-                                            padding: EdgeInsets.zero,
-                                            tooltip: state.saved.contains(p.id)
-                                                ? l.unsave(p.name)
-                                                : l.saveTo(p.name),
-                                            onPressed: () async {
-                                              final ok =
-                                                  await state.toggleSaved(p.id);
-                                              if (!ok && context.mounted) {
-                                                showToast(
-                                                    context, l.couldNotSave);
-                                              }
-                                            },
-                                            icon: Icon(
-                                                state.saved.contains(p.id)
-                                                    ? Icons.favorite
-                                                    : Icons.favorite_border,
-                                                size: 19,
-                                                color:
-                                                    state.saved.contains(p.id)
-                                                        ? coral
-                                                        : muted)))
-                                  ]),
-                                  Text(p.location,
-                                      style: const TextStyle(
-                                          fontSize: 11, color: muted)),
-                                  const SizedBox(height: 10),
-                                  Text(reason,
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          height: 1.5,
-                                          color: ink)),
-                                  const SizedBox(height: 10),
-                                  Row(children: [
-                                    Text(l.harmonyPct(m.score),
-                                        style: const TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w600,
-                                            color: green)),
-                                    const Spacer(),
-                                    const Icon(Icons.arrow_forward,
-                                        size: 17, color: muted)
-                                  ])
-                                ]))
-                          ]));
-                }))));
-  }
+  Widget _person(bazi.MatchResult m) => MatchListTile(
+      match: m,
+      saved: state.saved.contains(m.person.id),
+      onOpen: () => _openProfile(m),
+      onSave: () async {
+        final ok = await state.toggleSaved(m.person.id);
+        if (!ok && mounted) {
+          showToast(context, AppLocalizations.of(context)!.couldNotSave);
+        }
+      });
 
   Widget _empty(String title,
           {required VoidCallback onTap, required String action}) =>

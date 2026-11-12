@@ -1363,4 +1363,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get gardenCollectSeals => 'Collect the five seals';
+
+  @override
+  String get flowReadingDetails => 'Read the details';
 }

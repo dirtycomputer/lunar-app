@@ -1,0 +1,14 @@
+00:00 +0: loading /workspace/work/lunar-app/test/render/capture_ui.dart
+00:00 +0: /workspace/work/lunar-app/test/render/capture_ui.dart: (setUpAll)
+00:00 +0: /workspace/work/lunar-app/test/render/capture_ui.dart: desktop core UI walkthrough
+00:02 +1: /workspace/work/lunar-app/test/render/capture_garden.dart: desktop garden adventure
+00:03 +2: /workspace/work/lunar-app/test/render/capture_garden.dart: desktop garden adventure
+00:04 +3: /workspace/work/lunar-app/test/render/capture_ui.dart: accessible core UI walkthrough
+00:04 +4: /workspace/work/lunar-app/test/render/capture_garden.dart: mobile garden adventure
+00:05 +5: /workspace/work/lunar-app/test/render/capture_garden.dart: mobile garden adventure
+00:05 +6: /workspace/work/lunar-app/test/render/capture_ui.dart: landscape core UI walkthrough
+00:06 +7: /workspace/work/lunar-app/test/render/capture_garden.dart: accessible garden adventure
+00:06 +8: /workspace/work/lunar-app/test/render/capture_garden.dart: zh garden adventure
+00:08 +9: /workspace/work/lunar-app/test/render/capture_garden.dart: legacy garden adventure
+00:09 +10: /workspace/work/lunar-app/test/render/capture_garden.dart: (tearDownAll)
+00:09 +10: All tests passed!

@@ -22,7 +22,7 @@ class JourneyBadge extends StatelessWidget {
                 label: l.gardenTitle,
                 value: l.journeySparks(store.sparks),
                 child: Material(
-                    color: amberTint,
+                    color: mintTint,
                     borderRadius: BorderRadius.circular(18),
                     child: InkWell(
                         key: const ValueKey('journey-open'),
@@ -34,7 +34,7 @@ class JourneyBadge extends StatelessWidget {
                             child:
                                 Row(mainAxisSize: MainAxisSize.min, children: [
                               const Icon(Icons.auto_awesome_rounded,
-                                  color: amber, size: 18),
+                                  color: green, size: 18),
                               const SizedBox(width: 7),
                               if (MediaQuery.sizeOf(context).width >= 350 &&
                                   MediaQuery.textScalerOf(context).scale(13) <=
@@ -43,7 +43,7 @@ class JourneyBadge extends StatelessWidget {
                                     style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
-                                        color: amber)),
+                                        color: green)),
                                 const SizedBox(width: 7),
                               ],
                               AnimatedSwitcher(
@@ -61,7 +61,7 @@ class JourneyBadge extends StatelessWidget {
                                       style: const TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.w700,
-                                          color: amber))),
+                                          color: green))),
                             ])))))));
   }
 }

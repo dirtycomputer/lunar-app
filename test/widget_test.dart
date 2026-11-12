@@ -279,7 +279,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(state.personalized, isTrue);
     expect(state.startIntent, AppIntent.chart);
-    expect(find.text('YEAR'), findsOneWidget);
+    expect(find.text('Year'), findsOneWidget);
     expect(find.text('Reading'), findsOneWidget);
     expect(find.text('Your energy, at a glance'), findsNothing);
     expect(tester.takeException(), isNull);
@@ -387,9 +387,22 @@ void main() {
       'chart and recent outlook expose the reading and a direct Agent action',
       (tester) async {
     await start(tester, intent: AppIntent.chart, personal: true);
-    expect(find.text('YEAR'), findsOneWidget);
+    expect(find.text('Year'), findsOneWidget);
     expect(find.text('Reading'), findsOneWidget);
     expect(find.text('Chart details'), findsOneWidget);
+    expect(find.byType(SelectableText), findsOneWidget);
+    await tester.tap(find.text('Read the details'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SelectableText), findsNWidgets(2));
+    expect(
+        tester
+            .widgetList<SelectableText>(find.byType(SelectableText))
+            .last
+            .data,
+        contains('Your day master is'));
+    await tester.tap(find.text('Read the details'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SelectableText), findsOneWidget);
     await tester.tap(find.text('Recent outlook'));
     await tester.pumpAndSettle();
     expect(find.text('This month'), findsOneWidget);
@@ -401,8 +414,8 @@ void main() {
       (tester) async {
     await start(tester, intent: AppIntent.chart, personal: true);
     final chartScroll = find.byType(SingleChildScrollView).first;
-    expect(tester.getTopLeft(find.text('Reading')).dy,
-        lessThan(tester.getTopLeft(find.text('YEAR')).dy));
+    expect(tester.getTopLeft(find.text('Reading')).dx,
+        lessThan(tester.getTopLeft(find.text('Year')).dx));
     await tester.tap(find.text('Ask Agent'));
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey('contextual-agent')), findsOneWidget);

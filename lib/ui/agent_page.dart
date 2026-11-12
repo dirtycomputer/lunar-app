@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/chart_assistant.dart';
+import '../services/bazi.dart' as bazi;
 import 'design.dart';
+import 'element_art.dart';
 
 class AgentPage extends StatefulWidget {
   final ChartAgent agent;
@@ -112,9 +114,12 @@ class _AgentPageState extends State<AgentPage> {
                           ? Center(
                               child: SingleChildScrollView(
                                   child: Column(children: [
-                              const Icon(Icons.forum_outlined,
-                                  size: 52, color: blue),
-                              const SizedBox(height: 34),
+                              ElementSpirit(
+                                  element:
+                                      widget.chart?.natal.energy.dayElement ??
+                                          bazi.Element.metal,
+                                  size: 112),
+                              const SizedBox(height: 28),
                               LayoutBuilder(
                                   builder: (context, c) => Wrap(
                                           spacing: 11,
@@ -147,15 +152,15 @@ class _AgentPageState extends State<AgentPage> {
                                                               Colors.white,
                                                           padding:
                                                               const EdgeInsets.all(
-                                                                  18),
+                                                                  20),
                                                           shape: RoundedRectangleBorder(
                                                               borderRadius:
                                                                   BorderRadius.circular(
-                                                                      14))),
+                                                                      20))),
                                                       child: Text(q,
                                                           style: const TextStyle(
-                                                              fontSize: 12,
-                                                              height: 1.7))))
+                                                              fontSize: 14,
+                                                              height: 1.5))))
                                           ]))
                             ])))
                           : ListView(controller: scroll, children: [

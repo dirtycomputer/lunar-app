@@ -1,6 +1,20 @@
-# Release review — 2026-11-11
+# Release review — 2026-11-12
 
 This update uses a repeatable use → feedback → fix → regression loop. The shipped channel remains **preview**. Passing tests or deploying the website does not establish readiness for a real dating community.
+
+## UI design pass — 2026-11-12
+
+Applied the [official frontend-design guidance](https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md), with the palette, typography, layout sketch and critique recorded before implementation in [ui-design.md](ui-design.md). The UI retains the two primary routes, secondary Agent, sample-community notices and optional garden.
+
+| Observed feedback | Change | Verification |
+| --- | --- | --- |
+| First-use illustrations were small inside uniform white cards; ornamental route numbers implied an order. | Larger original elemental artwork, distinct cobalt/sky entrances, shared branding and no route numbers or hover lift. | First-use captures at desktop, phone, Chinese, landscape and 200% text. |
+| Reading lines spanned the desktop; on phone the full explanation pushed questions and pillars far below the opening screen. | Reading/pillars share a row on wide screens; the first paragraph is shown immediately, with complete details available inline. The question action remains outside the disclosure, and its full evidence packet is unchanged. | Expand/collapse assertions, existing contextual-question preservation and keyboard tests, desktop and phone renders. |
+| At 320px / 200% text, decorative entrance art split “reading” inside a word. | Hide that decorative illustration at larger text sizes so labels have the full card width; all routes remain scrollable. | Revised large-text render plus the full core navigation walkthrough. |
+| Names, reasons and harmony were visually similar, and saving used a small target. | Independent reusable matching tile with larger portraits/identity, clear reason, harmony badge and 48px save target. | Search, filter-aware random matching, saving, profile and local interaction regression tests; portraits are explicitly pre-cached before renderer captures. |
+| Garden task chrome competed with its landscape. | One green active task, descriptive task icons, quieter framing and no redundant chapter eyebrow or hard card shadows. | All five garden walkthroughs, including legacy rewards, complete the full five-link puzzle and all three discoveries. |
+
+Final checks: clean Flutter analysis, all **94 tests**, and **10 renderer walkthroughs / 75 captures**. The Web release and preview package check are recorded in verification.md. Selected current screenshots use `output/flutter-render/ui-*.png`. English and Chinese use bundled fonts; new Chinese copy is covered by the existing subset. No dependency, backend, model, quota or access change is part of this pass. Native checks run on the PR; browser acceptance remains unverified because the supported managed browser tool is unavailable. Existing production release blockers remain open.
 
 ## Element Garden redesign — 2026-11-11
 

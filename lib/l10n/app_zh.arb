@@ -628,5 +628,6 @@
   "gardenSavedCycle": "继续上次的循环 · {name}",
   "@gardenSavedCycle": {"placeholders": {"name": {"type": "String"}}},
   "gardenShort": "花园",
-  "gardenCollectSeals": "收集五枚五行印记"
+  "gardenCollectSeals": "收集五枚五行印记",
+  "flowReadingDetails": "展开解读"
 }

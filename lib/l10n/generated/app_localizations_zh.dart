@@ -1363,6 +1363,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get gardenCollectSeals => '收集五枚五行印记';
+
+  @override
+  String get flowReadingDetails => '展开解读';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
