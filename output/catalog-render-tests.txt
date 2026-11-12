@@ -1,0 +1,8 @@
+00:00 +0: loading /workspace/work/lunar-app/test/render/capture_catalog.dart
+00:00 +0: (setUpAll)
+00:00 +0: desktop persisted catalog walkthrough
+00:03 +1: mobile persisted catalog walkthrough
+00:04 +2: accessible persisted catalog walkthrough
+00:05 +3: zh persisted catalog walkthrough
+00:06 +4: (tearDownAll)
+00:06 +4: All tests passed!

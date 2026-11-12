@@ -1,0 +1,19 @@
+✔ 1,000 unique synthetic adults span 40 countries, six continents and three gender identities (85.305868ms)
+✔ SQL statistics agree with every stored row and report source truthfully (4.416543ms)
+✔ cursor pages traverse all 1,000 records once, with a stable total and revision (27.294316ms)
+✔ country, gender and age predicates are combined by the database (3.465863ms)
+✔ search treats wildcard and SQL syntax literally (4.043803ms)
+✔ invalid query bounds, identities and unsupported writes are rejected (1.692195ms)
+✔ repeating seed batches preserves count, record hashes and completion timestamp (10.832494ms)
+✔ closing and reopening the SQLite file preserves all profiles without seeding (3.80261ms)
+✔ removing the server token closes seed writes and keeps read access (2.909246ms)
+✔ normal deployment rejects seeding even when an old token binding exists (0.271458ms)
+✔ public responses expose neither credentials nor SQL internals (3.259073ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 259.740857

@@ -1,8 +1,8 @@
+import 'fixtures/app.dart';
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:lunar_social/services/app_state.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/services/social.dart';
 
 void main() {
@@ -11,25 +11,25 @@ void main() {
   test('invitations persist, are idempotent, and remain separate from saves',
       () async {
     final prefs = await SharedPreferences.getInstance();
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     expect(await state.social.invite('maya'), isTrue);
     expect(await state.social.invite('maya'), isTrue);
     expect(state.saved, isEmpty);
-    final restored = AppState(prefs);
+    final restored = testAppState(prefs);
     expect(restored.social.invitations, {'maya'});
     expect(await restored.social.withdraw('maya'), isTrue);
-    expect(AppState(prefs).social.invitations, isEmpty);
+    expect(testAppState(prefs).social.invitations, isEmpty);
   });
   test('messages are validated local drafts and survive restoration', () async {
     final prefs = await SharedPreferences.getInstance();
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     expect(
         await state.social.saveMessage('maya', '  Hello, Maya 👋  '), isTrue);
     expect(await state.social.saveMessage('maya', '   '), isFalse);
     expect(await state.social.saveMessage('maya', 'x' * 1001), isFalse);
     expect(await state.social.saveMessage('unknown', 'Hello'), isFalse);
     expect(await state.social.invite('unknown'), isFalse);
-    final restored = AppState(prefs);
+    final restored = testAppState(prefs);
     final message = restored.social.messagesFor('maya').single;
     expect(message.text, 'Hello, Maya 👋');
     expect(message.id, isNotEmpty);
@@ -40,7 +40,7 @@ void main() {
     expect(restored.social.invitations, isEmpty);
   });
   test('concurrent actions preserve every draft and invitation', () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final results = await Future.wait([
       state.social.saveMessage('maya', 'First thought'),
       state.social.invite('leo'),
@@ -71,7 +71,7 @@ void main() {
         }
       })
     });
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     expect(state.social.invitations, {'maya'});
     expect(state.social.messagesFor('maya').single.text, 'A valid draft');
     expect(state.social.messagesFor('unknown'), isEmpty);
@@ -80,7 +80,7 @@ void main() {
       () async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('unrelated', 'keep');
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     await state.social.invite('maya');
     await state.social.saveMessage('maya', 'Hello');
     expect(await state.reset(), isTrue);

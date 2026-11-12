@@ -1,10 +1,10 @@
+import 'fixtures/app.dart';
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:lunar/lunar.dart';
 import 'package:lunar_social/models/profile.dart';
-import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/bazi.dart' as core;
 import 'package:lunar_social/services/birth_clock.dart';
 import 'package:lunar_social/studio/chart_engine.dart';
@@ -12,7 +12,7 @@ import 'package:lunar_social/studio/interpretation.dart';
 import 'package:lunar_social/studio/seasonal_tools.dart';
 import 'package:lunar_social/studio/studio_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -284,7 +284,7 @@ void main() {
       () async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     addTearDown(state.dispose);
     final own = StudioStore(state);
     addTearDown(own.dispose);

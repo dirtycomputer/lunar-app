@@ -278,7 +278,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get curiosity => 'A little curiosity can be the start of something good.';
 
   @override
-  String get demoNotice => 'Demo community · All profiles are illustrative';
+  String get demoNotice => 'Synthetic profiles · Stored in a database';
 
   @override
   String harmonyPct(int n) {
@@ -548,7 +548,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get guideCommunityTitle => 'Is this a live dating community?';
 
   @override
-  String get guideCommunityBody => 'This first version is an interactive, local demo. The people shown are fictional profiles paired with stock photographs. You can explore charts, filter recommendations, and save connections on this device. Accounts, messages, verification, and a real community will be part of a future backend integration.';
+  String get guideCommunityBody => 'Explore 1,000 synthetic adults stored in a shared database. Profiles use initials rather than real photographs. You can filter recommendations and save profiles on this device. Invitations, drafts and reports remain local; real accounts, messaging and moderation are not available.';
 
   @override
   String get digDeeper => 'DIG DEEPER';
@@ -578,7 +578,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyTitle => 'Privacy & data';
 
   @override
-  String get privacyBody1 => 'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.';
+  String get privacyBody1 => 'Synthetic catalog profiles are stored in a public database. Your saves, invitations and local message drafts stay on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.';
 
   @override
   String get privacyBody2 => 'Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.';
@@ -1205,7 +1205,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get journeyNewEncounter => 'New encounter';
 
   @override
-  String get journeyDemoProfile => 'Sample profile';
+  String get journeyDemoProfile => 'Synthetic profile';
 
   @override
   String get journeyShort => 'Journey';
@@ -1223,7 +1223,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get releasePreviewTitle => 'About this release';
 
   @override
-  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+  String get releasePreviewBody => 'Charts and AI readings are available. The database holds 1,000 synthetic profiles. Invitations, messages and reports stay on this device and are not delivered.';
 
   @override
   String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
@@ -1366,4 +1366,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get flowReadingDetails => 'Read the details';
+
+  @override
+  String get catalogLoading => 'Loading profiles…';
+
+  @override
+  String get catalogLoadError => 'Could not load profiles. Try again.';
+
+  @override
+  String catalogCount(int n) {
+    return '$n profiles';
+  }
+
+  @override
+  String get catalogMore => 'Show more';
+
+  @override
+  String get catalogLanguages => 'Languages';
+
+  @override
+  String get genderNonBinary => 'Non-binary';
 }

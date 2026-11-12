@@ -1,3 +1,4 @@
+import 'fixtures/app.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -6,10 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/main.dart';
 import 'package:lunar_social/models/profile.dart';
-import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/chart_assistant.dart';
 import 'package:lunar_social/studio/chart_engine.dart';
 import 'package:lunar_social/studio/interpretation.dart';
@@ -42,7 +42,7 @@ void main() {
   test(
       'retry preserves the original question and context without duplicate turns',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(baseUrl: 'https://example.com/v1', model: 'test'),
@@ -78,7 +78,7 @@ void main() {
   });
 
   test('an offline status check is an explicit retryable failure', () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     var ready = false;
     final agent = ChartAgent(studio,
@@ -103,7 +103,7 @@ void main() {
 
   test('cancel can be retried and a late answer cannot replace the new result',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(baseUrl: 'https://example.com/v1', model: 'test'),
@@ -154,7 +154,7 @@ void main() {
   testWidgets(
       'failed questions expose a retry that replaces the reference answer',
       (tester) async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(baseUrl: 'https://example.com/v1', model: 'test'),

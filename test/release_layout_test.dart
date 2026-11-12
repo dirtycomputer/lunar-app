@@ -1,11 +1,11 @@
+import 'fixtures/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/main.dart';
 import 'package:lunar_social/models/profile.dart';
-import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/intent_flow.dart';
 
 void main() {
@@ -35,7 +35,7 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
       SharedPreferences.setMockInitialValues({});
-      final state = AppState(await SharedPreferences.getInstance());
+      final state = testAppState(await SharedPreferences.getInstance());
       await state.updateProfile('Alex', demoBirth);
       await state.chooseIntent(AppIntent.chart);
       await tester.pumpWidget(MediaQuery(

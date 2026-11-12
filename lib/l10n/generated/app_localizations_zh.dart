@@ -278,7 +278,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get curiosity => '一点点好奇，可能就是美好故事的开端。';
 
   @override
-  String get demoNotice => '演示社区 · 所有资料均为示例';
+  String get demoNotice => '合成人物 · 数据库资料';
 
   @override
   String harmonyPct(int n) {
@@ -548,7 +548,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get guideCommunityTitle => '这是真实的交友社区吗？';
 
   @override
-  String get guideCommunityBody => '当前版本是一个可交互的本地演示。展示的人物均为虚构资料，配以图库照片。你可以在本设备上探索命盘、筛选推荐并保存连接。账号、消息、认证与真实社区将在未来的后端集成中到来。';
+  String get guideCommunityBody => '人物库包含保存在共享数据库中的 1000 份成年合成人物资料，使用姓名头像而不配用真人照片。你可以筛选推荐、在当前设备收藏人物。邀请、草稿和举报仍然保存在本地，暂未开放真人账号、消息发送与人工审核。';
 
   @override
   String get digDeeper => '深入阅读';
@@ -578,7 +578,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privacyTitle => '隐私与数据';
 
   @override
-  String get privacyBody1 => '资料、收藏、邀请和本地对话草稿保存在此设备。问一问的完整对话保留在本次会话中。提问或生成解读时，姓名、出生资料、排盘口径、当前解读及此前完整对话会发送给所选服务，用于排盘校核和模型分析。输入内容不会自动脱敏。服务密钥不包含在这些资料中。重置本地资料不会删除服务商已经收到的内容。 探索进度也保存在本地，包含在资料导出中，并会随本地资料一起清除。';
+  String get privacyBody1 => '合成人物资料保存在公共数据库中。你的出生资料、收藏、邀请和本地消息草稿保存在当前设备。问答历史仅保留在本次会话内。提问或生成解读时，会把姓名、出生资料、排盘口径、当前解读和完整的先前对话发送到所选服务，用于排盘校核和模型分析。输入的文字不会自动脱敏，服务密钥不包含在上下文中。清除本地资料不会删除公共合成人物库或服务提供方的记录。探索进度保存在当前设备，会包含在导出资料中，并随本地资料一起清除。';
 
   @override
   String get privacyBody2 => '本地存储未经加密。在共用设备上使用完毕后，请清除你的数据。清除浏览器或应用数据也会同时移除你的资料。';
@@ -1205,7 +1205,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get journeyNewEncounter => '新的相遇';
 
   @override
-  String get journeyDemoProfile => '示例资料';
+  String get journeyDemoProfile => '合成人物';
 
   @override
   String get journeyShort => '旅程';
@@ -1223,7 +1223,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get releasePreviewTitle => '关于当前版本';
 
   @override
-  String get releasePreviewBody => '可以使用排盘和 AI 解读。人物、邀请、消息和举报是当前设备上的示例体验，不会实际发送消息或提交举报。';
+  String get releasePreviewBody => '排盘和 AI 解读可以使用。数据库保存了 1000 份合成人物资料。邀请、消息草稿和举报仅保存在当前设备，不会实际发送。';
 
   @override
   String get releaseConsentSaveFailed => '资料已保存，但未能保存同意记录，请重试。';
@@ -1366,6 +1366,26 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get flowReadingDetails => '展开解读';
+
+  @override
+  String get catalogLoading => '正在加载人物…';
+
+  @override
+  String get catalogLoadError => '人物资料加载失败，请重试。';
+
+  @override
+  String catalogCount(int n) {
+    return '$n 位人物';
+  }
+
+  @override
+  String get catalogMore => '显示更多';
+
+  @override
+  String get catalogLanguages => '语言';
+
+  @override
+  String get genderNonBinary => '非二元性别';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).

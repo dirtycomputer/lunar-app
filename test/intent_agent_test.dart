@@ -1,3 +1,4 @@
+import 'fixtures/app.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -5,9 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/models/profile.dart';
-import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/chart_assistant.dart';
 import 'package:lunar_social/services/intent_flow.dart';
 import 'package:lunar_social/studio/chart_engine.dart';
@@ -24,17 +24,17 @@ void main() {
   test('intent selection survives restart and privacy reset returns to chooser',
       () async {
     final prefs = await SharedPreferences.getInstance();
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     expect(state.startIntent, isNull);
     expect(await state.chooseIntent(AppIntent.match), isTrue);
-    expect(AppState(prefs).startIntent, AppIntent.match);
+    expect(testAppState(prefs).startIntent, AppIntent.match);
     await state.reset();
-    expect(AppState(prefs).startIntent, isNull);
+    expect(testAppState(prefs).startIntent, isNull);
   });
   test(
       'random matching stays within eligible people and avoids consecutive repeats',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final picker = RandomMatchPicker(random: Random(4));
     final eligible = state.matches.take(3).toList();
     String? previous;
@@ -62,7 +62,7 @@ void main() {
   test(
       'an unconfigured model gives a labelled calculated reference without a completion request',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     var posts = 0;
     final agent = ChartAgent(studio,
@@ -82,7 +82,7 @@ void main() {
   test(
       'professional model Q&A includes the question, prior turns and calculated evidence',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(
@@ -124,7 +124,7 @@ void main() {
   test(
       'a long conversation retains its first question and original reading context',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(baseUrl: 'https://example.com/v1', model: 'test'),
@@ -168,7 +168,7 @@ void main() {
     state.dispose();
   });
   test('cancelled answers do not arrive in a new conversation', () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(
@@ -191,7 +191,7 @@ void main() {
   });
   test('general Agent questions work before birth details are entered',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     final agent = ChartAgent(studio,
         clientFactory: () => MockClient(
@@ -204,7 +204,7 @@ void main() {
     state.dispose();
   });
   test('connected general Q&A does not manufacture a personal chart', () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await studio.configure(
         const ModelConfig(

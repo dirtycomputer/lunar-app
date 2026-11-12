@@ -2,6 +2,21 @@
 
 This update uses a repeatable use → feedback → fix → regression loop. The shipped channel remains **preview**. Passing tests or deploying the website does not establish readiness for a real dating community.
 
+## Persistent people catalog — 2026-11-12
+
+The Vercel integration endpoint still returns `403 forbidden`, so the existing public Site now provisions Cloudflare D1 instead. Native database inspection confirms the `DB` binding and real `catalog_people` / `catalog_seed_runs` tables. The authenticated bootstrap stored 1,000 rows, and subsequent live cursor traversal verifies every record against the server-only seed. SQL statistics report 40 countries (25 people each), six continents, ages 18–75, 400 women, 400 men, 200 non-binary adults and 100 unknown birth times. They are explicitly synthetic, not registered members. The dataset survives redeployment unchanged; evidence is in `output/catalog-live-report.json`.
+
+Production Flutter now loads the D1 API without a local person-list fallback. The six historical people live only in test fixtures. Pagination validates revision, count, IDs, chart convention, adult ages and birth clocks before publishing any result. Loading/retry states replace misleading empty or hard-coded results. The UI renders 20 rows at a time while ranking and random selection use the full eligible catalog; country options are data-driven. Public records use initials, and local saved IDs/drafts survive asynchronous catalog loading without exposing unknown profiles. Personal deletion leaves the public synthetic catalog intact.
+
+| Feedback found during the loop | Fix and evidence |
+| --- | --- |
+| Oslo in April 1964 resolved to different historical DST offsets in the client and Python databases, changing an hour pillar. | Save the Python-resolved birth instant alongside original inputs; validate/restore it in Flutter. All 1,000 snapshots match; Python independently recalculates all 1,000 and ignores spoofed client clock metadata during analysis. |
+| A reward snackbar intercepted the bottom “Show more” button after closing an encounter. | Use the existing animated spark badge for reward feedback. Desktop and 320px/200% interaction tests close a profile and successfully load the next 20 rows. |
+| Larger text and longer catalog names covered the profile close control. | The hero grows with text size and constrains the name. The same close/pagination regression runs at 200%; full catalog renderer walkthroughs also cover Chinese and phone layouts. |
+| Removing a runtime seed key did not reliably revoke an existing deployed binding. | Normal Worker builds reject seeding at a code gate regardless of token bindings; only deliberate bootstrap builds enable it. The SQL tests cover this retained-token case; no public record editor or arbitrary SQL is added. |
+
+Verification includes **102 Flutter tests**, **23 Python tests**, **11 file-backed SQLite/API tests**, and four walkthroughs/16 captures using the records fetched from the live D1 API. The database export passes SQLite integrity and reopen/count checks. Browser interaction remains unverified in this managed environment. Native compilation runs in CI. Real accounts, mutual messaging, moderation and production operator requirements remain separate open gates.
+
 ## UI design pass — 2026-11-12
 
 Applied the [official frontend-design guidance](https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md), with the palette, typography, layout sketch and critique recorded before implementation in [ui-design.md](ui-design.md). The UI retains the two primary routes, secondary Agent, sample-community notices and optional garden.

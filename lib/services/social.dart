@@ -42,7 +42,11 @@ class LocalSocialStore extends ChangeNotifier {
 
   int _sequence = 0;
 
-  LocalSocialStore(this.preferences, {required this.knownIds}) {
+  LocalSocialStore(this.preferences,
+      {required this.knownIds, bool allowUnresolved = false}) {
+    bool restorable(String id) =>
+        knownIds.contains(id) ||
+        (allowUnresolved && RegExp(r'^[a-zA-Z0-9_-]{1,48}$').hasMatch(id));
     try {
       final raw = storage.read<String>(storageKey);
       if (raw == null) return;
@@ -50,11 +54,11 @@ class LocalSocialStore extends ChangeNotifier {
       if (value['version'] != 1) return;
       _invitations = (value['invitations'] as List)
           .whereType<String>()
-          .where(knownIds.contains)
+          .where(restorable)
           .toSet();
       final threads = value['threads'] as Map<String, dynamic>;
       for (final entry in threads.entries) {
-        if (!knownIds.contains(entry.key) || entry.value is! List) continue;
+        if (!restorable(entry.key) || entry.value is! List) continue;
         final messages = <LocalMessage>[];
         for (final record in entry.value as List) {
           try {
@@ -75,10 +79,14 @@ class LocalSocialStore extends ChangeNotifier {
     }
   }
 
-  Set<String> get invitations => UnmodifiableSetView(_invitations);
-  Iterable<String> get conversationIds => _threads.keys;
+  Set<String> get invitations =>
+      UnmodifiableSetView(_invitations.where(knownIds.contains).toSet());
+  Iterable<String> get conversationIds =>
+      _threads.keys.where(knownIds.contains);
   List<LocalMessage> messagesFor(String id) =>
-      List.unmodifiable(_threads[id] ?? const <LocalMessage>[]);
+      List.unmodifiable(knownIds.contains(id)
+          ? (_threads[id] ?? const <LocalMessage>[])
+          : const <LocalMessage>[]);
   Map<String, dynamic> toJson() => _encode(_invitations, _threads);
 
   Map<String, dynamic> _encode(

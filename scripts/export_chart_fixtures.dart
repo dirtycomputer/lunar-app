@@ -1,6 +1,7 @@
+import '../test/fixtures/people.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/models/profile.dart';
 import 'package:lunar_social/services/birth_clock.dart';
 import 'package:lunar_social/studio/chart_engine.dart';

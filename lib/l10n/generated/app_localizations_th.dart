@@ -1205,7 +1205,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get journeyNewEncounter => 'New encounter';
 
   @override
-  String get journeyDemoProfile => 'Sample profile';
+  String get journeyDemoProfile => 'Synthetic profile';
 
   @override
   String get journeyShort => 'Journey';
@@ -1223,7 +1223,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get releasePreviewTitle => 'About this release';
 
   @override
-  String get releasePreviewBody => 'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.';
+  String get releasePreviewBody => 'Charts and AI readings are available. The database holds 1,000 synthetic profiles. Invitations, messages and reports stay on this device and are not delivered.';
 
   @override
   String get releaseConsentSaveFailed => 'Your details were saved, but the consent record could not be saved. Please try again.';
@@ -1366,4 +1366,24 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get flowReadingDetails => 'Read the details';
+
+  @override
+  String get catalogLoading => 'Loading profiles…';
+
+  @override
+  String get catalogLoadError => 'Could not load profiles. Try again.';
+
+  @override
+  String catalogCount(int n) {
+    return '$n profiles';
+  }
+
+  @override
+  String get catalogMore => 'Show more';
+
+  @override
+  String get catalogLanguages => 'Languages';
+
+  @override
+  String get genderNonBinary => 'Non-binary';
 }

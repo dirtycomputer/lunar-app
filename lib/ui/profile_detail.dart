@@ -6,6 +6,7 @@ import '../services/bazi.dart' as bazi;
 import '../services/platform_contracts.dart';
 import '../studio/glossary.dart';
 import 'design.dart';
+import 'profile_avatar.dart';
 import 'social_pages.dart';
 
 String localizedReasonLabel(AppLocalizations l10n, ReportReason r) =>
@@ -78,11 +79,18 @@ class _ProfileDetail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                         SizedBox(
-                            height: 265,
+                            height: 265 *
+                                (MediaQuery.textScalerOf(context).scale(16) /
+                                        16)
+                                    .clamp(1.0, 2.0),
                             child: Stack(fit: StackFit.expand, children: [
-                              Image.asset(p.image,
-                                  fit: BoxFit.cover,
-                                  alignment: const Alignment(0, -.5)),
+                              ProfileAvatar(p,
+                                  width: double.infinity,
+                                  height: 265 *
+                                      (MediaQuery.textScalerOf(context)
+                                                  .scale(16) /
+                                              16)
+                                          .clamp(1.0, 2.0)),
                               const DecoratedBox(
                                   decoration: BoxDecoration(
                                       gradient: LinearGradient(
@@ -122,12 +130,15 @@ class _ProfileDetail extends StatelessWidget {
                                       icon: const Icon(Icons.close, size: 20))),
                               Positioned(
                                   left: 26,
+                                  right: 26,
                                   bottom: 22,
                                   child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text('${p.name}, ${p.age}',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                                 fontSize: 32,
                                                 color: Colors.white,
@@ -180,6 +191,15 @@ class _ProfileDetail extends StatelessWidget {
                                           fontSize: 13,
                                           color: muted,
                                           height: 1.8)),
+                                  if (p.languages.isNotEmpty) ...[
+                                    const SizedBox(height: 16),
+                                    Text(
+                                        '${l10n.catalogLanguages}: ${p.languages.map(catalogLanguageName).join(', ')}',
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            color: ink,
+                                            height: 1.6)),
+                                  ],
                                   const SizedBox(height: 16),
                                   Wrap(
                                       spacing: 8,

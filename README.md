@@ -20,7 +20,7 @@ flutter build web --release --web-renderer canvaskit --no-web-resources-cdn --pw
 ./scripts/preview.sh
 ```
 
-Open http://127.0.0.1:5199 after building. Web renderer resources, fonts, and profile photos are bundled locally.
+Open http://127.0.0.1:5199 after building. Web renderer resources and fonts are bundled locally. The people catalog loads from the hosted D1 API, including on iOS and Android; it has no local profile-list fallback.
 
 ## Chart Studio
 
@@ -46,6 +46,8 @@ GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build
 
 ## Working features
 
+- A persistent Cloudflare D1 catalog with 1,000 explicitly synthetic adults across 40 countries, six continents and ages 18–75. Public SQL-backed list/detail/statistics APIs support paging and filters. Catalog records use initials and independently verified lunar-python chart snapshots, including historical birth instants. See [catalog operations](catalog/README.md).
+
 - Optional Element Garden: an original five-habitat map, a tap/drag supporting-cycle puzzle, waking guardians, a five-seal collection and readable field notes. Each of five links saves immediately; old rewards migrate and replay never duplicates sparks. All three discoveries remain freely selectable and clear with local data.
 
 - First-use chooser with two primary cards, My reading and Match, plus a secondary Ask Agent action. The chosen starting task is remembered.
@@ -68,7 +70,7 @@ GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build
 
 ## Scope
 
-This version is a working prototype with six fictional adults and stock photos, local social interactions, and no live community or messaging transport. Local profiles and drafts use unencrypted SharedPreferences. Agent history stays in memory for the session and resets when birth details change or local data is cleared. Exploration progress is local, exported and cleared with local data; the question context includes learning progress as app context. Sparks do not alter chart calculations or recommendation scores.
+This version is a preview with 1,000 synthetic profiles in a real hosted D1 database, device-local social interactions, and no live community or messaging transport. Your own birth profile and local drafts use unencrypted SharedPreferences. Public catalog data is separate from those private device records; clearing local data does not remove the shared synthetic catalog. Agent history stays in memory for the session and resets when birth details change or local data is cleared. Exploration progress is local, exported and cleared with local data; the question context includes learning progress as app context. Sparks do not alter chart calculations or recommendation scores.
 
 The new analysis service verifies birth charts with lunar-python before sending verified evidence and the user's complete session context to DeepSeek-V4.1-Flash-1017 (official API name `deepseek-flash`, 1M context, maximum reasoning). Context includes name, birth inputs, chart convention, current reading, and all earlier turns; typed text is not automatically redacted. Service keys are server-only. See [chart service setup, deployment protection, and limits](server/README.md). The public App uses the Production chart service; Preview backend deployments retain their access protection.
 
@@ -115,7 +117,8 @@ The earlier model-integration flows were exercised with Playwright in Chromium a
 
 ## Structure
 
-- `lib/models/profile.dart`: birth data, global birthplace presets, fictional profiles.
+- `lib/models/profile.dart`: birth data, global birthplace presets and validated catalog records. Historical synthetic births retain the server-resolved instant; the analysis server independently recalculates inputs.
+- `lib/services/people_repository.dart`: bounded D1 API pagination and complete-snapshot validation; six-person fixtures are test-only.
 - `lib/services/bazi.dart`: chart calculation and explainable ranking.
 - `lib/services/app_state.dart`: reactive app state and validated profile updates.
 - `lib/services/device_storage.dart`: shared write ordering, crash-safe deletion intent and typed reads.

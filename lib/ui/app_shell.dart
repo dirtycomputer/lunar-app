@@ -16,6 +16,7 @@ import 'intent_pages.dart';
 import 'journey.dart';
 import 'language_picker.dart';
 import 'match_card.dart';
+import 'profile_avatar.dart';
 import 'profile_editor.dart';
 import 'profile_detail.dart';
 import 'secondary_pages.dart';
@@ -40,7 +41,8 @@ class _AppShellState extends State<AppShell> {
   bool outlook = false;
   OutlookPeriod period = OutlookPeriod.month;
   String gender = 'Everyone', region = 'Worldwide';
-  RangeValues ageRange = const RangeValues(18, 60);
+  RangeValues ageRange = const RangeValues(18, 80);
+  int visibleMatches = 20;
   double minScore = 0;
   late int generation;
   late String profileSignature;
@@ -111,8 +113,6 @@ class _AppShellState extends State<AppShell> {
     final l = AppLocalizations.of(context)!;
     if (earned == null) {
       showToast(context, l.couldNotSave);
-    } else if (earned > 0 && !Navigator.of(context).canPop()) {
-      showToast(context, l.journeyReward(earned));
     }
   }
 
@@ -520,7 +520,7 @@ class _AppShellState extends State<AppShell> {
         return !state.hidden.contains(p.id) &&
             (matchTab != 1 || state.saved.contains(p.id)) &&
             (gender == 'Everyone' || p.gender == gender) &&
-            (region == 'Worldwide' || p.location.endsWith(region)) &&
+            (region == 'Worldwide' || p.countryName == region) &&
             p.age >= ageRange.start &&
             p.age <= ageRange.end &&
             m.score >= minScore &&
@@ -554,14 +554,38 @@ class _AppShellState extends State<AppShell> {
         search.clear();
         gender = 'Everyone';
         region = 'Worldwide';
-        ageRange = const RangeValues(18, 60);
+        ageRange = const RangeValues(18, 80);
+        visibleMatches = 20;
         minScore = 0;
       });
 
   Widget _matches() {
     final l = AppLocalizations.of(context)!;
+    if (state.people.isEmpty && state.catalogLoading) {
+      return Column(children: [
+        const LinearProgressIndicator(),
+        const SizedBox(height: 24),
+        Text(l.catalogLoading),
+      ]);
+    }
+    if (state.people.isEmpty && state.catalogError != null) {
+      return _empty(l.catalogLoadError,
+          onTap: state.refreshCatalog, action: l.releaseRetry);
+    }
     final list = recommendations;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      if (state.catalogError != null)
+        Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Wrap(
+                spacing: 12,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(l.catalogLoadError),
+                  TextButton(
+                      onPressed: state.refreshCatalog,
+                      child: Text(l.releaseRetry))
+                ])),
       SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(children: [
@@ -600,7 +624,7 @@ class _AppShellState extends State<AppShell> {
           final searchBox = TextField(
               key: const ValueKey('discovery-search'),
               controller: search,
-              onChanged: (_) => setState(() {}),
+              onChanged: (_) => setState(() => visibleMatches = 20),
               style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                   hintText: l.socialSearchHint,
@@ -653,12 +677,22 @@ class _AppShellState extends State<AppShell> {
               onTap: resetFilters,
               action: l.flowResetFilters)
         else ...[
-          Text(l.demoNotice,
-              style: const TextStyle(fontSize: 11, color: muted)),
+          Wrap(spacing: 16, runSpacing: 8, children: [
+            Text(l.demoNotice,
+                style: const TextStyle(fontSize: 11, color: muted)),
+            Text(l.catalogCount(list.length),
+                style: const TextStyle(fontSize: 11, color: muted)),
+          ]),
           const SizedBox(height: 12),
-          for (final m in list)
+          for (final m in list.take(visibleMatches))
             Padding(
                 padding: const EdgeInsets.only(bottom: 12), child: _person(m)),
+          if (list.length > visibleMatches)
+            Center(
+                child: OutlinedButton(
+                    key: const ValueKey('catalog-more'),
+                    onPressed: () => setState(() => visibleMatches += 20),
+                    child: Text(l.catalogMore))),
         ],
       ] else
         _socialList(),
@@ -733,8 +767,8 @@ class _AppShellState extends State<AppShell> {
                         child: Row(children: [
                           ClipRRect(
                               borderRadius: BorderRadius.circular(13),
-                              child: Image.asset(m.person.image,
-                                  width: 52, height: 59, fit: BoxFit.cover)),
+                              child: ProfileAvatar(m.person,
+                                  width: 52, height: 59)),
                           const SizedBox(width: 15),
                           Expanded(
                               child: Column(
@@ -775,6 +809,7 @@ class _AppShellState extends State<AppShell> {
   String _genderLabel(AppLocalizations l, String g) => switch (g) {
         'Women' => l.genderWomen,
         'Men' => l.genderMen,
+        'Non-binary' => l.genderNonBinary,
         _ => l.genderEveryone
       };
   String _regionLabel(AppLocalizations l, String r) => switch (r) {
@@ -783,7 +818,8 @@ class _AppShellState extends State<AppShell> {
         'France' => l.regionFrance,
         'Australia' => l.regionAustralia,
         'Singapore' => l.regionSingapore,
-        _ => l.regionWorldwide
+        'Worldwide' => l.regionWorldwide,
+        _ => r
       };
   Future<void> _showFilters() async {
     final l10n = AppLocalizations.of(context)!;
@@ -810,7 +846,12 @@ class _AppShellState extends State<AppShell> {
                             const SizedBox(height: 10),
                             Wrap(
                                 spacing: 8,
-                                children: ['Everyone', 'Women', 'Men']
+                                children: [
+                                  'Everyone',
+                                  'Women',
+                                  'Men',
+                                  'Non-binary'
+                                ]
                                     .map((g) => ChoiceChip(
                                         label: Text(_genderLabel(l10n, g)),
                                         selected: draftGender == g,
@@ -825,15 +866,16 @@ class _AppShellState extends State<AppShell> {
                                     InputDecoration(labelText: l10n.location),
                                 items: [
                                   'Worldwide',
-                                  'USA',
-                                  'UK',
-                                  'France',
-                                  'Australia',
-                                  'Singapore'
+                                  ...({
+                                    ...state.people.map((p) => p.countryName)
+                                  }.toList()
+                                    ..sort())
                                 ]
                                     .map((r) => DropdownMenuItem(
                                         value: r,
-                                        child: Text(_regionLabel(l10n, r))))
+                                        child: Text(_regionLabel(l10n, r),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis)))
                                     .toList(),
                                 onChanged: (r) =>
                                     update(() => draftRegion = r!)),
@@ -865,7 +907,7 @@ class _AppShellState extends State<AppShell> {
                         onPressed: () => update(() {
                               draftGender = 'Everyone';
                               draftRegion = 'Worldwide';
-                              draftAge = const RangeValues(18, 60);
+                              draftAge = const RangeValues(18, 80);
                               draftScore = 0;
                             }),
                         child: Text(l10n.reset)),
@@ -876,6 +918,7 @@ class _AppShellState extends State<AppShell> {
                             region = draftRegion;
                             ageRange = draftAge;
                             minScore = draftScore;
+                            visibleMatches = 20;
                           });
                           Navigator.pop(context);
                         },

@@ -3,6 +3,7 @@ import '../l10n/generated/app_localizations.dart';
 import '../services/bazi.dart' as bazi;
 import '../services/intent_flow.dart';
 import 'design.dart';
+import 'profile_avatar.dart';
 
 class MatchListTile extends StatelessWidget {
   final bazi.MatchResult match;
@@ -56,11 +57,11 @@ class MatchListTile extends StatelessWidget {
                           children: [
                             ClipRRect(
                                 borderRadius: BorderRadius.circular(18),
-                                child: Image.asset(p.image,
-                                    width: compact ? 76 : 104,
-                                    height: compact ? 108 : 128,
-                                    fit: BoxFit.cover,
-                                    alignment: const Alignment(0, -.3))),
+                                child: ProfileAvatar(
+                                  p,
+                                  width: compact ? 76 : 104,
+                                  height: compact ? 108 : 128,
+                                )),
                             SizedBox(width: compact ? 14 : 24),
                             Expanded(
                                 child: Column(

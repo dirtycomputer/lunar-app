@@ -122,7 +122,13 @@ class BaziService {
   }
 
   MatchResult match(EnergyChart mine, Person person) {
-    final other = calculate(person.birth);
+    final snapshot = person.catalogChart;
+    final other = snapshot == null
+        ? calculate(person.birth)
+        : EnergyChart([
+            for (var i = 0; i < snapshot.pillars.length; i++)
+              Pillar(['Year', 'Month', 'Day', 'Hour'][i], snapshot.pillars[i])
+          ], person.birth.timeKnown, snapshot.solarTime);
     final combined = List.generate(
         5, (i) => (mine.distribution[i] + other.distribution[i]) / 2);
     // Normalized entropy measures the balance of the combined visible elements.
