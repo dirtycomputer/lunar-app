@@ -1,5 +1,14 @@
 # Verification record
 
+## Frontend design UI update — 2026-11-12
+
+- Followed the official frontend-design skill: deliberate cobalt/cloud/jade palette, bundled Manrope/Noto typography, two-route layout sketch and pre-implementation critique in [ui-design.md](ui-design.md).
+- `flutter analyze` is clean; all **94 Flutter tests** pass. Reading now reveals its conclusion first; expand/collapse coverage checks the full remaining explanation is accessible. Existing full-context questions, keyboard layouts, saved progress, matching, reset and retry checks remain active.
+- `flutter test --update-goldens test/render/capture_ui.dart test/render/capture_garden.dart` passes **10 walkthroughs**, producing **75 actual Flutter renderer captures**. Core pages cover 1440×1000 desktop, 390×844 phone, 320×740 / 200% text, Chinese phone and 844×390 / 120% landscape. The complete garden also covers legacy progress. Portraits and all font weights are loaded before capture.
+- Observed word splitting at large text and excessive mobile reading length were fixed and re-rendered. Selected evidence: `output/flutter-render/ui-*.png`; logs: `output/ui-render-results.txt`, `output/test-results.txt`, `output/ui-web-build.txt`.
+- Web release uses the existing public Production API and local CanvasKit/fonts. `python3 scripts/check_release.py --channel preview` passes. Backend/dependency configuration is unchanged; final native/Python checks are visible in the PR's Quality workflow.
+- Browser QA is not performed: the current managed executor has no `cua_repl.js`/supported browser-control tool. Per the Sites workflow no alternate server/browser path is started. Native compilation is checked by CI, not by this Linux executor. Real-community production gates remain in place.
+
 ## Element Garden redesign — 2026-11-11
 
 - `flutter analyze`: no issues. All **94 Flutter tests** pass. The full supporting cycle is exercised for every starting element, with atomic step/seal/reward persistence, migration, resume, replay, failure recovery and clearing. Widget coverage verifies tap and drag, unlocked field notes, the phone inventory above Continue, and the narrow larger-text route through the sample profile.

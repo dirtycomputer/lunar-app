@@ -646,5 +646,6 @@
   "gardenSavedCycle": "Saved cycle · {name}",
   "@gardenSavedCycle": {"placeholders": {"name": {"type": "String"}}},
   "gardenShort": "Garden",
-  "gardenCollectSeals": "Collect the five seals"
+  "gardenCollectSeals": "Collect the five seals",
+  "flowReadingDetails": "Read the details"
 }

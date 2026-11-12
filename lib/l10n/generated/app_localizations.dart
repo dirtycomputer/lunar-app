@@ -2741,6 +2741,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Collect the five seals'**
   String get gardenCollectSeals;
+
+  /// No description provided for @flowReadingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the details'**
+  String get flowReadingDetails;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

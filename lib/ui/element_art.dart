@@ -179,6 +179,90 @@ class PortalArt extends StatelessWidget {
               ])));
 }
 
+/// Entrance illustrations use the same companions as the playable garden.
+class EntranceArt extends StatelessWidget {
+  final bool matching;
+  const EntranceArt({super.key, required this.matching});
+  @override
+  Widget build(BuildContext context) => AspectRatio(
+      aspectRatio: 1.15,
+      child: LayoutBuilder(builder: (context, c) {
+        final w = c.maxWidth;
+        return Stack(children: [
+          Positioned.fill(
+              child: CustomPaint(painter: _EntrancePainter(matching))),
+          if (matching) ...[
+            Positioned(
+                left: w * .02,
+                top: c.maxHeight * .10,
+                child: Transform.rotate(
+                    angle: -.12,
+                    child: ElementSpirit(
+                        element: bazi.Element.water, size: w * .56))),
+            Positioned(
+                right: 0,
+                bottom: c.maxHeight * .04,
+                child: Transform.rotate(
+                    angle: .1,
+                    child: ElementSpirit(
+                        element: bazi.Element.fire, size: w * .52))),
+          ] else
+            Positioned(
+                left: w * .21,
+                top: c.maxHeight * .06,
+                child:
+                    ElementSpirit(element: bazi.Element.wood, size: w * .64)),
+        ]);
+      }));
+}
+
+class _EntrancePainter extends CustomPainter {
+  final bool matching;
+  const _EntrancePainter(this.matching);
+  @override
+  void paint(Canvas c, Size s) {
+    final center = Offset(s.width * .5, s.height * .5);
+    final paint = Paint();
+    if (matching) {
+      c.drawCircle(Offset(s.width * .31, s.height * .39), s.width * .28,
+          paint..color = Colors.white.withValues(alpha: .7));
+      c.drawCircle(Offset(s.width * .75, s.height * .64), s.width * .25,
+          paint..color = const Color(0xFFD8E6FD));
+      final thread = Path()
+        ..moveTo(s.width * .16, s.height * .72)
+        ..cubicTo(s.width * .25, s.height * .96, s.width * .70, s.height * .96,
+            s.width * .86, s.height * .44);
+      c.drawPath(
+          thread,
+          paint
+            ..color = blue.withValues(alpha: .28)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2
+            ..strokeCap = StrokeCap.round);
+    } else {
+      c.drawCircle(center, s.width * .40,
+          paint..color = Colors.white.withValues(alpha: .10));
+      c.drawCircle(
+          center,
+          s.width * .32,
+          paint
+            ..color = Colors.white.withValues(alpha: .3)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1);
+      paint.style = PaintingStyle.fill;
+      for (var i = 0; i < 4; i++) {
+        final a = -math.pi / 2 + i * math.pi / 2;
+        final p = center + Offset(math.cos(a), math.sin(a)) * s.width * .40;
+        c.drawCircle(p, s.width * .045,
+            paint..color = Colors.white.withValues(alpha: .85));
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(_EntrancePainter old) => old.matching != matching;
+}
+
 class _PortalPainter extends CustomPainter {
   final bool matching;
   const _PortalPainter(this.matching);

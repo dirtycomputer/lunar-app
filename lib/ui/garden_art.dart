@@ -6,7 +6,7 @@ import '../l10n/bazi_labels.dart';
 import 'design.dart';
 import 'element_art.dart';
 
-const gardenPaper = Color(0xFFFCFAF2);
+const gardenPaper = Color(0xFFF3F7F4);
 const gardenInk = Color(0xFF294E43);
 const gardenGold = Color(0xFFC58B37);
 const gardenPositions = [

@@ -23,109 +23,81 @@ class IntentChooser extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     return Scaffold(
-        backgroundColor: canvas,
         body: SafeArea(
             child: Column(children: [
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 22),
-              child: Row(children: [
-                const FlowerLogo(size: 29),
-                const SizedBox(width: 10),
-                const Expanded(
-                    child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: Alignment.centerLeft,
-                        child: Text('FatePair',
-                            textScaler: TextScaler.noScaling,
-                            style: TextStyle(
-                                fontSize: 27,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: -1.3)))),
-                if (journeyAction != null) ...[
-                  journeyAction!,
-                  const SizedBox(width: 8)
-                ],
-                IconButton(
-                    tooltip: l.flowSettings,
-                    onPressed: onSettings,
-                    icon: const Icon(Icons.settings_outlined, size: 22))
-              ])),
-          Expanded(
-              child: Center(
-                  child: SingleChildScrollView(
-                      padding: const EdgeInsets.fromLTRB(24, 24, 24, 48),
-                      child: ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 920),
-                          child: LayoutBuilder(builder: (context, c) {
-                            final compact = c.maxWidth < 720;
-                            return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(l.journeyChoose,
-                                      style: TextStyle(
-                                          fontSize: compact ? 34 : 46,
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: -1.6,
-                                          height: 1.18)),
-                                  SizedBox(height: compact ? 28 : 48),
-                                  if (compact)
-                                    ...[
-                                      AppIntent.chart,
-                                      AppIntent.match
-                                    ].map((i) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 15),
-                                        child: _IntentCard(
-                                            intent: i,
-                                            title: switch (i) {
-                                              AppIntent.chart =>
-                                                l.flowSelfIntent,
-                                              AppIntent.match => l.flowMatch,
-                                              AppIntent.agent => l.flowAskAgent
-                                            },
-                                            compact: true,
-                                            onTap: () => onChoose(i))))
-                                  else
-                                    Row(children: [
-                                      for (final i in [
-                                        AppIntent.chart,
-                                        AppIntent.match
-                                      ])
-                                        Expanded(
-                                            child: Padding(
-                                                padding:
-                                                    EdgeInsetsDirectional.only(
-                                                        end:
-                                                            i == AppIntent.match
-                                                                ? 0
-                                                                : 20),
-                                                child: _IntentCard(
-                                                    intent: i,
-                                                    title: switch (i) {
-                                                      AppIntent.chart =>
-                                                        l.flowSelfIntent,
-                                                      AppIntent.match =>
-                                                        l.flowMatch,
-                                                      AppIntent.agent =>
-                                                        l.flowAskAgent
-                                                    },
-                                                    onTap: () => onChoose(i))))
-                                    ]),
-                                  const SizedBox(height: 24),
-                                  OutlinedButton.icon(
-                                      key: const ValueKey('intent-agent'),
-                                      onPressed: () =>
-                                          onChoose(AppIntent.agent),
-                                      icon: const Icon(Icons.forum_outlined,
-                                          size: 18),
-                                      label: Text(l.flowAskAgent)),
-                                ]);
-                          }))))),
-        ])));
+      Center(
+          child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1220),
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 20, 16, 14),
+                  child: Row(children: [
+                    const Expanded(
+                        child: Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: FittedBox(
+                                fit: BoxFit.scaleDown, child: BrandMark()))),
+                    if (journeyAction != null) ...[
+                      journeyAction!,
+                      const SizedBox(width: 8)
+                    ],
+                    IconButton(
+                        tooltip: l.flowSettings,
+                        onPressed: onSettings,
+                        icon: const Icon(Icons.settings_outlined, size: 22))
+                  ])))),
+      Expanded(
+          child: Center(
+              child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(24, 32, 24, 48),
+                  child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1024),
+                      child: LayoutBuilder(builder: (context, c) {
+                        final compact = c.maxWidth < 720;
+                        Widget card(AppIntent i) => _IntentCard(
+                            intent: i,
+                            title: i == AppIntent.chart
+                                ? l.flowSelfIntent
+                                : l.flowMatch,
+                            compact: compact,
+                            onTap: () => onChoose(i));
+                        return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(l.journeyChoose,
+                                  style: TextStyle(
+                                      fontSize: compact ? 36 : 52,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: -1.8,
+                                      height: 1.15)),
+                              SizedBox(height: compact ? 28 : 36),
+                              if (compact) ...[
+                                card(AppIntent.chart),
+                                const SizedBox(height: 16),
+                                card(AppIntent.match),
+                              ] else
+                                Row(children: [
+                                  Expanded(child: card(AppIntent.chart)),
+                                  const SizedBox(width: 24),
+                                  Expanded(child: card(AppIntent.match))
+                                ]),
+                              const SizedBox(height: 24),
+                              OutlinedButton.icon(
+                                  key: const ValueKey('intent-agent'),
+                                  onPressed: () => onChoose(AppIntent.agent),
+                                  style: OutlinedButton.styleFrom(
+                                      side: BorderSide.none,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4, vertical: 12)),
+                                  icon: const Icon(Icons.forum_outlined,
+                                      size: 19),
+                                  label: Text(l.flowAskAgent)),
+                            ]);
+                      }))))),
+    ])));
   }
 }
 
-class _IntentCard extends StatefulWidget {
+class _IntentCard extends StatelessWidget {
   final AppIntent intent;
   final String title;
   final VoidCallback onTap;
@@ -134,119 +106,71 @@ class _IntentCard extends StatefulWidget {
       {required this.intent,
       required this.title,
       required this.onTap,
-      this.compact = false});
-  @override
-  State<_IntentCard> createState() => _IntentCardState();
-}
-
-class _IntentCardState extends State<_IntentCard> {
-  bool hover = false, pressed = false;
+      required this.compact});
   @override
   Widget build(BuildContext context) {
-    final i = widget.intent.index, color = [green, blue, violet][i];
-    return MouseRegion(
-        onEnter: (_) => setState(() => hover = true),
-        onExit: (_) => setState(() => hover = false),
-        child: AnimatedContainer(
-            duration: MediaQuery.of(context).disableAnimations
-                ? Duration.zero
-                : const Duration(milliseconds: 160),
-            transform: Matrix4.translationValues(
-                0,
-                pressed
-                    ? 4
-                    : hover
-                        ? -4
-                        : 0,
-                0),
-            height: widget.compact
-                ? 166 *
-                    (MediaQuery.textScalerOf(context).scale(14) / 14)
-                        .clamp(1.0, 3.0)
-                : 332,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                    color: hover ? color.withValues(alpha: .4) : line),
-                boxShadow: [
-                  BoxShadow(
-                      color: color.withValues(alpha: .18),
-                      offset: Offset(0, pressed ? 2 : 6),
-                      blurRadius: hover ? 12 : 0)
-                ]),
-            child: Material(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(25),
-                child: InkWell(
-                    key: ValueKey('intent-${widget.intent.name}'),
-                    onTap: widget.onTap,
-                    onTapDown: (_) => setState(() => pressed = true),
-                    onTapUp: (_) => setState(() => pressed = false),
-                    onTapCancel: () => setState(() => pressed = false),
-                    borderRadius: BorderRadius.circular(25),
-                    child: Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: widget.compact
-                            ? Row(children: [
-                                Expanded(
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                      Text('0${i + 1}',
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              color: color,
-                                              fontWeight: FontWeight.w600)),
-                                      Text(widget.title,
-                                          style: const TextStyle(
-                                              fontSize: 23,
-                                              fontWeight: FontWeight.w500,
-                                              letterSpacing: -.6)),
-                                      Icon(Icons.arrow_forward,
-                                          size: 20, color: color)
-                                    ])),
-                                SizedBox(
-                                    width: 112 /
-                                        (MediaQuery.textScalerOf(context)
-                                                    .scale(14) /
-                                                14)
-                                            .clamp(1.0, 2.0),
-                                    height: 112,
-                                    child: PortalArt(
-                                        matching:
-                                            widget.intent == AppIntent.match))
-                              ])
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                    Text('0${i + 1}',
-                                        style: TextStyle(
-                                            fontSize: 11,
-                                            color: color,
-                                            fontWeight: FontWeight.w600)),
-                                    Expanded(
-                                        child: Center(
-                                            child: SizedBox(
-                                                width: 162,
-                                                height: 162,
-                                                child: PortalArt(
-                                                    matching: widget.intent ==
-                                                        AppIntent.match)))),
-                                    Row(children: [
-                                      Expanded(
-                                          child: Text(widget.title,
-                                              style: const TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.w500,
-                                                  letterSpacing: -.7))),
-                                      Icon(Icons.arrow_forward,
-                                          size: 22, color: color)
-                                    ])
-                                  ]))))));
+    final reading = intent == AppIntent.chart;
+    final foreground = reading ? Colors.white : ink;
+    final scale =
+        (MediaQuery.textScalerOf(context).scale(14) / 14).clamp(1.0, 3.0);
+    final titleWidget = Text(title,
+        style: TextStyle(
+            color: foreground,
+            fontSize: compact ? 25 : 29,
+            height: 1.2,
+            fontWeight: FontWeight.w600,
+            letterSpacing: -.8));
+    final arrow = Container(
+        width: 44,
+        height: 44,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle, color: reading ? Colors.white : blue),
+        child: Icon(Icons.arrow_forward_rounded,
+            color: reading ? blue : Colors.white, size: 22));
+    return SizedBox(
+        height: compact ? 182 * scale : 352 * scale.clamp(1.0, 1.6),
+        child: Material(
+            color: reading ? blue : blueTint,
+            clipBehavior: Clip.antiAlias,
+            borderRadius: BorderRadius.circular(30),
+            child: InkWell(
+                key: ValueKey('intent-${intent.name}'),
+                onTap: onTap,
+                splashColor: reading
+                    ? Colors.white.withValues(alpha: .12)
+                    : blue.withValues(alpha: .10),
+                child: Padding(
+                    padding: EdgeInsets.all(compact ? 24 : 30),
+                    child: compact
+                        ? LayoutBuilder(
+                            builder: (context, c) => Row(children: [
+                                  Expanded(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [titleWidget, arrow])),
+                                  if (scale <= 1.3)
+                                    SizedBox(
+                                        width: c.maxWidth * .43,
+                                        child: EntranceArt(matching: !reading))
+                                ]))
+                        : Column(children: [
+                            Expanded(
+                                child: Center(
+                                    child: SizedBox(
+                                        width: 260,
+                                        height: 230,
+                                        child:
+                                            EntranceArt(matching: !reading)))),
+                            const SizedBox(height: 14),
+                            Row(children: [
+                              Expanded(child: titleWidget),
+                              const SizedBox(width: 12),
+                              arrow
+                            ])
+                          ])))));
   }
 }
 
@@ -320,20 +244,31 @@ class MyChartPage extends StatelessWidget {
                   label: Text(l.flowTools))
             ]),
           ]),
-      const SizedBox(height: 28),
+      const SizedBox(height: 20),
       SegmentedButton<bool>(segments: [
         ButtonSegment(value: false, label: Text(l.flowOverview)),
         ButtonSegment(value: true, label: Text(l.flowOutlook))
       ], selected: {
         outlook
       }, onSelectionChanged: (v) => onMode(v.first)),
-      const SizedBox(height: 28),
+      const SizedBox(height: 20),
       if (!outlook) ...[
-        _Reading(
-            text: contextData.reading,
-            onAsk: () => onAsk(l.flowQuestionOverview)),
-        const SizedBox(height: 24),
-        _PillarGrid(r),
+        LayoutBuilder(builder: (context, c) {
+          final reading = _Reading(
+              text: contextData.reading,
+              element: r.energy.dayElement,
+              onAsk: () => onAsk(l.flowQuestionOverview));
+          final pillars = _PillarGrid(r);
+          return c.maxWidth >= 880 &&
+                  MediaQuery.textScalerOf(context).scale(14) < 20
+              ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Expanded(flex: 6, child: reading),
+                  const SizedBox(width: 24),
+                  Expanded(flex: 5, child: pillars)
+                ])
+              : Column(
+                  children: [reading, const SizedBox(height: 24), pillars]);
+        }),
         const SizedBox(height: 18),
         Surface(
             padding: EdgeInsets.zero,
@@ -398,7 +333,7 @@ class _PillarGrid extends StatelessWidget {
         return Container(
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(26),
                 border: Border.all(color: line)),
             clipBehavior: Clip.antiAlias,
             child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -414,11 +349,16 @@ class _PillarGrid extends StatelessWidget {
                                     color:
                                         i == 3 ? Colors.transparent : line))),
                         child: Column(children: [
-                          Text(['YEAR', 'MONTH', 'DAY', 'HOUR'][i],
+                          Text(
+                              [
+                                AppLocalizations.of(context)!.pillarYear,
+                                AppLocalizations.of(context)!.pillarMonth,
+                                AppLocalizations.of(context)!.pillarDay,
+                                AppLocalizations.of(context)!.pillarHour,
+                              ][i],
                               style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  letterSpacing: .8,
                                   color: i == 2 ? green : muted)),
                           const SizedBox(height: 21),
                           if (i < report.pillars.length) ...[
@@ -462,29 +402,58 @@ class _PillarGrid extends StatelessWidget {
 class _Reading extends StatelessWidget {
   final String text;
   final VoidCallback onAsk;
-  const _Reading({required this.text, required this.onAsk});
+  final core.Element? element;
+  const _Reading({required this.text, required this.onAsk, this.element});
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
-    return Surface(
+    final paragraphs = text.split('\n\n');
+    return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(26)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: 16,
-          runSpacing: 8,
-          children: [
-            Text(l.flowReading,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-            TextButton.icon(
-                onPressed: onAsk,
-                icon: const Icon(Icons.chat_bubble_outline, size: 16),
-                label: Text(l.flowAskAgent))
+          Row(children: [
+            Expanded(
+                child: Text(l.flowReading,
+                    style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -.6))),
+            if (element != null) ElementSpirit(element: element!, size: 48),
           ]),
-      const SizedBox(height: 13),
-      SelectableText(text,
-          style: const TextStyle(fontSize: 14, height: 1.9, color: ink))
-    ]));
+          const SizedBox(height: 12),
+          SelectableText(paragraphs.first,
+              style: const TextStyle(fontSize: 15, height: 1.65, color: ink)),
+          if (paragraphs.length > 1)
+            Theme(
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                    key: ValueKey('reading-details-$text'),
+                    tilePadding: EdgeInsets.zero,
+                    childrenPadding: const EdgeInsets.only(bottom: 8),
+                    title: Text(l.flowReadingDetails,
+                        style: const TextStyle(
+                            fontSize: 13,
+                            color: muted,
+                            fontWeight: FontWeight.w600)),
+                    children: [
+                      SelectableText(paragraphs.skip(1).join('\n\n'),
+                          style: const TextStyle(
+                              fontSize: 15, height: 1.8, color: ink))
+                    ])),
+          const SizedBox(height: 12),
+          TextButton.icon(
+              onPressed: onAsk,
+              style: TextButton.styleFrom(
+                  backgroundColor: blueTint,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16))),
+              icon: const Icon(Icons.chat_bubble_outline, size: 17),
+              label: Text(l.flowAskAgent))
+        ]));
   }
 }

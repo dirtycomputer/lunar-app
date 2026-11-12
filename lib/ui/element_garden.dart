@@ -97,25 +97,17 @@ class _GardenMap extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: const Color(0xFFE7E8DB)),
-          borderRadius: BorderRadius.circular(26)),
+          color: Colors.white, borderRadius: BorderRadius.circular(26)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
-          Expanded(
-              child: Text(l.gardenChapter,
-                  style: const TextStyle(
-                      fontSize: 10,
-                      letterSpacing: 1.4,
-                      color: muted,
-                      fontWeight: FontWeight.w700))),
+          const Spacer(),
           const Icon(Icons.auto_awesome_rounded, size: 16, color: gardenGold),
           const SizedBox(width: 5),
           Text('${store.sparks}',
               style: const TextStyle(
                   fontSize: 14, color: gardenGold, fontWeight: FontWeight.w700))
         ]),
-        const SizedBox(height: 18),
+        const SizedBox(height: 8),
         Row(children: [
           Expanded(
               child: Text(
@@ -176,7 +168,7 @@ class _GardenMap extends StatelessWidget {
                                 : canvas,
                             borderRadius: BorderRadius.circular(16)),
                         child: Opacity(
-                            opacity: store.seals.contains(e) ? 1 : .35,
+                            opacity: store.seals.contains(e) ? 1 : .6,
                             child: ElementSpirit(element: e, size: 39)))))
         ]),
         const SizedBox(height: 16),
@@ -215,66 +207,59 @@ class _GardenQuest extends StatelessWidget {
             : done
                 ? l.gardenReplay
                 : l.journeyReward(20);
-    return Container(
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.circular(18), boxShadow: [
-          BoxShadow(
-              color: (active ? green : gardenInk).withValues(alpha: .10),
-              offset: const Offset(0, 4))
-        ]),
-        child: Material(
-            color: active ? mintTint : gardenPaper,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-                side: BorderSide(
-                    color: active
-                        ? green.withValues(alpha: .5)
-                        : const Color(0xFFE6E6D7))),
-            child: InkWell(
-                key: ValueKey('quest-${quest.name}'),
-                borderRadius: BorderRadius.circular(18),
-                onTap: onTap,
-                child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Row(children: [
-                      Container(
-                          width: 35,
-                          height: 35,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: done ? green : Colors.white,
-                              shape: BoxShape.circle),
-                          child: done
-                              ? const Icon(Icons.check_rounded,
-                                  color: Colors.white, size: 21)
-                              : Text('0${quest.index + 1}',
-                                  style: const TextStyle(
-                                      fontSize: 12,
-                                      color: gardenInk,
-                                      fontWeight: FontWeight.w700))),
-                      const SizedBox(width: 12),
-                      Expanded(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                            Text(title,
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    height: 1.4,
-                                    fontWeight: FontWeight.w700,
-                                    color: gardenInk)),
-                            const SizedBox(height: 4),
-                            Text(subtitle,
-                                style: const TextStyle(
-                                    fontSize: 10, color: muted)),
-                          ])),
-                      const SizedBox(width: 8),
-                      Icon(
+    return Material(
+        color: active ? green : gardenPaper,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: active ? green : const Color(0xFFE0E8E1))),
+        child: InkWell(
+            key: ValueKey('quest-${quest.name}'),
+            borderRadius: BorderRadius.circular(18),
+            onTap: onTap,
+            child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(children: [
+                  Container(
+                      width: 35,
+                      height: 35,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: done ? green : Colors.white,
+                          shape: BoxShape.circle),
+                      child: Icon(
                           done
-                              ? Icons.replay_rounded
-                              : Icons.arrow_forward_rounded,
-                          size: 18,
-                          color: green),
-                    ])))));
+                              ? Icons.check_rounded
+                              : switch (quest) {
+                                  JourneyQuest.element => Icons.spa_outlined,
+                                  JourneyQuest.outlook =>
+                                    Icons.calendar_today_outlined,
+                                  JourneyQuest.encounter =>
+                                    Icons.people_outline,
+                                },
+                          color: done ? Colors.white : green,
+                          size: 19)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        Text(title,
+                            style: TextStyle(
+                                fontSize: 14,
+                                height: 1.4,
+                                fontWeight: FontWeight.w700,
+                                color: active ? Colors.white : gardenInk)),
+                        const SizedBox(height: 4),
+                        Text(subtitle,
+                            style: TextStyle(
+                                fontSize: 11,
+                                color: active ? Colors.white : muted)),
+                      ])),
+                  const SizedBox(width: 8),
+                  Icon(
+                      done ? Icons.replay_rounded : Icons.arrow_forward_rounded,
+                      size: 18,
+                      color: active ? Colors.white : green),
+                ]))));
   }
 }
