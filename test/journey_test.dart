@@ -1,8 +1,8 @@
+import 'fixtures/app.dart';
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:lunar_social/services/app_state.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/services/bazi.dart';
 import 'package:lunar_social/services/journey.dart';
 
@@ -113,7 +113,7 @@ void main() {
   });
   test('learning progress never changes a chart or recommendation ranking',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final pillars = state.chart.pillars.map((p) => p.value).toList();
     final ranking =
         state.matches.map((m) => '${m.person.id}:${m.score}').toList();
@@ -124,7 +124,7 @@ void main() {
     expect(state.matches.map((m) => '${m.person.id}:${m.score}'), ranking);
     expect(await state.reset(), isTrue);
     expect(state.journey.sparks, 0);
-    expect(AppState(state.preferences).journey.completed, isEmpty);
+    expect(testAppState(state.preferences).journey.completed, isEmpty);
     state.dispose();
   });
 }

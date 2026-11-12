@@ -1,5 +1,14 @@
 # Verification record
 
+## Persistent D1 catalog — 2026-11-12
+
+- Live Cloudflare D1: `DB` binding, `catalog_people` and `catalog_seed_runs` confirmed independently through the Sites database viewer. Live API traversal verifies all 1,000 persisted profiles and dataset revision. SQL aggregates cover 40 countries, six continents, ages 18–75 and 400/400/200 gender counts; unknown birth times: 100.
+- Repeated live verification after deployment preserves the same dataset digest: `6ef5b47b9549f8b69f19f551b2020d5a02d468c460b0d08ca1bc5e5133a4c62c`. Full profile data stays in the ignored renderer input; the small report is committed. SQLite export: 1,462,272 bytes, integrity `ok`, 1,000 rows after reopening.
+- **102 Flutter tests**, including all 1,000 Python-vs-Dart chart snapshots, bounded pagination, invalid/change/duplicate responses, failed load/retry, saved IDs/drafts and concurrent profile edits. The dataset is excluded from the Flutter bundle; default AppState uses the live API.
+- **23 Python tests** independently verify all seed instants/pillars and reject trusting altered client-resolved metadata. **11 Node tests** run the Worker against an actual file-backed SQLite database: paging, predicates, wildcard/injection handling, idempotence, reopen, readiness, token removal and the default closed write gate.
+- Four renderer walkthroughs use the fetched D1 records at desktop, phone, 320px/200% text and Chinese phone sizes. All 16 captures pass, including country/non-binary filtering, filtered random matching, accessible profile closing and loading more. Selected screenshots: `output/flutter-render/catalog-*.png`. They are Flutter renderer evidence, not browser acceptance.
+- Web/Worker builds and preview package checks are recorded in current output logs. Browser control, local Xcode/Android SDK and signed store/device acceptance remain unavailable or separate from CI compilation. No real-member release gates are removed.
+
 ## Frontend design UI update — 2026-11-12
 
 - Followed the official frontend-design skill: deliberate cobalt/cloud/jade palette, bundled Manrope/Noto typography, two-route layout sketch and pre-implementation critique in [ui-design.md](ui-design.md).

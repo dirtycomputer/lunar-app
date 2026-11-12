@@ -687,7 +687,7 @@ abstract class AppLocalizations {
   /// No description provided for @demoNotice.
   ///
   /// In en, this message translates to:
-  /// **'Demo community · All profiles are illustrative'**
+  /// **'Synthetic profiles · Stored in a database'**
   String get demoNotice;
 
   /// No description provided for @harmonyPct.
@@ -1179,7 +1179,7 @@ abstract class AppLocalizations {
   /// No description provided for @guideCommunityBody.
   ///
   /// In en, this message translates to:
-  /// **'This first version is an interactive, local demo. The people shown are fictional profiles paired with stock photographs. You can explore charts, filter recommendations, and save connections on this device. Accounts, messages, verification, and a real community will be part of a future backend integration.'**
+  /// **'Explore 1,000 synthetic adults stored in a shared database. Profiles use initials rather than real photographs. You can filter recommendations and save profiles on this device. Invitations, drafts and reports remain local; real accounts, messaging and moderation are not available.'**
   String get guideCommunityBody;
 
   /// No description provided for @digDeeper.
@@ -1239,7 +1239,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyBody1.
   ///
   /// In en, this message translates to:
-  /// **'Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.'**
+  /// **'Synthetic catalog profiles are stored in a public database. Your saves, invitations and local message drafts stay on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.'**
   String get privacyBody1;
 
   /// No description provided for @privacyBody2.
@@ -2445,7 +2445,7 @@ abstract class AppLocalizations {
   /// No description provided for @journeyDemoProfile.
   ///
   /// In en, this message translates to:
-  /// **'Sample profile'**
+  /// **'Synthetic profile'**
   String get journeyDemoProfile;
 
   /// No description provided for @journeyShort.
@@ -2481,7 +2481,7 @@ abstract class AppLocalizations {
   /// No description provided for @releasePreviewBody.
   ///
   /// In en, this message translates to:
-  /// **'Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.'**
+  /// **'Charts and AI readings are available. The database holds 1,000 synthetic profiles. Invitations, messages and reports stay on this device and are not delivered.'**
   String get releasePreviewBody;
 
   /// No description provided for @releaseConsentSaveFailed.
@@ -2747,6 +2747,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Read the details'**
   String get flowReadingDetails;
+
+  /// No description provided for @catalogLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading profiles…'**
+  String get catalogLoading;
+
+  /// No description provided for @catalogLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load profiles. Try again.'**
+  String get catalogLoadError;
+
+  /// No description provided for @catalogCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} profiles'**
+  String catalogCount(int n);
+
+  /// No description provided for @catalogMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get catalogMore;
+
+  /// No description provided for @catalogLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get catalogLanguages;
+
+  /// No description provided for @genderNonBinary.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-binary'**
+  String get genderNonBinary;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

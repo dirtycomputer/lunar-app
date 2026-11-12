@@ -46,6 +46,29 @@ class BirthClock {
           'Check the birth date, time and birthplace coordinates.');
     }
     final location = tz.getLocation(data.place.zone);
+    final reference = data.resolvedClock;
+    if (reference != null) {
+      final civil = DateTime.utc(data.date.year, data.date.month, data.date.day,
+          data.timeKnown ? data.hour : 12, data.timeKnown ? data.minute : 0);
+      if (reference.utc.add(Duration(seconds: reference.offsetSeconds)) !=
+          civil) {
+        throw const FormatException(
+            'Resolved birth time differs from its inputs.');
+      }
+      final mean = reference.utc
+          .add(Duration(seconds: (data.place.longitude * 240).round()));
+      final equation = equationOfTime(reference.utc);
+      return BirthClock(
+          utc: reference.utc,
+          civil: civil,
+          meanSolar: mean,
+          apparentSolar: mean.add(Duration(seconds: (equation * 60).round())),
+          zone: data.place.zone,
+          offset: Duration(seconds: reference.offsetSeconds),
+          daylightSaving: reference.daylightSaving,
+          repeatedTime: reference.repeatedTime,
+          equationMinutes: equation);
+    }
     final wall = tz.TZDateTime(
         location,
         data.date.year,

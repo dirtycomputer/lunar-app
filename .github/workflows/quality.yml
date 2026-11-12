@@ -9,6 +9,16 @@ concurrency:
   group: quality-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  people-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test catalog/tests/*.test.mjs
+      - run: python3 scripts/build_catalog.py
   flutter:
     runs-on: ubuntu-latest
     timeout-minutes: 20

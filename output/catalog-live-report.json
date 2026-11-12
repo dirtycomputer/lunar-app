@@ -1,0 +1,21 @@
+{
+  "origin": "https://yuan-bazi-connections.dirtycomputer.chatgpt.site",
+  "storage": "cloudflare-d1",
+  "revision": "synthetic-adults-2026-11-v1",
+  "profiles": 1000,
+  "countries": 40,
+  "continents": 6,
+  "genders": {
+    "Women": 400,
+    "Non-binary": 200,
+    "Men": 400
+  },
+  "ageRange": [
+    18,
+    75
+  ],
+  "unknownBirthTime": 100,
+  "profileDigest": "6ef5b47b9549f8b69f19f551b2020d5a02d468c460b0d08ca1bc5e5133a4c62c",
+  "seededAt": "2026-11-12 08:48:50",
+  "sqliteBytes": 1462272
+}

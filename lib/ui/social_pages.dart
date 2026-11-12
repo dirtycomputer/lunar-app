@@ -4,6 +4,7 @@ import '../models/profile.dart';
 import '../services/app_state.dart';
 import '../services/social.dart';
 import 'design.dart';
+import 'profile_avatar.dart';
 
 Future<void> showLocalConversation(
         BuildContext context, AppState state, Person person) =>
@@ -85,8 +86,7 @@ class _ConversationState extends State<_Conversation> {
                       child: Column(children: [
                         Row(children: [
                           ClipOval(
-                              child: Image.asset(p.image,
-                                  width: 43, height: 43, fit: BoxFit.cover)),
+                              child: ProfileAvatar(p, width: 43, height: 43)),
                           const SizedBox(width: 12),
                           Expanded(
                               child: Column(

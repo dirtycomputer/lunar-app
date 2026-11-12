@@ -57,7 +57,7 @@ class StudioStore extends ChangeNotifier {
   void _defaults() {
     primary = ChartSubject(name: source.name, birth: source.birth);
     secondary = ChartSubject(
-        name: demoPeople.first.name, birth: demoPeople.first.birth, sex: 0);
+        name: 'Sample comparison', birth: sampleComparisonBirth, sex: 0);
   }
 
   void _sourceChanged() {

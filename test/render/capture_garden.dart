@@ -1,3 +1,4 @@
+import '../fixtures/app.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:lunar_social/services/journey.dart';
@@ -5,10 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/main.dart';
 import 'package:lunar_social/l10n/generated/app_localizations.dart';
-import 'package:lunar_social/services/app_state.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +46,7 @@ void main() {
               })
             }
           : {});
-      final state = AppState(await SharedPreferences.getInstance());
+      final state = testAppState(await SharedPreferences.getInstance());
       if (name == 'zh') await state.setLocale(const Locale('zh'));
       await tester.pumpWidget(RepaintBoundary(
           key: const ValueKey('capture'),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/profile.dart';
@@ -8,6 +9,7 @@ import 'social.dart';
 import 'intent_flow.dart';
 import 'journey.dart';
 import 'device_storage.dart';
+import 'people_repository.dart';
 
 class AppState extends ChangeNotifier {
   final SharedPreferences preferences;
@@ -25,6 +27,13 @@ class AppState extends ChangeNotifier {
   late BirthData birth;
   late EnergyChart chart;
   late List<MatchResult> matches;
+  final PeopleRepository? _peopleRepository;
+  List<Person> _people;
+  final Set<String> _knownIds = {};
+  List<Person> get people => _people;
+  Future<void>? _catalogTask;
+  bool catalogLoading = false;
+  String? catalogError, catalogRevision;
   String name = 'Alex';
   bool personalized = false;
   final Set<String> saved = {};
@@ -33,11 +42,16 @@ class AppState extends ChangeNotifier {
   String? persistenceError;
   int resetGeneration = 0;
   AppIntent? startIntent;
-  AppState(this.preferences)
-      : storage = DeviceStorage(preferences),
+  AppState(this.preferences,
+      {PeopleRepository? peopleRepository, List<Person>? initialPeople})
+      : _peopleRepository = peopleRepository ??
+            (initialPeople == null ? PeopleRepository() : null),
+        _people = List.unmodifiable(initialPeople ?? const <Person>[]),
+        storage = DeviceStorage(preferences),
         consentStore = LocalConsentService(preferences),
         moderationStore = LocalModerationService(preferences) {
     birth = demoBirth;
+    _knownIds.addAll(_people.map((p) => p.id));
     try {
       final raw = storage.read<String>('profile');
       if (raw == null && storage.read<Object>('profile') != null) {
@@ -59,8 +73,8 @@ class AppState extends ChangeNotifier {
       persistenceError =
           'Your saved profile could not be loaded. Please add your birth details again.';
     }
-    saved.addAll((storage.read<List<String>>('saved') ?? []).where(_known));
-    hidden.addAll((storage.read<List<String>>('hidden') ?? []).where(_known));
+    saved.addAll((storage.read<List<String>>('saved') ?? []).where(_validId));
+    hidden.addAll((storage.read<List<String>>('hidden') ?? []).where(_validId));
     reports = moderationStore.loadReports();
     localeOverride = _parseLocale(storage.read<String>('locale'));
     final intent = storage.read<String>('start.intent');
@@ -68,11 +82,12 @@ class AppState extends ChangeNotifier {
       if (value.name == intent) startIntent = value;
     }
     social = LocalSocialStore(preferences,
-        knownIds: demoPeople.map((p) => p.id).toSet());
+        knownIds: _knownIds, allowUnresolved: _peopleRepository != null);
     social.addListener(_notify);
     journey = JourneyStore(preferences);
     journey.addListener(_notify);
     _recalculate();
+    if (_peopleRepository != null) unawaited(refreshCatalog());
   }
 
   /// User-chosen app language; null means follow the system language.
@@ -129,7 +144,38 @@ class AppState extends ChangeNotifier {
         !birth.date.isAfter(cutoff);
   }
 
-  static bool _known(String id) => demoPeople.any((p) => p.id == id);
+  static bool _validId(String id) =>
+      RegExp(r'^[a-zA-Z0-9_-]{1,48}$').hasMatch(id);
+  bool _known(String id) => _knownIds.contains(id);
+
+  Future<void> refreshCatalog() =>
+      _catalogTask ??= _fetchCatalog().whenComplete(() => _catalogTask = null);
+
+  Future<void> _fetchCatalog() async {
+    final repository = _peopleRepository;
+    if (repository == null || _disposed) return;
+    catalogLoading = true;
+    catalogError = null;
+    _notify();
+    try {
+      final catalog = await repository.load();
+      if (_disposed) return;
+      _people = catalog.people;
+      _knownIds
+        ..clear()
+        ..addAll(_people.map((p) => p.id));
+      catalogRevision = catalog.revision;
+      _recalculate();
+    } catch (_) {
+      if (!_disposed) catalogError = 'catalog_unavailable';
+    } finally {
+      if (!_disposed) {
+        catalogLoading = false;
+        _notify();
+      }
+    }
+  }
+
   Future<bool> setLocale(Locale? locale) => storage.write(() async {
         final raw = locale == null ? '' : locale.toString();
         if (locale != null && _parseLocale(raw) == null) return false;
@@ -141,7 +187,7 @@ class AppState extends ChangeNotifier {
 
   void _recalculate() {
     chart = service.calculate(birth);
-    matches = service.rank(chart, demoPeople);
+    matches = service.rank(chart, _people);
   }
 
   Future<bool> chooseIntent(AppIntent intent) => storage.write(() async {
@@ -171,7 +217,7 @@ class AppState extends ChangeNotifier {
       personalized = true;
       persistenceError = null;
       chart = calculated;
-      matches = service.rank(chart, demoPeople);
+      matches = service.rank(chart, _people);
       _notify();
       return true;
     }, failure: false);
@@ -258,6 +304,7 @@ class AppState extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
+    _peopleRepository?.close();
     social.removeListener(_notify);
     social.dispose();
     journey.removeListener(_notify);

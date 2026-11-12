@@ -1,11 +1,11 @@
+import 'fixtures/app.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/main.dart';
 import 'package:lunar_social/models/profile.dart';
-import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/data_export.dart';
 import 'package:lunar_social/services/device_storage.dart';
 import 'package:lunar_social/services/journey.dart';
@@ -40,7 +40,7 @@ void main() {
     await prefs.setBool(DeviceStorage.resetKey, true);
     await prefs.setString('profile', 'private record');
     prefs.failRemoval.add('profile');
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     await tester.pumpWidget(LunarApp(state: state));
     await tester.pumpAndSettle();
     expect(find.textContaining('Data deletion is incomplete'), findsOneWidget);
@@ -58,7 +58,7 @@ void main() {
   test('rapid saves preserve every selection and toggle parity after restart',
       () async {
     final prefs = await SharedPreferences.getInstance();
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     expect(
         await Future.wait([
           state.toggleSaved('maya'),
@@ -70,7 +70,7 @@ void main() {
         ]),
         everyElement(isTrue));
     expect(state.saved, {'leo', 'sofia'});
-    final restored = AppState(prefs);
+    final restored = testAppState(prefs);
     expect(restored.saved, {'leo', 'sofia'});
     expect(restored.hidden, {'noah', 'ethan'});
     state.dispose();
@@ -80,7 +80,7 @@ void main() {
   test('reset is a cross-store barrier against pending personal writes',
       () async {
     final prefs = await SharedPreferences.getInstance();
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     final studio = StudioStore(state);
     final pending = [
       state.toggleSaved('maya'),
@@ -97,7 +97,7 @@ void main() {
     expect(state.social.messagesFor('maya'), isEmpty);
     expect(state.journey.sparks, 0);
     expect(prefs.getKeys().intersection(DeviceStorage.personalKeys), isEmpty);
-    expect(AppState(prefs).personalized, isFalse);
+    expect(testAppState(prefs).personalized, isFalse);
     studio.dispose();
     state.dispose();
   });
@@ -106,7 +106,7 @@ void main() {
       'interrupted deletion never restores old personal data and can finish later',
       () async {
     final prefs = InterruptedPreferences(await SharedPreferences.getInstance());
-    final state = AppState(prefs);
+    final state = testAppState(prefs);
     await state.updateProfile('Private', demoBirth);
     await state.social.saveMessage('maya', 'Private draft');
     await state.journey.complete(JourneyQuest.element);
@@ -116,7 +116,7 @@ void main() {
     expect(await state.reset(), isFalse);
     expect(state.storage.deletionPending, isTrue);
     expect(state.personalized, isFalse);
-    final restored = AppState(prefs);
+    final restored = testAppState(prefs);
     expect(restored.personalized, isFalse);
     expect(restored.social.messagesFor('maya'), isEmpty);
     expect(restored.journey.sparks, 0);
@@ -143,7 +143,7 @@ void main() {
       'reports': false,
       'locale': ['en']
     });
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     expect(state.saved, isEmpty);
     expect(state.hidden, isEmpty);
     expect(state.reports, isEmpty);
@@ -157,7 +157,7 @@ void main() {
   test(
       'portable export includes studio charts and language but never API credentials',
       () async {
-    final state = AppState(await SharedPreferences.getInstance());
+    final state = testAppState(await SharedPreferences.getInstance());
     final studio = StudioStore(state);
     await state.updateProfile('Sam', demoBirth);
     await state.setLocale(const Locale('zh'));

@@ -104,7 +104,7 @@
   },
   "bestHarmony": "Best harmony first",
   "curiosity": "A little curiosity can be the start of something good.",
-  "demoNotice": "Demo community · All profiles are illustrative",
+  "demoNotice": "Synthetic profiles · Stored in a database",
   "harmonyPct": "{n}% harmony",
   "@harmonyPct": {
     "placeholders": {
@@ -282,7 +282,7 @@
   "guideNoTimeTitle": "What if I don’t know my birth time?",
   "guideNoTimeBody": "You can still explore. FatePair uses local noon for the date calculation, omits the hour pillar, and marks your results as approximate. On dates near a solar-term boundary, year or month may be uncertain too. Add your time later to refine your chart.",
   "guideCommunityTitle": "Is this a live dating community?",
-  "guideCommunityBody": "This first version is an interactive, local demo. The people shown are fictional profiles paired with stock photographs. You can explore charts, filter recommendations, and save connections on this device. Accounts, messages, verification, and a real community will be part of a future backend integration.",
+  "guideCommunityBody": "Explore 1,000 synthetic adults stored in a shared database. Profiles use initials rather than real photographs. You can filter recommendations and save profiles on this device. Invitations, drafts and reports remain local; real accounts, messaging and moderation are not available.",
   "digDeeper": "DIG DEEPER",
   "termFourPillars": "Four pillars",
   "termStemsBranches": "Heavenly stems & earthly branches",
@@ -292,7 +292,7 @@
   "termSolarTime": "True solar time",
   "guideFooter": "Stay curious. Be kind. Leave room for a little serendipity.",
   "privacyTitle": "Privacy & data",
-  "privacyBody1": "Profiles, saves, invitations and local message drafts are stored on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
+  "privacyBody1": "Synthetic catalog profiles are stored in a public database. Your saves, invitations and local message drafts stay on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.",
   "privacyBody2": "Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.",
   "privacyBody3": "Resetting clears your personal details and saved preferences, then returns to the sample profile.",
   "clearDataTitle": "Clear your local data?",
@@ -592,13 +592,13 @@
   "journeyBack": "Back to journey",
   "journeySample": "Sample element",
   "journeyNewEncounter": "New encounter",
-  "journeyDemoProfile": "Sample profile",
+  "journeyDemoProfile": "Synthetic profile",
   "journeyShort": "Journey",
   "releaseRetry": "Try again",
   "releaseDeletePending": "Data deletion is incomplete. Your old data is hidden. Retry to finish clearing it.",
   "releaseStorageTitle": "Saved data needs attention",
   "releasePreviewTitle": "About this release",
-  "releasePreviewBody": "Charts and AI readings are available. People, invitations, messages and reports are a sample experience on this device. No messages or reports are delivered.",
+  "releasePreviewBody": "Charts and AI readings are available. The database holds 1,000 synthetic profiles. Invitations, messages and reports stay on this device and are not delivered.",
   "releaseConsentSaveFailed": "Your details were saved, but the consent record could not be saved. Please try again.",
   "releaseReportHideFailed": "Local report saved, but the profile could not be hidden. Please try Hide this profile again.",
   "gardenTitle": "Element Garden",
@@ -647,5 +647,18 @@
   "@gardenSavedCycle": {"placeholders": {"name": {"type": "String"}}},
   "gardenShort": "Garden",
   "gardenCollectSeals": "Collect the five seals",
-  "flowReadingDetails": "Read the details"
+  "flowReadingDetails": "Read the details",
+  "catalogLoading": "Loading profiles…",
+  "catalogLoadError": "Could not load profiles. Try again.",
+  "catalogCount": "{n} profiles",
+  "@catalogCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "catalogMore": "Show more",
+  "catalogLanguages": "Languages",
+  "genderNonBinary": "Non-binary"
 }
