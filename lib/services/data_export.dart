@@ -6,7 +6,7 @@ import 'app_state.dart';
 String exportDeviceData(AppState state) =>
     const JsonEncoder.withIndent('  ').convert({
       'app': 'FatePair',
-      'formatVersion': 2,
+      'formatVersion': 3,
       'scope': 'This device only',
       'exportedAt': DateTime.now().toUtc().toIso8601String(),
       'profile': state.personalized
@@ -16,6 +16,9 @@ String exportDeviceData(AppState state) =>
       'hidden': state.hidden.toList(),
       'social': state.social.toJson(),
       'journey': state.journey.toJson(),
+      'sharing': state.sharing.entries
+          .map((e) => e.toJson(credentials: false))
+          .toList(),
       'reports': state.reports.map((r) => r.toJson()).toList(),
       'consents': state.consentStore
           .all()

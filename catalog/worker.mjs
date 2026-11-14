@@ -1,3 +1,4 @@
+import {handleSharing} from './sharing.mjs';
 import seed from './seed.json' with { type: 'json' };
 
 const columns = 'id,name,gender,country_code,country,continent,birth_date,location,search_text,time_known,seed_version,record_hash,data_json';
@@ -26,7 +27,17 @@ async function authorized(request,token) {
 
 export function createHandler({now=()=>new Date(),allowSeeding=false}={}) {
   return async function fetch(request,env) {
+    const shared=await handleSharing(request,env,{now});
+    if(shared)return shared;
     const url=new URL(request.url),path=url.pathname;
+    if (/^\/s\/[A-Za-z0-9_-]{32}\/?$/.test(path) && env.ASSETS) {
+      const asset=await env.ASSETS.fetch(new Request(new URL('/index.html',url),request));
+      const headers=new Headers(asset.headers);
+      headers.set('Cache-Control','no-store');
+      headers.set('Referrer-Policy','no-referrer');
+      headers.set('X-Robots-Tag','noindex, nofollow');
+      return new Response(asset.body,{status:asset.status,headers});
+    }
     const admin=path==='/api/admin/catalog/seed';
     const api=path==='/api/people'||path.startsWith('/api/people/');
     if(!admin&&!api) {

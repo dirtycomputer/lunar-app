@@ -1,0 +1,39 @@
+{
+  "host": {
+    "name": "Alex",
+    "element": 0,
+    "traits": [
+      0,
+      1
+    ],
+    "counts": [
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "guest": {
+    "name": "Sam",
+    "element": 3,
+    "traits": [
+      0,
+      1
+    ],
+    "counts": [
+      1,
+      3,
+      1,
+      1,
+      0
+    ]
+  },
+  "commonTitle": "Room for growth",
+  "commonText": "Both summaries include Wood. In the Five Elements tradition it represents growth. Explore whether that feels familiar to you both.",
+  "differenceTitle": "Two ways to bring warmth",
+  "differenceText": "Sam has more Fire in this summary. That is a difference in the chart, not a stronger or better personality. Compare how you each approach warmth.",
+  "prompt": "What makes you feel appreciated, and how do you like to show it?",
+  "unknownTime": true,
+  "method": "Element conversation v1. Equal counts of the visible stems and branch main elements; missing birth hours are omitted. Symbolic reflection, not a relationship prediction."
+}

@@ -100,7 +100,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteConfirmTitle => 'Clear your data on this device?';
 
   @override
-  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider.';
+  String get deleteConfirmBody => 'This removes your birth profile, saved and hidden profiles, consent and report records, comparison charts, model settings, sample invitations, drafts and exploration progress. Session conversations are cleared. Your language is preserved. This does not delete records held by an AI provider. Active friend-sharing links saved here are withdrawn first. If that fails, deletion stops and keeps access for retry. Images already shared cannot be recalled.';
 
   @override
   String get keepAccount => 'Keep my data';
@@ -578,19 +578,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get privacyTitle => 'Privacy & data';
 
   @override
-  String get privacyBody1 => 'Synthetic catalog profiles are stored in a public database. Your saves, invitations and local message drafts stay on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data.';
+  String get privacyBody1 => 'Synthetic catalog profiles are stored in a public database. Your saves, sample invitations and local message drafts stay on this device. Agent history stays in memory for the session. Asking or generating a reading sends your name, birth inputs, chart convention, current reading and full prior conversation to the selected service for chart verification and model analysis. Typed text is not automatically redacted. Service keys are not included in this context. Resetting local data does not erase provider records. Exploration progress is stored locally, included in exports, and cleared with your local data. Friend-sharing links store only the nickname, selected reflections, day element and (for comparisons) element counts you approve. Links and shared results expire after seven days. Result access is saved on each participant’s device. Daily aggregate sharing events and temporary abuse-prevention counters are stored; counters expire after two days and aggregate events after 90 days.';
 
   @override
-  String get privacyBody2 => 'Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile.';
+  String get privacyBody2 => 'Local storage is not encrypted. On a shared device, clear your data when you are done. Clearing browser or app data also removes your profile. Use Withdraw in My shared links before clearing browser storage or uninstalling. Removing device storage outside FatePair loses your access until the link expires. Copied images cannot be withdrawn.';
 
   @override
-  String get privacyBody3 => 'Resetting clears your personal details and saved preferences, then returns to the sample profile.';
+  String get privacyBody3 => 'Reset first withdraws links and shared results saved on this device, then clears your personal details and returns to the sample profile. An internet connection is needed when you have active shared links. If withdrawal fails, your data and access remain available for retry.';
 
   @override
   String get clearDataTitle => 'Clear your local data?';
 
   @override
-  String get clearDataBody => 'Your birth profile, saved connections, and hidden profiles will be removed from this device.';
+  String get clearDataBody => 'Active sharing links and results saved on this device will be withdrawn first. Then your birth profile, saved connections, drafts and garden progress will be removed. If sharing is offline, clearing stops so you can retry.';
 
   @override
   String get keepMyData => 'Keep my data';

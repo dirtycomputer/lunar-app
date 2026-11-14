@@ -17,6 +17,7 @@ class DeviceStorage {
     'start.intent',
     'social.v1',
     'journey.v1',
+    'sharing.v1',
   };
   static final _instances = Expando<DeviceStorage>();
   final SharedPreferences preferences;
@@ -50,12 +51,17 @@ class DeviceStorage {
     return next;
   }
 
-  Future<bool> reset({required void Function() onMarked}) {
+  Future<bool> reset(
+      {required void Function() onMarked,
+      Future<bool> Function()? beforeMark}) {
     if (_resetting) return Future.value(false);
     _resetting = true;
     _generation++;
     final next = _pending.then((_) async {
       try {
+        if (!deletionPending && beforeMark != null && !await beforeMark()) {
+          return false;
+        }
         if (!deletionPending && !await preferences.setBool(resetKey, true)) {
           return false;
         }
