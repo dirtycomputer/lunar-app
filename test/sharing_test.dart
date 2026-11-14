@@ -342,15 +342,22 @@ void main() {
     await tester.pumpWidget(const SizedBox());
     state.dispose();
   });
-  testWidgets(
-      'share preview requires consent and cannot publish the sample profile',
+  testWidgets('share preview respects the displayed chart and requires consent',
       (tester) async {
     final state =
         AppState(await SharedPreferences.getInstance(), initialPeople: []);
     await state.updateProfile('Alex', demoBirth);
+    final selectedChart = state.service.calculate(BirthData(
+        date: demoBirth.date.add(const Duration(days: 2)),
+        hour: 12,
+        minute: 0,
+        place: demoBirth.place,
+        timeKnown: false));
+    expect(selectedChart.dayElement, isNot(state.chart.dayElement));
     await tester.pumpWidget(MaterialApp(
         theme: lunarTheme(),
-        home: ShareComposer(state: state, kind: 'portrait')));
+        home: ShareComposer(
+            state: state, kind: 'portrait', readingChart: selectedChart)));
     await tester.pumpAndSettle();
     final button =
         tester.widget<FilledButton>(find.byKey(const ValueKey('share-create')));

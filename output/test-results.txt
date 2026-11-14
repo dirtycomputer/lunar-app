@@ -15,67 +15,69 @@
 00:00 +12: /workspace/work/lunar-app/test/sharing_test.dart: an open result disappears when its link expires
 00:00 +13: /workspace/work/lunar-app/test/sharing_test.dart: an open result disappears when its link expires
 00:00 +14: /workspace/work/lunar-app/test/sharing_test.dart: an open result disappears when its link expires
-00:00 +15: /workspace/work/lunar-app/test/sharing_test.dart: returning from sharing can reopen the reading after navigating elsewhere
+00:01 +15: /workspace/work/lunar-app/test/sharing_test.dart: returning from sharing can reopen the reading after navigating elsewhere
 00:01 +16: /workspace/work/lunar-app/test/sharing_test.dart: returning from sharing can reopen the reading after navigating elsewhere
 00:01 +17: /workspace/work/lunar-app/test/sharing_test.dart: returning from sharing can reopen the reading after navigating elsewhere
 00:01 +18: /workspace/work/lunar-app/test/sharing_test.dart: returning from sharing can reopen the reading after navigating elsewhere
 00:01 +19: /workspace/work/lunar-app/test/sharing_test.dart: returning from sharing can reopen the reading after navigating elsewhere
 00:01 +20: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
-00:01 +21: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
-00:01 +22: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:02 +21: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
+00:02 +22: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
 00:02 +23: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
 00:02 +24: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
 00:02 +25: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
 00:02 +26: /workspace/work/lunar-app/test/agent_recovery_test.dart: failed questions expose a retry that replaces the reference answer
-00:02 +27: /workspace/work/lunar-app/test/social_test.dart: invitations persist, are idempotent, and remain separate from saves
-00:02 +28: /workspace/work/lunar-app/test/social_test.dart: messages are validated local drafts and survive restoration
-00:02 +29: /workspace/work/lunar-app/test/social_test.dart: concurrent actions preserve every draft and invitation
-00:02 +30: /workspace/work/lunar-app/test/social_test.dart: a malformed draft does not erase valid records or expose unknown profiles
-00:02 +31: /workspace/work/lunar-app/test/social_test.dart: privacy reset clears social data and preserves other preferences
-00:02 +32: /workspace/work/lunar-app/test/social_test.dart: (tearDownAll)
+00:03 +27: /workspace/work/lunar-app/test/agent_recovery_test.dart: (tearDownAll)
+00:03 +27: /workspace/work/lunar-app/test/social_test.dart: (setUpAll)
+00:03 +27: /workspace/work/lunar-app/test/social_test.dart: invitations persist, are idempotent, and remain separate from saves
+00:03 +28: /workspace/work/lunar-app/test/social_test.dart: messages are validated local drafts and survive restoration
+00:03 +29: /workspace/work/lunar-app/test/social_test.dart: concurrent actions preserve every draft and invitation
+00:03 +30: /workspace/work/lunar-app/test/social_test.dart: a malformed draft does not erase valid records or expose unknown profiles
+00:03 +31: /workspace/work/lunar-app/test/social_test.dart: privacy reset clears social data and preserves other preferences
+00:03 +32: /workspace/work/lunar-app/test/social_test.dart: (tearDownAll)
 00:03 +32: /workspace/work/lunar-app/test/app_state_test.dart: (setUpAll)
 00:03 +32: /workspace/work/lunar-app/test/app_state_test.dart: saved connections survive state restoration
 00:03 +33: /workspace/work/lunar-app/test/app_state_test.dart: profile save recalculates chart and survives restoration
-00:03 +34: /workspace/work/lunar-app/test/intent_agent_test.dart: (setUpAll)
-00:03 +35: /workspace/work/lunar-app/test/intent_agent_test.dart: (setUpAll)
-00:03 +36: /workspace/work/lunar-app/test/intent_agent_test.dart: (setUpAll)
-00:03 +36: /workspace/work/lunar-app/test/app_state_test.dart: consents and reports persist and reset with the account
-00:03 +37: /workspace/work/lunar-app/test/intent_agent_test.dart: intent selection survives restart and privacy reset returns to chooser
-00:03 +38: /workspace/work/lunar-app/test/intent_agent_test.dart: random matching stays within eligible people and avoids consecutive repeats
-00:03 +39: /workspace/work/lunar-app/test/intent_agent_test.dart: recent outlook uses current transit stems relative to the natal day master
-00:03 +40: /workspace/work/lunar-app/test/intent_agent_test.dart: an unconfigured model gives a labelled calculated reference without a completion request
-00:03 +41: /workspace/work/lunar-app/test/intent_agent_test.dart: professional model Q&A includes the question, prior turns and calculated evidence
-00:03 +42: /workspace/work/lunar-app/test/intent_agent_test.dart: a long conversation retains its first question and original reading context
-00:03 +43: /workspace/work/lunar-app/test/intent_agent_test.dart: cancelled answers do not arrive in a new conversation
-00:03 +44: /workspace/work/lunar-app/test/intent_agent_test.dart: general Agent questions work before birth details are entered
-00:03 +45: /workspace/work/lunar-app/test/intent_agent_test.dart: connected general Q&A does not manufacture a personal chart
-00:03 +46: /workspace/work/lunar-app/test/intent_agent_test.dart: (tearDownAll)
+00:04 +34: /workspace/work/lunar-app/test/app_state_test.dart: privacy reset removes personal state but preserves unrelated settings
+00:04 +35: /workspace/work/lunar-app/test/app_state_test.dart: corrupt profile falls back to an explicit sample
+00:04 +36: /workspace/work/lunar-app/test/app_state_test.dart: consents and reports persist and reset with the account
+00:04 +37: /workspace/work/lunar-app/test/intent_agent_test.dart: (setUpAll)
+00:04 +37: /workspace/work/lunar-app/test/intent_agent_test.dart: intent selection survives restart and privacy reset returns to chooser
+00:04 +38: /workspace/work/lunar-app/test/intent_agent_test.dart: random matching stays within eligible people and avoids consecutive repeats
+00:04 +39: /workspace/work/lunar-app/test/intent_agent_test.dart: recent outlook uses current transit stems relative to the natal day master
+00:04 +40: /workspace/work/lunar-app/test/intent_agent_test.dart: an unconfigured model gives a labelled calculated reference without a completion request
+00:04 +41: /workspace/work/lunar-app/test/intent_agent_test.dart: professional model Q&A includes the question, prior turns and calculated evidence
+00:04 +42: /workspace/work/lunar-app/test/intent_agent_test.dart: a long conversation retains its first question and original reading context
+00:04 +43: /workspace/work/lunar-app/test/intent_agent_test.dart: cancelled answers do not arrive in a new conversation
+00:04 +44: /workspace/work/lunar-app/test/intent_agent_test.dart: general Agent questions work before birth details are entered
+00:04 +45: /workspace/work/lunar-app/test/intent_agent_test.dart: connected general Q&A does not manufacture a personal chart
+00:04 +46: /workspace/work/lunar-app/test/intent_agent_test.dart: (tearDownAll)
 00:04 +46: /workspace/work/lunar-app/test/people_catalog_test.dart: (setUpAll)
 00:04 +46: /workspace/work/lunar-app/test/people_catalog_test.dart: catalog reads five bounded pages and validates all 1,000 synthetic adults
-00:04 +47: /workspace/work/lunar-app/test/bazi_test.dart: (setUpAll)
-00:04 +47: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +48: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +49: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +50: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +51: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +52: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +53: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +54: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +55: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
-00:04 +56: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +47: /workspace/work/lunar-app/test/bazi_test.dart: (setUpAll)
+00:05 +47: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +48: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +49: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +50: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +51: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +52: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +53: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +54: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +55: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
+00:05 +56: /workspace/work/lunar-app/test/people_catalog_test.dart: all stored lunar-python snapshots match the Flutter chart engine
 00:05 +57: /workspace/work/lunar-app/test/people_catalog_test.dart: a changed revision or duplicate page cannot publish a partial catalog
 00:05 +58: /workspace/work/lunar-app/test/people_catalog_test.dart: network failure keeps the catalog empty and retry loads persisted records
 00:05 +59: /workspace/work/lunar-app/test/people_catalog_test.dart: saved IDs and drafts survive asynchronous loading and profile changes
-Shell: Ranked 1,000 stored charts in 14 ms.
-00:05 +60: /workspace/work/lunar-app/test/people_catalog_test.dart: invalid birth dates, zones and chart conventions fail validation
-00:05 +61: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +62: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +63: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +64: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +65: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +66: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +67: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
-00:06 +68: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+Shell: Ranked 1,000 stored charts in 22 ms.
+00:05 +60: /workspace/work/lunar-app/test/release_recovery_test.dart: unfinished deletion exposes a retry from the first-use screen
+00:05 +61: /workspace/work/lunar-app/test/release_recovery_test.dart: unfinished deletion exposes a retry from the first-use screen
+00:07 +62: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+00:07 +63: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+00:07 +64: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+00:07 +65: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+00:07 +66: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+00:07 +67: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
+00:07 +68: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(1440.0, 1000.0) / 1.0
 00:07 +69: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(320.0, 740.0) / 2.0
 00:07 +70: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(320.0, 740.0) / 2.0
 00:07 +71: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(320.0, 740.0) / 2.0
@@ -83,49 +85,49 @@ Shell: Ranked 1,000 stored charts in 14 ms.
 00:07 +73: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(320.0, 740.0) / 2.0
 00:07 +74: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(320.0, 740.0) / 2.0
 00:07 +75: /workspace/work/lunar-app/test/people_catalog_test.dart: 1,000-profile pagination remains tappable after an encounter at Size(320.0, 740.0) / 2.0
-00:07 +76: /workspace/work/lunar-app/test/people_catalog_test.dart: (tearDownAll)
+00:08 +76: /workspace/work/lunar-app/test/people_catalog_test.dart: (tearDownAll)
 00:08 +76: /workspace/work/lunar-app/test/release_layout_test.dart: (setUpAll)
 00:08 +76: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
-00:09 +77: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
-00:09 +78: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:09 +79: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:10 +77: /workspace/work/lunar-app/test/release_layout_test.dart: core tasks and settings remain accessible on narrow phone with large text
+00:10 +78: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:10 +79: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
 00:10 +80: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +81: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +82: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +83: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +84: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +85: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +86: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +87: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
-00:10 +88: /workspace/work/lunar-app/test/studio_test.dart: all twelve solar months have correct boundaries and pillar mapping
-00:10 +89: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:10 +90: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +91: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +92: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +93: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +94: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +95: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +96: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +97: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +98: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +99: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
-00:11 +100: /workspace/work/lunar-app/test/widget_test.dart: field notes can be read before collecting a seal
-00:11 +101: /workspace/work/lunar-app/test/widget_test.dart: a spirit can be dragged onto its stone and the next link resumes after closing
-00:12 +102: /workspace/work/lunar-app/test/widget_test.dart: all five spirits are visible above Continue on a phone
-00:12 +103: /workspace/work/lunar-app/test/widget_test.dart: a journey task opens a sample outlook without locking core features
-00:12 +104: /workspace/work/lunar-app/test/widget_test.dart: journey and quiz fit a small screen with larger text and reduced motion
-00:13 +105: /workspace/work/lunar-app/test/widget_test.dart: phone matching entry shows people and random matching with three primary destinations
-00:13 +106: /workspace/work/lunar-app/test/widget_test.dart: first chart entry validates birth details and consent before opening the chart
-00:13 +107: /workspace/work/lunar-app/test/widget_test.dart: returning users open their chosen task and can return to intent selection
-00:13 +108: /workspace/work/lunar-app/test/widget_test.dart: matching search, empty state and reset work without energy cards
-00:14 +109: /workspace/work/lunar-app/test/widget_test.dart: random matching opens a real eligible profile with compatibility details
-00:14 +110: /workspace/work/lunar-app/test/widget_test.dart: saved profiles, invitations and local conversation drafts share the Match workflow
-00:14 +111: /workspace/work/lunar-app/test/widget_test.dart: profile report flow still records the report and hides the person
-00:15 +112: /workspace/work/lunar-app/test/widget_test.dart: chart and recent outlook expose the reading and a direct Agent action
-00:15 +113: /workspace/work/lunar-app/test/widget_test.dart: asking from a reading retains the chart and returns to it
-00:15 +114: /workspace/work/lunar-app/test/widget_test.dart: phone contextual questions remain usable with the keyboard open
-00:15 +115: /workspace/work/lunar-app/test/widget_test.dart: advanced tools stay available without the old promotional heading
-00:16 +116: /workspace/work/lunar-app/test/widget_test.dart: Agent has a question composer and chart-specific suggested questions
-00:16 +117: /workspace/work/lunar-app/test/widget_test.dart: settings preserve language and privacy access from every task
-00:17 +118: /workspace/work/lunar-app/test/widget_test.dart: (tearDownAll)
-00:17 +118: All tests passed!
+00:11 +81: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +82: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +83: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +84: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +85: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +86: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +87: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +88: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +89: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +90: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +91: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +92: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +93: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +94: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +95: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +96: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +97: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:11 +98: /workspace/work/lunar-app/test/widget_test.dart: the garden cycle gives feedback, collects five seals and rewards only once
+00:12 +99: /workspace/work/lunar-app/test/widget_test.dart: existing rewards still invite players into the new seal collection
+00:12 +100: /workspace/work/lunar-app/test/widget_test.dart: field notes can be read before collecting a seal
+00:12 +101: /workspace/work/lunar-app/test/widget_test.dart: a spirit can be dragged onto its stone and the next link resumes after closing
+00:13 +102: /workspace/work/lunar-app/test/widget_test.dart: all five spirits are visible above Continue on a phone
+00:13 +103: /workspace/work/lunar-app/test/widget_test.dart: a journey task opens a sample outlook without locking core features
+00:14 +104: /workspace/work/lunar-app/test/widget_test.dart: journey and quiz fit a small screen with larger text and reduced motion
+00:14 +105: /workspace/work/lunar-app/test/widget_test.dart: phone matching entry shows people and random matching with three primary destinations
+00:15 +106: /workspace/work/lunar-app/test/widget_test.dart: first chart entry validates birth details and consent before opening the chart
+00:15 +107: /workspace/work/lunar-app/test/widget_test.dart: returning users open their chosen task and can return to intent selection
+00:15 +108: /workspace/work/lunar-app/test/widget_test.dart: matching search, empty state and reset work without energy cards
+00:15 +109: /workspace/work/lunar-app/test/widget_test.dart: random matching opens a real eligible profile with compatibility details
+00:16 +110: /workspace/work/lunar-app/test/widget_test.dart: saved profiles, invitations and local conversation drafts share the Match workflow
+00:16 +111: /workspace/work/lunar-app/test/widget_test.dart: profile report flow still records the report and hides the person
+00:17 +112: /workspace/work/lunar-app/test/widget_test.dart: chart and recent outlook expose the reading and a direct Agent action
+00:17 +113: /workspace/work/lunar-app/test/widget_test.dart: asking from a reading retains the chart and returns to it
+00:17 +114: /workspace/work/lunar-app/test/widget_test.dart: phone contextual questions remain usable with the keyboard open
+00:17 +115: /workspace/work/lunar-app/test/widget_test.dart: advanced tools stay available without the old promotional heading
+00:18 +116: /workspace/work/lunar-app/test/widget_test.dart: Agent has a question composer and chart-specific suggested questions
+00:18 +117: /workspace/work/lunar-app/test/widget_test.dart: settings preserve language and privacy access from every task
+00:19 +118: /workspace/work/lunar-app/test/widget_test.dart: (tearDownAll)
+00:19 +118: All tests passed!

@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import '../services/app_state.dart';
 import '../services/sharing.dart';
-import '../services/bazi.dart' show ElementInfo;
+import '../services/bazi.dart' show ElementInfo, EnergyChart;
 import '../services/intent_flow.dart';
 import 'design.dart';
 import 'element_art.dart';
@@ -14,12 +14,18 @@ import 'profile_editor.dart';
 
 Future<void> showShareComposer(
     BuildContext context, AppState state, String kind,
-    {String? parentId}) async {
-  if (!state.personalized) await showProfileEditor(context, state);
+    {String? parentId, EnergyChart? readingChart}) async {
+  if (!state.personalized) {
+    await showProfileEditor(context, state);
+    readingChart = null;
+  }
   if (!context.mounted || !state.personalized) return;
   await Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (_) =>
-          ShareComposer(state: state, kind: kind, parentId: parentId)));
+      builder: (_) => ShareComposer(
+          state: state,
+          kind: kind,
+          parentId: parentId,
+          readingChart: readingChart)));
 }
 
 Future<void> showSharedLinks(BuildContext context, AppState state) =>
@@ -116,15 +122,20 @@ class ShareComposer extends StatefulWidget {
   final AppState state;
   final String kind;
   final String? parentId;
+  final EnergyChart? readingChart;
   const ShareComposer(
-      {super.key, required this.state, required this.kind, this.parentId});
+      {super.key,
+      required this.state,
+      required this.kind,
+      this.parentId,
+      this.readingChart});
   @override
   State<ShareComposer> createState() => _ShareComposerState();
 }
 
 class _ShareComposerState extends State<ShareComposer> {
   late final TextEditingController nickname;
-  late final chart = widget.state.chart;
+  late final chart = widget.readingChart ?? widget.state.chart;
   final selected = <int>{0, 1};
   final cardKey = GlobalKey();
   bool agreed = false, busy = false;

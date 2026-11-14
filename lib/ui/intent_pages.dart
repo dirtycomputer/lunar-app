@@ -273,11 +273,13 @@ class MyChartPage extends StatelessWidget {
         const SizedBox(height: 18),
         Wrap(spacing: 12, runSpacing: 8, children: [
           OutlinedButton.icon(
-              onPressed: () => showShareComposer(context, state, 'pair'),
+              onPressed: () => showShareComposer(context, state, 'pair',
+                  readingChart: r.energy),
               icon: const Icon(Icons.people_outline),
               label: const Text('Compare with a friend')),
           TextButton.icon(
-              onPressed: () => showShareComposer(context, state, 'portrait'),
+              onPressed: () => showShareComposer(context, state, 'portrait',
+                  readingChart: r.energy),
               icon: const Icon(Icons.ios_share),
               label: const Text('Share my element')),
           TextButton(
