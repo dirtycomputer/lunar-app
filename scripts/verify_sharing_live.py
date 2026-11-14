@@ -3,8 +3,7 @@ import argparse
 import json
 from pathlib import Path
 import secrets
-import urllib.request
-import urllib.error
+import subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
 def main():
@@ -13,15 +12,22 @@ def main():
     args=parser.parse_args()
     origin=args.origin.rstrip('/')
     def call(path,method='GET',credential=None,data=None):
-        headers={'Content-Type':'application/json'}
-        if credential: headers['Authorization']='Bearer '+credential
-        request=urllib.request.Request(origin+path,method=method,headers=headers,
-            data=json.dumps(data).encode() if data is not None else None)
-        try:
-            with urllib.request.urlopen(request,timeout=25) as r:
-                content=r.read();return r.status,dict(r.headers),json.loads(content) if r.headers.get_content_type()=='application/json' else content
-        except urllib.error.HTTPError as e:
-            return e.code,dict(e.headers),json.loads(e.read())
+        # Native Sites accepts browser, Dart and curl clients; its edge rejects
+        # urllib's default Python user agent. Credentials stay on hidden stdin.
+        config=['url = '+json.dumps(origin+path),'request = '+json.dumps(method),
+                'header = "Content-Type: application/json"']
+        if credential:config.append('header = '+json.dumps('Authorization: Bearer '+credential))
+        if data is not None:config.append('data = '+json.dumps(json.dumps(data)))
+        response=subprocess.run(['curl','--silent','--show-error','--include','--max-time','25','--config','-'],
+                                input='\n'.join(config)+'\n',capture_output=True,text=True,check=True)
+        remaining=response.stdout
+        while remaining.startswith('HTTP/'):
+            block,_,remaining=remaining.partition('\n\n')
+            lines=block.splitlines();status=int(lines[0].split()[1])
+            headers=dict(line.split(': ',1) for line in lines[1:] if ': ' in line)
+        try:value=json.loads(remaining)
+        except json.JSONDecodeError:value=remaining.encode()
+        return status,headers,value
     links=[]
     host={'name':'QA Alex','element':0,'traits':[0,1],'counts':[2,1,1,1,1]}
     guest={'name':'QA Sam','element':3,'traits':[0,1],'counts':[1,3,1,1,0]}

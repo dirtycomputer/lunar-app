@@ -123,3 +123,16 @@ test('all element combinations produce nonfatalistic discussion prompts, includi
   }
   assert.equal(pairReading(host,host).differenceTitle,'Similar elements, different people');
 });
+
+test('invitation HTML fetches the asset root internally without an index.html redirect',async()=>{
+  const response=await createHandler()(new Request('https://fatepair.test/s/'+token(42)),{
+    ASSETS:{fetch:async request=>{
+      assert.equal(new URL(request.url).pathname,'/');
+      return new Response('<html>flutter_bootstrap.js</html>',{headers:{'Content-Type':'text/html'}});
+    }}
+  });
+  assert.equal(response.status,200);assert.equal(response.headers.get('Location'),null);
+  assert.equal(response.headers.get('Cache-Control'),'no-store');
+  assert.equal(response.headers.get('Referrer-Policy'),'no-referrer');
+  assert.ok((await response.text()).includes('flutter_bootstrap.js'));
+});

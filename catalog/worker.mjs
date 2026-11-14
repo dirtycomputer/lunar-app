@@ -31,7 +31,9 @@ export function createHandler({now=()=>new Date(),allowSeeding=false}={}) {
     if(shared)return shared;
     const url=new URL(request.url),path=url.pathname;
     if (/^\/s\/[A-Za-z0-9_-]{32}\/?$/.test(path) && env.ASSETS) {
-      const asset=await env.ASSETS.fetch(new Request(new URL('/index.html',url),request));
+      // The asset service canonicalizes /index.html to /. Fetch / internally
+      // so its redirect never erases the invitation from the browser URL.
+      const asset=await env.ASSETS.fetch(new Request(new URL('/',url),request));
       const headers=new Headers(asset.headers);
       headers.set('Cache-Control','no-store');
       headers.set('Referrer-Policy','no-referrer');
