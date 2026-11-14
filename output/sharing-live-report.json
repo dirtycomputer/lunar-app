@@ -1,0 +1,16 @@
+{
+  "origin": "https://yuan-bazi-connections.dirtycomputer.chatgpt.site",
+  "storage": "cloudflare-d1",
+  "creation": true,
+  "idempotentRetry": true,
+  "deepLinkHtml": true,
+  "twoDeviceResult": true,
+  "privateResult": true,
+  "singleParticipant": true,
+  "onwardPortrait": true,
+  "participantWithdrawal": true,
+  "ownerWithdrawal": true,
+  "catalogPreserved": 1000,
+  "testRecordsRemoved": true,
+  "browserInteraction": false
+}

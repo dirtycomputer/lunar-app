@@ -8,9 +8,10 @@ import '../services/platform_contracts.dart';
 import 'design.dart';
 import 'legal_center.dart';
 
-Future<void> showProfileEditor(BuildContext context, AppState state) =>
-    showDialog<void>(
-        context: context, builder: (_) => ProfileEditor(state: state));
+Future<bool> showProfileEditor(BuildContext context, AppState state) async =>
+    await showDialog<bool>(
+        context: context, builder: (_) => ProfileEditor(state: state)) ==
+    true;
 
 class ProfileEditor extends StatefulWidget {
   final AppState state;
@@ -97,7 +98,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
               error = AppLocalizations.of(context)!.releaseConsentSaveFailed);
           return;
         }
-        Navigator.pop(context);
+        Navigator.pop(context, true);
         showToast(context, AppLocalizations.of(context)!.energyReadyToast);
       } else {
         setState(() => error = AppLocalizations.of(context)!.saveFailed);

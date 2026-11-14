@@ -1,5 +1,14 @@
 # Verification record
 
+## Friend sharing — 2026-11-14
+
+- Clean Flutter analysis; **118 Flutter tests** pass, including URL routing, reduced chart snapshots, consent, failed save/no request, ambiguous network retry after restart, acknowledgement failure, corrupt-entry recovery, concurrent create/reset, offline withdrawal, credential-free export, expiry and large-text layouts.
+- **21 file-backed SQLite/API tests** pass (11 catalog, 10 sharing), including cross-device result retrieval, missing/invalid credentials, single-participant races, idempotency, strict input/body bounds, shared rate limits, both withdrawal roles and expiry after reopening the real database file.
+- **23 Python chart-service tests** pass. The existing full-context DeepSeek / lunar-python service remains unchanged.
+- Three friend-sharing renderer walkthroughs at 1440×1000, 390×844 and 320×740 / 200% complete invitation → profile with unknown hour → explicit summary consent → shared result → onward invitation. **15 captures**; selected evidence in `output/flutter-render/sharing-*.png`. These use API fixtures only for deterministic rendering; production has no fallback data.
+- Release Web build succeeds with local renderer assets; preview package checks pass. The live D1 smoke passed creation/retry, direct invitation HTML, two independent participant credentials, private results, join conflicts, onward portrait creation, both withdrawal roles and cleanup. Native database inspection confirmed all three sharing tables, the aggregate events and zero remaining QA link records. The original catalog retains its exact 1,000-row digest. See `output/sharing-live-report.json`. CI native compilation is recorded in the PR checks. Browser and actual OS share-sheet acceptance remain unverified.
+
+
 ## Persistent D1 catalog — 2026-11-12
 
 - Live Cloudflare D1: `DB` binding, `catalog_people` and `catalog_seed_runs` confirmed independently through the Sites database viewer. Live API traversal verifies all 1,000 persisted profiles and dataset revision. SQL aggregates cover 40 countries, six continents, ages 18–75 and 400/400/200 gender counts; unknown birth times: 100.

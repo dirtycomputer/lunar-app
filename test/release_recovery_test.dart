@@ -165,7 +165,7 @@ void main() {
     studio.apiKey = 'private-memory-credential';
     final raw = exportDeviceData(state);
     final value = jsonDecode(raw) as Map;
-    expect(value['formatVersion'], 2);
+    expect(value['formatVersion'], 3);
     expect(value['language'], 'zh');
     expect(value['studio']['studio.charts']['primary']['birth'], isNotNull);
     expect(raw, isNot(contains('private-memory-credential')));

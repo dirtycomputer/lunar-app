@@ -21,6 +21,7 @@ import 'profile_editor.dart';
 import 'profile_detail.dart';
 import 'secondary_pages.dart';
 import 'social_pages.dart';
+import 'sharing_pages.dart';
 
 class AppShell extends StatefulWidget {
   final AppState state;
@@ -32,6 +33,7 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   AppState get state => widget.state;
   AppIntent? section;
+  late int intentGeneration;
   late final StudioStore studio;
   late final ChartAgent agent;
   final scroll = ScrollController(), search = TextEditingController();
@@ -50,6 +52,7 @@ class _AppShellState extends State<AppShell> {
   void initState() {
     super.initState();
     section = state.startIntent;
+    intentGeneration = state.intentGeneration;
     studio = StudioStore(state);
     agent = ChartAgent(studio);
     generation = state.resetGeneration;
@@ -60,6 +63,10 @@ class _AppShellState extends State<AppShell> {
   String _profileSignature() =>
       jsonEncode([state.name, state.birth.toJson(), state.personalized]);
   void _changed() {
+    if (state.intentGeneration != intentGeneration) {
+      intentGeneration = state.intentGeneration;
+      section = state.startIntent;
+    }
     final next = _profileSignature();
     if (next != profileSignature) {
       profileSignature = next;
@@ -259,6 +266,13 @@ class _AppShellState extends State<AppShell> {
                           onTap: () {
                             Navigator.pop(ctx);
                             showProfileEditor(context, state);
+                          }),
+                      ListTile(
+                          leading: const Icon(Icons.ios_share),
+                          title: const Text('My shared links'),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            showSharedLinks(context, state);
                           }),
                       ListTile(
                           leading: const Icon(Icons.translate),

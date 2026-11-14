@@ -1,3 +1,4 @@
+import 'sharing_pages.dart';
 import 'package:flutter/material.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/app_state.dart';
@@ -269,6 +270,22 @@ class MyChartPage extends StatelessWidget {
               : Column(
                   children: [reading, const SizedBox(height: 24), pillars]);
         }),
+        const SizedBox(height: 18),
+        Wrap(spacing: 12, runSpacing: 8, children: [
+          OutlinedButton.icon(
+              onPressed: () => showShareComposer(context, state, 'pair',
+                  readingChart: r.energy),
+              icon: const Icon(Icons.people_outline),
+              label: const Text('Compare with a friend')),
+          TextButton.icon(
+              onPressed: () => showShareComposer(context, state, 'portrait',
+                  readingChart: r.energy),
+              icon: const Icon(Icons.ios_share),
+              label: const Text('Share my element')),
+          TextButton(
+              onPressed: () => showSharedLinks(context, state),
+              child: const Text('My shared links')),
+        ]),
         const SizedBox(height: 18),
         Surface(
             padding: EdgeInsets.zero,

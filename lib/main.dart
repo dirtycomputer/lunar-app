@@ -8,6 +8,8 @@ import 'services/app_state.dart';
 import 'services/device_storage.dart';
 import 'ui/app_shell.dart';
 import 'ui/design.dart';
+import 'services/sharing.dart';
+import 'ui/sharing_pages.dart';
 
 SemanticsHandle? webSemantics;
 
@@ -110,7 +112,27 @@ class LunarApp extends StatelessWidget {
                 ? const Locale('en')
                 : basicLocaleListResolution([deviceLocale], supportedLocales);
           },
-          home: AppShell(state: state),
+          initialRoute: '/',
+          home: ShareGateway(state: state),
         ),
       );
+}
+
+class ShareGateway extends StatefulWidget {
+  final AppState state;
+  final Uri? initialUri;
+  const ShareGateway({super.key, required this.state, this.initialUri});
+  @override
+  State<ShareGateway> createState() => _ShareGatewayState();
+}
+
+class _ShareGatewayState extends State<ShareGateway> {
+  late String? id = shareIdFromUri(widget.initialUri ?? Uri.base);
+  @override
+  Widget build(BuildContext context) => id == null
+      ? AppShell(state: widget.state)
+      : SharedLinkPage(
+          state: widget.state,
+          id: id!,
+          onExit: () => setState(() => id = null));
 }

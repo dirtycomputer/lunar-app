@@ -37,3 +37,7 @@ The rejected direction was another set of uniform white cards, ornamental route 
 ## Verification
 
 Use the actual Flutter renderer and bundled fonts to inspect first use, chart, outlook, matching, profile, Agent and garden at desktop, phone, narrow large-text and Chinese sizes. Exercise existing navigation, filtering, random matching, in-context questions and saved progress. Record observed issues and the final verification in release-review.md; renderer captures are not browser acceptance.
+
+## Friend sharing
+
+Reuse the six named colors and Manrope system above. The memorable moment is two actual day-element companions meeting on a shared sky surface, not another dashboard. Left-aligned names and a single action guide each step; body copy appears only where it explains disclosure or the result. The preview is the same portrait that recipients see. A centered reading column keeps the portrait and actions together on desktop and fills the available width on phones. Avoid scores, referral counters, unlock gates and title subtitles. The first concept used several milestone cards; it was reduced to one portrait and three unboxed result paragraphs so the content stays ahead of the game chrome.

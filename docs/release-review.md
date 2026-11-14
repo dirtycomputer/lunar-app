@@ -1,6 +1,25 @@
-# Release review — 2026-11-12
+# Release review — 2026-11-14
 
 This update uses a repeatable use → feedback → fix → regression loop. The shipped channel remains **preview**. Passing tests or deploying the website does not establish readiness for a real dating community.
+
+## Friend sharing — 2026-11-14
+
+Implemented personal element cards and a consented one-friend comparison in the existing D1 database. A recipient follows `/s/:id` directly to the invitation, enters adult birth inputs (unknown hour supported), previews a reduced summary, and accepts. Both devices retrieve the same deterministic discussion result with their own credentials. Sharing uses the OS sheet, copy-link fallback or a rendered card image. My shared links supports retries, returning to a result and withdrawal. A resulting user can create an onward invitation. No share requirement or reward gate was added.
+
+| Feedback found during the loop | Fix and evidence |
+| --- | --- |
+| The previous invitation remained on one device and could not reach a friend. | Persistent link and participant APIs, direct recipient routing and a complete onward-sharing walkthrough. |
+| A network timeout after creation could lose the only revocation handle. | Persist a pending credential before the request; retries reuse the same ID and credential. Tests inject network loss and failed local acknowledgement, then restore from preferences. |
+| Clearing while a share was in flight could orphan server data. | The existing storage deletion barrier now waits for outstanding writes and withdraws all current handles before marking local deletion. Offline withdrawal keeps data/access for retry; concurrent writes are blocked. |
+| A profile-save snackbar covered the following consent step on a phone. | Dismiss it when entering the shared-details preview. Actual renderer interaction completes the confirmation on phones and 320px/200% text. |
+| A refreshed revoked link could retain the previous result in widget memory. | Failed reloads clear old shared data; an expiry timer closes an already-open result. Regression tests verify expiry and no stale result. |
+| One malformed saved link could discard all other withdrawal handles. | Recover valid records independently and show a recovery notice; a regression preserves the valid handle. |
+| Advanced chart settings could make the share preview differ from the reading being viewed. | Pass the displayed chart into the composer; the consent-preview test verifies it uses that selected chart. |
+| Flutter Web history can append `#/` to a path-based invitation. | URI parsing checks both locations so a generic fragment cannot mask the invitation during reload; the URL regression covers this combined form. |
+| Live hosting redirected the internal `/index.html` fetch to `/`, losing the invitation path. | Fetch the asset root internally so the browser retains `/s/:id`; a Worker regression models asset canonicalization and the production smoke checks invitation HTML. |
+| After acceptance, the result inherited the preview’s scroll position and clipped the companions. | Each share stage has a separate scroll view; the result begins at the top. All three renderer walkthroughs assert its position. |
+
+The sharing schema rejects birth inputs and unexpected properties. Capabilities are independent from public link IDs and hashed on the server. Pair acceptance is atomic and retry-safe, records expire after seven days, either participant can withdraw, and aggregate counters contain no names or referral graph. This does not create real community accounts, verified identities or mutual messaging. Production smoke and final CI/publication evidence are recorded in verification.md. The supported browser-control tool is unavailable; renderer interaction is not browser or native share-sheet acceptance.
 
 ## Persistent people catalog — 2026-11-12
 

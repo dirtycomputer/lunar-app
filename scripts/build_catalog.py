@@ -8,6 +8,7 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--enable-seeding',action='store_true',help='Temporary bootstrap only; normal builds reject writes.')
 args=parser.parse_args()
 source=(ROOT/'catalog/worker.mjs').read_text()
+source=source.replace("import {handleSharing} from './sharing.mjs';",(ROOT/'catalog/sharing.mjs').read_text())
 seed=json.loads((ROOT/'catalog/seed.json').read_text())
 assert len(seed['people'])==seed['expectedCount']==1000
 source=source.replace("import seed from './seed.json' with { type: 'json' };",

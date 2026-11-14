@@ -10,6 +10,7 @@ import 'intent_flow.dart';
 import 'journey.dart';
 import 'device_storage.dart';
 import 'people_repository.dart';
+import 'sharing.dart';
 
 class AppState extends ChangeNotifier {
   final SharedPreferences preferences;
@@ -24,6 +25,7 @@ class AppState extends ChangeNotifier {
   final LocalModerationService moderationStore;
   late final LocalSocialStore social;
   late final JourneyStore journey;
+  late final SharingStore sharing;
   late BirthData birth;
   late EnergyChart chart;
   late List<MatchResult> matches;
@@ -41,9 +43,12 @@ class AppState extends ChangeNotifier {
   List<ReportRecord> reports = [];
   String? persistenceError;
   int resetGeneration = 0;
+  int intentGeneration = 0;
   AppIntent? startIntent;
   AppState(this.preferences,
-      {PeopleRepository? peopleRepository, List<Person>? initialPeople})
+      {PeopleRepository? peopleRepository,
+      SharingRepository? sharingRepository,
+      List<Person>? initialPeople})
       : _peopleRepository = peopleRepository ??
             (initialPeople == null ? PeopleRepository() : null),
         _people = List.unmodifiable(initialPeople ?? const <Person>[]),
@@ -84,6 +89,8 @@ class AppState extends ChangeNotifier {
     social = LocalSocialStore(preferences,
         knownIds: _knownIds, allowUnresolved: _peopleRepository != null);
     social.addListener(_notify);
+    sharing = SharingStore(storage, repository: sharingRepository);
+    sharing.addListener(_notify);
     journey = JourneyStore(preferences);
     journey.addListener(_notify);
     _recalculate();
@@ -195,6 +202,7 @@ class AppState extends ChangeNotifier {
           return false;
         }
         startIntent = intent;
+        intentGeneration++;
         _notify();
         return true;
       }, failure: false);
@@ -282,21 +290,24 @@ class AppState extends ChangeNotifier {
   }
 
   Future<bool> reset() async {
-    final complete = await storage.reset(onMarked: () {
-      birth = demoBirth;
-      name = 'Alex';
-      personalized = false;
-      startIntent = null;
-      persistenceError = null;
-      saved.clear();
-      hidden.clear();
-      reports = [];
-      social.forget();
-      journey.forget();
-      resetGeneration++;
-      _recalculate();
-      _notify();
-    });
+    final complete = await storage.reset(
+        beforeMark: sharing.revokeBeforeReset,
+        onMarked: () {
+          birth = demoBirth;
+          name = 'Alex';
+          personalized = false;
+          startIntent = null;
+          persistenceError = null;
+          saved.clear();
+          hidden.clear();
+          reports = [];
+          social.forget();
+          journey.forget();
+          sharing.forget();
+          resetGeneration++;
+          _recalculate();
+          _notify();
+        });
     _notify();
     return complete;
   }
@@ -309,6 +320,8 @@ class AppState extends ChangeNotifier {
     social.dispose();
     journey.removeListener(_notify);
     journey.dispose();
+    sharing.removeListener(_notify);
+    sharing.dispose();
     super.dispose();
   }
 }
