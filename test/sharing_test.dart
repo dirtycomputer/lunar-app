@@ -65,6 +65,7 @@ void main() {
         isTrue);
     expect(shareIdFromUri(Uri.parse('https://example.test/s/$id')), id);
     expect(shareIdFromUri(Uri.parse('https://example.test/#/s/$id')), id);
+    expect(shareIdFromUri(Uri.parse('https://example.test/s/$id#/')), id);
     expect(shareIdFromUri(Uri.parse('https://example.test/s/short')), isNull);
     expect(shareIdFromUri(Uri.parse('https://example.test/?birth=private')),
         isNull);

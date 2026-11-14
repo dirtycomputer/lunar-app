@@ -15,6 +15,7 @@ Implemented personal element cards and a consented one-friend comparison in the 
 | A refreshed revoked link could retain the previous result in widget memory. | Failed reloads clear old shared data; an expiry timer closes an already-open result. Regression tests verify expiry and no stale result. |
 | One malformed saved link could discard all other withdrawal handles. | Recover valid records independently and show a recovery notice; a regression preserves the valid handle. |
 | Advanced chart settings could make the share preview differ from the reading being viewed. | Pass the displayed chart into the composer; the consent-preview test verifies it uses that selected chart. |
+| Flutter Web history can append `#/` to a path-based invitation. | URI parsing checks both locations so a generic fragment cannot mask the invitation during reload; the URL regression covers this combined form. |
 | Live hosting redirected the internal `/index.html` fetch to `/`, losing the invitation path. | Fetch the asset root internally so the browser retains `/s/:id`; a Worker regression models asset canonicalization and the production smoke checks invitation HTML. |
 | After acceptance, the result inherited the preview’s scroll position and clipped the companions. | Each share stage has a separate scroll view; the result begins at the top. All three renderer walkthroughs assert its position. |
 

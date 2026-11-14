@@ -40,8 +40,13 @@ String newShareToken() {
 }
 
 String? shareIdFromUri(Uri uri) {
-  final path = uri.fragment.startsWith('/') ? uri.fragment : uri.path;
-  return RegExp(r'^/s/([A-Za-z0-9_-]{32})/?$').firstMatch(path)?.group(1);
+  // Flutter's default Web history may add #/ to a path-based invitation.
+  // A generic fragment must not hide the invitation when the page reloads.
+  for (final path in [uri.fragment, uri.path]) {
+    final id = RegExp(r'^/s/([A-Za-z0-9_-]{32})/?$').firstMatch(path)?.group(1);
+    if (id != null) return id;
+  }
+  return null;
 }
 
 class ElementPortrait {
