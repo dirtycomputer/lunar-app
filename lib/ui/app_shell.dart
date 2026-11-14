@@ -32,7 +32,8 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   AppState get state => widget.state;
-  AppIntent? section, lastIntent;
+  AppIntent? section;
+  late int intentGeneration;
   late final StudioStore studio;
   late final ChartAgent agent;
   final scroll = ScrollController(), search = TextEditingController();
@@ -50,7 +51,8 @@ class _AppShellState extends State<AppShell> {
   @override
   void initState() {
     super.initState();
-    section = lastIntent = state.startIntent;
+    section = state.startIntent;
+    intentGeneration = state.intentGeneration;
     studio = StudioStore(state);
     agent = ChartAgent(studio);
     generation = state.resetGeneration;
@@ -61,8 +63,9 @@ class _AppShellState extends State<AppShell> {
   String _profileSignature() =>
       jsonEncode([state.name, state.birth.toJson(), state.personalized]);
   void _changed() {
-    if (state.startIntent != lastIntent) {
-      section = lastIntent = state.startIntent;
+    if (state.intentGeneration != intentGeneration) {
+      intentGeneration = state.intentGeneration;
+      section = state.startIntent;
     }
     final next = _profileSignature();
     if (next != profileSignature) {

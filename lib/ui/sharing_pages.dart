@@ -42,6 +42,7 @@ class ShareFrame extends StatelessWidget {
               onPressed: onClose ?? () => Navigator.pop(context))),
       body: SafeArea(
           child: SingleChildScrollView(
+              key: ValueKey(title),
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 40),
               child: Center(
                   child: ConstrainedBox(

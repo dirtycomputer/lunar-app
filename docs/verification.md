@@ -2,7 +2,7 @@
 
 ## Friend sharing — 2026-11-14
 
-- Clean Flutter analysis; **116 Flutter tests** pass, including URL routing, reduced chart snapshots, consent, failed save/no request, ambiguous network retry after restart, acknowledgement failure, corrupt-entry recovery, concurrent create/reset, offline withdrawal, credential-free export, expiry and large-text layouts.
+- Clean Flutter analysis; **118 Flutter tests** pass, including URL routing, reduced chart snapshots, consent, failed save/no request, ambiguous network retry after restart, acknowledgement failure, corrupt-entry recovery, concurrent create/reset, offline withdrawal, credential-free export, expiry and large-text layouts.
 - **20 file-backed SQLite/API tests** pass (11 catalog, 9 sharing), including cross-device result retrieval, missing/invalid credentials, single-participant races, idempotency, strict input/body bounds, shared rate limits, both withdrawal roles and expiry after reopening the real database file.
 - **23 Python chart-service tests** pass. The existing full-context DeepSeek / lunar-python service remains unchanged.
 - Three friend-sharing renderer walkthroughs at 1440×1000, 390×844 and 320×740 / 200% complete invitation → profile with unknown hour → explicit summary consent → shared result → onward invitation. **15 captures**; selected evidence in `output/flutter-render/sharing-*.png`. These use API fixtures only for deterministic rendering; production has no fallback data.

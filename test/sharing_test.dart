@@ -10,6 +10,8 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/main.dart';
 import 'package:lunar_social/models/profile.dart';
 import 'package:lunar_social/services/app_state.dart';
+import 'package:lunar_social/services/intent_flow.dart';
+import 'package:lunar_social/ui/intent_pages.dart';
 import 'package:lunar_social/services/bazi.dart' as bazi;
 import 'package:lunar_social/services/data_export.dart';
 import 'package:lunar_social/services/device_storage.dart';
@@ -258,6 +260,61 @@ void main() {
     await tester.pump(const Duration(seconds: 7));
     await tester.pumpAndSettle();
     expect(find.text('Something you share'), findsNothing);
+    expect(find.textContaining('expired or was withdrawn'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    state.dispose();
+  });
+  testWidgets(
+      'returning from sharing can reopen the reading after navigating elsewhere',
+      (tester) async {
+    final state =
+        AppState(await SharedPreferences.getInstance(), initialPeople: []);
+    await state.chooseIntent(AppIntent.chart);
+    await tester.pumpWidget(LunarApp(state: state));
+    await tester.pumpAndSettle();
+    tester
+        .widget<NavigationBar>(find.byType(NavigationBar))
+        .onDestinationSelected!(1);
+    await tester.pumpAndSettle();
+    expect(find.byType(MyChartPage), findsNothing);
+    await state.chooseIntent(AppIntent.chart);
+    await tester.pumpAndSettle();
+    expect(find.byType(MyChartPage), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    state.dispose();
+  });
+  testWidgets('refreshing a withdrawn link clears the previous shared card',
+      (tester) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        'sharing.v1',
+        jsonEncode([
+          ShareEntry(
+                  id: id,
+                  secret: newShareToken(),
+                  kind: 'pair',
+                  role: 'owner',
+                  portrait: portrait,
+                  expiresAt: until)
+              .toJson()
+        ]));
+    var withdrawn = false;
+    final state = AppState(prefs,
+        initialPeople: [],
+        sharingRepository: SharingRepository(
+            client: MockClient((r) async => withdrawn
+                ? http.Response('{"code":"expired_or_missing"}', 410)
+                : ok(link()))));
+    await tester.pumpWidget(MaterialApp(
+        theme: lunarTheme(),
+        home: SharedLinkPage(state: state, id: id, onExit: () {})));
+    await tester.pumpAndSettle();
+    expect(find.byType(ElementPortraitCard), findsOneWidget);
+    withdrawn = true;
+    await tester.ensureVisible(find.text('Check for reply'));
+    await tester.tap(find.text('Check for reply'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ElementPortraitCard), findsNothing);
     expect(find.textContaining('expired or was withdrawn'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
     state.dispose();

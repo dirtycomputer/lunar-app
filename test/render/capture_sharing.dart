@@ -134,6 +134,8 @@ void main() {
       await tester.pumpAndSettle();
       expect(joined, isTrue);
       expect(find.text('Your elements together'), findsOneWidget);
+      expect(tester.getTopLeft(find.byType(PairResultView)).dy,
+          greaterThanOrEqualTo(56));
       await shot('result');
       await tester.ensureVisible(find.text('Compare with another friend'));
       await tester.tap(find.text('Compare with another friend'));

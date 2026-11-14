@@ -43,6 +43,7 @@ class AppState extends ChangeNotifier {
   List<ReportRecord> reports = [];
   String? persistenceError;
   int resetGeneration = 0;
+  int intentGeneration = 0;
   AppIntent? startIntent;
   AppState(this.preferences,
       {PeopleRepository? peopleRepository,
@@ -201,6 +202,7 @@ class AppState extends ChangeNotifier {
           return false;
         }
         startIntent = intent;
+        intentGeneration++;
         _notify();
         return true;
       }, failure: false);

@@ -46,6 +46,8 @@ GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build
 
 ## Working features
 
+- Shareable element cards and private one-friend comparisons, persisted in D1. Preview the shared fields, create a seven-day link, open it on another device, consent to a reduced elemental summary, and both view a commonality, difference and conversation question. Revisit/withdraw from My shared links; share through the system, clipboard or a card image. [Sharing contract and verification](docs/friend-sharing.md).
+
 - A persistent Cloudflare D1 catalog with 1,000 explicitly synthetic adults across 40 countries, six continents and ages 18–75. Public SQL-backed list/detail/statistics APIs support paging and filters. Catalog records use initials and independently verified lunar-python chart snapshots, including historical birth instants. See [catalog operations](catalog/README.md).
 
 - Optional Element Garden: an original five-habitat map, a tap/drag supporting-cycle puzzle, waking guardians, a five-seal collection and readable field notes. Each of five links saves immediately; old rewards migrate and replay never duplicates sparks. All three discoveries remain freely selectable and clear with local data.
@@ -61,7 +63,7 @@ GitHub Actions runs Flutter/Python checks, a Web release, an Android debug build
 - Save / unsave connections, inspect match breakdowns, and hide profiles.
 - Search discovery by name, city/country, occupation, or interests.
 - Secondary Saved, Invitations, and Messages tabs within Match.
-- Local-only invitations, withdrawal, conversation previews, and persistent message drafts with an icebreaker. No messages are delivered.
+- Local-only invitations to synthetic profiles, withdrawal, conversation previews, and persistent message drafts with an icebreaker. No messages are delivered.
 - Validated adult birth profile, date picker, optional birth time, 16 global birthplaces, and custom birthplace with IANA zone and longitude.
 - Historical time-zone and daylight-saving handling.
 - Four Pillars, day master, visible element distribution, and English guide.
