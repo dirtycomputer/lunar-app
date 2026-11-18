@@ -27,6 +27,13 @@ const elementColors = [
 ];
 const elementTints = [mintTint, coralTint, amberTint, lavenderTint, blueTint];
 
+const _buttonLabelStyle = TextStyle(
+  fontFamily: 'Manrope',
+  fontFamilyFallback: ['NotoSansSC'],
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+);
+
 ThemeData lunarTheme() => ThemeData(
       useMaterial3: true,
       fontFamily: 'Manrope',
@@ -70,8 +77,7 @@ ThemeData lunarTheme() => ThemeData(
         minimumSize: const Size(48, 48),
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 17),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        textStyle: const TextStyle(
-            fontFamily: 'Manrope', fontWeight: FontWeight.w600, fontSize: 14),
+        textStyle: _buttonLabelStyle,
       )),
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
@@ -85,10 +91,7 @@ ThemeData lunarTheme() => ThemeData(
           style: TextButton.styleFrom(
               minimumSize: const Size(48, 48),
               foregroundColor: blue,
-              textStyle: const TextStyle(
-                  fontFamily: 'Manrope',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600))),
+              textStyle: _buttonLabelStyle)),
       iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(minimumSize: const Size(48, 48))),
       navigationBarTheme: const NavigationBarThemeData(

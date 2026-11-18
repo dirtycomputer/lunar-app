@@ -79,6 +79,15 @@ void main() {
 
       expect(find.byType(MatchListTile), findsNWidgets(20));
       expect(find.text(l.catalogCount(1000)), findsOneWidget);
+      if (name == 'zh') {
+        for (final label in [l.flowRandom, l.flowSampleRanking]) {
+          expect(
+              DefaultTextStyle.of(tester.element(find.text(label)))
+                  .style
+                  .fontFamilyFallback,
+              contains('NotoSansSC'));
+        }
+      }
       await shot('people');
       await tester.tap(find.text(l.filters));
       await tester.pumpAndSettle();
