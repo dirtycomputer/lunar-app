@@ -1,120 +1,115 @@
 import 'package:flutter/material.dart';
+import '../l10n/bazi_labels.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../services/bazi.dart' as bazi;
 import '../services/intent_flow.dart';
+import '../services/journey.dart' show supportedElement;
 import 'design.dart';
 import 'profile_avatar.dart';
 
 class MatchListTile extends StatelessWidget {
   final bazi.MatchResult match;
+  final bazi.EnergyChart mine;
   final bool saved;
   final VoidCallback onOpen, onSave;
-  const MatchListTile(
-      {super.key,
-      required this.match,
-      required this.saved,
-      required this.onOpen,
-      required this.onSave});
+
+  const MatchListTile({
+    super.key,
+    required this.match,
+    required this.mine,
+    required this.saved,
+    required this.onOpen,
+    required this.onSave,
+  });
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context)!;
     final p = match.person;
+    final first = elementLabel(l, mine.dayElement);
+    final second = elementLabel(l, match.chart.dayElement);
+    final mineSupportsTheirs =
+        supportedElement(mine.dayElement) == match.chart.dayElement;
+    final myDaySign = branchLabel(l, mine.pillars[2]);
+    final theirDaySign = branchLabel(l, match.chart.pillars[2]);
     final reason = switch (matchReason(match)) {
       MatchReason.balance => l.flowReasonBalance,
-      MatchReason.support => l.flowReasonSupport,
-      MatchReason.shared => l.flowReasonShared,
-      MatchReason.branches => l.flowReasonBranches,
-      MatchReason.contrast => l.flowReasonContrast,
+      MatchReason.support => mineSupportsTheirs
+          ? l.flowReasonSupport(first, second)
+          : l.flowReasonSupport(second, first),
+      MatchReason.shared => l.flowReasonShared(first),
+      MatchReason.branches => myDaySign == theirDaySign
+          ? l.flowReasonSameSign(myDaySign)
+          : l.flowReasonBranches(myDaySign, theirDaySign),
+      MatchReason.contrast => l.flowReasonContrast(first, second),
     };
-    return Semantics(
-        button: true,
-        label: '${p.name}, ${p.age}, ${p.location}',
-        child: Material(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(24),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-                onTap: onOpen,
-                hoverColor: blue.withValues(alpha: .035),
-                child: LayoutBuilder(builder: (context, c) {
-                  final compact = c.maxWidth < 640;
-                  final harmony = Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                          color: mintTint,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(l.harmonyPct(match.score),
-                          style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: green)));
-                  return Padding(
-                      padding: EdgeInsets.all(compact ? 14 : 20),
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(18),
-                                child: ProfileAvatar(
-                                  p,
-                                  width: compact ? 76 : 104,
-                                  height: compact ? 108 : 128,
-                                )),
-                            SizedBox(width: compact ? 14 : 24),
-                            Expanded(
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                  Row(children: [
-                                    Expanded(
-                                        child: Text('${p.name}, ${p.age}',
-                                            style: TextStyle(
-                                                fontSize: compact ? 19 : 23,
-                                                height: 1.25,
-                                                fontWeight: FontWeight.w600,
-                                                letterSpacing: -.5))),
-                                    IconButton(
-                                        tooltip: saved
-                                            ? l.unsave(p.name)
-                                            : l.saveTo(p.name),
-                                        onPressed: onSave,
-                                        icon: Icon(
-                                            saved
-                                                ? Icons.favorite_rounded
-                                                : Icons.favorite_border_rounded,
-                                            size: 21,
-                                            color: saved ? coral : muted))
-                                  ]),
-                                  Text(p.location,
-                                      style: const TextStyle(
-                                          fontSize: 12, color: muted)),
-                                  const SizedBox(height: 12),
-                                  Text(reason,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          height: 1.5,
-                                          color: ink)),
-                                  const SizedBox(height: 14),
-                                  Row(children: [
-                                    Flexible(child: harmony),
-                                    const SizedBox(width: 12),
-                                    if (!compact)
-                                      Expanded(
-                                          child: Text(p.occupation,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                  fontSize: 12, color: muted)))
-                                    else
-                                      const Spacer(),
-                                    const Icon(Icons.arrow_forward_rounded,
-                                        size: 20, color: blue)
-                                  ])
-                                ]))
-                          ]));
-                }))));
+    final save = IconButton(
+      tooltip: saved ? l.unsave(p.name) : l.saveTo(p.name),
+      onPressed: onSave,
+      icon: Icon(saved ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+          size: 21, color: saved ? coral : muted),
+    );
+    final score = Text(l.harmonyPct(match.score),
+        style: const TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w700, color: green));
+    final why = Text(reason,
+        style: const TextStyle(fontSize: 14, height: 1.45, color: ink));
+    return InkWell(
+      onTap: onOpen,
+      child: LayoutBuilder(builder: (context, c) {
+        final wide = c.maxWidth >= 760 &&
+            MediaQuery.textScalerOf(context).scale(14) < 20;
+        final avatarSize = wide ? 54.0 : 46.0;
+        final identity = Row(children: [
+          ExcludeSemantics(
+            child: ClipOval(
+                child: ProfileAvatar(p, width: avatarSize, height: avatarSize)),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text('${p.name}, ${p.age}',
+                    style: const TextStyle(
+                        fontSize: 18,
+                        height: 1.22,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -.45)),
+                const SizedBox(height: 3),
+                Text(
+                    wide && p.occupation.isNotEmpty
+                        ? '${p.location} · ${p.occupation}'
+                        : p.location,
+                    style: const TextStyle(fontSize: 13, color: muted)),
+              ])),
+        ]);
+        return Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: wide ? 22 : 16, vertical: wide ? 14 : 12),
+          child: wide
+              ? Row(children: [
+                  Expanded(flex: 5, child: identity),
+                  const SizedBox(width: 24),
+                  Expanded(flex: 6, child: why),
+                  const SizedBox(width: 20),
+                  Expanded(
+                      flex: 3,
+                      child: Align(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: score)),
+                  const SizedBox(width: 8),
+                  save,
+                ])
+              : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Row(children: [Expanded(child: identity), save]),
+                  const SizedBox(height: 8),
+                  why,
+                  const SizedBox(height: 6),
+                  score,
+                ]),
+        );
+      }),
+    );
   }
 }

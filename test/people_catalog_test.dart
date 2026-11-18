@@ -9,6 +9,7 @@ import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:lunar_social/models/profile.dart';
+import 'package:lunar_social/l10n/generated/app_localizations.dart';
 import 'package:lunar_social/services/app_state.dart';
 import 'package:lunar_social/services/bazi.dart';
 import 'package:lunar_social/services/people_repository.dart';
@@ -190,6 +191,33 @@ void main() {
     (convention['chart'] as Map)['sect'] = 1;
     expect(() => Person.fromCatalog(convention), throwsFormatException);
   });
+  testWidgets(
+      'recommendation copy follows the direction of the actual element cycle',
+      (tester) async {
+    final person = Person.fromCatalog(rows.first);
+    EnergyChart chart(String day) => EnergyChart([
+          const Pillar('Year', '甲子'),
+          const Pillar('Month', '甲子'),
+          Pillar('Day', day)
+        ], false, DateTime(2000));
+    final wood = chart('甲子');
+    final fire = chart('丙寅');
+    for (final (mine, theirs) in [(wood, fire), (fire, wood)]) {
+      await tester.pumpWidget(MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        home: Scaffold(
+            body: MatchListTile(
+                mine: mine,
+                match: MatchResult(person, theirs, 90, 82, 96, 72),
+                saved: false,
+                onOpen: () {},
+                onSave: () {})),
+      ));
+      await tester.pumpAndSettle();
+      expect(find.text('In these charts, Wood supports Fire.'), findsOneWidget);
+    }
+  });
+
   for (final (size, scale) in [
     (const Size(1440, 1000), 1.0),
     (const Size(320, 740), 2.0)
@@ -212,6 +240,13 @@ void main() {
           child: LunarApp(state: state)));
       await tester.pumpAndSettle();
       expect(find.byType(MatchListTile), findsNWidgets(20));
+      final first =
+          tester.widget<MatchListTile>(find.byType(MatchListTile).first);
+      expect(
+          find.descendant(
+              of: find.byType(MatchListTile).first,
+              matching: find.text('Chart score ${first.match.score}/100')),
+          findsOneWidget);
       await tester.tap(find.byKey(const ValueKey('random-match')));
       await tester.pumpAndSettle();
       expect(find.byTooltip('Close profile').hitTestable(), findsOneWidget);

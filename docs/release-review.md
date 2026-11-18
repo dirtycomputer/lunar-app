@@ -1,6 +1,18 @@
-# Release review — 2026-11-14
+# Release review — 2026-11-18
 
 This update uses a repeatable use → feedback → fix → regression loop. The shipped channel remains **preview**. Passing tests or deploying the website does not establish readiness for a real dating community.
+
+## Reading, matching and invitation walkthrough — 2026-11-18
+
+| Observed in use | Shipped change | Evidence |
+| --- | --- | --- |
+| On desktop the name, reason and score did not align across rows. On a 390 px phone just one whole recommendation fit above the navigation. Several reasons read identically. | Align desktop rows and give the reason the full phone width. Show the actual elements or day signs for the relevant rule, scores out of 100 and the sample chart state before personalization. | Two complete recommendations and the third identity are visible on the phone. The D1 snapshot contains 1,000 profiles. Regression checks verify score text and both directions of the generating cycle. |
+| The chart detail disclosure was separated from the pillars by sharing actions. | Place the disclosure directly under the pillars. Give the conclusion a larger reading size and carry its day element color through the chart. | Desktop, phone, larger text, landscape and Chinese chart, outlook and Agent walkthroughs. |
+| The invite repeated its question and printed five counts together. A third reflection looked selectable after two were chosen. | Follow the card with a single action. Pair the proportion strip with the five named counts. Disable an unavailable choice and re-enable it after deselection. | The composer regression changes selections, previews the active chart and verifies consent. Three rendering walkthroughs reach the shared result. |
+| At 320 px and 200% text, the first revision split “Wood” inside a word and clipped the recipient title. | Move the companion beside the wordmark at large text sizes. Let the header and friend name wrap in the same scrolling column. | The large-text regression checks the element word occupies one line. Core and catalog captures also assert the effective text scaling. |
+| Chinese button labels rendered as missing-glyph blocks in the offline Flutter renderer. | Include the bundled Noto Sans SC fallback in the two custom button text styles. | The Chinese catalog walkthrough checks the effective font family fallback for the random and personalization buttons. |
+
+Flutter interaction and rendering cover 12 walkthroughs with 66 captures. The Sites environment lacks its supported browser-control tool. Browser accessibility, browser interaction and native share sheets still need testing on release devices. Platform and operator actions are recorded in the [launch checklist](launch-checklist.md).
 
 ## Friend sharing — 2026-11-14
 

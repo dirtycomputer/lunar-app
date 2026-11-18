@@ -282,7 +282,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String harmonyPct(int n) {
-    return '궁합 $n%';
+    return '궁합 점수 $n/100';
   }
 
   @override
@@ -405,7 +405,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String minHarmony(int n) {
-    return '최소 궁합 · $n%';
+    return '최소 점수 · $n/100';
   }
 
   @override
@@ -761,7 +761,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String factorContext(String title, int score) {
-    return '이번 궁합 점수에서 $title이(가) $score%를 차지했습니다.';
+    return '$title · $score/100';
   }
 
   @override
@@ -1108,19 +1108,35 @@ class AppLocalizationsKo extends AppLocalizations {
   String get flowGeneralSolar => 'How does solar time work?';
 
   @override
-  String get flowReasonBalance => 'Your combined charts have a balanced mix of elements.';
+  String get flowSampleRanking => 'Using sample chart · Personalize';
 
   @override
-  String get flowReasonSupport => 'Your core elements follow the supporting cycle.';
+  String get flowReasonBalance => 'Across both charts, the five elements are spread fairly evenly.';
 
   @override
-  String get flowReasonShared => 'You share the same core element.';
+  String flowReasonSupport(String source, String target) {
+    return 'In these charts, $source supports $target.';
+  }
 
   @override
-  String get flowReasonBranches => 'Your day branches share a traditional harmony pattern.';
+  String flowReasonShared(String element) {
+    return 'Both charts have $element as their core element.';
+  }
 
   @override
-  String get flowReasonContrast => 'Your core elements form a contrasting pair.';
+  String flowReasonSameSign(String sign) {
+    return 'Both day pillars share the $sign sign.';
+  }
+
+  @override
+  String flowReasonBranches(String first, String second) {
+    return '$first and $second form a traditional day-sign pairing.';
+  }
+
+  @override
+  String flowReasonContrast(String first, String second) {
+    return '$first and $second form a contrasting element pair.';
+  }
 
   @override
   String get journeyTitle => 'Your journey';

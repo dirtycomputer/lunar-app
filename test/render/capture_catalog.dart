@@ -61,6 +61,10 @@ void main() {
                   disableAnimations: scale > 1),
               child: LunarApp(state: state))));
       await tester.pumpAndSettle();
+      expect(
+          MediaQuery.textScalerOf(tester.element(find.byType(Scaffold).first))
+              .scale(14),
+          closeTo(14 * scale, .01));
       final l =
           AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
       Future<void> shot(String phase) async {
@@ -75,6 +79,15 @@ void main() {
 
       expect(find.byType(MatchListTile), findsNWidgets(20));
       expect(find.text(l.catalogCount(1000)), findsOneWidget);
+      if (name == 'zh') {
+        for (final label in [l.flowRandom, l.flowSampleRanking]) {
+          expect(
+              DefaultTextStyle.of(tester.element(find.text(label)))
+                  .style
+                  .fontFamilyFallback,
+              contains('NotoSansSC'));
+        }
+      }
       await shot('people');
       await tester.tap(find.text(l.filters));
       await tester.pumpAndSettle();

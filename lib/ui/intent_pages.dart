@@ -221,13 +221,25 @@ class MyChartPage extends StatelessWidget {
                     termId: 'master',
                     child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
+                            horizontal: 10, vertical: 9),
                         decoration: BoxDecoration(
-                            color: mintTint,
-                            borderRadius: BorderRadius.circular(7)),
-                        child: Text('${r.energy.identity} ⓘ',
-                            style:
-                                const TextStyle(fontSize: 11, color: green))))
+                            color: elementTints[r.energy.dayElement.index],
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Wrap(
+                            spacing: 5,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Text(r.energy.identity,
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      color: elementColors[
+                                          r.energy.dayElement.index],
+                                      fontWeight: FontWeight.w600)),
+                              Icon(Icons.info_outline,
+                                  size: 15,
+                                  color:
+                                      elementColors[r.energy.dayElement.index]),
+                            ])))
               ]),
               const SizedBox(height: 10),
               Text(
@@ -259,7 +271,19 @@ class MyChartPage extends StatelessWidget {
               text: contextData.reading,
               element: r.energy.dayElement,
               onAsk: () => onAsk(l.flowQuestionOverview));
-          final pillars = _PillarGrid(r);
+          final pillars = Column(children: [
+            _PillarGrid(r),
+            const SizedBox(height: 6),
+            ExpansionTile(
+              tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+              shape: const Border(),
+              collapsedShape: const Border(),
+              title: Text(l.flowDetails,
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w600)),
+              children: [ChartTable(r.pillars)],
+            ),
+          ]);
           return c.maxWidth >= 880 &&
                   MediaQuery.textScalerOf(context).scale(14) < 20
               ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -282,21 +306,7 @@ class MyChartPage extends StatelessWidget {
                   readingChart: r.energy),
               icon: const Icon(Icons.ios_share),
               label: const Text('Share my element')),
-          TextButton(
-              onPressed: () => showSharedLinks(context, state),
-              child: const Text('My shared links')),
         ]),
-        const SizedBox(height: 18),
-        Surface(
-            padding: EdgeInsets.zero,
-            child: ExpansionTile(
-                shape: const Border(),
-                collapsedShape: const Border(),
-                title: Text(l.flowDetails,
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w600)),
-                childrenPadding: const EdgeInsets.all(18),
-                children: [ChartTable(r.pillars)])),
       ] else ...[
         Wrap(spacing: 9, runSpacing: 9, children: [
           for (final p in OutlookPeriod.values)
@@ -360,7 +370,9 @@ class _PillarGrid extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: small ? 22 : 28, horizontal: 4),
                         decoration: BoxDecoration(
-                            color: i == 2 ? mintTint : null,
+                            color: i == 2
+                                ? elementTints[report.energy.dayElement.index]
+                                : null,
                             border: BorderDirectional(
                                 end: BorderSide(
                                     color:
@@ -376,7 +388,10 @@ class _PillarGrid extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: i == 2 ? green : muted)),
+                                  color: i == 2
+                                      ? elementColors[
+                                          report.energy.dayElement.index]
+                                      : muted)),
                           const SizedBox(height: 21),
                           if (i < report.pillars.length) ...[
                             Text(report.pillars[i].value[0],
@@ -391,7 +406,7 @@ class _PillarGrid extends StatelessWidget {
                                 core.stemNames[core.stems
                                     .indexOf(report.pillars[i].value[0])],
                                 style: const TextStyle(
-                                    fontSize: 10, color: muted)),
+                                    fontSize: 12, color: muted)),
                             const SizedBox(height: 15),
                             Text(report.pillars[i].value[1],
                                 style: TextStyle(
@@ -403,7 +418,7 @@ class _PillarGrid extends StatelessWidget {
                                 core.branchNames[core.branches
                                     .indexOf(report.pillars[i].value[1])],
                                 style: const TextStyle(
-                                    fontSize: 10, color: muted)),
+                                    fontSize: 12, color: muted)),
                           ] else
                             const SizedBox(
                                 height: 153,
@@ -427,9 +442,11 @@ class _Reading extends StatelessWidget {
     final paragraphs = text.split('\n\n');
     return Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(22),
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(26)),
+            color:
+                element == null ? Colors.white : elementTints[element!.index],
+            borderRadius: BorderRadius.circular(26)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [
             Expanded(
@@ -438,11 +455,17 @@ class _Reading extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
                         letterSpacing: -.6))),
-            if (element != null) ElementSpirit(element: element!, size: 48),
+            if (element != null)
+              ExcludeSemantics(
+                  child: ElementSpirit(element: element!, size: 60)),
           ]),
           const SizedBox(height: 12),
           SelectableText(paragraphs.first,
-              style: const TextStyle(fontSize: 15, height: 1.65, color: ink)),
+              style: const TextStyle(
+                  fontSize: 18,
+                  height: 1.5,
+                  fontWeight: FontWeight.w500,
+                  color: ink)),
           if (paragraphs.length > 1)
             Theme(
                 data: Theme.of(context)
@@ -465,7 +488,7 @@ class _Reading extends StatelessWidget {
           TextButton.icon(
               onPressed: onAsk,
               style: TextButton.styleFrom(
-                  backgroundColor: blueTint,
+                  backgroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16))),

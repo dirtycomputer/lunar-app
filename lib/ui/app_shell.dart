@@ -674,15 +674,26 @@ class _AppShellState extends State<AppShell> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [searchBox, const SizedBox(height: 13), actions]);
         }),
-        if (!state.personalized)
-          Padding(
-              padding: const EdgeInsets.only(top: 9),
-              child: TextButton.icon(
-                  onPressed: () => showProfileEditor(context, state),
-                  icon: const Icon(Icons.person_outline, size: 15),
-                  label: Text(l.flowAddBirth,
-                      style: const TextStyle(fontSize: 11)))),
-        const SizedBox(height: 23),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 12,
+          runSpacing: 4,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(l.demoNotice,
+                style: const TextStyle(
+                    fontSize: 13, color: ink, fontWeight: FontWeight.w600)),
+            Text(l.catalogCount(list.length),
+                style: const TextStyle(fontSize: 13, color: muted)),
+            if (!state.personalized)
+              TextButton.icon(
+                onPressed: () => showProfileEditor(context, state),
+                icon: const Icon(Icons.person_outline, size: 16),
+                label: Text(l.flowSampleRanking),
+              ),
+          ],
+        ),
+        const SizedBox(height: 8),
         if (list.isEmpty)
           _empty(
               matchTab == 1 && state.saved.isEmpty
@@ -691,16 +702,18 @@ class _AppShellState extends State<AppShell> {
               onTap: resetFilters,
               action: l.flowResetFilters)
         else ...[
-          Wrap(spacing: 16, runSpacing: 8, children: [
-            Text(l.demoNotice,
-                style: const TextStyle(fontSize: 11, color: muted)),
-            Text(l.catalogCount(list.length),
-                style: const TextStyle(fontSize: 11, color: muted)),
-          ]),
+          Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(22),
+            clipBehavior: Clip.antiAlias,
+            child: Column(children: [
+              for (final (index, m) in list.take(visibleMatches).indexed) ...[
+                if (index > 0) const Divider(height: 1, color: line),
+                _person(m),
+              ],
+            ]),
+          ),
           const SizedBox(height: 12),
-          for (final m in list.take(visibleMatches))
-            Padding(
-                padding: const EdgeInsets.only(bottom: 12), child: _person(m)),
           if (list.length > visibleMatches)
             Center(
                 child: OutlinedButton(
@@ -714,6 +727,7 @@ class _AppShellState extends State<AppShell> {
   }
 
   Widget _person(bazi.MatchResult m) => MatchListTile(
+      mine: state.chart,
       match: m,
       saved: state.saved.contains(m.person.id),
       onOpen: () => _openProfile(m),
@@ -910,7 +924,9 @@ class _AppShellState extends State<AppShell> {
                                 min: 0,
                                 max: 100,
                                 divisions: 20,
-                                label: '${draftScore.round()}%',
+                                label: '${draftScore.round()} / 100',
+                                semanticFormatterCallback: (value) =>
+                                    l10n.minHarmony(value.round()),
                                 onChanged: (v) => update(() => draftScore = v)),
                             Text(l10n.harmonyNote,
                                 style: const TextStyle(

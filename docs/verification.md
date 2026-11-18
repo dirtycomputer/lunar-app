@@ -1,5 +1,11 @@
 # Verification record
 
+## Core screens and release audit — 2026-11-18
+
+- Flutter analysis passed, along with 119 Flutter tests, 23 Python chart-service tests and 21 SQLite/API tests. Regression coverage includes direction-specific reasons, scores out of 100 and the reflection selection limit.
+- Twelve Flutter renderer walkthroughs produced 66 images across the core journeys, persisted catalog and friend sharing. The 320 px invitation checks the element remains on one line at 200% text. Selected captures are in `output/flutter-render/focused-*.png`.
+- The live catalog verifier read all 1,000 fictional profiles from public D1, covering 40 countries. The preview package check passed. The production check lists six open gates. The [launch checklist](launch-checklist.md) includes the browser/device acceptance work, signing and SDK requirements.
+
 ## Friend sharing — 2026-11-14
 
 - Clean Flutter analysis; **118 Flutter tests** pass, including URL routing, reduced chart snapshots, consent, failed save/no request, ambiguous network retry after restart, acknowledgement failure, corrupt-entry recovery, concurrent create/reset, offline withdrawal, credential-free export, expiry and large-text layouts.

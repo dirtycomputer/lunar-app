@@ -360,6 +360,19 @@ void main() {
         home: ShareComposer(
             state: state, kind: 'portrait', readingChart: selectedChart)));
     await tester.pumpAndSettle();
+    final choices = find.byType(CheckboxListTile);
+    CheckboxListTile choice(int i) =>
+        tester.widget<CheckboxListTile>(choices.at(i));
+    expect(choice(2).onChanged, isNull);
+    await tester.ensureVisible(choices.first);
+    await tester.tap(choices.first);
+    await tester.pumpAndSettle();
+    expect(choice(2).onChanged, isNotNull);
+    await tester.ensureVisible(choices.at(2));
+    await tester.tap(choices.at(2));
+    await tester.pumpAndSettle();
+    expect(choice(2).value, isTrue);
+    expect(choice(0).onChanged, isNull);
     final button =
         tester.widget<FilledButton>(find.byKey(const ValueKey('share-create')));
     expect(button.onPressed, isNull);

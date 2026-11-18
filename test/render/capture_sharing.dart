@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -102,6 +103,13 @@ void main() {
                 '${Directory.current.path}/output/sharing-render/$phase-$device.png'));
       }
 
+      final elementText = find.descendant(
+          of: find.byType(ElementPortraitCard), matching: find.text('Wood'));
+      final elementParagraph =
+          tester.renderObject<RenderParagraph>(elementText);
+      final boxes = elementParagraph.getBoxesForSelection(
+          const TextSelection(baseOffset: 0, extentOffset: 4));
+      expect(boxes.map((b) => b.top).toSet(), hasLength(1));
       await shot('invite');
       await tester.ensureVisible(find.byKey(const ValueKey('join-start')));
       await tester.tap(find.byKey(const ValueKey('join-start')));
