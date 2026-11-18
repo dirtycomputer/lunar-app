@@ -61,6 +61,10 @@ void main() {
                   disableAnimations: scale > 1),
               child: LunarApp(state: state))));
       await tester.pumpAndSettle();
+      expect(
+          MediaQuery.textScalerOf(tester.element(find.byType(Scaffold).first))
+              .scale(14),
+          closeTo(14 * scale, .01));
       final l =
           AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
       Future<void> shot(String phase) async {

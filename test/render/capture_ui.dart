@@ -53,6 +53,10 @@ void main() {
           precacheImage(AssetImage(m.person.image),
               tester.element(find.byType(Scaffold).first)))));
       await tester.pumpAndSettle();
+      expect(
+          MediaQuery.textScalerOf(tester.element(find.byType(Scaffold).first))
+              .scale(14),
+          closeTo(14 * scale, .01));
       final l =
           AppLocalizations.of(tester.element(find.byType(Scaffold).first))!;
       Future<void> shot(String page) async {

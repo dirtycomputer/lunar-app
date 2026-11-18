@@ -278,11 +278,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get curiosity => '一点点好奇，可能就是美好故事的开端。';
 
   @override
-  String get demoNotice => '合成人物 · 数据库资料';
+  String get demoNotice => '虚构示例人物';
 
   @override
   String harmonyPct(int n) {
-    return '和谐度 $n%';
+    return '命盘匹配分 $n/100';
   }
 
   @override
@@ -405,11 +405,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String minHarmony(int n) {
-    return '最低和谐度 · $n%';
+    return '最低匹配分 · $n/100';
   }
 
   @override
-  String get harmonyNote => '和谐分是一种文化探索指数，并不能预测感情的成功与否。';
+  String get harmonyNote => '匹配分根据两份命盘的五行和干支关系计算。';
 
   @override
   String get reset => '重置';
@@ -761,7 +761,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String factorContext(String title, int score) {
-    return '在本次和谐分中，$title贡献了 $score%。';
+    return '$title · $score/100';
   }
 
   @override
@@ -1108,19 +1108,35 @@ class AppLocalizationsZh extends AppLocalizations {
   String get flowGeneralSolar => '太阳时如何影响排盘？';
 
   @override
+  String get flowSampleRanking => '当前使用示例命盘 · 换成我的';
+
+  @override
   String get flowReasonBalance => '你们命盘的五行组合较为均衡。';
 
   @override
-  String get flowReasonSupport => '你们的日主五行相生。';
+  String flowReasonSupport(String source, String target) {
+    return '这两份命盘的日主五行相生，$source生$target。';
+  }
 
   @override
-  String get flowReasonShared => '你们拥有相同的日主五行。';
+  String flowReasonShared(String element) {
+    return '两份命盘的日主五行都是$element。';
+  }
 
   @override
-  String get flowReasonBranches => '你们的日支构成传统的相合关系。';
+  String flowReasonSameSign(String sign) {
+    return '两份命盘的日支同属$sign。';
+  }
 
   @override
-  String get flowReasonContrast => '你们的日主五行呈相克关系。';
+  String flowReasonBranches(String first, String second) {
+    return '两份命盘的日支按传统配对相合，对应$first和$second。';
+  }
+
+  @override
+  String flowReasonContrast(String first, String second) {
+    return '两份命盘的日主分别属$first和$second，构成相克关系。';
+  }
 
   @override
   String get journeyTitle => '我的旅程';
@@ -1664,11 +1680,11 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get curiosity => '一點點好奇，可能就是美好故事的開端。';
 
   @override
-  String get demoNotice => '示範社群 · 所有資料均為範例';
+  String get demoNotice => '虛構示例人物';
 
   @override
   String harmonyPct(int n) {
-    return '和諧度 $n%';
+    return '命盤配對分 $n/100';
   }
 
   @override
@@ -1791,11 +1807,11 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String minHarmony(int n) {
-    return '最低和諧度 · $n%';
+    return '最低配對分 · $n/100';
   }
 
   @override
-  String get harmonyNote => '和諧分是一種文化探索指標，並不能預測感情的成功與否。';
+  String get harmonyNote => '配對分根據兩份命盤的五行和干支關係計算。';
 
   @override
   String get reset => '重設';
@@ -2147,7 +2163,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String factorContext(String title, int score) {
-    return '在本次和諧分中，$title貢獻了 $score%。';
+    return '$title · $score/100';
   }
 
   @override

@@ -104,8 +104,8 @@
   },
   "bestHarmony": "Best harmony first",
   "curiosity": "A little curiosity can be the start of something good.",
-  "demoNotice": "Synthetic profiles · Stored in a database",
-  "harmonyPct": "{n}% harmony",
+  "demoNotice": "Fictional profiles",
+  "harmonyPct": "Chart score {n}/100",
   "@harmonyPct": {
     "placeholders": {
       "n": {
@@ -187,7 +187,7 @@
       }
     }
   },
-  "minHarmony": "Minimum harmony · {n}%",
+  "minHarmony": "Minimum chart score · {n}/100",
   "@minHarmony": {
     "placeholders": {
       "n": {
@@ -195,7 +195,7 @@
       }
     }
   },
-  "harmonyNote": "Harmony is a cultural exploration score, not a prediction of relationship success.",
+  "harmonyNote": "This score compares two birth charts using traditional BaZi rules.",
   "reset": "Reset",
   "showConnections": "Show connections",
   "dayMasterContext": "{name}’s day master is {identity}. The badge shows their day element and polarity.",
@@ -384,7 +384,7 @@
     }
   },
   "hideFailed": "Could not update recommendations. Please try again.",
-  "factorContext": "{title} contributed {score}% to this harmony score.",
+  "factorContext": "{title} · {score}/100",
   "@factorContext": {
     "placeholders": {
       "title": {
@@ -525,11 +525,51 @@
   "flowGeneralGods": "How do the Ten Gods work?",
   "flowGeneralMaster": "What is a day master?",
   "flowGeneralSolar": "How does solar time work?",
-  "flowReasonBalance": "Your combined charts have a balanced mix of elements.",
-  "flowReasonSupport": "Your core elements follow the supporting cycle.",
-  "flowReasonShared": "You share the same core element.",
-  "flowReasonBranches": "Your day branches share a traditional harmony pattern.",
-  "flowReasonContrast": "Your core elements form a contrasting pair.",
+  "flowSampleRanking": "Using sample chart · Personalize",
+  "flowReasonBalance": "Across both charts, the five elements are spread fairly evenly.",
+  "flowReasonSupport": "In these charts, {source} supports {target}.",
+  "@flowReasonSupport": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "flowReasonShared": "Both charts have {element} as their core element.",
+  "@flowReasonShared": {
+    "placeholders": {
+      "element": {
+        "type": "String"
+      }
+    }
+  },
+  "flowReasonSameSign": "Both day pillars share the {sign} sign.",
+  "@flowReasonSameSign": { "placeholders": { "sign": { "type": "String" } } },
+  "flowReasonBranches": "{first} and {second} form a traditional day-sign pairing.",
+  "@flowReasonBranches": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
+  "flowReasonContrast": "{first} and {second} form a contrasting element pair.",
+  "@flowReasonContrast": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "second": {
+        "type": "String"
+      }
+    }
+  },
   "journeyTitle": "Your journey",
   "journeyChoose": "Choose your path",
   "journeySparks": "{n} sparks",

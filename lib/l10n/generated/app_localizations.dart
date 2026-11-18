@@ -687,13 +687,13 @@ abstract class AppLocalizations {
   /// No description provided for @demoNotice.
   ///
   /// In en, this message translates to:
-  /// **'Synthetic profiles · Stored in a database'**
+  /// **'Fictional profiles'**
   String get demoNotice;
 
   /// No description provided for @harmonyPct.
   ///
   /// In en, this message translates to:
-  /// **'{n}% harmony'**
+  /// **'Chart score {n}/100'**
   String harmonyPct(int n);
 
   /// No description provided for @savedToast.
@@ -915,13 +915,13 @@ abstract class AppLocalizations {
   /// No description provided for @minHarmony.
   ///
   /// In en, this message translates to:
-  /// **'Minimum harmony · {n}%'**
+  /// **'Minimum chart score · {n}/100'**
   String minHarmony(int n);
 
   /// No description provided for @harmonyNote.
   ///
   /// In en, this message translates to:
-  /// **'Harmony is a cultural exploration score, not a prediction of relationship success.'**
+  /// **'This score compares two birth charts using traditional BaZi rules.'**
   String get harmonyNote;
 
   /// No description provided for @reset.
@@ -1587,7 +1587,7 @@ abstract class AppLocalizations {
   /// No description provided for @factorContext.
   ///
   /// In en, this message translates to:
-  /// **'{title} contributed {score}% to this harmony score.'**
+  /// **'{title} · {score}/100'**
   String factorContext(String title, int score);
 
   /// No description provided for @elementWood.
@@ -2268,35 +2268,47 @@ abstract class AppLocalizations {
   /// **'How does solar time work?'**
   String get flowGeneralSolar;
 
+  /// No description provided for @flowSampleRanking.
+  ///
+  /// In en, this message translates to:
+  /// **'Using sample chart · Personalize'**
+  String get flowSampleRanking;
+
   /// No description provided for @flowReasonBalance.
   ///
   /// In en, this message translates to:
-  /// **'Your combined charts have a balanced mix of elements.'**
+  /// **'Across both charts, the five elements are spread fairly evenly.'**
   String get flowReasonBalance;
 
   /// No description provided for @flowReasonSupport.
   ///
   /// In en, this message translates to:
-  /// **'Your core elements follow the supporting cycle.'**
-  String get flowReasonSupport;
+  /// **'In these charts, {source} supports {target}.'**
+  String flowReasonSupport(String source, String target);
 
   /// No description provided for @flowReasonShared.
   ///
   /// In en, this message translates to:
-  /// **'You share the same core element.'**
-  String get flowReasonShared;
+  /// **'Both charts have {element} as their core element.'**
+  String flowReasonShared(String element);
+
+  /// No description provided for @flowReasonSameSign.
+  ///
+  /// In en, this message translates to:
+  /// **'Both day pillars share the {sign} sign.'**
+  String flowReasonSameSign(String sign);
 
   /// No description provided for @flowReasonBranches.
   ///
   /// In en, this message translates to:
-  /// **'Your day branches share a traditional harmony pattern.'**
-  String get flowReasonBranches;
+  /// **'{first} and {second} form a traditional day-sign pairing.'**
+  String flowReasonBranches(String first, String second);
 
   /// No description provided for @flowReasonContrast.
   ///
   /// In en, this message translates to:
-  /// **'Your core elements form a contrasting pair.'**
-  String get flowReasonContrast;
+  /// **'{first} and {second} form a contrasting element pair.'**
+  String flowReasonContrast(String first, String second);
 
   /// No description provided for @journeyTitle.
   ///

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import '../services/app_state.dart';
 import '../services/sharing.dart';
+import '../services/bazi.dart' as bazi show Element;
 import '../services/bazi.dart' show ElementInfo, EnergyChart;
 import '../services/intent_flow.dart';
 import 'design.dart';
@@ -40,20 +41,40 @@ class ShareFrame extends StatelessWidget {
       {super.key, required this.title, required this.child, this.onClose});
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-          title: Text(title),
-          leading: IconButton(
-              tooltip: 'Back',
-              icon: const Icon(Icons.arrow_back),
-              onPressed: onClose ?? () => Navigator.pop(context))),
-      body: SafeArea(
-          child: SingleChildScrollView(
-              key: ValueKey(title),
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 40),
-              child: Center(
-                  child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 720),
-                      child: child)))));
+          body: SafeArea(
+        child: SingleChildScrollView(
+          key: ValueKey(title),
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 720),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(children: [
+                      IconButton(
+                        tooltip:
+                            MaterialLocalizations.of(context).backButtonTooltip,
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: onClose ?? () => Navigator.pop(context),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                          child: Semantics(
+                              header: true,
+                              child: Text(title,
+                                  style: const TextStyle(
+                                      fontSize: 22,
+                                      height: 1.25,
+                                      fontWeight: FontWeight.w600)))),
+                    ]),
+                    const SizedBox(height: 16),
+                    child,
+                  ]),
+            ),
+          ),
+        ),
+      ));
 }
 
 class ElementPortraitCard extends StatelessWidget {
@@ -64,57 +85,82 @@ class ElementPortraitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final i = portrait.element.index;
+    final counts = pair ? portrait.counts : null;
+    final enlarged = MediaQuery.textScalerOf(context).scale(14) > 20;
+    final spirit = ExcludeSemantics(
+        child:
+            ElementSpirit(element: portrait.element, size: enlarged ? 48 : 84));
     return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(26),
-        decoration: BoxDecoration(
-            color: elementTints[i], borderRadius: BorderRadius.circular(28)),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const BrandMark(),
-          const SizedBox(height: 22),
-          Row(children: [
-            Expanded(
-                child: Text(portrait.name,
-                    style: Theme.of(context).textTheme.headlineMedium)),
-            ExcludeSemantics(
-                child: ElementSpirit(element: portrait.element, size: 88))
-          ]),
-          Text(portrait.element.label,
-              style: TextStyle(
-                  fontSize: 38,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: -1,
-                  color: elementColors[i])),
-          const SizedBox(height: 16),
-          for (final t in portrait.traits)
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Text(elementTraits[i][t],
-                    style: const TextStyle(fontSize: 16, height: 1.5))),
-          if (pair && portrait.counts != null) ...[
-            const SizedBox(height: 8),
-            Wrap(spacing: 8, runSpacing: 8, children: [
-              for (var n = 0; n < 5; n++)
-                Text(
-                    '${[
-                      'Wood',
-                      'Fire',
-                      'Earth',
-                      'Metal',
-                      'Water'
-                    ][n]} ${portrait.counts![n]}',
-                    style: const TextStyle(fontSize: 12))
-            ]),
-            if (portrait.unknownTime)
-              const Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Text('Birth hour unknown · three pillars',
-                      style: TextStyle(fontSize: 12))),
-          ],
+      width: double.infinity,
+      padding: EdgeInsets.all(enlarged ? 18 : 22),
+      decoration: BoxDecoration(
+          color: elementTints[i], borderRadius: BorderRadius.circular(26)),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [
+          const FlowerLogo(size: 20),
+          const SizedBox(width: 6),
+          const Expanded(
+              child: Text('FatePair',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700))),
+          if (enlarged) spirit,
+        ]),
+        const SizedBox(height: 16),
+        Row(children: [
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(portrait.name,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600)),
+                Text(portrait.element.label,
+                    style: TextStyle(
+                        fontSize: 36,
+                        height: 1.15,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -1,
+                        color: elementColors[i])),
+              ])),
+          if (!enlarged) ...[const SizedBox(width: 8), spirit],
+        ]),
+        if (portrait.traits.isNotEmpty) ...[
           const SizedBox(height: 12),
-          const Text('A reflection from the Five Elements tradition',
-              style: TextStyle(fontSize: 12, color: muted)),
-        ]));
+          for (final trait in portrait.traits)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 3),
+              child: Text(elementTraits[i][trait],
+                  style: const TextStyle(fontSize: 15, height: 1.45)),
+            ),
+        ],
+        if (counts != null) ...[
+          const SizedBox(height: 14),
+          ExcludeSemantics(
+              child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Row(children: [
+              for (final element in bazi.Element.values)
+                if (counts[element.index] > 0)
+                  Expanded(
+                      flex: counts[element.index],
+                      child: ColoredBox(
+                          color: elementColors[element.index],
+                          child: const SizedBox(height: 7))),
+            ]),
+          )),
+          const SizedBox(height: 8),
+          Wrap(spacing: 12, runSpacing: 5, children: [
+            for (final element in bazi.Element.values)
+              Text('${element.label} ${counts[element.index]}',
+                  style: const TextStyle(fontSize: 13, color: ink)),
+          ]),
+          if (portrait.unknownTime)
+            const Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Text('Birth hour unknown · three pillars',
+                    style: TextStyle(fontSize: 13, color: muted))),
+        ],
+      ]),
+    );
   }
 }
 
@@ -246,15 +292,16 @@ class _ShareComposerState extends State<ShareComposer> {
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text(elementTraits[chart.dayElement.index][i]),
                     value: selected.contains(i),
-                    onChanged: busy
-                        ? null
-                        : (v) => setState(() {
-                              if (v == false) {
-                                selected.remove(i);
-                              } else if (selected.length < 2) {
-                                selected.add(i);
-                              }
-                            })),
+                    onChanged:
+                        busy || (!selected.contains(i) && selected.length >= 2)
+                            ? null
+                            : (v) => setState(() {
+                                  if (v == false) {
+                                    selected.remove(i);
+                                  } else {
+                                    selected.add(i);
+                                  }
+                                })),
               const SizedBox(height: 16),
               Text(pair
                   ? 'Anyone with your link can see this card. One friend can join. Only the two of you can access the shared result.'
@@ -612,17 +659,13 @@ class _SharedLinkPageState extends State<SharedLinkPage> {
                               label: const Text('Check for reply')),
                       ] else if (data.kind == 'pair' &&
                           data.status == 'open') ...[
-                        const Text('What happens when our elements meet?',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.w600)),
-                        const SizedBox(height: 16),
                         FilledButton(
                             key: const ValueKey('join-start'),
                             onPressed: prepare,
                             child: const Text('Add my birth details')),
                         const SizedBox(height: 12),
                         const Text(
-                            'You will preview your summary before sharing it. No account or download needed.',
+                            'Preview your card before sharing. No account or download needed.',
                             style: TextStyle(fontSize: 13, color: muted)),
                       ] else if (data.kind == 'pair') ...[
                         const Text('This invitation has already been joined.'),

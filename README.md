@@ -38,6 +38,8 @@ The default chart service selects `deepseek-flash` (DeepSeek-V4.1-Flash-1017) wi
 
 The current public release is a **preview**, with an explicit production gate in [`release/launch.json`](release/launch.json). [`docs/release-review.md`](docs/release-review.md) records the use → feedback → fix → regression loops and the remaining infrastructure/operational blockers. `python3 scripts/check_release.py --channel preview` checks package integrity; the `production` channel intentionally fails until the open gates have evidence.
 
+The [launch checklist](docs/launch-checklist.md) lists the operator decisions, real-community requirements, platform minimums and acceptance tests for release.
+
 A shared device-storage coordinator orders writes across profiles, drafts, consents, progress and Chart Studio. A durable deletion marker prevents interrupted deletion or queued writes restoring old personal data. Startup and deletion have retry paths. Questions also support retry with the original context and without duplicate turns. Chart reports are cached while page context changes. Data exports include comparison charts and language, excluding model keys.
 
 Pinned Python and Pub dependencies are queried against OSV through `scripts/audit_dependencies.py`; network/incomplete responses and findings fail the audit. The timestamped result is `output/dependency-audit.json`.

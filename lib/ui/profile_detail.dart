@@ -64,6 +64,9 @@ class _ProfileDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final p = match.person;
+    final showAvatar = p.image.startsWith('assets/') ||
+        MediaQuery.sizeOf(context).width >= 500 ||
+        MediaQuery.textScalerOf(context).scale(14) < 20;
     return ListenableBuilder(
         listenable: state,
         builder: (context, _) => Dialog(
@@ -78,77 +81,59 @@ class _ProfileDetail extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        SizedBox(
-                            height: 265 *
-                                (MediaQuery.textScalerOf(context).scale(16) /
-                                        16)
-                                    .clamp(1.0, 2.0),
-                            child: Stack(fit: StackFit.expand, children: [
-                              ProfileAvatar(p,
-                                  width: double.infinity,
-                                  height: 265 *
-                                      (MediaQuery.textScalerOf(context)
-                                                  .scale(16) /
-                                              16)
-                                          .clamp(1.0, 2.0)),
-                              const DecoratedBox(
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                    Colors.transparent,
-                                    Colors.black54
-                                  ]))),
-                              Positioned(
-                                  left: 16,
-                                  top: 17,
-                                  child: Container(
-                                    constraints:
-                                        const BoxConstraints(maxWidth: 230),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 8),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(18)),
-                                    child: Text(
-                                        encounter
-                                            ? '${l10n.journeyNewEncounter} · ${l10n.journeyDemoProfile}'
-                                            : l10n.journeyDemoProfile,
-                                        style: const TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w600,
-                                            color: ink)),
+                        Container(
+                          width: double.infinity,
+                          color: Colors.white,
+                          padding: const EdgeInsets.fromLTRB(22, 12, 12, 22),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  Expanded(
+                                      child: Text(
+                                    encounter
+                                        ? '${l10n.journeyNewEncounter} · ${l10n.journeyDemoProfile}'
+                                        : l10n.journeyDemoProfile,
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        color: muted,
+                                        fontWeight: FontWeight.w600),
                                   )),
-                              Positioned(
-                                  right: 15,
-                                  top: 15,
-                                  child: IconButton.filledTonal(
-                                      onPressed: () => Navigator.pop(context),
-                                      tooltip: l10n.closeProfile,
-                                      icon: const Icon(Icons.close, size: 20))),
-                              Positioned(
-                                  left: 26,
-                                  right: 26,
-                                  bottom: 22,
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
+                                  IconButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    tooltip: l10n.closeProfile,
+                                    icon: const Icon(Icons.close, size: 21),
+                                  ),
+                                ]),
+                                const SizedBox(height: 6),
+                                Row(children: [
+                                  if (showAvatar) ...[
+                                    ExcludeSemantics(
+                                        child: ClipOval(
+                                            child: ProfileAvatar(p,
+                                                width: 64, height: 64))),
+                                    const SizedBox(width: 14),
+                                  ],
+                                  Expanded(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
                                         Text('${p.name}, ${p.age}',
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
-                                                fontSize: 32,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600)),
+                                                fontSize: 26,
+                                                height: 1.2,
+                                                color: ink,
+                                                fontWeight: FontWeight.w600,
+                                                letterSpacing: -.6)),
+                                        const SizedBox(height: 5),
                                         Text(p.location,
                                             style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12)),
+                                                color: muted, fontSize: 14)),
                                       ])),
-                            ])),
+                                ]),
+                              ]),
+                        ),
                         Padding(
                             padding: const EdgeInsets.all(26),
                             child: Column(
@@ -452,13 +437,13 @@ class _ProfileDetail extends StatelessWidget {
                               : TermLink(
                                   termId: termId,
                                   label: '$title ⓘ',
-                                  contextText: contextText ??
-                                      '$title contributed $score% to this harmony score.',
+                                  contextText:
+                                      contextText ?? '$title · $score / 100',
                                   style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                       color: ink))),
-                      Text('$score%',
+                      Text('$score / 100',
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -469,12 +454,15 @@ class _ProfileDetail extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                         child: LinearProgressIndicator(
                             value: score / 100,
+                            semanticsLabel: title,
+                            semanticsValue: '$score / 100',
                             color: color,
                             backgroundColor: Colors.white,
                             minHeight: 5)),
                     const SizedBox(height: 7),
                     Text(description,
-                        style: const TextStyle(fontSize: 10, color: muted)),
+                        style: const TextStyle(
+                            fontSize: 13, height: 1.4, color: muted)),
                   ])));
 }
 
