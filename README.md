@@ -1,5 +1,12 @@
 # FatePair
 
+## Current client
+
+FatePair now runs from `uniapp/` on Web, WeChat mini programs, iOS and Android. From that directory run `npm ci`, `npm test`, `npm run build` and `npm run check:build`. WeChat DevTools imports the generated mini-program project. The App build produces shared iOS/Android resources, with signing and device acceptance still pending. [Setup and release instructions](docs/uni-app.md) · [Web preview](https://yuan-bazi-connections.dirtycomputer.chatgpt.site/) · [Mainland market review](docs/china-market-review.md)
+
+The Flutter project and its historical verification records below document the previous client and its calculation baseline.
+
+
 An English-language Flutter app for BaZi charts, recent outlook, matching, and chart-grounded Agent questions. Built with Material 3, cobalt and jade accents, original elemental companions, bundled Manrope typography, and responsive mobile / desktop layouts.
 
 ## Run

@@ -118,3 +118,13 @@ Provisioning is blocked by Vercel's `403 forbidden` for `GET /v1/integrations/co
 The managed executor reports running/connected with current observations and enforced network policy. Environment ID: `ccarenv_b64_Y2NhcmVudl83MzJlMTAxZDcyMmM4MTkxYjE0ZTg5NGJhMWI4ODFmZQ`. Remote desktop is enabled with state unknown, but no `cua_repl.js`/supported browser-control tool is exposed. Browser QA is therefore unverified this turn. Flutter-rendered captures and widget-driven interaction tests are used and identified explicitly. This Linux executor also lacks Android SDK and Xcode; native CI and store/device checks must not be confused with local validation.
 
 See [`verification.md`](verification.md) for final command outcomes and artifacts.
+
+## 2026-11-20 uni-app migration
+
+The same Vue pages now compile to H5, WeChat mini-program pages and App runtime resources for Android/iOS. The Web review used the actual Vue page components with a programmatic renderer. It walked through first use, an outlook question, per-question disclosure, the computed chart packet, D1-shaped pagination, random matching, a profile and saving. The independent public endpoint smoke exercises the real D1 database. WeChat DevTools and physical-device acceptance, native signatures and live store submission remain open.
+
+A comparison with the existing app found a pre-1970 Oslo clock difference, a ranking path that ignored the selected chart convention, and an outlook question that lost the displayed sample chart. The current tests verify all 1,000 original birth instants and pillars, 20 detailed chart fixtures and 21,000 independent Dart ranking entries including factor scores and ties. The new tests also cover interruption between sharing and response, deletion retry, cross-platform exports and restoration, delayed AI replies and replaying garden tasks.
+
+The existing database and cloud model remain separate from the client packages. The dataset contains fictional adults. The preview has no paid services. The mainland market review records the Shanghai action on paid divination and the 2026 national action on AI fortune telling. Formal mainland launch and store acceptance remain explicit decisions. [Market review](china-market-review.md) · [Build instructions](uni-app.md)
+
+Clean-install verification passed 11 client tests, 22 SQL/HTTP tests and 23 chart-service tests. All 10 pages were present in the compiled outputs. The mini-program output was 1.03 MiB. The App output identifies Android, iPhone and iPad and retains the public-ID placeholders for release ownership. The toolchain produced no native installers in this run.

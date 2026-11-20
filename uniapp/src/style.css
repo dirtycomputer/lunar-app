@@ -1,0 +1,272 @@
+/* #ifdef H5 */
+@font-face {
+  font-family: Manrope;
+  src: url('/static/h5/manrope.ttf') format('truetype');
+  font-weight: 200 800;
+  font-display: swap;
+}
+button:focus-visible,
+[role='button']:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #4292f2;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* #endif */
+page,
+body {
+  background: #f5f7fc;
+  color: #202d47;
+  font-family:
+    Manrope,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'PingFang SC',
+    sans-serif;
+  font-size: 16px;
+}
+view,
+text,
+image,
+button,
+input,
+textarea,
+picker {
+  box-sizing: border-box;
+}
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4;
+  margin: 0;
+  padding: 10px 15px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: normal;
+  border-radius: 14px;
+  background: #fff;
+  color: #202d47;
+  text-align: center;
+}
+button::after {
+  border: 0;
+}
+button[disabled] {
+  opacity: 0.52;
+}
+.primary {
+  background: #245acb;
+  color: white;
+}
+.quiet {
+  color: #245acb;
+  background: transparent;
+}
+.outline {
+  background: #fff;
+  border: 1px solid #d7deea;
+}
+.danger {
+  color: #984333;
+}
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 24px 50px;
+}
+.subpage {
+  max-width: 690px;
+  margin: 0 auto;
+  padding: 22px 18px 60px;
+}
+.title {
+  display: block;
+  font-size: 36px;
+  line-height: 1.12;
+  letter-spacing: -1.3px;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
+.subhead {
+  display: block;
+  font-size: 22px;
+  line-height: 1.28;
+  font-weight: 650;
+  margin-bottom: 12px;
+}
+.body {
+  display: block;
+  line-height: 1.55;
+}
+.meta {
+  display: block;
+  font-size: 14px;
+  color: #58677f;
+  line-height: 1.5;
+}
+.label {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin: 12px 0 6px;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.panel {
+  padding: 22px;
+  background: #fff;
+  border-radius: 20px;
+}
+.tint {
+  background: #e9f1ff;
+}
+.rule {
+  height: 1px;
+  background: #dce3ee;
+  margin: 14px 0;
+}
+.input,
+.picker {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  width: 100%;
+  height: auto;
+  background: white;
+  border: 1px solid #cbd5e3;
+  border-radius: 12px;
+  padding: 10px 13px;
+  line-height: 1.4;
+  font-size: 16px;
+  color: #202d47;
+}
+.input {
+  display: block;
+}
+.textarea {
+  height: 98px;
+}
+.error {
+  display: block;
+  color: #963b32;
+  line-height: 1.5;
+}
+.score {
+  font-weight: 700;
+  color: #21684f;
+  font-size: 14px;
+}
+.segment {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.chip {
+  background: transparent;
+  border: 1px solid #ccd6e6;
+  border-radius: 24px;
+  min-height: 42px;
+  font-size: 14px;
+}
+.selected {
+  background: #e3edff;
+  border-color: #245acb;
+  color: #193f93;
+}
+.list {
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+}
+.listitem {
+  padding: 15px 17px;
+  border-bottom: 1px solid #dce3ee;
+}
+.listitem:last-child {
+  border: 0;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.bigword {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.smallArt {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+.pillars {
+  display: flex;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+}
+.pillar {
+  flex: 1;
+  text-align: center;
+  padding: 16px 3px;
+  border-inline-end: 1px solid #e0e6ef;
+  min-width: 0;
+}
+.han {
+  display: block;
+  font-size: 32px;
+  margin: 8px 0;
+  line-height: 1.2;
+}
+@media (max-width: 750px) {
+  .page {
+    padding: 20px 16px 90px;
+  }
+  .title {
+    font-size: 30px;
+    margin-bottom: 18px;
+  }
+  .split {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .panel {
+    padding: 17px;
+  }
+}

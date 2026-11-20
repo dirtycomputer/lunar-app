@@ -45,3 +45,7 @@ Reuse the six named colors and Manrope system above. The memorable moment is two
 ## Reading, people and invitations
 
 Use cobalt for the next action, ink for the person's name or first conclusion, and the actual day element's color for the reading and invitation portrait. Keep Manrope and the original five companions. On a wide screen, align each person's identity, recommendation reason, score and save action in the same columns. On a phone, use a small portrait and allow the reason the full row width. Scanning several people should take less scrolling. Put the chart beside the conclusion on desktop, with its details immediately beneath it. On an invitation, the element, its distribution and the next action should all be visible on an ordinary phone. The initial screens repeated prompts and gave initials more space than recommendation reasons. Use one list surface, one portrait and one invitation action.
+
+## Four-platform client
+
+The two entrances keep their original illustrations, cobalt #245ACB, sky #E9F1FF, cloud #F5F7FC, ink #202D47 and jade #25765A. Use Manrope on the web and the device's readable sans-serif on smaller runtime packages. On wide screens place reading and pillars side by side, and align people, reasons and scores in a single list. On phones give each reason a full line. Preserve a single action after the invite portrait. Extra dashboard cards would push those actions down, so the optional garden and preferences stay in the header.

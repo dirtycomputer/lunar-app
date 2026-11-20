@@ -32,14 +32,16 @@ def main():
     host={'name':'QA Alex','element':0,'traits':[0,1],'counts':[2,1,1,1,1]}
     guest={'name':'QA Sam','element':3,'traits':[0,1],'counts':[1,3,1,1,0]}
     try:
-        pair,owner,participant=[secrets.token_urlsafe(24) for _ in range(3)]
+        status,headers,issued=call('/api/share-tokens','POST')
+        assert status==200 and headers.get('cache-control',headers.get('Cache-Control'))=='no-store'
+        pair,owner,participant=issued['id'],issued['secret'],secrets.token_urlsafe(24)
         links.append((pair,owner))
         payload={'id':pair,'kind':'pair','portrait':host,'consent':True}
         status,_,_=call('/api/shares','POST',owner,payload);assert status==201,('create',status)
         assert call('/api/shares','POST',owner,payload)[0]==200
         status,headers,public=call('/api/shares/'+pair);assert status==200 and 'result' not in public
         assert headers.get('Cache-Control',headers.get('cache-control'))=='no-store'
-        status,_,html=call('/s/'+pair);assert status==200 and b'flutter_bootstrap.js' in html
+        status,_,html=call('/s/'+pair);assert status==200 and b'id="app"' in html and b'#/pages/share/index?id=' in html
         assert call('/api/shares/'+pair+'/open','POST',data={})[0]==200
         status,_,accepted=call('/api/shares/'+pair+'/join','POST',participant,{'portrait':guest,'consent':True})
         assert status==200 and accepted['result']['guest']==guest

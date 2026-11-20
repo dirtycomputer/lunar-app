@@ -136,3 +136,16 @@ test('invitation HTML fetches the asset root internally without an index.html re
   assert.equal(response.headers.get('Referrer-Policy'),'no-referrer');
   assert.ok((await response.text()).includes('flutter_bootstrap.js'));
 });
+
+test('new clients obtain independent uncached link credentials before creating a record',async()=>{
+  const ids=new Set();
+  for(let i=0;i<4;i++){
+    const res=await handler(new Request('https://fatepair.test/api/share-tokens',{method:'POST'}),{});
+    assert.equal(res.status,200);assert.equal(res.headers.get('Cache-Control'),'no-store');
+    const pair=await res.json();
+    for(const value of [pair.id,pair.secret]){assert.match(value,/^[A-Za-z0-9_-]{32}$/);ids.add(value);}
+  }
+  assert.equal(ids.size,8);
+  assert.equal((await call('/api/share-tokens')).status,405);
+  assert.equal((await call('/api/share-tokens',{method:'OPTIONS'})).status,204);
+});
