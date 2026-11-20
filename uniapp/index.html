@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F5F7FC"><link rel="icon" href="/static/art/flower.png"><title>FatePair</title>
+<script>
+  // Resolve published invitation URLs before the hash router selects a page.
+  const invite = [location.pathname, location.hash.slice(1)].map(path => /^\/s\/([A-Za-z0-9_-]{32})\/?$/.exec(path)).find(Boolean);
+  if (invite) history.replaceState(null, '', '/#/pages/share/index?id=' + invite[1]);
+</script></head><body><div id="app"></div><script type="module" src="/src/main.js"></script></body></html>

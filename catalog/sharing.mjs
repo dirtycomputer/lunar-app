@@ -98,6 +98,13 @@ async function limits(db,request,now,action,max) {
 }
 export async function handleSharing(request,env,{now=()=>new Date()}={}) {
   const path=new URL(request.url).pathname;
+  if(path==='/api/share-tokens') {
+    if(request.method==='OPTIONS')return jsonShare(null,204);
+    if(request.method!=='POST')return jsonShare({code:'method_not_allowed'},405);
+    const token=()=>btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(24))))
+      .replaceAll('+','-').replaceAll('/','_');
+    return jsonShare({id:token(),secret:token()});
+  }
   if(!(path==='/api/shares'||path.startsWith('/api/shares/')))return null;
   if(request.method==='OPTIONS')return jsonShare(null,204);
   try {

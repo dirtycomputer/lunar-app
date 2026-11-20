@@ -1,0 +1,89 @@
+{
+  "name": "FatePair",
+  "appid": "",
+  "description": "BaZi readings and connections",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "vueVersion": "3",
+  "locale": "en",
+  "app-plus": {
+    "usingComponents": true,
+    "compilerVersion": 3,
+    "distribute": {
+      "android": {
+        "packagename": "com.lunar.lunar_social",
+        "targetSdkVersion": 36,
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.INTERNET\"/>"
+        ]
+      },
+      "ios": {
+        "appid": "com.lunar.lunarSocial",
+        "dSYMs": false
+      },
+      "icons": {
+        "android": {
+          "hdpi": "resources/icons/android-hdpi.png",
+          "xhdpi": "resources/icons/android-xhdpi.png",
+          "xxhdpi": "resources/icons/android-xxhdpi.png",
+          "xxxhdpi": "resources/icons/android-xxxhdpi.png"
+        },
+        "ios": {
+          "appstore": "resources/icons/ios-1024@1x.png",
+          "iphone": {
+            "app@2x": "resources/icons/ios-60@2x.png",
+            "app@3x": "resources/icons/ios-60@3x.png",
+            "notification@2x": "resources/icons/ios-20@2x.png",
+            "notification@3x": "resources/icons/ios-20@3x.png",
+            "settings@2x": "resources/icons/ios-29@2x.png",
+            "settings@3x": "resources/icons/ios-29@3x.png",
+            "spotlight@2x": "resources/icons/ios-40@2x.png",
+            "spotlight@3x": "resources/icons/ios-40@3x.png"
+          },
+          "ipad": {
+            "app": "resources/icons/ios-76@1x.png",
+            "app@2x": "resources/icons/ios-76@2x.png",
+            "proapp@2x": "resources/icons/ios-83.5@2x.png",
+            "notification": "resources/icons/ios-20@1x.png",
+            "notification@2x": "resources/icons/ios-20@2x.png",
+            "settings": "resources/icons/ios-29@1x.png",
+            "settings@2x": "resources/icons/ios-29@2x.png",
+            "spotlight": "resources/icons/ios-40@1x.png",
+            "spotlight@2x": "resources/icons/ios-40@2x.png"
+          }
+        }
+      }
+    },
+    "splashscreen": {
+      "autoclose": true,
+      "waiting": true
+    }
+  },
+  "mp-weixin": {
+    "appid": "",
+    "usingComponents": true,
+    "setting": {
+      "urlCheck": true,
+      "es6": true,
+      "minified": true
+    },
+    "optimization": {
+      "subPackages": true
+    }
+  },
+  "h5": {
+    "title": "FatePair",
+    "router": {
+      "mode": "hash",
+      "base": "/"
+    },
+    "template": "index.html"
+  },
+  "networkTimeout": {
+    "request": 285000
+  },
+  "uniStatistics": {
+    "enable": false
+  }
+}

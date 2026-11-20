@@ -1,4 +1,4 @@
-"""Bundle the dependency-free D1 Worker; Flutter remains the client."""
+"""Bundle the dependency-free D1 Worker for all FatePair clients."""
 from pathlib import Path
 import argparse
 import json

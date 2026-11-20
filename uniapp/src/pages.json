@@ -1,0 +1,76 @@
+{
+  "pages": [
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "FatePair",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/share/index",
+      "style": {
+        "navigationBarTitleText": "FatePair",
+        "enableShareAppMessage": true
+      }
+    },
+    {
+      "path": "pages/reading/index",
+      "style": {
+        "navigationBarTitleText": "My reading",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/matches/index",
+      "style": {
+        "navigationBarTitleText": "Match",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/agent/index",
+      "style": {
+        "navigationBarTitleText": "Ask Agent",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/garden/index",
+      "style": {
+        "navigationBarTitleText": "Element garden",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/settings/index",
+      "style": {
+        "navigationBarTitleText": "Settings",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/edit/index",
+      "style": {
+        "navigationBarTitleText": "Birth details"
+      }
+    },
+    {
+      "path": "pages/person/index",
+      "style": {
+        "navigationBarTitleText": "Profile"
+      }
+    },
+    {
+      "path": "pages/tools/index",
+      "style": {
+        "navigationBarTitleText": "Chart tools"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarBackgroundColor": "#f5f7fc",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f7fc"
+  }
+}

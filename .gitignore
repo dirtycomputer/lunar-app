@@ -66,3 +66,9 @@ __pycache__/
 android/key.properties
 *.jks
 *.keystore
+
+/uniapp/node_modules/
+/uniapp/dist/
+/uniapp/unpackage/
+/uniapp/.hbuilderx/
+/uniapp/project.private.config.json

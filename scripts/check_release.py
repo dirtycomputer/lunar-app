@@ -27,9 +27,9 @@ def check(channel):
     # Only application inputs are scanned; no environment, credentials, logs or
     # user files are read. Error output reports paths, never matching values.
     key_pattern = re.compile(r'\bsk-[A-Za-z0-9]{24,}\b')
-    for directory in ('lib', 'server', 'web', 'scripts'):
+    for directory in ('lib', 'server', 'web', 'scripts', 'uniapp/src'):
         for path in (ROOT / directory).rglob('*'):
-            if path.suffix not in ('.dart', '.py', '.mjs', '.js', '.html', '.arb'):
+            if path.suffix not in ('.dart', '.py', '.mjs', '.js', '.vue', '.html', '.arb'):
                 continue
             if any(part in ('.venv', '__pycache__') for part in path.parts):
                 continue
